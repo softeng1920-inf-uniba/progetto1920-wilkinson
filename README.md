@@ -1,4 +1,4 @@
-# scacchi ![Gradle Check&Build + Image Push on GitHub Packages](https://github.com/softeng1920-inf-uniba/progetto1920-wilkinson/workflows/Gradle%20Check&Build%20+%20Image%20Push%20on%20GitHub%20Packages/badge.svg)
+# scacchi ![Gradle Check&Build + Image Push on GitHub Packages](https://github.com/softeng1920-inf-uniba/progetto1920-wilkinson/workflows/Gradle%20Check&Build%20+%20Image%20Push%20on%20GitHub%20Packages/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/softeng1920-inf-uniba/progetto1920-wilkinson/badge.svg?branch=master&t=gCtWqp)](https://coveralls.io/github/softeng1920-inf-uniba/progetto1920-wilkinson?branch=master)
 
 La struttura della repository si presenta nel seguente modo:
 ```
