@@ -10,3 +10,5 @@ https://it.wikipedia.org/wiki/Notazione_algebrica
 – 1.e4 e5
 – 2.Cf3 Cc6
 – 3.d4
+
+ ![chessboard_img.png](/res/img/assegnazione-progetto/chessboard_img.png)
