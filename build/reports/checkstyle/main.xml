@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.8">
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto1920-wilkinson/src/main/java/it/uniba/example/db/DatabaseConnection.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto1920-wilkinson/src/main/java/it/uniba/example/db/package-info.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto1920-wilkinson/src/main/java/it/uniba/example/utils/math/MathUtils.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto1920-wilkinson/src/main/java/it/uniba/example/utils/package-info.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto1920-wilkinson/src/main/java/it/uniba/example/utils/strings/StringUtils.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto1920-wilkinson/src/main/java/it/uniba/main/AppMain.java">
+<error line="3" column="8" severity="error" message="Unused import - java.io.FileNotFoundException." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="4" column="8" severity="error" message="Unused import - java.io.IOException." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="5" column="8" severity="error" message="Unused import - java.net.URISyntaxException." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="6" column="8" severity="error" message="Unused import - java.security.GeneralSecurityException." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="8" column="8" severity="error" message="Unused import - it.uniba.sotorrent.GoogleDocsUtils." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto1920-wilkinson/src/main/java/it/uniba/sotorrent/GoogleDocsUtils.java">
+<error line="3" column="8" severity="error" message="Unused import - java.io.IOException." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="4" column="8" severity="error" message="Unused import - java.net.URISyntaxException." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="5" column="8" severity="error" message="Unused import - java.net.URL." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="6" column="8" severity="error" message="Unused import - java.security.GeneralSecurityException." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="7" column="8" severity="error" message="Unused import - java.util.ArrayList." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="8" column="8" severity="error" message="Unused import - java.util.Arrays." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="9" column="8" severity="error" message="Unused import - java.util.List." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="10" column="8" severity="error" message="Unused import - java.util.Map." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="12" column="8" severity="error" message="Unused import - com.google.api.client.auth.oauth2.Credential." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="13" column="8" severity="error" message="Unused import - com.google.api.client.googleapis.auth.oauth2.GoogleCredential." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="14" column="8" severity="error" message="Unused import - com.google.api.client.googleapis.batch.BatchRequest." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="15" column="8" severity="error" message="Unused import - com.google.api.client.googleapis.batch.json.JsonBatchCallback." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="16" column="8" severity="error" message="Unused import - com.google.api.client.googleapis.javanet.GoogleNetHttpTransport." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="17" column="8" severity="error" message="Unused import - com.google.api.client.googleapis.json.GoogleJsonError." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="18" column="8" severity="error" message="Unused import - com.google.api.client.http.HttpHeaders." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="19" column="8" severity="error" message="Unused import - com.google.api.client.json.jackson2.JacksonFactory." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="20" column="8" severity="error" message="Unused import - com.google.api.services.drive.Drive." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="21" column="8" severity="error" message="Unused import - com.google.api.services.drive.model.Permission." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="31" severity="error" message="Comment matches to-do format &apos;TODO:&apos;." source="com.puppycrawl.tools.checkstyle.checks.TodoCommentCheck"/>
+</file>
+</checkstyle>
