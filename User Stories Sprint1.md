@@ -51,23 +51,23 @@ _______________
   >>> [**nome pezzo**] + [**casella di arrivo sulla scacchiera**] + [**simbolo speciale**]  
   >>> dove:    
   >>>      - [***nome pezzo***] è una lettera riportata nella tabella qui sotto (nel caso dei pedoni non viene utilizzata nessuna lettera)  
-  >>>      - [***casella di arrivo sulla scacchiera***] è un combinazione lettera+numero (id colonna + id riga) [->*chessboard*](https://upload.wikimedia.org/wikipedia/commons/5/51/AlgebraicNotationOnChessboard.png)  
-  >>>      - [***simbolo speciale***] è uno dei simbolo utilizzati per evidenziare il verificarsi di un evento particolare (*scacco*, *scacco matto*, *promozione*, *cattura*, *...)  
+  >>>      - [***casella di arrivo sulla scacchiera***] è un combinazione lettera+numero (id colonna + id riga) [>*chessboard*](https://upload.wikimedia.org/wikipedia/commons/5/51/AlgebraicNotationOnChessboard.png)  
+  >>>      - [***simbolo speciale***] è uno dei simbolo utilizzati per evidenziare il verificarsi di un evento particolare (*scacco*, *scacco matto*, *promozione*, *cattura*, *...*)  
   
 | `nome pezzo` | Re  | Donna | Torre | Alfiere | Cavallo |
 |--------------|-----|-------|-------|---------|---------|
-| simbolo      | ♔ ♚ | ♕ ♛   | ♖ ♜   | ♗ ♝     | ♘ ♞     |
+| simbolo      | ♔ ♚ | ♕ ♛ | ♖ ♜ | ♗ ♝ | ♘ ♞ |
 | lettera ITA  | R   | D     | T     | A       | C       |
 | lettera ENG  | K   | Q     | R     | B       | N       |
 
 | `eventi` | scacco | scacco doppio | cattura | arrocco corto | arrocco lungo | presa en passant | scacco matto |
 |----------|--------|---------------|---------|---------------|---------------|------------------|:------------:|
-| simbolo  | +      | ++            | x       | O-O           | O-O-O         | e.p.             | #            |
+| simbolo  | +      | ++            | x       | 0-0           | 0-0-0         | e.p.             | #            |
 
  >>> - ***movimento del pedone***
- >>>    - Il pedone può muoversi solo di una casa in avanti, tolta la possibilità di avanzare di due case solo dalla posizione iniziale. 
- >>>    - Può catturare i pezzi avversari che si trovano in una delle due caselle oblique a lui adiacenti (a eccezione della presa [en passant](https://lh3.googleusercontent.com/proxy/HdFbE8mPf0x5pYtg7hqGuf2lYdxeZZWUVjgbkjy3ofzEqL_EHpY7zvgWleUN-oAH7ZcafKkFByJezfbaukukb97P0wPq7pWUZo0b0xoA2jBXSSWRv4vT6SBDRgf1UsJOzmRAKghF)): è quindi l'unico pezzo che mangia in modo diverso dal proprio normale movimento. 
- >>>    - Se un pedone riesce a raggiungere il lato opposto della scacchiera, il proprietario del pedone lo deve promuovere sostituendolo con un qualsiasi altro pezzo a sua scelta (purché dello stesso colore, e che non sia il re).
+ >>>    - il pedone può muoversi solo di una casa in avanti, tolta la possibilità di avanzare di due case solo dalla posizione iniziale   
+ >>>    - può catturare i pezzi avversari che si trovano in una delle due caselle oblique a lui adiacenti (a eccezione della presa [en passant](https://lh3.googleusercontent.com/proxy/HdFbE8mPf0x5pYtg7hqGuf2lYdxeZZWUVjgbkjy3ofzEqL_EHpY7zvgWleUN-oAH7ZcafKkFByJezfbaukukb97P0wPq7pWUZo0b0xoA2jBXSSWRv4vT6SBDRgf1UsJOzmRAKghF)): è quindi l'unico pezzo che mangia in modo diverso dal proprio normale movimento  
+ >>>    - se un pedone riesce a raggiungere il lato opposto della scacchiera, il proprietario del pedone lo deve promuovere sostituendolo con un qualsiasi altro pezzo a sua scelta (purché dello stesso colore, e che non sia il re)
 _______________
 ### 6) MOSTRARE MOSSE GIOCATE
   - permettere di visualizzare lo storico delle mosse giocate
