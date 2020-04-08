@@ -1,4 +1,6 @@
-# scacchi
+
+# scacchi ![CI/CD](https://github.com/softeng1920-inf-uniba/progetto1920-wilkinson/workflows/CI/CD/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/softeng1920-inf-uniba/progetto1920-wilkinson/badge.svg?branch=master&t=gCtWqp)](https://coveralls.io/github/softeng1920-inf-uniba/progetto1920-wilkinson?branch=master)
+
 
 La struttura della repository si presenta nel seguente modo:
 ```
