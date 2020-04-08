@@ -97,6 +97,7 @@ public final class AppMain {
 		    	quitFlag=false; // Imposto la variabile flag a false per uscire dal ciclo e terminare il programma
 		    	break;			    	
 			}
+		    default:
 	    } 
 	  } 
 	}
