@@ -11,7 +11,7 @@ public class Spot {
 	 * @param x	coordinata della riga (corrispondente ad un numero)
 	 * @param y coordinata della colonna (corrispondente ad una lettera)
 	 */
-	public Spot(int x, int y) {
+	public Spot(int x, int y, Piece piece) {
 		//TODO
 	}
 }

@@ -9,10 +9,9 @@ public class Move {
 
 	/**costruttore dell'oggetto Move
 	 * 
-	 * @param start casa di partenza
-	 * @param end casa di arrivo
+	 * @param command comando da interpretare in mossa
 	 */
-	public Move(Spot start, Spot end) {
+	public Move(String command) {
 		//TODO
 	}
 	

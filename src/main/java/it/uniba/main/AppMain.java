@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.security.GeneralSecurityException;
 
+import org.junit.jupiter.api.Test;
+
 import it.uniba.sotorrent.GoogleDocsUtils;
 
 /**
@@ -21,6 +23,7 @@ public final class AppMain {
 	private AppMain() {
 
 	}
+	
 
 	/**
 	 * 	 * This is the main entry of the application.
