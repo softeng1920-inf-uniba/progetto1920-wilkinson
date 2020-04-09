@@ -1,6 +1,6 @@
 package it.uniba.main;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import it.uniba.main.Move.GameStatus;
 
@@ -8,10 +8,10 @@ public class Game {
 	Board board;	//oggetto scacchiera per la partita in corso
 	boolean whiteTurn = true;	//true se turno del bianco, false se turno del nero
 	GameStatus status;	//stato della partita (se ACTIVE si continua a giocare, altrimenti si quitta)
-	List<Move> whiteMoves;	//lista con le mosse effettuate dal bianco
-	List<Move> blackMoves;	//lista con le mosse effettuate dal nero
-	List<Piece> whiteCaptures;	//lista con i pezzi catturati dal bianco (quindi pezzi neri)
-	List<Piece> blackCaptures;	//lista con i pezzi catturati dal nero (quindi pezzi bianchi)
+	ArrayList<Move> whiteMoves;	//lista con le mosse effettuate dal bianco
+	ArrayList<Move> blackMoves;	//lista con le mosse effettuate dal nero
+	ArrayList<Piece> whiteCaptures;	//lista con i pezzi catturati dal bianco (quindi pezzi neri)
+	ArrayList<Piece> blackCaptures;	//lista con i pezzi catturati dal nero (quindi pezzi bianchi)
 	
 	/**metodo che pone inizio alla partita (inizializzando la board, settando ad ACTIVE lo status, ecc
 	 * 
