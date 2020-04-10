@@ -12,6 +12,12 @@ public class Spot {
 	 * @param y coordinata della colonna (corrispondente ad una lettera)
 	 */
 	public Spot(int x, int y, Piece piece) {
-		//TODO
+		this.x = x;
+		this.y = y;
+		this.piece = piece;
+	}
+	
+	public Piece getPiece() {
+		return this.piece;
 	}
 }
