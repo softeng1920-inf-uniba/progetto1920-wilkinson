@@ -1,14 +1,14 @@
 package it.uniba.main;
 
 public class Board {
-	Spot[][] boxes;	//matrice scacchiera formata da caselle (elementi di classe Spot)
+	Spot[][] boxes = new Spot[8][8];	//matrice scacchiera formata da caselle (elementi di classe Spot)
 
 
 	/**costruttore di Board, inizializza la scacchiera con la configurazione iniziale 
 	 * usando il metodo resetBoard()
 	 */
 	public Board() {
-		resetBoard();
+		this.resetBoard();
 		
 		//TODO
 	}
@@ -20,15 +20,13 @@ public class Board {
 	 * @return elemento di classe Spot 
 	 */
 	public Spot getSpot(int x, int y) {
-		//TODO
-		return null;
+		return boxes[x][y];
 	}
 
 	/**metodo che inizializza la scacchiera con pezzi nelle posizioni iniziali
 	 * 
 	 */
 	void resetBoard() {
-		Spot boxes[][] = new Spot [8][8];
 		boxes[1][0] = new Spot(1,0, new Pawn());
 		boxes[1][1] = new Spot(1,1, new Pawn());
 		boxes[1][2] = new Spot(1,2, new Pawn());
@@ -94,7 +92,7 @@ public class Board {
 		boxes[5][6] = new Spot(5,6, null);
 		boxes[5][7] = new Spot(5,7, null);
 		System.out.println(boxes);
-		//TODO
+
 	}
 
 	/**metodo che permette la stampa a video della scacchiera nella configurazione attuale
