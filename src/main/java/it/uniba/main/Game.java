@@ -45,4 +45,16 @@ public class Game {
 		//TODO
 		return false;
 	}
+	
+	public void showCaptures() {
+		System.out.println("Catture del bianco: ");
+		for (Piece currentCapture: whiteCaptures) {
+			//TODO System.out.println(currentCapture.draw());
+		}
+		
+		System.out.println("Catture del nero: ");
+		for (Piece currentCapture: blackCaptures) {
+			//TODO System.out.println(currentCapture.draw());
+		}
+	}
 }
