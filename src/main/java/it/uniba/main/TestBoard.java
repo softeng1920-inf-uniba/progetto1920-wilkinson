@@ -33,7 +33,7 @@ public class TestBoard {
 					System.out.print("R");
 				}	
 			}
-			System.out.println("\n");
+			System.out.println("\t");
 		}
 	}
 }
