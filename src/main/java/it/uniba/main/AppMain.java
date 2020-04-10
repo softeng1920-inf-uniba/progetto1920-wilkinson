@@ -59,17 +59,17 @@ public final class AppMain {
 			userChoice=choice.nextLine().toLowerCase();// Permette all'utente di inserire il comando, trasformando eventuali lettere maiuscole in minuscole per una piu' facile gestione dell'input
 			while (userChoice.compareTo("play")!=0 && userChoice.compareTo("help")!=0 && userChoice.compareTo("board")!=0 && userChoice.compareTo("moves")!=0 && userChoice.compareTo("captures")!=0 && userChoice.compareTo("quit")!=0)
 			{
-				System.out.println("Il comando inserito non è corretto, si prega di inserirne nuovamente uno:");
+				System.out.println("Il comando inserito non Ã¨ corretto, si prega di inserirne nuovamente uno:");
 				userChoice=choice.nextLine().toLowerCase();
 			} //Controllo sulla stringa in input
 			if (userChoice.compareTo("help")==0) 
 			{
 				System.out.println("**Elenco dei comandi**\n");	        	
-				System.out.println(">Play");
-				System.out.println(">Board"); 
-				System.out.println(">Moves");
-				System.out.println(">Captures");
-				System.out.println(">Quit");
+				System.out.println(">play     :: inizia una nuova partita");
+				System.out.println(">board    :: mostra al scacchiera"); 
+				System.out.println(">moves    :: mostra lo storico delle mosse giocate");
+				System.out.println(">captures :: mostra i pezzi catturati");
+				System.out.println(">quit     :: esci dalla partita");
 			}
 			else 
 			{
