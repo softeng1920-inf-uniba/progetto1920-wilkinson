@@ -33,7 +33,7 @@ public final class AppMain {
 		boolean quitFlag = false; //Flag per gestire l'uscita dal programma
 		String quitConfirm;    
 		int i=1;
-		System.out.println("Current working dir: " + System.getProperty("user.dir"));
+		//TODO System.out.println("Current working dir: " + System.getProperty("user.dir"));
 
 		if (args.length > 0) {
 			switch (args[0]) {
