@@ -30,10 +30,9 @@ public final class AppMain {
 	 */
 	public static void main(final String[] args) {
 		String userChoice; //Memorizza le scelte che vengono effettuate dall'utente
-		boolean quitFlag = false; //Flag per gestire l'uscita dal programma
-		String quitConfirm;    
+		boolean quitFlag=true; //Flag per gestire l'uscita dal programma
 		int i=1;
-		//TODO System.out.println("Current working dir: " + System.getProperty("user.dir"));
+		System.out.println("Current working dir: " + System.getProperty("user.dir"));
 
 		if (args.length > 0) {
 			switch (args[0]) {
@@ -54,8 +53,7 @@ public final class AppMain {
 			System.out.println("Using default language 'en'");
 			System.out.println("Application - started.\n");
 		}
-		
-		while(quitFlag==false) //Il ciclo di immisione comandi continua fino a che l'utente non digita il comando >quit che setta il flag da true a false, uscendo dal programma
+		while(quitFlag==true) // Il ciclo di immisione comandi continua fino a che l'utente non digita il comando >quit che setta il flag da true a false, uscendo dal programma
 		{    
 			Scanner choice=new Scanner(System.in); 
 			System.out.println("Inserire il comando che si intende eseguire:");
@@ -92,23 +90,13 @@ public final class AppMain {
 					break;
 				case "quit":
 				{
-					System.out.println("Sei sicuro di voler chiudere l'applicazione? Inserire 's' per confermare, 'n' per tornare a giocare" );
-					quitConfirm = choice.nextLine().toLowerCase();
-					if(quitConfirm.compareTo("s")==0){
-						quitFlag=true; 
-						System.out.println("Uscita dal gioco.");
-						//System.exit(0);
-					} else if (quitConfirm.compareTo("n")==0) {
-						quitFlag=false;
-					} else {
-						System.out.println("Scelta non valida");
-					}
+					System.out.println("Sei sicuro di voler chiudere l'applicazione? Inserire >true per confermare, >false per torrnare a giocare" );// Da implementare
+					quitFlag=false; // Imposto la variabile flag a false per uscire dal ciclo e terminare il programma
 					break;			    	
 				}
 				default:
-				}//end switch 
+				} 
 			}
-			choice.close();
-		}//end while 
+		} 
 	}
 }
