@@ -21,7 +21,7 @@ public final class AppMain {
 	private AppMain() {
 
 	}
-	
+
 
 	/**
 	 * 	 * This is the main entry of the application.
@@ -29,30 +29,12 @@ public final class AppMain {
 	 * @param args The command-line arguments.
 	 */
 	public static void main(final String[] args) {
+		Game game;
 		String userChoice; //Memorizza le scelte che vengono effettuate dall'utente
 		boolean quitFlag=true; //Flag per gestire l'uscita dal programma
 		int i=1;
 		System.out.println("Current working dir: " + System.getProperty("user.dir"));
 
-		if (args.length > 0) {
-			switch (args[0]) {
-			case "it":
-				System.out.println("Applicazione  avviata.");
-				break;
-
-			case "en":
-				System.out.println("Application started.");
-				break;
-
-			default:
-				System.out.println("Specify the language. "
-						+ "Languages supported: 'it' or 'en'");
-				break;
-			}
-		} else {
-			System.out.println("Using default language 'en'");
-			System.out.println("Application - started.\n");
-		}
 		while(quitFlag==true) // Il ciclo di immisione comandi continua fino a che l'utente non digita il comando >quit che setta il flag da true a false, uscendo dal programma
 		{    
 			Scanner choice=new Scanner(System.in); 
@@ -78,6 +60,24 @@ public final class AppMain {
 				{
 				case "play":
 					System.out.println("**Inizio partita**\n"); 
+					game = new Game();
+
+					while(!game.isEnd()) {
+						System.out.println("Inserire comando: ");
+						userChoice=choice.nextLine();
+
+						switch(userChoice) {
+						case "board":
+							game.board.showBoard();
+							break;
+						default:
+							game.currentGame(userChoice);
+							game.board.showBoard();
+						}	
+					}
+					
+	
+
 					break;
 				case "board":
 					System.out.println("visualizzazione scacchiera\n");
