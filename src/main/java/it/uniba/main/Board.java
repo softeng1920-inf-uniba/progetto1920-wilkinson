@@ -27,6 +27,7 @@ public class Board {
 	 * 
 	 */
 	void resetBoard() {
+
 		boxes[1][0] = new Spot(1,0, new Pawn(false));
 		boxes[1][1] = new Spot(1,1, new Pawn(false));
 		boxes[1][2] = new Spot(1,2, new Pawn(false));
@@ -59,6 +60,7 @@ public class Board {
 		boxes[7][3] = new Spot(7,3, new Queen(true));
 		boxes[0][4] = new Spot(0,4, new King(false));
 		boxes[7][4] = new Spot(7,4, new King(true));
+
 		for (int x=2; x<6; x++) {
 			for (int j=0; j<8; j++) {
 				boxes[x][j] = new Spot(x, j, null);
