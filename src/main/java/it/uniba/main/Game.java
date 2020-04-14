@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import it.uniba.main.Move.GameStatus;
 
 public class Game {
+	
 	Board board;	//oggetto scacchiera per la partita in corso
 	boolean whiteTurn = true;	//true se turno del bianco, false se turno del nero
 	GameStatus status;	//stato della partita (se ACTIVE si continua a giocare, altrimenti si quitta)
-	ArrayList<Move> whiteMoves;	//lista con le mosse effettuate dal bianco
-	ArrayList<Move> blackMoves;	//lista con le mosse effettuate dal nero
+	ArrayList<String> allMoves;	//lista con le mosse effettuate dal bianco
+	//TODO ArrayList<String> blackMoves;	//lista con le mosse effettuate dal nero
 	ArrayList<Piece> whiteCaptures;	//lista con i pezzi catturati dal bianco (quindi pezzi neri)
 	ArrayList<Piece> blackCaptures;	//lista con i pezzi catturati dal nero (quindi pezzi bianchi)
 	
@@ -45,4 +46,22 @@ public class Game {
 		//TODO
 		return false;
 	}
+	
+	/**Metodo che mosterà le mosse giocate durante
+	 * la partita.
+	 */
+	
+	public void showMoves() {
+		int moveNumber = 0;
+		int turnControl = 0;
+		for (String currentMove: allMoves) {
+			if(turnControl % 2 == 0) {
+				moveNumber++;
+				System.out.print("\n" + moveNumber + ".");
+			}
+			turnControl++;
+			System.out.print(currentMove + " ");
+		}//end for
+	}
+
 }
