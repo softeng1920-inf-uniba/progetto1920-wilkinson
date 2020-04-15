@@ -14,11 +14,22 @@ public class Game {
 	ArrayList<Piece> whiteCaptures;	//lista con i pezzi catturati dal bianco (quindi pezzi neri)
 	ArrayList<Piece> blackCaptures;	//lista con i pezzi catturati dal nero (quindi pezzi bianchi)
 	
+	Game(){
+		initialize();
+	}
+	
 	/**metodo che pone inizio alla partita (inizializzando la board, settando ad ACTIVE lo status, ecc
 	 * 
 	 */
 	void initialize() {
 		//TODO
+	}
+	
+	/**gestisce la partita in corso elaborando la mossa da eseguire
+	 * 
+	 * @param command
+	 */
+	public void currentGame(String command) {
 	}
 	
 	/**controlla se la partita Ã¨ ancora in corso
@@ -47,7 +58,7 @@ public class Game {
 		return false;
 	}
 	
-	/**Metodo che mosterà le mosse giocate durante
+	/**Metodo che mosterï¿½ le mosse giocate durante
 	 * la partita.
 	 */
 	
@@ -62,6 +73,22 @@ public class Game {
 			turnControl++;
 			System.out.print(currentMove + " ");
 		}//end for
+	}
+	
+	public GameStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(GameStatus status) {
+		this.status = status;
+	}
+
+	public Board getBoard() {
+		return board;
+	}
+
+	public void setBoard(Board board) {
+		this.board = board;
 	}
 
 }
