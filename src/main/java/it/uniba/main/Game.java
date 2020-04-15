@@ -38,19 +38,9 @@ public class Game {
 	public void currentGame(String command) { //
 		
 		Move move = new Move(command, this);
-		if(move.getStart() != null) {
-			if(makeMove (move)) {
-				whiteTurn = (!whiteTurn);
-				if(whiteTurn) {
-					System.out.println("Turno del bianco");
-				} else {
-					System.out.println("Turno del nero");
-				}
-			}
-		} else {
-			System.out.println("Mossa non valida, reinserila");
+		if(makeMove (move)) {
+			whiteTurn = (!whiteTurn);
 		}
-		
 		
 	}
 	
@@ -67,11 +57,10 @@ public class Game {
 	 * @return true se la mossa è stata effettuata, false altrimenti
 	 */
 	public boolean makeMove(Move move) {
-		
 		Spot start = board.getSpot(move.getStart().getX(), move.getStart().getY());
 		Spot end = board.getSpot(move.getEnd().getX(), move.getEnd().getY());
 		
-		if(start.getPiece() != null && start.getPiece().isWhite() == this.whiteTurn && move.getInterpreter().isGoodMove) {
+		if(start.getPiece() != null && start.getPiece().isWhite() == this.whiteTurn) {
 			if(start.getPiece().canMove(board, start, end)) {
 				end.setPiece(start.getPiece());
 				start.setPiece(null);	
@@ -80,6 +69,7 @@ public class Game {
 				return true;
 			} 
 		} 
+		
 		
 		return false;
 	}
