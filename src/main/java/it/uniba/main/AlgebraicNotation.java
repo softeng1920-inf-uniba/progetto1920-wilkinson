@@ -11,7 +11,8 @@ public class AlgebraicNotation {
 	boolean isCastle = false;
 	boolean isEnPassant = false;
 	boolean isDoubleCheck = false;
-	
+	boolean isGoodMove = false;
+
 	private static final int STARTINDEX = 0;
 	private static final int PIECELETTERINDEX = 1;
 	private static final int DOUBLECHECKSPOTS = 2;
@@ -22,6 +23,7 @@ public class AlgebraicNotation {
 	AlgebraicNotation(String command){
 		initializeSymbolList();
 		divideCommand(command);
+		checkMove(); 
 	}
 
 	void initializeSymbolList() {	//elenco simboli possibili
@@ -38,29 +40,29 @@ public class AlgebraicNotation {
 		if(!isPawn(command)) {	//controllo lettera se non pedone
 			this.pieceLetter = command.substring(STARTINDEX,PIECELETTERINDEX);
 			command = reduceString(command, getPieceLetter());
-			}
-		
+		}
+
 		extractSymbol(command);	//estrazione simbolo speciale
-		
+
 		if(isDoubleCheck) {	//caso scacco doppio
 			command = command.substring(STARTINDEX, command.length()-DOUBLECHECKSPOTS);
 		}
-		
+
 		for(String currentSymbol: getSymbol()) {	//elimino eventuali altri simboli
 			command = reduceString(command, currentSymbol);
 		}
-		
+
 		if(isEnPassant) {	//caso en passant
 			setEndSquareId(command.substring(STARTINDEX, command.length()-ENPASSANTINDEX)); //elimino la dicitura e.p. 
 		} else if(isCastle) {	//caso arrocco
 			setEndSquareId("");
 		} else {
-			setEndSquareId(command);	//il resto della stringa √® la casella di partenza/arrivo
+			setEndSquareId(command);	//il resto della stringa Ë la casella di partenza/arrivo
 		}
 
 	}
 
-	boolean isPawn(String command) {	//controllo se la mossa √® di un pedone (nessuna lettera iniziale)
+	boolean isPawn(String command) {	//controllo se la mossa Ë di un pedone (nessuna lettera iniziale)
 
 		char firstLetter = command.charAt(STARTINDEX);
 		if(Character.isUpperCase(firstLetter)) {
@@ -76,7 +78,7 @@ public class AlgebraicNotation {
 
 		for(String currentSymbol: symbolList) {
 			if(command.contains(currentSymbol)) {
-	
+
 				if(pos >= STARTINDEXCASTLING) {	//check di simboli che innescano eventi
 					this.isCastle = true;
 				} else if(pos == ENPASSANTINDEX) {
@@ -85,9 +87,9 @@ public class AlgebraicNotation {
 					this.isDoubleCheck = true;
 					getSymbol().remove(symbolList.get(STARTINDEX));
 				}
-				
+
 				getSymbol().add(currentSymbol);
-				
+
 				if(isCastle) {	//interrompo se arrocco
 					break;
 				}
@@ -96,18 +98,18 @@ public class AlgebraicNotation {
 		}
 	}
 
-	String reduceString(String command, String extracted) {	//riduce la stringa di comando eliminando i caratteri gi√† estratti
+	String reduceString(String command, String extracted) {	//riduce la stringa di comando eliminando i caratteri gi‡ estratti
 
-		/*controllo se la stringa da sottrarre √® vuota o se contiene un simbolo da trattare diversamente*/
+		/*controllo se la stringa da sottrarre Ë vuota o se contiene un simbolo da trattare diversamente*/
 		if(!extracted.isEmpty() && !(extracted == symbolList.get(ENPASSANTINDEX)) && !(extracted == symbolList.get(DOUBLECHECKINDEX))) {
 			String newCommand = "";
 
 			for(int i=0; i<command.length(); i++) {
 				char commandToken = command.charAt(i);
-				
+
 				for(int j=0; j<extracted.length(); j++) {
 					char extractedToken = extracted.charAt(j);
-					
+
 					if(commandToken != extractedToken) {
 						newCommand += commandToken;
 					}
@@ -118,14 +120,72 @@ public class AlgebraicNotation {
 		return command;
 	}
 
+	/**il metodo controlla che il comando sia scritto in notazione algebrica corretta
+	 * 
+	 * @return
+	 */
+	boolean checkMove() {
+		switch(getPieceLetter()) {
+		case "P": case "T": case "C": case "A": case "D": case "R": case "":
+			if (getEndSquareId().length() > 3) {
+				return false;
+			} else if (getEndSquareId().length() == 3) {
+				String check = getEndSquareId().substring(0, 1);
+				if(Character.isDigit(check.charAt(0))) {
+					int c = Integer.parseInt(check);
+					if (c>=1 && c<=8) {
+						check = reduceString(getEndSquareId(), check.substring(0, 1));
+						String letter = check.substring(0, 1);
+						String number = check.substring(1, 2);
+						int n = Integer.parseInt(number);
+						if(letter.charAt(0)>=97 && letter.charAt(0)<=104 ) {
+							if(n>=1 && n<=8) {
+								isGoodMove = true; 
+								return true;
+							}
+						}
+					}
+				} else {
+					if (check.charAt(0)>=97 && check.charAt(0)<=104) {
+						check = reduceString(getEndSquareId(), check.substring(0, 1));
+						String letter = check.substring(0, 1);
+						String number = check.substring(1, 2);
+						int n = Integer.parseInt(number);
+						if(letter.charAt(0)>=97 && letter.charAt(0)<=104 ) {
+							if(n>=1 && n<=8) {
+								isGoodMove = true; 
+								return true;
+							}
+						}
+					}
+				}
+			} else if(getEndSquareId().length() == 2){
+				String letter = getEndSquareId().substring(0, 1);
+				String number = getEndSquareId().substring(1, 2);
+				int n = Integer.parseInt(number);
+				if(letter.charAt(0)>=97 && letter.charAt(0)<=104 ) {
+					if(n>=1 && n<=8) {
+						isGoodMove = true; 
+						return true;
+					}
+				}
+			}
+			break;
+		default: 
+			return false;
+		}
+		return false;
+	}
+
 
 	public String toString(){	//stampa a video del comando scomposto
 		String output = "";
 		output += "Nome Pezzo: "+getPieceLetter()+"\nCasa di arrivo: "+getEndSquareId()+"\nSimbolo speciale: "+getSymbol();
+		output += "\nMossa scritta correttamente: "+isGoodMove;
 		return output;
 	}
 
-	
+
 	/*Getters & Setters*/
 	public String getPieceLetter() {
 		return pieceLetter;
