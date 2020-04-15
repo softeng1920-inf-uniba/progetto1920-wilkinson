@@ -34,7 +34,7 @@ public final class AppMain {
 		boolean quitFlag=false; //Flag per gestire l'uscita dal programma
 		//TODO int i=1;
 
-		System.out.println("Current working dir: " + System.getProperty("user.dir"));
+		//System.out.println("Current working dir: " + System.getProperty("user.dir"));
 		System.out.println("**Benvenuto nel gioco degli Scacchi**\n");	        	
 		System.out.println("**Elenco dei comandi disponibili**\n");	        	
 		System.out.println(">play     :: inizia una nuova partita");
@@ -106,9 +106,12 @@ public final class AppMain {
 							+ " Inserire> 'si' per confermare, inserire > 'no' per tornare a giocare" );
 					userChoice=scanner.nextLine().toLowerCase();
 					if(userChoice.compareTo("si")== 0) {
+						System.out.println("...uscita dal programma");
 						quitFlag = true;
-					} else {
+					} else if (userChoice.compareTo("no")== 0){
 						quitFlag = false;
+					} else {
+						System.out.println("Risposta non valida, inserire 'si' oppure 'no'");
 					}
 					break;			    	
 				}
