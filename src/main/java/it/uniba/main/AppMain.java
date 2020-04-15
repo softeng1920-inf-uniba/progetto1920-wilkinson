@@ -85,9 +85,27 @@ public final class AppMain {
 						case "board":
 							game.board.showBoard();
 							break;
+						case "quit":
+						{
+							System.out.println("Sei sicuro di voler chiudere l'applicazione?"
+									+ " Inserire> 'si' per confermare, inserire > 'no' per tornare a giocare" );
+							userChoice=scanner.nextLine().toLowerCase();
+							if(userChoice.compareTo("si")== 0) {
+								System.out.println("...uscita dal programma");
+								quitFlag = true;
+							} else if (userChoice.compareTo("no")== 0){
+								quitFlag = false;
+							} else {
+								System.out.println("Risposta non valida, inserire 'si' oppure 'no'");
+							}
+							break;			    	
+						}
+							
 						default:
 							game.currentGame(userChoice);
 							game.board.showBoard();
+							
+							
 						}	
 					}
 					break;
