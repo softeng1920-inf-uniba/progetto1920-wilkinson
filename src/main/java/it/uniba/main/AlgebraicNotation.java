@@ -117,6 +117,10 @@ public class AlgebraicNotation {
 		}
 		return command;
 	}
+	
+	boolean checkMove() {
+		return true;
+	}
 
 
 	public String toString(){	//stampa a video del comando scomposto

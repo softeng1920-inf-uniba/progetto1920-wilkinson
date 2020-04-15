@@ -74,18 +74,23 @@ public class Board {
 	 */
 	public void showBoard() {
 		for(int i=0; i<8; i++) {
+			System.out.print("---------------------------------\n");
 			for(int j=0; j<8; j++) {
 				Piece piece = this.getSpot(i, j).getPiece();
 				System.out.print("|");
+				System.out.print(" ");
 				if(piece == null) {
 					System.out.print(" ");
 				} else {
+					piece.draw();
 					System.out.print(piece.draw());
 				}
-				
+				System.out.print(" ");
 			}
+			
 			System.out.print("|");
 			System.out.println("\t");
 		}
+		System.out.print("---------------------------------\n");
 	}
 }
