@@ -119,20 +119,7 @@ public class AlgebraicNotation {
 	}
 	
 	boolean checkMove() {
-		switch(getPieceLetter()) {
-		case "T": case "D": case "A":
-			break;
-		}
 		
-		if(getEndSquareId().length() >3) {
-			return false;
-		} else {
-			String letter = getEndSquareId().substring(0, 1);
-			String number = getEndSquareId().substring(1, 2);
-			
-		}
-		
-		return false;
 	}
 
 
