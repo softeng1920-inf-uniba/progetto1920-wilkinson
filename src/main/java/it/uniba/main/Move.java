@@ -1,32 +1,37 @@
 package it.uniba.main;
 
-public class Move {
-	private AlgebraicNotation interpreter; // interprete della mossa scritta in notazione algebrica abbreviata
-	private Spot start; // casa di partenza
-	private Spot end; // casa di arrivo
-	private Piece pieceMoved; // pezzo che deve eseguire il movimento
-	private boolean isAmbiguity = false;	//caso in cui ci sia ambiguit√† di movimento
+import java.util.ArrayList;
 
+public class Move {
+	private AlgebraicNotation interpreter; 		// interprete della mossa scritta in notazione algebrica abbreviata
+	private Spot start; 						// casa di partenza
+	private Spot end; 							// casa di arrivo
+	private Piece pieceMoved; 					// pezzo che deve eseguire il movimento
+	private boolean isAmbiguity = false;		//caso in cui ci sia ambiguit‡ di movimento
+	private boolean isCapture = false;			//caso in cui si effettua una cattura
+
+	
 	/**
 	 * costruttore dell'oggetto Move
 	 * 
 	 * @param command comando da interpretare in mossa
 	 */
-	// Movimento con cattura
-	public Move(final String command, Game game) {				                                                                        //Probabilmente andrebbe messo private
-		this.interpreter = new AlgebraicNotation(command); 			// Istanzio l'oggetto interpreter
-
+	public Move(final String command, Game game) {				             
+		this.interpreter = new AlgebraicNotation(command); 					// Istanzio l'oggetto interpreter
 
 		if(this.getInterpreter().isGoodMove) {
-			String algebraicPieceMoved = interpreter.getPieceLetter();                                                    // Stringa in notazione algebrica del pezzo che deve muoversi
-			String algebraicFinalSpot = interpreter.getEndSquareId();    // Stringa della posizione d'arrivo in notazione algebrica che deve essere convertita
-			
-			this.end = extractCoordinates(algebraicFinalSpot);	//estraggo le coordinate di arrivo
+			String algebraicPieceMoved = interpreter.getPieceLetter();     // Stringa in notazione algebrica del pezzo che deve muoversi
+			String algebraicFinalSpot = interpreter.getEndSquareId();    	// Stringa in notazione algebrica ella posizione d'arrivo 
+			ArrayList<String> algebraicSymbol = interpreter.getSymbol();	// ArrayList con i simboli speciali inseriti 
 
-			findStartSpotOnBoard(game, getEnd(), algebraicPieceMoved, algebraicFinalSpot); //estraggo le coordinate di partenza
-			
+			extractSymbol(algebraicSymbol);									// interpreta il simbolo speciale
+
+			this.end = extractCoordinates(algebraicFinalSpot);				//estrae le coordinate di arrivo
+
+			findStartSpotOnBoard(game, getEnd(), algebraicPieceMoved, algebraicFinalSpot); //estrae le coordinate di partenza
+
 			if(this.start != null) {
-				this.pieceMoved = start.getPiece();		// prende il pezzo che si muove direttamente dallo Spot di partenza
+				this.pieceMoved = start.getPiece();						// prende il pezzo che si muove dallo Spot di partenza
 			}
 		}
 	}
@@ -42,7 +47,7 @@ public class Move {
 			endSpot = new Spot(convertCoordinate(algebraicFinalSpot.substring(1, 2)), 
 					convertCoordinate(algebraicFinalSpot.substring(0, 1)), null);
 			return endSpot;
-		} else if(algebraicFinalSpot.length() == 3) { //caso in cui la stringa sia lunga 3 (ambiguit√†)
+		} else if(algebraicFinalSpot.length() == 3) { //caso in cui la stringa sia lunga 3 (ambiguit‡)
 			endSpot = new Spot(convertCoordinate(algebraicFinalSpot.substring(2, 3)), 
 					convertCoordinate(algebraicFinalSpot.substring(1, 2)), null);
 			setAmbiguity(true);
@@ -51,10 +56,6 @@ public class Move {
 		return null;
 	}
 
-
-
-	
-	
 
 	/**converte la coordinata in notazione matriciale
 	 * 
@@ -95,21 +96,20 @@ public class Move {
 	 */
 	void findStartSpotOnBoard(Game game, Spot endSpot, String piece, String algebraicFinalSpot) {
 		Piece currentPiece = classPieceMoved(piece);	//tipo di pezzo da muovere (instanziato come elemento della classe
-		
+
 		if(isAmbiguity) {
-			/*TODO caso in cui la notazione algebrica sia lunga 3 (quindi pi√π pezzi dello stesso
-			 * tipo possano raggiungere la stessa casa
-			 */
 			findCandidates(game, currentPiece, endSpot, algebraicFinalSpot);
 		}
 		else{
 			findCandidates(game, currentPiece, endSpot, null);	//Spot candidati ad essere spot di partenza
 		}
-
-		//TODO a partire dalla lista degli Spot candidati selezionare lo spot giusto
-
 	}
 
+	/** Intepreta dalla lettera inserita dall'utente il pezzo che vuole muovere
+	 * 
+	 * @param algebraicPiece
+	 * @return ritorna il pezzo che si deve muovere
+	 */
 	Piece classPieceMoved (String algebraicPiece){
 		Piece currentPiece;
 		switch (algebraicPiece){          
@@ -135,7 +135,13 @@ public class Move {
 		return currentPiece;
 	}
 
-
+	/**Trova i candidati possibili come punto di partenza di una mossa
+	 * 
+	 * @param game	la partita attuale
+	 * @param piece	il pezzo che deve muoversi
+	 * @param end	il punto d'arrivo
+	 * @param algebraicFinalSpot	casella d'arrivo in notazione algebrica
+	 */
 	void findCandidates(Game game, Piece piece, Spot end, String algebraicFinalSpot) {
 		if(isAmbiguity){
 			for(int i=0; i<8; i++){
@@ -146,7 +152,6 @@ public class Move {
 				}
 			}
 		}
-
 		else{
 			for(int i=0; i<8; i++) {
 				for(int j=0; j<8; j++) {
@@ -159,10 +164,24 @@ public class Move {
 				}
 			}
 		}
+
+	}
+	
+	/**estrae il simbolo speciale di cattura dal comando
+	 * 
+	 * @param algebraicSymbol ArrayList dei simboli speciali
+	 */
+	public void extractSymbol(ArrayList<String> algebraicSymbol){
+		for(String currentSymbol : algebraicSymbol){
+			if(currentSymbol.contains("x") && currentSymbol.length()==1){
+				this.isCapture = true;
+			}
+		}
 	}
 
+
 	/**
-	 * enumerazione dello stato di gioco (per verificare se la partita √® ancora in
+	 * enumerazione dello stato di gioco (per verificare se la partita Ë ancora in
 	 * corso)
 	 * 
 	 * @author wilkinson
@@ -204,5 +223,25 @@ public class Move {
 
 	public void setAmbiguity(boolean isAmbiguity) {
 		this.isAmbiguity = isAmbiguity;
+	}
+
+	public boolean isCapture() {
+		return isCapture;
+	}
+
+	public void setCapture(boolean isCapture) {
+		this.isCapture = isCapture;
+	}
+
+	public void setStart(Spot start) {
+		this.start = start;
+	}
+
+	public void setEnd(Spot end) {
+		this.end = end;
+	}
+
+	public void setPieceMoved(Piece pieceMoved) {
+		this.pieceMoved = pieceMoved;
 	}
 }
