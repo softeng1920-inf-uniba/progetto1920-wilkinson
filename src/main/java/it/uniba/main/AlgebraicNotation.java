@@ -119,7 +119,7 @@ public class AlgebraicNotation {
 	}
 	
 	boolean checkMove() {
-		
+		return true;
 	}
 
 
