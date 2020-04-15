@@ -17,14 +17,20 @@ public class Move {
 	public Move(final String command, Game game) {				                                                                        //Probabilmente andrebbe messo private
 		this.interpreter = new AlgebraicNotation(command); 			// Istanzio l'oggetto interpreter
 
-		String algebraicPieceMoved = interpreter.getPieceLetter();                                                    // Stringa in notazione algebrica del pezzo che deve muoversi
-		String algebraicFinalSpot = interpreter.getEndSquareId();    // Stringa della posizione d'arrivo in notazione algebrica che deve essere convertita
-		
-		this.end = extractCoordinates(algebraicFinalSpot);	//estraggo le coordinate di arrivo
+		if(this.getInterpreter().isGoodMove) {
+			String algebraicPieceMoved = interpreter.getPieceLetter();                                                    // Stringa in notazione algebrica del pezzo che deve muoversi
+			String algebraicFinalSpot = interpreter.getEndSquareId();    // Stringa della posizione d'arrivo in notazione algebrica che deve essere convertita
+			
+			this.end = extractCoordinates(algebraicFinalSpot);	//estraggo le coordinate di arrivo
 
-		findStartSpotOnBoard(game, getEnd(), algebraicPieceMoved, algebraicFinalSpot); //estraggo le coordinate di partenza
+			findStartSpotOnBoard(game, getEnd(), algebraicPieceMoved, algebraicFinalSpot); //estraggo le coordinate di partenza
+			
+			if(this.start != null) {
+				this.pieceMoved = start.getPiece();		// prende il pezzo che si muove direttamente dallo Spot di partenza
+			}
+		}
 		
-		this.pieceMoved = start.getPiece();		// prende il pezzo che si muove direttamente dallo Spot di partenza
+		
 
 	}
 
@@ -138,7 +144,8 @@ public class Move {
 		if(isAmbiguity){
 			for(int i=0; i<8; i++){
 				Spot start = game.getBoard().getSpot(i, convertCoordinate(algebraicFinalSpot.substring(0, 1) ));
-				if(start.getPiece() != null && start.getPiece().canMove(game.getBoard(), start, end) && start.getPiece().isWhite() == game.whiteTurn){
+				Spot end2 = game.getBoard().getSpot(end.getX(), end.getY());
+				if(start.getPiece() != null && start.getPiece().canMove(game.getBoard(), start, end2) && start.getPiece().isWhite() == game.whiteTurn){
 					this.start = start;
 				}
 			}
@@ -147,7 +154,8 @@ public class Move {
 			for(int i=0; i<8; i++) {
 				for(int j=0; j<8; j++) {
 					Spot start = game.getBoard().getSpot(i, j);
-					if(start.getPiece() != null && start.getPiece().canMove(game.getBoard(), start, end) && start.getPiece().isWhite() == game.whiteTurn) {
+					Spot end2 = game.getBoard().getSpot(end.getX(), end.getY());
+					if(start.getPiece() != null && start.getPiece().canMove(game.getBoard(), start, end2) && start.getPiece().isWhite() == game.whiteTurn) {
 						this.start = start;
 					}
 
