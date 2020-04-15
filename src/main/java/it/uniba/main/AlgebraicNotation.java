@@ -57,12 +57,12 @@ public class AlgebraicNotation {
 		} else if(isCastle) {	//caso arrocco
 			setEndSquareId("");
 		} else {
-			setEndSquareId(command);	//il resto della stringa Ë la casella di partenza/arrivo
+			setEndSquareId(command);	//il resto della stringa √® la casella di partenza/arrivo
 		}
 
 	}
 
-	boolean isPawn(String command) {	//controllo se la mossa Ë di un pedone (nessuna lettera iniziale)
+	boolean isPawn(String command) {	//controllo se la mossa √® di un pedone (nessuna lettera iniziale)
 
 		char firstLetter = command.charAt(STARTINDEX);
 		if(Character.isUpperCase(firstLetter)) {
@@ -98,9 +98,9 @@ public class AlgebraicNotation {
 		}
 	}
 
-	String reduceString(String command, String extracted) {	//riduce la stringa di comando eliminando i caratteri gi‡ estratti
+	String reduceString(String command, String extracted) {	//riduce la stringa di comando eliminando i caratteri gi√† estratti
 
-		/*controllo se la stringa da sottrarre Ë vuota o se contiene un simbolo da trattare diversamente*/
+		/*controllo se la stringa da sottrarre √® vuota o se contiene un simbolo da trattare diversamente*/
 		if(!extracted.isEmpty() && !(extracted == symbolList.get(ENPASSANTINDEX)) && !(extracted == symbolList.get(DOUBLECHECKINDEX))) {
 			String newCommand = "";
 
@@ -120,10 +120,6 @@ public class AlgebraicNotation {
 		return command;
 	}
 	
-	boolean checkMove() {
-		return true;
-	}
-
 	/**il metodo controlla che il comando sia scritto in notazione algebrica corretta
 	 * 
 	 * @return
