@@ -28,18 +28,12 @@ public final class AppMain {
 		Game game;
 		String userChoice; //Memorizza le scelte che vengono effettuate dall'utente
 		boolean quitFlag=false; //Flag per gestire l'uscita dal programma
-		//TODO int i=1;
+		boolean quitGame=false; //Flag per gestire l'uscita dal programma
 
-		//System.out.println("Current working dir: " + System.getProperty("user.dir"));
 		System.out.println("**Benvenuto nel gioco degli Scacchi**\n");	        	
-		System.out.println("**Elenco dei comandi disponibili**\n");	        	
 		System.out.println(">play     :: inizia una nuova partita");
-		System.out.println(">board    :: mostra al scacchiera"); 
-		System.out.println(">moves    :: mostra lo storico delle mosse giocate");
-		System.out.println(">captures :: mostra i pezzi catturati");
-		System.out.println(">quit     :: esci dalla partita");
+		System.out.println(">exit     :: chiudi il gioco");
 		
-		//Ho ritenuto opportuno rinominare choice in scanner
 		Scanner scanner=new Scanner(System.in);
 		
 		/*Il ciclo di immissione comandi continua fino a che l'utente non digita il comando >quit 
@@ -48,49 +42,68 @@ public final class AppMain {
 		while(quitFlag==false)
 		{    
 			//TODO Scanner scanner=new Scanner(System.in); 
-			System.out.println("Inserire il comando che si intende eseguire:");
-			// Permette all'utente di inserire il comando, trasformando eventuali lettere maiuscole in minuscole per una piu' facile gestione dell'input
+			System.out.println("Inserire il comando che si intende eseguire: (play/exit)");
 			userChoice=scanner.nextLine().toLowerCase();
-			while (userChoice.compareTo("play")!=0 && userChoice.compareTo("help")!=0 && userChoice.compareTo("board")!=0 && userChoice.compareTo("moves")!=0 && userChoice.compareTo("captures")!=0 && userChoice.compareTo("quit")!=0)
-			{
-				System.out.println("Il comando inserito non e' corretto, si prega di inserirne nuovamente uno:");
-				userChoice=scanner.nextLine().toLowerCase();
-			} //Controllo sulla stringa in input
-			if (userChoice.compareTo("help")==0) 
-			{
-				System.out.println("**Elenco dei comandi**\n");	        	
-				System.out.println(">play     :: inizia una nuova partita");
-				System.out.println(">board    :: mostra al scacchiera"); 
-				System.out.println(">moves    :: mostra lo storico delle mosse giocate");
-				System.out.println(">captures :: mostra i pezzi catturati");
-				System.out.println(">quit     :: esci dalla partita");
-			}
-			else 
-			{
-				switch(userChoice) // tutti i vari casi sono da implementare 
-				{
+		
+			switch(userChoice){
+				
+				case "exit":
+					System.out.println("Sei sicuro di voler chiudere il gioco?"
+							+ " Inserire> 'si' per confermare, inserire > 'no' per tornare al menu principale" );
+					userChoice=scanner.nextLine().toLowerCase();
+					if(userChoice.compareTo("si")== 0) {
+						System.out.println("...uscita dal gioco");
+						quitFlag = true;
+						//System.exit(0);
+					} else if (userChoice.compareTo("no")== 0){
+						quitFlag = false;
+					} else {
+						System.out.println("Risposta non valida, inserire 'si' oppure 'no'");
+					}
+					break;		
+					
+					
 				case "play":
-					System.out.println("**Inizio partita**\n"); 
+					System.out.println("**Inizio partita**\nE' possibile digitare 'help' per ottenere la lista dei comandi disponibili"
+							+"Le pedine si muovono"); 
 					game = new Game();
 
-					while(!game.isEnd()) {
+					while(!game.isEnd() && !quitGame) {
 						System.out.println("Inserire comando: ");
-						userChoice=scanner.nextLine();
-
+						userChoice=scanner.nextLine().toLowerCase();
+						if (userChoice.compareTo("exit")==0){
+							userChoice = "quit";
+						};
 						switch(userChoice) {
+						
+						case "help":
+							System.out.println(">board    :: mostra al scacchiera"); 
+							System.out.println(">moves    :: mostra lo storico delle mosse giocate");
+							System.out.println(">captures :: mostra i pezzi catturati");
+							System.out.println(">quit     :: esci dalla partita");
+							break;
+							
 						case "board":
 							game.board.showBoard();
 							break;
+						case "moves":                                           
+							System.out.println("MOVES..."); //TODO da implementare
+							break;
+						case "captures":
+							System.out.println("CAPTURES..."); //TODO da implementare
+							break;
+															
 						case "quit":
 						{
-							System.out.println("Sei sicuro di voler chiudere l'applicazione?"
-									+ " Inserire> 'si' per confermare, inserire > 'no' per tornare a giocare" );
+							System.out.println("Sei sicuro di voler chiudere la partita?\n"
+									+ "Inserire> 'si' per confermare e tornare al menu principale, inserire > 'no' per continuare a giocare" );
 							userChoice=scanner.nextLine().toLowerCase();
 							if(userChoice.compareTo("si")== 0) {
-								System.out.println("...uscita dal programma");
-								quitFlag = true;
+								System.out.println("...ritorno al menu principale");
+								quitGame = true;
+							//	System.exit(0);
 							} else if (userChoice.compareTo("no")== 0){
-								quitFlag = false;
+								quitGame = false;
 							} else {
 								System.out.println("Risposta non valida, inserire 'si' oppure 'no'");
 							}
@@ -98,41 +111,18 @@ public final class AppMain {
 						}
 							
 						default:
-							game.currentGame(userChoice);
-							game.board.showBoard();
-							
-							
+						/*	game.currentGame(userChoice);
+							game.board.showBoard();*/
+										
 						}	
 					}
-					break;
-				case "board":
-					System.out.println("visualizzazione scacchiera\n");
-					break;
-				case "moves":                                           
-					System.out.println("");
-					break;
-				case "captures":
-					System.out.println("");
-					break;
-				case "quit":
-				{
-					System.out.println("Sei sicuro di voler chiudere l'applicazione?"
-							+ " Inserire> 'si' per confermare, inserire > 'no' per tornare a giocare" );
-					userChoice=scanner.nextLine().toLowerCase();
-					if(userChoice.compareTo("si")== 0) {
-						System.out.println("...uscita dal programma");
-						quitFlag = true;
-					} else if (userChoice.compareTo("no")== 0){
-						quitFlag = false;
-					} else {
-						System.out.println("Risposta non valida, inserire 'si' oppure 'no'");
-					}
-					break;			    	
-				}
+					break;//fine del caso "play"
+				
+			
 				default:
 					quitFlag = false;
 				}//end switch 
-			}
+			
 		}//end while
 		scanner.close(); //chiusura dello scanner
 	}
