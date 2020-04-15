@@ -29,6 +29,7 @@ public class Move {
 				this.pieceMoved = start.getPiece();		// prende il pezzo che si muove direttamente dallo Spot di partenza
 			}
 		}
+	}
 
 	/**estrae le coordinate della casa di arrivo
 	 * 
