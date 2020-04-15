@@ -111,8 +111,8 @@ public final class AppMain {
 						}
 							
 						default:
-						/*	game.currentGame(userChoice);
-							game.board.showBoard();*/
+							game.currentGame(userChoice);
+							game.board.showBoard();
 										
 						}	
 					}
