@@ -31,19 +31,34 @@ public final class AppMain {
 	public static void main(final String[] args) {
 		Game game;
 		String userChoice; //Memorizza le scelte che vengono effettuate dall'utente
-		boolean quitFlag=true; //Flag per gestire l'uscita dal programma
-		int i=1;
-		System.out.println("Current working dir: " + System.getProperty("user.dir"));
+		boolean quitFlag=false; //Flag per gestire l'uscita dal programma
+		//TODO int i=1;
 
-		while(quitFlag==true) // Il ciclo di immisione comandi continua fino a che l'utente non digita il comando >quit che setta il flag da true a false, uscendo dal programma
+		System.out.println("Current working dir: " + System.getProperty("user.dir"));
+		System.out.println("**Benvenuto nel gioco degli Scacchi**\n");	        	
+		System.out.println("**Elenco dei comandi disponibili**\n");	        	
+		System.out.println(">play     :: inizia una nuova partita");
+		System.out.println(">board    :: mostra al scacchiera"); 
+		System.out.println(">moves    :: mostra lo storico delle mosse giocate");
+		System.out.println(">captures :: mostra i pezzi catturati");
+		System.out.println(">quit     :: esci dalla partita");
+		
+		//Ho ritenuto opportuno rinominare choice in scanner
+		Scanner scanner=new Scanner(System.in);
+		
+		/*Il ciclo di immissione comandi continua fino a che l'utente non digita il comando >quit 
+		  che setta il flag da true a false, uscendo dal programma*/
+		
+		while(quitFlag==false)
 		{    
-			Scanner choice=new Scanner(System.in); 
+			//TODO Scanner scanner=new Scanner(System.in); 
 			System.out.println("Inserire il comando che si intende eseguire:");
-			userChoice=choice.nextLine().toLowerCase();// Permette all'utente di inserire il comando, trasformando eventuali lettere maiuscole in minuscole per una piu' facile gestione dell'input
+			// Permette all'utente di inserire il comando, trasformando eventuali lettere maiuscole in minuscole per una piu' facile gestione dell'input
+			userChoice=scanner.nextLine().toLowerCase();
 			while (userChoice.compareTo("play")!=0 && userChoice.compareTo("help")!=0 && userChoice.compareTo("board")!=0 && userChoice.compareTo("moves")!=0 && userChoice.compareTo("captures")!=0 && userChoice.compareTo("quit")!=0)
 			{
-				System.out.println("Il comando inserito non è corretto, si prega di inserirne nuovamente uno:");
-				userChoice=choice.nextLine().toLowerCase();
+				System.out.println("Il comando inserito non e' corretto, si prega di inserirne nuovamente uno:");
+				userChoice=scanner.nextLine().toLowerCase();
 			} //Controllo sulla stringa in input
 			if (userChoice.compareTo("help")==0) 
 			{
@@ -64,7 +79,7 @@ public final class AppMain {
 
 					while(!game.isEnd()) {
 						System.out.println("Inserire comando: ");
-						userChoice=choice.nextLine();
+						userChoice=scanner.nextLine();
 
 						switch(userChoice) {
 						case "board":
@@ -75,9 +90,6 @@ public final class AppMain {
 							game.board.showBoard();
 						}	
 					}
-					
-	
-
 					break;
 				case "board":
 					System.out.println("visualizzazione scacchiera\n");
@@ -90,13 +102,21 @@ public final class AppMain {
 					break;
 				case "quit":
 				{
-					System.out.println("Sei sicuro di voler chiudere l'applicazione? Inserire >true per confermare, >false per torrnare a giocare" );// Da implementare
-					quitFlag=false; // Imposto la variabile flag a false per uscire dal ciclo e terminare il programma
+					System.out.println("Sei sicuro di voler chiudere l'applicazione?"
+							+ " Inserire> 'si' per confermare, inserire > 'no' per tornare a giocare" );
+					userChoice=scanner.nextLine().toLowerCase();
+					if(userChoice.compareTo("si")== 0) {
+						quitFlag = true;
+					} else {
+						quitFlag = false;
+					}
 					break;			    	
 				}
 				default:
-				} 
+					quitFlag = false;
+				}//end switch 
 			}
-		} 
+		}//end while
+		scanner.close(); //chiusura dello scanner
 	}
 }
