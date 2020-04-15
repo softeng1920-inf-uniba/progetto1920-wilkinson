@@ -65,7 +65,7 @@ public final class AppMain {
 					
 				case "play":
 					System.out.println("**Inizio partita**\nE' possibile digitare 'help' per ottenere la lista dei comandi disponibili"
-							+"Le pedine si muovono"); 
+							+"\nLe pedine si muovono usando la notazione algebrica"); 
 					game = new Game();
 
 					while(!game.isEnd() && !quitGame) {
