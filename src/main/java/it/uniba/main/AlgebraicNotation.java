@@ -117,6 +117,23 @@ public class AlgebraicNotation {
 		}
 		return command;
 	}
+	
+	boolean checkMove() {
+		switch(getPieceLetter()) {
+		case "T": case "D": case "A":
+			break;
+		}
+		
+		if(getEndSquareId().length() >3) {
+			return false;
+		} else {
+			String letter = getEndSquareId().substring(0, 1);
+			String number = getEndSquareId().substring(1, 2);
+			
+		}
+		
+		return false;
+	}
 
 
 	public String toString(){	//stampa a video del comando scomposto
