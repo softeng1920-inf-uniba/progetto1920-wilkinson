@@ -13,21 +13,35 @@ public class Game {
 	//TODO ArrayList<String> blackMoves;	//lista con le mosse effettuate dal nero
 	ArrayList<Piece> whiteCaptures;	//lista con i pezzi catturati dal bianco (quindi pezzi neri)
 	ArrayList<Piece> blackCaptures;	//lista con i pezzi catturati dal nero (quindi pezzi bianchi)
+	boolean isGood = false;
 	
 	/**metodo che pone inizio alla partita (inizializzando la board, settando ad ACTIVE lo status, ecc
 	 * 
 	 */
-	void initialize() {
-		//TODO
+	Game(){
+		initialize();
 	}
 	
-	/**controlla se la partita è ancora in corso
-	 * 
-	 * @return true se status è diverso da ACTIVE
-	 */
-	public boolean isEnd() {
-		//TODO
-		return false;
+	public void initialize() { //inizializza la partita
+		board = new Board();
+		setStatus(GameStatus.ACTIVE);
+	}
+	
+	public boolean isEnd() { //metodo booleano che restituisce true se la partita è terminata
+		if(status != GameStatus.ACTIVE) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public void currentGame(String command) { //
+		
+		Move move = new Move(command, this);
+		if(makeMove (move)) {
+			whiteTurn = (!whiteTurn);
+		}
+		
 	}
 	
 	/**metodo che effettua la mossa
@@ -43,11 +57,24 @@ public class Game {
 	 * @return true se la mossa è stata effettuata, false altrimenti
 	 */
 	public boolean makeMove(Move move) {
-		//TODO
+		Spot start = board.getSpot(move.getStart().getX(), move.getStart().getY());
+		Spot end = board.getSpot(move.getEnd().getX(), move.getEnd().getY());
+		
+		if(start.getPiece() != null && start.getPiece().isWhite() == this.whiteTurn) {
+			if(start.getPiece().canMove(board, start, end)) {
+				end.setPiece(start.getPiece());
+				start.setPiece(null);	
+				end.getPiece().setAsMoved();
+				isGood = true;
+				return true;
+			} 
+		} 
+		
+		
 		return false;
 	}
 	
-	/**Metodo che moster� le mosse giocate durante
+	/**Metodo che moster� le mosse giocate durante
 	 * la partita.
 	 */
 	
@@ -62,6 +89,22 @@ public class Game {
 			turnControl++;
 			System.out.print(currentMove + " ");
 		}//end for
+	}
+
+	public GameStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(GameStatus status) {
+		this.status = status;
+	}
+
+	public Board getBoard() {
+		return board;
+	}
+
+	public void setBoard(Board board) {
+		this.board = board;
 	}
 
 }

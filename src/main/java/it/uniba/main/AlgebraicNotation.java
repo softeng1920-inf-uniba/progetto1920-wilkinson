@@ -119,6 +119,10 @@ public class AlgebraicNotation {
 		}
 		return command;
 	}
+	
+	boolean checkMove() {
+		return true;
+	}
 
 	/**il metodo controlla che il comando sia scritto in notazione algebrica corretta
 	 * 
