@@ -91,7 +91,7 @@ public class Game {
 		return false;
 	}
 	
-	/**Metodo che moster� le mosse giocate durante
+	/**Metodo che mostra le mosse giocate durante
 	 * la partita.
 	 */
 	
@@ -108,10 +108,10 @@ public class Game {
 		}//end for
 	}
 	
-
-/**	Metodo per mostrare la catture effettuate 
- */
-	//TODO da implementare
+//TODO
+/**	Metodo che mostra le catture effettuate
+ * durante la partita 
+ 
 	public void showCaptures() {
 		int captureNumber = 0;
 		int turnControl = 0;
@@ -124,6 +124,8 @@ public class Game {
 			System.out.print(currentMove + " ");
 		}//end for
 	}
+	*/
+	
 
 	public GameStatus getStatus() {
 		return status;

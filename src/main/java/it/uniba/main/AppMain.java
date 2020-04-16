@@ -93,7 +93,7 @@ public final class AppMain {
 							break;
 						case "captures":
 							System.out.println("CAPTURES..."); //TODO da implementare
-							game.showCaptures();
+							//TODO game.showCaptures();
 							break;
 															
 						case "quit":
