@@ -8,6 +8,7 @@ public class Queen extends Piece {
 	}
 	
 	@Override
+<<<<<<< HEAD
 	public String draw() {
 		if(isWhite())
 		{
@@ -17,6 +18,11 @@ public class Queen extends Piece {
 		{
 			return "\u265b";
 		}
+=======
+	public void draw() {
+		// TODO Auto-generated method stub
+		
+>>>>>>> 1f7370ad7b83c975c9ea9b883754ec70e01a31f3
 	}
 
 	@Override
@@ -26,4 +32,8 @@ public class Queen extends Piece {
 
 
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 1f7370ad7b83c975c9ea9b883754ec70e01a31f3

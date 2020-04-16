@@ -8,6 +8,7 @@ public class Pawn extends Piece {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public String draw() {
 		if(isWhite())
 		{
@@ -16,12 +17,23 @@ public class Pawn extends Piece {
 		else
 		{
 			return "\u265f";
+=======
+	public void draw() {
+		if(isWhite())
+		{
+			System.out.println("Il pedone e' di colore bianco ed il suo codice Unicode e': u2659");
+		}
+		else
+		{
+			System.out.println("Il pedone e' di colore nero ed il suo codice Unicode e': u265f");
+>>>>>>> 1f7370ad7b83c975c9ea9b883754ec70e01a31f3
 		}
 
 	}
 
 	@Override
 	boolean canMove(Board board, Spot start, Spot end) {
+<<<<<<< HEAD
 		if(start.piece.isWhite()) {
 			if(end.piece==null) {
 				if((start.y==end.y) && (start.x ==(end.x+2))){ //possibile movimento di 2 caselle del pedone se non e' stato mai spostato
@@ -71,3 +83,38 @@ public class Pawn extends Piece {
 		return false;
 	}
 }
+=======
+
+		//non posso muovere in una casella dove c'Ã¨ un pezzo dello stesso colore
+		if(end.piece.isWhite() == this.isWhite()) {
+			return false;
+		}
+		if(start.piece.isWhite()) {
+			if((start.y == end.y) && (start.x == (end.x +1))) {
+				if(end.piece==null) //verifico che nello spot d'arrivo non siano già presenti pezzi
+				{
+					return true;
+				}
+				else 
+				{
+					return false;
+				}
+				//TODO movimento in avanti del pedone bianco e possibile cattura in obliquo
+			}
+		} else if(!start.piece.isWhite()) {
+			if((start.y == end.y) && (start.x == (end.x -1))) {
+				if(end.piece==null) //verifico che nello spot d'arrivo non siano già presenti pezzi
+				{
+					return true;
+				}
+				else 
+				{
+					return false;
+				}
+			}
+			//TODO movimento in avanti del pedone nero e possibile cattura in obliquo
+		}      
+		return false;
+	}
+}
+>>>>>>> 1f7370ad7b83c975c9ea9b883754ec70e01a31f3
