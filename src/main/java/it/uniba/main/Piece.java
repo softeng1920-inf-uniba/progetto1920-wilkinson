@@ -15,11 +15,7 @@ public abstract class Piece {
   
 	/**ritorna il valore dell'attributo ehite
 	 * 
-<<<<<<< HEAD
 	 * @return white true se il pezzo è bianco, false se il pezzo è nero
-=======
-	 * @return white true se il pezzo Ã¨ bianco, false se il pezzo Ã¨ nero
->>>>>>> 1f7370ad7b83c975c9ea9b883754ec70e01a31f3
 	 */
     public boolean isWhite() { 
         return this.white; 
@@ -35,11 +31,7 @@ public abstract class Piece {
   
     /**ritorna il valore dell'attributo killed
      * 
-<<<<<<< HEAD
      * @return killed true se è stato catturato, false altrimenti
-=======
-     * @return killed true se Ã¨ stato catturato, false altrimenti
->>>>>>> 1f7370ad7b83c975c9ea9b883754ec70e01a31f3
      */
     public boolean isKilled() { 
         return this.killed; 
@@ -54,11 +46,7 @@ public abstract class Piece {
     
     /**ritorna il valore dell'attributo moved
      * 
-<<<<<<< HEAD
      * @return moved true se il pezzo è stato mosso, false altrimenti
-=======
-     * @return moved true se il pezzo Ã¨ stato mosso, false altrimenti
->>>>>>> 1f7370ad7b83c975c9ea9b883754ec70e01a31f3
      */
     public boolean isMoved() {
     	return this.moved;
@@ -72,16 +60,10 @@ public abstract class Piece {
     }
     
     /**metodo che stampa a console il corrispondente carattere Unicode del pezzo
-<<<<<<< HEAD
      * stabilendo se è nero o bianco
 <<<<<<< HEAD
      */
     public abstract String draw();
-=======
-     * stabilendo se Ã¨ nero o bianco
-     */
-    public abstract void draw();
->>>>>>> 1f7370ad7b83c975c9ea9b883754ec70e01a31f3
 	
 	/**metodo che stabilisce se il pezzo può muoversi (la mossa è legale)
 	 * 

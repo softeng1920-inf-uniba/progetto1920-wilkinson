@@ -8,7 +8,6 @@ public class Rook extends Piece {
 	}
 	
 	@Override
-<<<<<<< HEAD
 	public String draw() {
 		if(isWhite())
 		{
@@ -18,19 +17,10 @@ public class Rook extends Piece {
 		{
 			return "\u265c";
 		}
-=======
-	public void draw() {
-		// TODO Auto-generated method stub
-		
->>>>>>> 1f7370ad7b83c975c9ea9b883754ec70e01a31f3
 	}
 
 	@Override
 	boolean canMove(Board board, Spot start, Spot end) {
 		return false;
 	}
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 1f7370ad7b83c975c9ea9b883754ec70e01a31f3

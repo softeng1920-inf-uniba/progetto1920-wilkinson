@@ -91,7 +91,7 @@ public class Game {
 		return false;
 	}
 	
-<<<<<<< HEAD
+
 	/**Metodo che mostra le mosse giocate durante
 	 * la partita.
 	 */
@@ -144,8 +144,7 @@ public class Game {
 		this.board = board;
 	}
 
-=======
-	public void showCaptures() {
+/*	public void showCaptures() {
 		System.out.println("Catture del bianco: ");
 		for (Piece currentCapture: whiteCaptures) {
 			//TODO System.out.println(currentCapture.draw());
@@ -155,6 +154,5 @@ public class Game {
 		for (Piece currentCapture: blackCaptures) {
 			//TODO System.out.println(currentCapture.draw());
 		}
-	}
->>>>>>> 1f7370ad7b83c975c9ea9b883754ec70e01a31f3
+	}*/
 }
