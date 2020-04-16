@@ -92,7 +92,7 @@ public final class AppMain {
 							game.showMoves();
 							break;
 						case "captures":
-							System.out.println("\nCatture per colore:"); //TODO da implementare
+							System.out.println("\nELENCO DELLE CATTURE PER COLORE:"); //TODO da implementare
 							game.showCaptures();
 							break;
 															

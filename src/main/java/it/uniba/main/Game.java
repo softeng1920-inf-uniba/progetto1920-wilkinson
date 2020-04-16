@@ -102,7 +102,7 @@ public class Game {
 		int moveNumber = 0;
 		int turnControl = 0;
 		if(allMoves.size()==0) {
-			System.out.println("L'elenco delle mosse e' vuoto.");
+			System.out.println("\nL'elenco delle mosse e' vuoto.");
 		}
 		for (String currentMove: allMoves) {
 			if(turnControl % 2 == 0) {
@@ -119,14 +119,22 @@ public class Game {
  * durante la partita 
  */
 	public void showCaptures() {
-		System.out.println("Catture del bianco: ");
-		for (String currentCapture: whiteCaptures) {
-			System.out.println(currentCapture);
+		if(whiteCaptures.size() ==0) {
+			System.out.println("Nessuna cattura fatta dal bianco.");
+			} else {
+				for (String currentCapture: whiteCaptures) {
+					System.out.println("Catture del bianco: ");
+					System.out.println(currentCapture);
+			}
 		}
 		
-		System.out.println("Catture del nero: ");
-		for (String currentCapture: blackCaptures) {
-			System.out.println(currentCapture);
+		if(blackCaptures.size() ==0) {
+			System.out.println("Nessuna cattura fatta dal nero.");
+			} else {
+				for (String currentCapture: blackCaptures) {
+					System.out.println("Catture del nero: ");
+					System.out.println(currentCapture);
+			}
 		}
 	}
 	
