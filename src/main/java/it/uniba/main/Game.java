@@ -101,6 +101,9 @@ public class Game {
 	public void showMoves() {
 		int moveNumber = 0;
 		int turnControl = 0;
+		if(allMoves.size()==0) {
+			System.out.println("L'elenco delle mosse e' vuoto.");
+		}
 		for (String currentMove: allMoves) {
 			if(turnControl % 2 == 0) {
 				moveNumber++;
