@@ -9,7 +9,9 @@ public class Game {
 	Board board;	//oggetto scacchiera per la partita in corso
 	boolean whiteTurn = true;	//true se turno del bianco, false se turno del nero
 	GameStatus status;	//stato della partita (se ACTIVE si continua a giocare, altrimenti si quitta)
-	ArrayList<String> allMoves;	//lista con le mosse effettuate dal bianco
+	ArrayList<String> allMoves = new ArrayList<String>();	//lista contenente tutte le mosse effettuate nel gioco
+	ArrayList<String> allCaptures = new ArrayList<String>();
+	//ArrayList<Move> allMove;
 	//TODO ArrayList<String> blackMoves;	//lista con le mosse effettuate dal nero
 	ArrayList<Piece> whiteCaptures;	//lista con i pezzi catturati dal bianco (quindi pezzi neri)
 	ArrayList<Piece> blackCaptures;	//lista con i pezzi catturati dal nero (quindi pezzi bianchi)
@@ -46,11 +48,14 @@ public class Game {
 				} else {
 					System.out.println("Turno del nero");
 				}
+				allMoves.add(command); //inserisco la stinga command in allMoves 
+				if(move.isCapture()){
+					allCaptures.add(command);
+				}
 			}
 		} else {
 			System.out.println("Mossa non valida, reinserila");
 		}
-		
 		
 	}
 	
@@ -77,6 +82,8 @@ public class Game {
 				start.setPiece(null);	
 				end.getPiece().setAsMoved();
 				isGood = true;
+			//	allMoves.add(move.toString());
+				
 				return true;
 			} 
 		} 
@@ -95,6 +102,23 @@ public class Game {
 			if(turnControl % 2 == 0) {
 				moveNumber++;
 				System.out.print("\n" + moveNumber + ".");
+			}
+			turnControl++;
+			System.out.print(currentMove + " ");
+		}//end for
+	}
+	
+
+/**	Metodo per mostrare la catture effettuate 
+ */
+	//TODO da implementare
+	public void showCaptures() {
+		int captureNumber = 0;
+		int turnControl = 0;
+		for (String currentMove: allCaptures) {
+			if(turnControl % 2 == 0) {
+				captureNumber++;
+				System.out.print("\n" + captureNumber + ".");
 			}
 			turnControl++;
 			System.out.print(currentMove + " ");

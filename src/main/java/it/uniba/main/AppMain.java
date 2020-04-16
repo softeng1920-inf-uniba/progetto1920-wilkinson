@@ -70,7 +70,7 @@ public final class AppMain {
 					game = new Game();
 
 					while(!game.isEnd() && !quitGame) {
-						System.out.println("Inserire comando: ");
+						System.out.println("\nInserire comando: ");
 						userChoice=scanner.nextLine().toLowerCase();
 						if (userChoice.compareTo("exit")==0){
 							userChoice = "quit";
@@ -89,9 +89,11 @@ public final class AppMain {
 							break;
 						case "moves":                                           
 							System.out.println("MOVES..."); //TODO da implementare
+							game.showMoves();
 							break;
 						case "captures":
 							System.out.println("CAPTURES..."); //TODO da implementare
+							game.showCaptures();
 							break;
 															
 						case "quit":
