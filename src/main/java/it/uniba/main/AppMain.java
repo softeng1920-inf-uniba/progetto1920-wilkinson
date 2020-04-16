@@ -88,12 +88,12 @@ public final class AppMain {
 							game.board.showBoard();
 							break;
 						case "moves":                                           
-							System.out.println("\nSerie di Mosse:"); //TODO da implementare
+							System.out.print("\nSerie di Mosse:"); //TODO da implementare
 							game.showMoves();
 							break;
 						case "captures":
-							System.out.println("\nserie di Catture:"); //TODO da implementare
-							//TODO game.showCaptures();
+							System.out.println("\nCatture per colore:"); //TODO da implementare
+							game.showCaptures();
 							break;
 															
 						case "quit":
@@ -115,8 +115,7 @@ public final class AppMain {
 							
 						default:
 							game.currentGame(userChoice);
-							game.board.showBoard();
-										
+							game.board.showBoard();	
 						}	
 					}
 					break;//fine del caso "play"
