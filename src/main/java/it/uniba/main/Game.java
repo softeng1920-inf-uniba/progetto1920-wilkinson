@@ -82,7 +82,6 @@ public class Game {
 				start.setPiece(null);	
 				end.getPiece().setAsMoved();
 				isGood = true;
-			//	allMoves.add(move.toString());
 				
 				return true;
 			} 

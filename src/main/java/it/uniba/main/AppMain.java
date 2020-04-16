@@ -88,11 +88,11 @@ public final class AppMain {
 							game.board.showBoard();
 							break;
 						case "moves":                                           
-							System.out.println("MOVES..."); //TODO da implementare
+							System.out.println("\nSerie di Mosse:"); //TODO da implementare
 							game.showMoves();
 							break;
 						case "captures":
-							System.out.println("CAPTURES..."); //TODO da implementare
+							System.out.println("\nserie di Catture:"); //TODO da implementare
 							//TODO game.showCaptures();
 							break;
 															
