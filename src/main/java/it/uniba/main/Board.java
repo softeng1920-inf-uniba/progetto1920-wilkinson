@@ -73,24 +73,65 @@ public class Board {
 	 * 
 	 */
 	public void showBoard() {
+		String upline = "\u2550";
+		String upline2 = "\u2566";
+		String sxline2 = "\u2560";
+		String cornersxline = "\u2554";
+		String cornerdxline = "\u2557";
+		String dxline = "\u2563";
+		String cornersxline2 = "\u255a";
+		String cornerdxline2 = "\u255d";
+		String downline2 = "\u2569";
+		
+		System.out.println("      a b c d e f g h");
+		
+		boolean isblack = true;
+	
+		System.out.print("    "+cornersxline);
 		for(int i=0; i<8; i++) {
-			System.out.print("---------------------------------\n");
+			System.out.print(upline);
+			System.out.print(upline2);
+		}
+		System.out.print(upline);
+		System.out.print(cornerdxline);
+		System.out.println("");
+		
+		for(int i=0; i<8; i++) {
+			System.out.print("  "+(8-i)+" ");
+			System.out.print(sxline2);
+			System.out.print(" ");
 			for(int j=0; j<8; j++) {
 				Piece piece = this.getSpot(i, j).getPiece();
-				System.out.print("|");
-				System.out.print(" ");
 				if(piece == null) {
-					System.out.print(" ");
+					if(isblack) {
+						System.out.print("\u25A1");
+						isblack = false;
+					} else {
+						System.out.print("\u25A0");
+						isblack = true;
+					}
 				} else {
 					piece.draw();
 					System.out.print(piece.draw());
+					isblack = !isblack;
 				}
 				System.out.print(" ");
 			}
 			
-			System.out.print("|");
+			System.out.print(dxline);
+			System.out.print(" "+(8-i));
+			isblack = !isblack;
 			System.out.println("\t");
 		}
-		System.out.print("---------------------------------\n");
+		
+		System.out.print("    "+cornersxline2);
+		for(int i=0; i<8; i++) {
+			System.out.print(upline);
+			System.out.print(downline2);
+		}
+		System.out.print(upline);
+		System.out.print(cornerdxline2);
+		System.out.println("");
+		System.out.println("      a b c d e f g h");
 	}
 }
