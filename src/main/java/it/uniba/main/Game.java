@@ -9,10 +9,10 @@ public class Game {
 	Board board;	//oggetto scacchiera per la partita in corso
 	boolean whiteTurn = true;	//true se turno del bianco, false se turno del nero
 	GameStatus status;	//stato della partita (se ACTIVE si continua a giocare, altrimenti si quitta)
-	ArrayList<String> allMoves;	//lista con le mosse effettuate dal bianco
+	ArrayList<String> allMoves = new ArrayList<String>();	//lista con le mosse effettuate dal bianco
 	//TODO ArrayList<String> blackMoves;	//lista con le mosse effettuate dal nero
-	ArrayList<Piece> whiteCaptures;	//lista con i pezzi catturati dal bianco (quindi pezzi neri)
-	ArrayList<Piece> blackCaptures;	//lista con i pezzi catturati dal nero (quindi pezzi bianchi)
+	ArrayList<Piece> whiteCaptures = new ArrayList<Piece>();	//lista con i pezzi catturati dal bianco (quindi pezzi neri)
+	ArrayList<Piece> blackCaptures = new ArrayList<Piece>();	//lista con i pezzi catturati dal nero (quindi pezzi bianchi)
 	boolean isCapture = false;
 
 
@@ -59,6 +59,7 @@ public class Game {
 	 * @return true se la mossa è stata effettuata, false altrimenti
 	 */
 	public boolean makeMove(Move move) {
+		isCapture = false;
 		Spot start = board.getSpot(move.getStart().getX(), move.getStart().getY());
 		Spot end = board.getSpot(move.getEnd().getX(), move.getEnd().getY());
 		searchForCapture(getBoard());
@@ -74,12 +75,24 @@ public class Game {
 						if(start.getPiece() instanceof Pawn) {
 							if(((Pawn)start.getPiece()).isCapturingEnPassant){
 								getBoard().getSpot(start.getX(), end.getY()).setPiece(null);
+								if (whiteTurn) {
+									whiteCaptures.add(end.getPiece());
+								}
+								else {
+									blackCaptures.add(end.getPiece());
+								}
 								end.setPiece(start.getPiece());
 								start.setPiece(null);	
 								end.getPiece().setAsMoved();
 								return true;
 								
 							} else {
+								if (whiteTurn) {
+									whiteCaptures.add(end.getPiece());
+								}
+								else {
+									blackCaptures.add(end.getPiece());
+								}
 								end.setPiece(start.getPiece());
 								start.setPiece(null);	
 								end.getPiece().setAsMoved();
@@ -87,7 +100,12 @@ public class Game {
 							}
 							
 						}
-						
+						if (whiteTurn) {
+							whiteCaptures.add(end.getPiece());
+						}
+						else {
+							blackCaptures.add(end.getPiece());
+						}
 						end.setPiece(start.getPiece());
 						start.setPiece(null);	
 						end.getPiece().setAsMoved();
@@ -138,7 +156,14 @@ public class Game {
 	}
 	
 	public void showCaptures() {
-
+		System.out.print("\nCattura del bianco: ");
+		for (Piece currentPiece: whiteCaptures) {
+			System.out.print(currentPiece.draw());
+		}
+		System.out.print("\nCattura del nero: ");
+		for (Piece currentPiece: blackCaptures) {
+			System.out.print(currentPiece.draw());
+		}
 	}
 
 	/**controlla se il comando e' una cattura
