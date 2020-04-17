@@ -113,7 +113,7 @@ public class Game {
 //TODO
 /**	Metodo che mostra le catture effettuate
  * durante la partita 
- */
+ */ 
 	public void showCaptures() {
 		if(whiteCaptures.size() ==0) {
 			System.out.println("Nessuna cattura fatta dal bianco.");
