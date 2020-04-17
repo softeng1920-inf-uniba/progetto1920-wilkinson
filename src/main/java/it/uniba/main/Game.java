@@ -158,7 +158,7 @@ public class Game {
 	}
 	
 	public void showCaptures() {
-		System.out.print("\nCatture del bianco: ");
+		System.out.print("Catture del bianco: ");
 		if(!whiteCaptures.isEmpty()) {
 			for (Piece currentPiece: whiteCaptures) {
 				System.out.print(currentPiece.draw() +" ");
