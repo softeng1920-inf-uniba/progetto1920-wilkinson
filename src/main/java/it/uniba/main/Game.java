@@ -9,10 +9,9 @@ public class Game {
 	Board board;	//oggetto scacchiera per la partita in corso
 	boolean whiteTurn = true;	//true se turno del bianco, false se turno del nero
 	GameStatus status;	//stato della partita (se ACTIVE si continua a giocare, altrimenti si quitta)
-	ArrayList<String> allMoves = new ArrayList<String>();	//lista con le mosse effettuate dal bianco
-	//TODO ArrayList<String> blackMoves;	//lista con le mosse effettuate dal nero
-	ArrayList<Piece> whiteCaptures = new ArrayList<Piece>();	//lista con i pezzi catturati dal bianco (quindi pezzi neri)
-	ArrayList<Piece> blackCaptures = new ArrayList<Piece>();	//lista con i pezzi catturati dal nero (quindi pezzi bianchi)
+	ArrayList<String> allMoves;	//lista con le mosse effettuate dal bianco
+	ArrayList<Piece> whiteCaptures;	//lista con i pezzi catturati dal bianco (quindi pezzi neri)
+	ArrayList<Piece> blackCaptures;	//lista con i pezzi catturati dal nero (quindi pezzi bianchi)
 	boolean isCapture = false;
 
 
@@ -26,6 +25,9 @@ public class Game {
 	public void initialize() { //inizializza la partita
 		board = new Board();
 		setStatus(GameStatus.ACTIVE);
+		allMoves = new ArrayList<String>();
+		whiteCaptures = new ArrayList<Piece>();
+		blackCaptures = new ArrayList<Piece>();
 	}
 
 	public boolean isEnd() { //metodo booleano che restituisce true se la partita è terminata
@@ -156,13 +158,18 @@ public class Game {
 	}
 	
 	public void showCaptures() {
-		System.out.print("\nCattura del bianco: ");
-		for (Piece currentPiece: whiteCaptures) {
-			System.out.print(currentPiece.draw());
+		System.out.print("\nCatture del bianco: ");
+		if(!whiteCaptures.isEmpty()) {
+			for (Piece currentPiece: whiteCaptures) {
+				System.out.print(currentPiece.draw() +" ");
+			}
 		}
-		System.out.print("\nCattura del nero: ");
-		for (Piece currentPiece: blackCaptures) {
-			System.out.print(currentPiece.draw());
+		
+		System.out.print("\nCatture del nero: ");
+		if(!blackCaptures.isEmpty()) {
+			for (Piece currentPiece: blackCaptures) {
+				System.out.print(currentPiece.draw() + " ");
+			}
 		}
 	}
 
