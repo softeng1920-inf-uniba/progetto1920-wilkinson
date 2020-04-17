@@ -41,10 +41,19 @@ public class Pawn extends Piece {
 				else if((start.y == end.y) && (start.x == (end.x +1))) {
 					return true;
 				}
-			}
+
+				else if(start.getX() == 3) {
+					if(enPassantCheck(board, start, end)) {
+						((Pawn)start.getPiece()).isCapturingEnPassant = true;
+
+						return true;
+					}
+				}
+			} 	
 			else {
 				if(start.piece.isWhite()==!(end.piece.isWhite())) {
 					if((start.y==end.y+1 || start.y==end.y-1) && (start.x==end.x+1)){
+
 						return true;
 					}
 				}
@@ -64,10 +73,18 @@ public class Pawn extends Piece {
 				else if((start.y == end.y) && (start.x == (end.x -1))) {
 					return true;
 				}
+				else if(start.getX() == 4) {
+					if(enPassantCheck(board, start, end)) {
+						((Pawn)start.getPiece()).isCapturingEnPassant = true;
+						((Pawn)end.getPiece()).setAsKilled();
+						return true;
+					}
+				}
 			}
 			else {
 				if(start.piece.isWhite()==!(end.piece.isWhite())) {
 					if((start.y==end.y+1 || start.y==end.y-1) && (start.x==end.x-1)){
+						((Pawn)end.getPiece()).setAsKilled();
 						return true;
 					}
 				}
@@ -75,7 +92,6 @@ public class Pawn extends Piece {
 		}
 		return false;
 	}
-
 
 	boolean enPassantCheck(Board board, Spot start, Spot end) {
 		Spot examinedSpot = board.getSpot(start.getX(), end.getY());
@@ -91,7 +107,7 @@ public class Pawn extends Piece {
 		}
 		return false;
 	}
-	
+
 	public boolean isPossibleEnPassantCapture() {
 		return possibleEnPassantCapture;
 	}
