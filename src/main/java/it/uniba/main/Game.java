@@ -40,6 +40,7 @@ public class Game {
 
 		Move move = new Move(command, this);
 		if(move.getStart() != null && makeMove (move)) {
+			allMoves.add(command);
 			whiteTurn = (!whiteTurn);
 		} else {
 			System.out.println("Mossa non valida, reinserila");
