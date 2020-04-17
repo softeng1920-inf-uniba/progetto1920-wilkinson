@@ -44,14 +44,10 @@ public class Game {
 				whiteTurn = (!whiteTurn);
 				if(whiteTurn) {
 					System.out.println("Turno del bianco");
-					if(move.isCapture()){
-						blackCaptures.add(command);
-					}
+					
 				} else {
 					System.out.println("Turno del nero");
-					if(move.isCapture()){
-						whiteCaptures.add(command);
-					}
+					
 				}
 				allMoves.add(command); //inserisco la stinga command in allMoves 
 				
