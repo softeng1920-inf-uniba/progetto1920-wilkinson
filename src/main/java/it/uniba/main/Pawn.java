@@ -45,7 +45,6 @@ public class Pawn extends Piece {
 				else if(start.getX() == 3) {
 					if(enPassantCheck(board, start, end)) {
 						((Pawn)start.getPiece()).isCapturingEnPassant = true;
-
 						return true;
 					}
 				}
@@ -53,7 +52,7 @@ public class Pawn extends Piece {
 			else {
 				if(start.piece.isWhite()==!(end.piece.isWhite())) {
 					if((start.y==end.y+1 || start.y==end.y-1) && (start.x==end.x+1)){
-
+						((Pawn)end.getPiece()).setAsKilled();
 						return true;
 					}
 				}

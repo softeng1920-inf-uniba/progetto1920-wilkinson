@@ -78,10 +78,21 @@ public class Game {
 								start.setPiece(null);	
 								end.getPiece().setAsMoved();
 								return true;
+								
 							} else {
-								return false;
+								end.setPiece(start.getPiece());
+								start.setPiece(null);	
+								end.getPiece().setAsMoved();
+								return true;
 							}
+							
 						}
+						
+						end.setPiece(start.getPiece());
+						start.setPiece(null);	
+						end.getPiece().setAsMoved();
+						return true;
+						
 					} else {
 						return false;
 					}
