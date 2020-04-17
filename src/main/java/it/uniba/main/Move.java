@@ -1,15 +1,11 @@
 package it.uniba.main;
 
-import java.util.ArrayList;
-
 public class Move {
 	private AlgebraicNotation interpreter; 		// interprete della mossa scritta in notazione algebrica abbreviata
 	private Spot start; 						// casa di partenza
 	private Spot end; 							// casa di arrivo
 	private Piece pieceMoved; 					// pezzo che deve eseguire il movimento
-	private boolean isAmbiguity = false;		//caso in cui ci sia ambiguità di movimento
-	private boolean isCapture = false;			//caso in cui si effettua una cattura
-
+	private boolean isAmbiguity = false;		//caso in cui ci sia ambiguita' di movimento
 	
 	/**
 	 * costruttore dell'oggetto Move
@@ -19,16 +15,11 @@ public class Move {
 	public Move(final String command, Game game) {				             
 		this.interpreter = new AlgebraicNotation(command); 					// Istanzio l'oggetto interpreter
 
-		if(this.getInterpreter().isGoodMove) {
-			String algebraicPieceMoved = interpreter.getPieceLetter();     // Stringa in notazione algebrica del pezzo che deve muoversi
-			String algebraicFinalSpot = interpreter.getEndSquareId();    	// Stringa in notazione algebrica ella posizione d'arrivo 
-			ArrayList<String> algebraicSymbol = interpreter.getSymbol();	// ArrayList con i simboli speciali inseriti 
+		if(this.getInterpreter().isGoodMove()) {	
 
-			extractSymbol(algebraicSymbol);									// interpreta il simbolo speciale
+			this.end = extractCoordinates(interpreter.getEndSquareId());				//estrae le coordinate di arrivo
 
-			this.end = extractCoordinates(algebraicFinalSpot);				//estrae le coordinate di arrivo
-
-			findStartSpotOnBoard(game, getEnd(), algebraicPieceMoved, algebraicFinalSpot); //estrae le coordinate di partenza
+			findStartSpotOnBoard(game, this.end, interpreter.getPieceLetter(), interpreter.getEndSquareId()); //estrae le coordinate di partenza
 
 			if(this.start != null) {
 				this.pieceMoved = start.getPiece();						// prende il pezzo che si muove dallo Spot di partenza
@@ -47,7 +38,7 @@ public class Move {
 			endSpot = new Spot(convertCoordinate(algebraicFinalSpot.substring(1, 2)), 
 					convertCoordinate(algebraicFinalSpot.substring(0, 1)), null);
 			return endSpot;
-		} else if(algebraicFinalSpot.length() == 3) { //caso in cui la stringa sia lunga 3 (ambiguità)
+		} else if(algebraicFinalSpot.length() == 3) { //caso in cui la stringa sia lunga 3 (ambiguita')
 			endSpot = new Spot(convertCoordinate(algebraicFinalSpot.substring(2, 3)), 
 					convertCoordinate(algebraicFinalSpot.substring(1, 2)), null);
 			setAmbiguity(true);
@@ -166,22 +157,10 @@ public class Move {
 		}
 
 	}
-	
-	/**estrae il simbolo speciale di cattura dal comando
-	 * 
-	 * @param algebraicSymbol ArrayList dei simboli speciali
-	 */
-	public void extractSymbol(ArrayList<String> algebraicSymbol){
-		for(String currentSymbol : algebraicSymbol){
-			if(currentSymbol.contains("x") && currentSymbol.length()==1){
-				this.isCapture = true;
-			}
-		}
-	}
 
 
 	/**
-	 * enumerazione dello stato di gioco (per verificare se la partita è ancora in
+	 * enumerazione dello stato di gioco (per verificare se la partita ï¿½ ancora in
 	 * corso)
 	 * 
 	 * @author wilkinson
@@ -223,14 +202,6 @@ public class Move {
 
 	public void setAmbiguity(boolean isAmbiguity) {
 		this.isAmbiguity = isAmbiguity;
-	}
-
-	public boolean isCapture() {
-		return isCapture;
-	}
-
-	public void setCapture(boolean isCapture) {
-		this.isCapture = isCapture;
 	}
 
 	public void setStart(Spot start) {
