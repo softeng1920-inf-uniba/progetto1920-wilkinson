@@ -70,7 +70,7 @@ public final class AppMain {
 					game = new Game();
 
 					while(!game.isEnd() && !quitGame) {
-						System.out.println("Inserire comando: ");
+						System.out.println("\nInserire comando: ");
 						userChoice=scanner.nextLine().toLowerCase();
 						if (userChoice.compareTo("exit")==0){
 							userChoice = "quit";
@@ -88,10 +88,12 @@ public final class AppMain {
 							game.board.showBoard();
 							break;
 						case "moves":                                           
-							System.out.println("MOVES..."); //TODO da implementare
+							System.out.print("\nSerie di Mosse:"); //TODO da implementare
+							game.showMoves();
 							break;
 						case "captures":
-							System.out.println("CAPTURES..."); //TODO da implementare
+							System.out.println("\nELENCO DELLE CATTURE PER COLORE:"); //TODO da implementare
+							game.showCaptures();
 							break;
 															
 						case "quit":
@@ -113,8 +115,7 @@ public final class AppMain {
 							
 						default:
 							game.currentGame(userChoice);
-							game.board.showBoard();
-										
+							game.board.showBoard();	
 						}	
 					}
 					break;//fine del caso "play"

@@ -9,10 +9,11 @@ public class Game {
 	Board board;	//oggetto scacchiera per la partita in corso
 	boolean whiteTurn = true;	//true se turno del bianco, false se turno del nero
 	GameStatus status;	//stato della partita (se ACTIVE si continua a giocare, altrimenti si quitta)
-	ArrayList<String> allMoves;	//lista con le mosse effettuate dal bianco
-	//TODO ArrayList<String> blackMoves;	//lista con le mosse effettuate dal nero
-	ArrayList<Piece> whiteCaptures;	//lista con i pezzi catturati dal bianco (quindi pezzi neri)
-	ArrayList<Piece> blackCaptures;	//lista con i pezzi catturati dal nero (quindi pezzi bianchi)
+	ArrayList<String> allMoves = new ArrayList<String>();	//lista contenente tutte le mosse effettuate nel gioco
+	//ArrayList<String> allCaptures = new ArrayList<String>();
+	//ArrayList<Move> allMove;
+	ArrayList<String> whiteCaptures = new ArrayList<String>();	//lista con i pezzi catturati dal bianco (quindi pezzi neri)
+	ArrayList<String> blackCaptures = new ArrayList<String>();	//lista con i pezzi catturati dal nero (quindi pezzi bianchi)
 	boolean isGood = false;
 	
 	/**metodo che pone inizio alla partita (inizializzando la board, settando ad ACTIVE lo status, ecc
@@ -43,14 +44,21 @@ public class Game {
 				whiteTurn = (!whiteTurn);
 				if(whiteTurn) {
 					System.out.println("Turno del bianco");
+					if(move.isCapture()){
+						blackCaptures.add(command);
+					}
 				} else {
 					System.out.println("Turno del nero");
+					if(move.isCapture()){
+						whiteCaptures.add(command);
+					}
 				}
+				allMoves.add(command); //inserisco la stinga command in allMoves 
+				
 			}
 		} else {
 			System.out.println("Mossa non valida, reinserila");
 		}
-		
 		
 	}
 	
@@ -77,6 +85,7 @@ public class Game {
 				start.setPiece(null);	
 				end.getPiece().setAsMoved();
 				isGood = true;
+				
 				return true;
 			} 
 		} 
@@ -84,13 +93,17 @@ public class Game {
 		return false;
 	}
 	
-	/**Metodo che moster� le mosse giocate durante
+
+	/**Metodo che mostra le mosse giocate durante
 	 * la partita.
 	 */
 	
 	public void showMoves() {
 		int moveNumber = 0;
 		int turnControl = 0;
+		if(allMoves.size()==0) {
+			System.out.println("\nL'elenco delle mosse e' vuoto.");
+		}
 		for (String currentMove: allMoves) {
 			if(turnControl % 2 == 0) {
 				moveNumber++;
@@ -100,6 +113,32 @@ public class Game {
 			System.out.print(currentMove + " ");
 		}//end for
 	}
+	
+//TODO
+/**	Metodo che mostra le catture effettuate
+ * durante la partita 
+ */
+	public void showCaptures() {
+		if(whiteCaptures.size() ==0) {
+			System.out.println("Nessuna cattura fatta dal bianco.");
+			} else {
+				for (String currentCapture: whiteCaptures) {
+					System.out.println("Catture del bianco: ");
+					System.out.println(currentCapture);
+			}
+		}
+		
+		if(blackCaptures.size() ==0) {
+			System.out.println("Nessuna cattura fatta dal nero.");
+			} else {
+				for (String currentCapture: blackCaptures) {
+					System.out.println("Catture del nero: ");
+					System.out.println(currentCapture);
+			}
+		}
+	}
+	
+	
 
 	public GameStatus getStatus() {
 		return status;
@@ -117,4 +156,5 @@ public class Game {
 		this.board = board;
 	}
 
+	
 }

@@ -1,4 +1,3 @@
- 
 package it.uniba.main;
 
 public class Bishop extends Piece {
