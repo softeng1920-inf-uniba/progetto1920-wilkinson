@@ -55,6 +55,7 @@ public class Pawn extends Piece {
 				if((start.getY() == end.getY()) && (start.getX() == (end.getX()+1))) {
 					return true;
 				} else if((start.getY() == end.getY()) && (start.getX() == (end.getX()+2)) && (!start.getPiece().isMoved())){
+					((Pawn)start.getPiece()).possibleEnPassantCapture = true;
 					return true;
 				} else if (start.getX() == XENPASSANTWHITE) {// controllo che il pedone bianco sia nella riga giusta per
 					// effettuare la cattura en-passant
@@ -69,6 +70,7 @@ public class Pawn extends Piece {
 				if((start.getY() == end.getY()) && (start.getX() == (end.getX()-1))) {
 					return true;
 				} else if((start.getY() == end.getY()) && (start.getX() == (end.getX()-2)) && (!start.getPiece().isMoved())){
+					((Pawn)start.getPiece()).possibleEnPassantCapture = true;
 					return true;
 				} else if (start.getX() == XENPASSANTBLACK) {
 					if (enPassantCheck(board, start, end)) {
@@ -108,7 +110,7 @@ public class Pawn extends Piece {
 
 		// controllo che nell'arrivo non ci siano pezzi e che nello spot esaminato ci sia
 		if (start.getPiece() != null && end.getPiece() == null) {
-			if (examinedSpot1.getPiece() != null) {
+			if (examinedSpot1 != null && examinedSpot1.getPiece() != null) {
 				Piece possibleCapture = examinedSpot1.getPiece();
 				if ((start.getPiece().isWhite() != possibleCapture.isWhite()) && (possibleCapture instanceof Pawn)) {
 					if (((Pawn) possibleCapture).isPossibleEnPassantCapture()) {// controllo se il booleano e' true
@@ -117,7 +119,7 @@ public class Pawn extends Piece {
 					}
 				}
 			} 
-			if (examinedSpot2.getPiece() != null) {
+			if (examinedSpot2 != null && examinedSpot2.getPiece() != null) {
 				Piece possibleCapture = examinedSpot2.getPiece();
 				if ((start.getPiece().isWhite() != possibleCapture.isWhite()) && (possibleCapture instanceof Pawn)) {
 					if (((Pawn) possibleCapture).isPossibleEnPassantCapture()) {// controllo se il booleano e' true
