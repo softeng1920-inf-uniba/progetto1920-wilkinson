@@ -120,17 +120,30 @@ public class Pawn extends Piece {
 	 */
 	private boolean enPassantCheck(Board board, Spot start, Spot end) {
 		// assegno a examinedSpot le stesse cordinate del pedone che puo' subire l'en-passant
-		Spot examinedSpot = board.getSpot(start.getX(), end.getY());
+		Spot examinedSpot1 = board.getSpot(start.getX(), start.getY()+1);
+		Spot examinedSpot2 = board.getSpot(start.getX(), start.getY()-1);
+		
 		// controllo che nell'arrivo non ci siano pezzi e che nello spot esaminato ci sia
-		if (start.getPiece() != null && end.getPiece() == null && examinedSpot.getPiece() != null) {
-			Piece possibleCapture = examinedSpot.getPiece();
-			// controllo che il pedone che puo'essere catturato enpassant sia avversario
-			if ((start.getPiece().isWhite() != possibleCapture.isWhite()) && (possibleCapture instanceof Pawn)) {
-				if (((Pawn) possibleCapture).isPossibleEnPassantCapture()) {// controllo se il booleano e' true
-					possibleCapture.setAsKilled(); // catturo il pezzo
-					return true;
+		if (start.getPiece() != null && end.getPiece() == null) {
+			if (examinedSpot1.getPiece() != null) {
+				Piece possibleCapture = examinedSpot1.getPiece();
+				if ((start.getPiece().isWhite() != possibleCapture.isWhite()) && (possibleCapture instanceof Pawn)) {
+					if (((Pawn) possibleCapture).isPossibleEnPassantCapture()) {// controllo se il booleano e' true
+						possibleCapture.setAsKilled(); // catturo il pezzo
+						return true;
+					}
+				}
+			} 
+			if (examinedSpot2.getPiece() != null) {
+				Piece possibleCapture = examinedSpot2.getPiece();
+				if ((start.getPiece().isWhite() != possibleCapture.isWhite()) && (possibleCapture instanceof Pawn)) {
+					if (((Pawn) possibleCapture).isPossibleEnPassantCapture()) {// controllo se il booleano e' true
+						possibleCapture.setAsKilled(); // catturo il pezzo
+						return true;
+					}
 				}
 			}
+			// controllo che il pedone che puo'essere catturato enpassant sia avversario
 		}
 		return false;
 	}
