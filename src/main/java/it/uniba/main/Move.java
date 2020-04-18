@@ -199,7 +199,7 @@ public final class Move {
 		return interpreter;
 	}
 
-	public void setInterpreter(AlgebraicNotation interpreter) {
+	public void setInterpreter(final AlgebraicNotation interpreter) {
 		this.interpreter = interpreter;
 	}
 
@@ -219,19 +219,19 @@ public final class Move {
 		return isAmbiguity;
 	}
 
-	public void setAmbiguity(boolean isAmbiguity) {
+	public void setAmbiguity(final boolean isAmbiguity) {
 		this.isAmbiguity = isAmbiguity;
 	}
 
-	public void setStart(Spot start) {
+	public void setStart(final Spot start) {
 		this.start = start;
 	}
 
-	public void setEnd(Spot end) {
+	public void setEnd(final Spot end) {
 		this.end = end;
 	}
 
-	public void setPieceMoved(Piece pieceMoved) {
+	public void setPieceMoved(final Piece pieceMoved) {
 		this.pieceMoved = pieceMoved;
 	}
 }
