@@ -39,13 +39,12 @@ public class Game {
 	}
 
 	public void currentGame(String command) { //
-
 		Move move = new Move(command, this);
 		if(move.getStart() != null && makeMove (move)) {
 			allMoves.add(command);
 			whiteTurn = (!whiteTurn);
 		} else {
-			System.out.println("Mossa non valida, reinserila");
+			System.out.println("Mossa non valida, reinserirla");
 		}
 	}
 
@@ -77,13 +76,13 @@ public class Game {
 
 						if(start.getPiece() instanceof Pawn) {
 							if(((Pawn)start.getPiece()).isCapturingEnPassant){
-								getBoard().getSpot(start.getX(), end.getY()).setPiece(null);
 								if (whiteTurn) {
-									whiteCaptures.add(end.getPiece());
+									whiteCaptures.add(getBoard().getSpot(start.getX(), end.getY()).getPiece());
 								}
 								else {
-									blackCaptures.add(end.getPiece());
+									blackCaptures.add(getBoard().getSpot(start.getX(), end.getY()).getPiece());
 								}
+								getBoard().getSpot(start.getX(), end.getY()).setPiece(null);
 								end.setPiece(start.getPiece());
 								start.setPiece(null);	
 								end.getPiece().setAsMoved();
