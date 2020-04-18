@@ -135,6 +135,7 @@ public class Pawn extends Piece {
 		return false;
 	}
 
+	//Getters & Setters
 	public boolean isPossibleEnPassantCapture() {
 		return possibleEnPassantCapture;
 	}

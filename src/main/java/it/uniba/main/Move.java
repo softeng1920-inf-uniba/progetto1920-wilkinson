@@ -194,7 +194,7 @@ public final class Move {
 		ACTIVE, BLACK_WIN, WHITE_WIN, DRAW, FORCED_END
 	}
 
-	/* Getters & Setters */
+	// Getters & Setters
 	public AlgebraicNotation getInterpreter() {
 		return interpreter;
 	}

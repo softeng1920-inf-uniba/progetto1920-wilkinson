@@ -272,6 +272,8 @@ public class Game {
 		}
 	}
 
+	
+	//Getters & Setters
 	public GameStatus getStatus() {
 		return status;
 	}
