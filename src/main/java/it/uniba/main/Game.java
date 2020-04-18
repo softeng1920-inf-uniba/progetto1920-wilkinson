@@ -156,7 +156,9 @@ public class Game {
 				turnControl++;
 				System.out.print(currentMove + " ");
 			}
-		}//end for
+		} else {
+			System.out.println("\nNessuna mossa effettuata finora.");
+		}
 	}
 
 	public void showCaptures() {

@@ -109,6 +109,7 @@ public final class AppMain {
 						userChoice=scanner.nextLine().toLowerCase();
 						if(userChoice.compareTo("si")== 0) {
 							System.out.println("...ritorno al menu principale");
+							quitGame = true;
 						} else if (userChoice.compareTo("no")== 0){
 							quitGame = false;
 						} else {
