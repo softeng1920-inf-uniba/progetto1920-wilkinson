@@ -1,8 +1,8 @@
 package it.uniba.main;
 
 public class Pawn extends Piece {
-	boolean possibleEnPassantCapture;
-	boolean isCapturingEnPassant;
+	private boolean possibleEnPassantCapture;
+	private boolean isCapturingEnPassant;
 
 	public Pawn(boolean white) {
 		super(white); // chiamo il costruttore della classe astratta Piece

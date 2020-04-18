@@ -36,7 +36,7 @@ public final class AppMain {
 		/*
 		 * Il ciclo di immissione comandi continua fino a che l'utente non digita il
 		 * comando >quit che setta il flag da true a false, uscendo dal programma. Se il
-		 * giocatore sceglie il comando "play" dopo aver già avviato una partita, il
+		 * giocatore sceglie il comando "play" dopo aver giï¿½ avviato una partita, il
 		 * programma fara' partire una nuova partita previa conferma del giocatore.
 		 */
 		while (quitFlag == false) {
@@ -101,7 +101,7 @@ public final class AppMain {
 						}
 						break;
 					case "board":
-						game.board.showBoard();
+						game.getBoard().showBoard();
 						break;
 					case "moves":
 						System.out.print("\nSERIE DI MOSSE:");
