@@ -22,9 +22,7 @@ public class Game {
 
 	/**
 	 * Il metodo initialize, pone inizio alla partita. 
-	 * - Inizia la board, 
-	 * - setta lo
-	 * status su Attivo 
+	 * - Inizia la board, setta lo status su Attivo 
 	 * - Inizializza gli Array per registrare le farie mosse e catture
 	 */
 	public void initialize() {
@@ -49,9 +47,9 @@ public class Game {
 	}
 
 	/**
-	 * currentGame � il metodo che gestisce la partita corrente
+	 * currentGame e' il metodo che gestisce la partita corrente
 	 * 
-	 * @param command � il comando/mossa inserita dall'utente
+	 * @param command e' il comando/mossa inserita dall'utente
 	 */
 	public void currentGame(String command) {
 		Move move = new Move(command, this);
@@ -64,7 +62,7 @@ public class Game {
 	}
 
 	/**
-	 * Il metodo makeMove � un booleano che effettua la mossa. 
+	 * Il metodo makeMove e' un booleano che effettua la mossa. 
 	 * Tiene conto di questi fattori: 
 	 * - che pezzo si deve muovere 
 	 * - se la mossa e' valida 
@@ -154,7 +152,7 @@ public class Game {
 		return false;
 	}
 
-	/** showMoves � il metodo che mostrera' le mosse giocate durante la partita
+	/** showMoves e' il metodo che mostrera' le mosse giocate durante la partita
 	 * 
 	 */
 	public void showMoves() {
@@ -169,12 +167,10 @@ public class Game {
 				turnControl++;
 				System.out.print(currentMove + " ");
 			}
-		} /*else {
-			System.out.println("\nNessuna mossa effettuata finora.");
-		 */
+		}
 	}
 
-	/** showCaptures � il metodo che mostrera' le catture fatte durante la partita.
+	/** showCaptures e' il metodo che mostrera' le catture fatte durante la partita.
 	 * Distingue in:
 	 * - catture del bianco
 	 * - catture del nero
@@ -185,14 +181,13 @@ public class Game {
 			for (Piece currentPiece : whiteCaptures) {
 				System.out.print(currentPiece.draw() + " ");
 			}
-		} 
+		}
 		System.out.print("\nCatture del nero: ");
 		if (!blackCaptures.isEmpty()) {
 			for (Piece currentPiece : blackCaptures) {
 				System.out.print(currentPiece.draw() + " ");
 			}
-		} 
-		
+		}
 	}
 
 	/** Il metodo checkIfIsCapture e' un booleano.
@@ -225,7 +220,7 @@ public class Game {
 		return false;
 	}
 
-	/** searchForCapture � il metodo che controlla se un pezzo pu� catturare
+	/** searchForCapture e' il metodo che controlla se un pezzo puo' catturare
 	 * 
 	 * @param board
 	 */
@@ -241,7 +236,7 @@ public class Game {
 		}
 	}
 
-	/** toString � il metodo che restituisce delle stringhe.
+	/** toString e' il metodo che restituisce delle stringhe.
 	 * Indicano il turno
 	 * - @return (Turno del bianco) se e' il turno del bianco
 	 * - @return (Turno del nero) se e' il turno del nero
@@ -256,8 +251,7 @@ public class Game {
 	
 	// Di seguito GETTER e SETTER
 
-	/** Il metodo setAllPawnNotEP setta false 
-	 * la possibile cattura en-passant di tutti i pedoni ogni turno
+	/** Il metodo setAllPawnNotEP setta false la possibile cattura en-passant di tutti i pedoni ogni turno
 	 * 
 	 * @param board
 	 */
