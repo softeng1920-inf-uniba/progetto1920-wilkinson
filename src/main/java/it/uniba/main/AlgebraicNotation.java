@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 
 public class AlgebraicNotation {
-	String pieceLetter = "";	//lettera corrispondente al pezzo 
-	ArrayList<String> symbol = new ArrayList<String>();	//simbolo speciale nel comando
-	String endSquareId;	//casa di arrivo del pezzo
-	ArrayList<String> symbolList = new ArrayList<String>();	//simboli possibili
-	boolean isCastle = false;
-	boolean isEnPassant = false;
-	boolean isDoubleCheck = false;
-	boolean isCapture = false;
-	boolean isCheck = false;
-	boolean isGoodMove = false;
+	private String pieceLetter;	//lettera corrispondente al pezzo 
+	private ArrayList<String> symbol;	//simbolo speciale nel comando
+	private String endSquareId;	//casa di arrivo del pezzo
+	private ArrayList<String> symbolList;	//simboli possibili
+	private boolean isCastle = false;
+	private boolean isEnPassant = false;
+	private boolean isDoubleCheck = false;
+	private boolean isCapture = false;
+	private boolean isCheck = false;
+	private boolean isGoodMove = false;
 
 	//costanti per lettera corrispondente al pezzo
 	private static final int STARTINDEX = 0;
@@ -34,12 +34,15 @@ public class AlgebraicNotation {
 	private static final int STARTINDEXCASTLING = 5;
 
 	/**
-	 * costruttore, inizializza l'arraylist dei simboli, interpreta la stringa in input e 
+	 * costruttore, inizializza i membri, l'arraylist dei simboli, interpreta la stringa in input e 
 	 * decide se è una stringa valida
 	 * 
 	 * @param command stringa da interpretare
 	 */
 	AlgebraicNotation(String command){
+		pieceLetter = "";
+		symbol = new ArrayList<String>();
+		symbolList = new ArrayList<String>();
 		initializeSymbolList();
 		divideCommand(command);
 		isGoodMove = isValidAlgebraicNotation();
