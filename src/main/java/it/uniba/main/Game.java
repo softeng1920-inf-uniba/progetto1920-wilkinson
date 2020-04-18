@@ -39,13 +39,12 @@ public class Game {
 	}
 
 	public void currentGame(String command) { //
-
 		Move move = new Move(command, this);
 		if(move.getStart() != null && makeMove (move)) {
-			allMoves.add(command);
+			allMoves.add(move.getPieceMoved().draw() + command);
 			whiteTurn = (!whiteTurn);
 		} else {
-			System.out.println("Mossa non valida, reinserila");
+			System.out.println("Mossa non valida, reinserirla");
 		}
 	}
 
@@ -68,27 +67,27 @@ public class Game {
 		searchForCapture(getBoard());
 
 		//controllo se c'e' un pezzo nella casa di partenza, se il pezzo da muovere puo' essere mosso in questo turno e se la mossa e' scritta in notazione corretta
-		if(start.getPiece() != null && start.getPiece().isWhite() == this.whiteTurn && move.getInterpreter().isGoodMove) {	
+		if(start.getPiece() != null && start.getPiece().isWhite() == this.isWhiteTurn() && move.getInterpreter().isGoodMove()) {	
 			//effettuo il movimento
 			if(start.getPiece().canMove(getBoard(), start, end)) {
 				//controllo se la mossa e' una cattura e nel comando c'è il simbolo 'x' 
 				if(checkIfIsCapture(move.getInterpreter())) {
 					if(isCapture) {
-						
+
 						if(start.getPiece() instanceof Pawn) {
 							if(((Pawn)start.getPiece()).isCapturingEnPassant){
-								getBoard().getSpot(start.getX(), end.getY()).setPiece(null);
 								if (whiteTurn) {
-									whiteCaptures.add(end.getPiece());
+									whiteCaptures.add(getBoard().getSpot(start.getX(), end.getY()).getPiece());
 								}
 								else {
-									blackCaptures.add(end.getPiece());
+									blackCaptures.add(getBoard().getSpot(start.getX(), end.getY()).getPiece());
 								}
+								getBoard().getSpot(start.getX(), end.getY()).setPiece(null);
 								end.setPiece(start.getPiece());
 								start.setPiece(null);	
 								end.getPiece().setAsMoved();
 								return true;
-								
+
 							} else {
 								if (whiteTurn) {
 									whiteCaptures.add(end.getPiece());
@@ -101,7 +100,7 @@ public class Game {
 								end.getPiece().setAsMoved();
 								return true;
 							}
-							
+
 						}
 						if (whiteTurn) {
 							whiteCaptures.add(end.getPiece());
@@ -113,11 +112,11 @@ public class Game {
 						start.setPiece(null);	
 						end.getPiece().setAsMoved();
 						return true;
-						
+
 					} else {
 						return false;
 					}
-					
+
 				} else if (!isCapture) {
 					setAllPawnNotEP(getBoard());
 
@@ -127,14 +126,14 @@ public class Game {
 							((Pawn)start.getPiece()).setPossibleEnPassantCapture(true);
 						}
 					}				
-					
+
 					end.setPiece(start.getPiece());
 					start.setPiece(null);	
 					end.getPiece().setAsMoved();
 					return true;
 				}
-				
-			
+
+
 			}			
 		} 
 
@@ -148,18 +147,18 @@ public class Game {
 	public void showMoves() {
 		int moveNumber = 0;
 		int turnControl = 0;
-                if(!allMoves.isEmpty()){
-		   for (String currentMove: allMoves) {
-			if(turnControl % 2 == 0) {
-				moveNumber++;
-				System.out.print("\n" + moveNumber + ".");
+		if(!allMoves.isEmpty()){
+			for (String currentMove: allMoves) {
+				if(turnControl % 2 == 0) {
+					moveNumber++;
+					System.out.print("\n" + moveNumber + ".");
+				}
+				turnControl++;
+				System.out.print(currentMove + " ");
 			}
-			turnControl++;
-			System.out.print(currentMove + " ");
-		    }
-                 }//end for
+		}//end for
 	}
-	
+
 	public void showCaptures() {
 		System.out.print("Catture del bianco: ");
 		if(!whiteCaptures.isEmpty()) {
@@ -167,7 +166,7 @@ public class Game {
 				System.out.print(currentPiece.draw() +" ");
 			}
 		}
-		
+
 		System.out.print("\nCatture del nero: ");
 		if(!blackCaptures.isEmpty()) {
 			for (Piece currentPiece: blackCaptures) {
@@ -182,7 +181,7 @@ public class Game {
 	 * @return
 	 */
 	boolean checkIfIsCapture(AlgebraicNotation check) {
-		if(check.isCapture) {
+		if(check.isCapture()) {
 			return true;
 		}
 		return false;
@@ -194,7 +193,7 @@ public class Game {
 	 * @return
 	 */
 	boolean checkIfEnPassant(AlgebraicNotation check) {
-		if(check.isEnPassant) {
+		if(check.isEnPassant()) {
 			return true;
 		}
 		return false;

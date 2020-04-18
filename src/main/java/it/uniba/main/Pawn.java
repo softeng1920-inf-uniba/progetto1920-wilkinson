@@ -75,7 +75,6 @@ public class Pawn extends Piece {
 				else if(start.getX() == 4) {
 					if(enPassantCheck(board, start, end)) {
 						((Pawn)start.getPiece()).isCapturingEnPassant = true;
-						((Pawn)end.getPiece()).setAsKilled();
 						return true;
 					}
 				}

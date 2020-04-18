@@ -2,28 +2,25 @@ package it.uniba.main;
 
 import java.util.ArrayList;
 
-
-public class AlgebraicNotation {
-	String pieceLetter = "";	//lettera corrispondente al pezzo 
-	ArrayList<String> symbol = new ArrayList<String>();	//simbolo speciale nel comando
-	String endSquareId;	//casa di arrivo del pezzo
-	ArrayList<String> symbolList = new ArrayList<String>();	//simboli possibili
-	boolean isCastle = false;
-	boolean isEnPassant = false;
-	boolean isDoubleCheck = false;
-	boolean isCapture = false;
-	boolean isCheck = false;
-	boolean isGoodMove = false;
-
+public final class AlgebraicNotation {
+	private String pieceLetter;	//lettera corrispondente al pezzo 
+	private ArrayList<String> symbol;	//simbolo speciale nel comando
+	private String endSquareId;	//casa di arrivo del pezzo
+	private static ArrayList<String> symbolList;	//simboli possibili
+	private boolean isCastle = false;
+	private boolean isEnPassant = false;
+	private boolean isDoubleCheck = false;
+	private boolean isCapture = false;
+	private boolean isCheck = false;
+	private boolean isGoodMove = false;
 	//costanti per lettera corrispondente al pezzo
 	private static final int STARTINDEX = 0;
 	private static final int PIECELETTERINDEX = 1;
-	
 	//costanti per le lunghezze delle stringhe
 	private static final int MINLENGTHENDSQ = 1;
 	private static final int MAXLENGTHENDSQ = 3;
 	private static final int MAXSYMBOLS = 2;
-	
+	private static final int ENPASSANTLENGTH = 3;
 	//costanti per le posizioni nell'arraylist di tutti i simboli possibili
 	private static final int CHECKINDEX = 0;
 	private static final int CAPTUREINDEX = 1;
@@ -32,13 +29,25 @@ public class AlgebraicNotation {
 	private static final int ENPASSANTINDEX = 4;
 	private static final int STARTINDEXCASTLING = 5;
 
-	AlgebraicNotation(String command){
+	/**
+	 * costruttore, inizializza i membri, l'arraylist dei simboli, interpreta la stringa in input e 
+	 * decide se è una stringa valida
+	 * 
+	 * @param command stringa da interpretare
+	 */
+	AlgebraicNotation(final String command) {
+		pieceLetter = "";
+		symbol = new ArrayList<String>();
+		symbolList = new ArrayList<String>();
 		initializeSymbolList();
 		divideCommand(command);
 		isGoodMove = isValidAlgebraicNotation();
 	}
 
-	void initializeSymbolList() {	//elenco simboli possibili
+	/**
+	 * inizializza la lista dei possibili simboli ritrovabili
+	 */
+	private static void initializeSymbolList() {	//elenco simboli possibili
 		symbolList.add("+");
 		symbolList.add("x");
 		symbolList.add("#");
@@ -48,71 +57,84 @@ public class AlgebraicNotation {
 		symbolList.add("0-0");
 	}
 
-	void divideCommand(String command){
-		if(!isPawn(command)) {	//controllo lettera se non pedone
-			this.pieceLetter = command.substring(STARTINDEX,PIECELETTERINDEX);
-			command = reduceString(command, getPieceLetter());
+	/**
+	 * interpreta la stringa in input avvalorando gli attributi di classe
+	 * 
+	 * @param command stringa in input da interpretare
+	 */
+	private final void divideCommand(final String command) {
+		String commandInterpreted = command;
+		if (!isPawn(commandInterpreted)) {	//controllo lettera se non pedone
+			this.pieceLetter = commandInterpreted.substring(STARTINDEX, PIECELETTERINDEX);
+			commandInterpreted = reduceString(commandInterpreted, getPieceLetter());
 		}
 
-		extractSymbol(command);	//estrazione simbolo speciale
+		extractSymbol(commandInterpreted);	//estrazione simbolo speciale
 
-		if(isDoubleCheck) {	//caso scacco doppio
-			command = command.substring(STARTINDEX, command.length()-DOUBLECHECKSPOTS);
+		if (isDoubleCheck) {	//caso scacco doppio
+			commandInterpreted = commandInterpreted.substring(STARTINDEX, commandInterpreted.length() - DOUBLECHECKSPOTS);
 		}
 
-		for(String currentSymbol: getSymbol()) {	//elimino eventuali altri simboli
-			command = reduceString(command, currentSymbol);
+		for (String currentSymbol: getSymbol()) {	//elimino eventuali altri simboli
+			commandInterpreted = reduceString(commandInterpreted, currentSymbol);
 		}
 
-		if(isEnPassant) {	//caso en passant
-			setEndSquareId(command.substring(STARTINDEX, 3)); //elimino la dicitura e.p. 
+		if (isEnPassant) {	//caso en passant
+			setEndSquareId(commandInterpreted.substring(STARTINDEX, ENPASSANTLENGTH)); //elimino la dicitura e.p. 
 			setEndSquareId(reduceString(getEndSquareId(), " "));
-		} else if(isCastle) {	//caso arrocco
+		} else if (isCastle) {	//caso arrocco
 			setEndSquareId("");
 		} else {
-			setEndSquareId(command);	//il resto della stringa � la casella di partenza/arrivo
+			setEndSquareId(commandInterpreted);	//il resto della stringa è la casella di partenza/arrivo
 		}
-
 	}
 
-	boolean isPawn(String command) {	//controllo se la mossa � di un pedone (nessuna lettera iniziale)
-
+	/**
+	 * controllo se il comando riguarda un pedone
+	 * 
+	 * @param command stringa in input da interpretare
+	 * @return
+	 */
+	private boolean isPawn(String command) {	//controllo se la mossa è di un pedone (nessuna lettera iniziale)
 		char firstLetter = command.charAt(STARTINDEX);
-		if(Character.isUpperCase(firstLetter)) {
+		if (Character.isUpperCase(firstLetter)) {
 			return false;
 		}
-
 		return true;
 	}
 
-
-	void extractSymbol(String command) {	//estrae l'eventuale simbolo speciale 
+	/**
+	 * estrae i simboli contenuti nel comando
+	 * 
+	 * @param command stringa in input
+	 */
+	private void extractSymbol(String command) {	//estrae l'eventuale simbolo speciale 
 		int pos = 0;
 
-		for(String currentSymbol: symbolList) {
-			if(command.contains(currentSymbol)) {
+		for (String currentSymbol: symbolList) {
+			if (command.contains(currentSymbol)) {
 
-				if(pos >= STARTINDEXCASTLING) {	//check di simboli che innescano eventi
+				if (pos >= STARTINDEXCASTLING) {	//check di simboli che innescano eventi
 					this.isCastle = true;
-				} else if(pos == ENPASSANTINDEX) {
+				} else if (pos == ENPASSANTINDEX) {
 					this.isEnPassant = true;
-				} else if(pos == DOUBLECHECKINDEX) {
+				} else if (pos == DOUBLECHECKINDEX) {
 					this.isDoubleCheck = true;
 					getSymbol().remove(symbolList.get(STARTINDEX));
-				} else if(pos == CAPTUREINDEX) {
+				} else if (pos == CAPTUREINDEX) {
 					this.isCapture = true;
-				} else if(pos == CHECKINDEX) {
+				} else if (pos == CHECKINDEX) {
 					this.isCheck = true;
 				} 
 				
-				if(command.contains("e.p.") || command.contains("e.p")) {
+				if (command.contains("e.p.") || command.contains("e.p")) {
 					this.isEnPassant = true;
 					getSymbol().add("ep");
 				}
 				
 				getSymbol().add(currentSymbol);
 
-				if(isCastle) {	//interrompo se arrocco
+				if (isCastle) {	//interrompo se arrocco
 					break;
 				}
 			}
@@ -120,19 +142,26 @@ public class AlgebraicNotation {
 		}
 	}
 
-	String reduceString(String command, String extracted) {	//riduce la stringa di comando eliminando i caratteri gi� estratti
+	/**
+	 * riduce la prima stringa togliendo il contenuto della seconda
+	 * 
+	 * @param command prima stringa contenente il comando da ridurre
+	 * @param extracted seconda stringa da sottrarre a command
+	 * @return stringa ridotta
+	 */
+	private String reduceString(String command, String extracted) {	//riduce la stringa di comando eliminando i caratteri gi� estratti
 
-		/*controllo se la stringa da sottrarre � vuota o se contiene un simbolo da trattare diversamente*/
-		if(!extracted.isEmpty() && !(extracted == symbolList.get(ENPASSANTINDEX)) && !(extracted == symbolList.get(DOUBLECHECKINDEX))) {
+		//controllo se la stringa da sottrarre è vuota o se contiene un simbolo da trattare diversamente*/
+		if (!extracted.isEmpty() && !(extracted == symbolList.get(ENPASSANTINDEX)) && !(extracted == symbolList.get(DOUBLECHECKINDEX))) {
 			String newCommand = "";
 
-			for(int i=0; i<command.length(); i++) {
+			for (int i=0; i<command.length(); i++) {
 				char commandToken = command.charAt(i);
 
-				for(int j=0; j<extracted.length(); j++) {
+				for (int j=0; j<extracted.length(); j++) {
 					char extractedToken = extracted.charAt(j);
 
-					if(commandToken != extractedToken) {
+					if (commandToken != extractedToken) {
 						newCommand += commandToken;
 					}
 				}
@@ -142,14 +171,15 @@ public class AlgebraicNotation {
 		return command;
 	}
 	
-	/**controlla se il comando inserito � scritto 
-	 * in notazione algebrica abbreviata ed � sintatticamente corretto
+	/**
+	 * controlla se il comando inserito e' scritto 
+	 * in notazione algebrica abbreviata ed e' sintatticamente corretto
 	 * 
 	 * @return true se comando valido, false altrimenti
 	 */
 	public boolean isValidAlgebraicNotation() {
-		if(this.getPieceLetter() != "") {
-			switch(this.getPieceLetter()) {
+		if (this.getPieceLetter() != "") {
+			switch (this.getPieceLetter()) {
 			case "A": case "T": case "C": case "D": case "R":
 				break;
 			default:
@@ -157,14 +187,14 @@ public class AlgebraicNotation {
 			}
 		}
 
-		if(this.getEndSquareId().length() >MAXLENGTHENDSQ || this.getEndSquareId().length() <= MINLENGTHENDSQ) {
+		if (getEndSquareId().length() > MAXLENGTHENDSQ || getEndSquareId().length() <= MINLENGTHENDSQ) {
 			return false;
 		} else {
 			int length = getEndSquareId().length();
 			String square = getEndSquareId();
 
-			if(length == MAXLENGTHENDSQ) {
-				switch(square.substring(STARTINDEX, PIECELETTERINDEX)) {
+			if (length == MAXLENGTHENDSQ) {
+				switch (square.substring(STARTINDEX, PIECELETTERINDEX)) {
 				case "a": case "b": case "c": case "d": case "e": case "f": case "g": case "h":
 				case "1": case "2": case "3": case "4": case "5": case "6": case "7": case "8":
 					break;
@@ -174,7 +204,7 @@ public class AlgebraicNotation {
 				square = reduceString(square, square.substring(STARTINDEX, PIECELETTERINDEX));
 			} 
 
-			switch(square) {
+			switch (square) {
 			case "a1": case "a2": case "a3": case "a4": case "a5": case "a6": case "a7": case "a8":
 			case "b1": case "b2": case "b3": case "b4": case "b5": case "b6": case "b7": case "b8":
 			case "c1": case "c2": case "c3": case "c4": case "c5": case "c6": case "c7": case "c8":
@@ -188,24 +218,13 @@ public class AlgebraicNotation {
 				return false;
 			}
 		} 
-		
-		if(getSymbol().size() > MAXSYMBOLS) {
+		if (getSymbol().size() > MAXSYMBOLS) {
 			return false;
 		} 
-
 		return true;
 	}
 
-
-	public String toString(){	//stampa a video del comando scomposto
-		String output = "";
-		output += "Nome Pezzo: "+getPieceLetter()+"\nCasa di arrivo: "+getEndSquareId()+"\nSimbolo speciale: "+getSymbol();
-		output += "\nMossa scritta correttamente: "+isGoodMove;
-		return output;
-	}
-
-
-	/*Getters & Setters*/
+	//Getters & Setters
 	public String getPieceLetter() {
 		return pieceLetter;
 	}

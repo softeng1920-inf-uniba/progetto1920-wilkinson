@@ -15,7 +15,7 @@ public abstract class Piece {
   
 	/**ritorna il valore dell'attributo ehite
 	 * 
-	 * @return white true se il pezzo è bianco, false se il pezzo è nero
+	 * @return white true se il pezzo e' bianco, false se il pezzo e' nero
 	 */
     public boolean isWhite() { 
         return this.white; 
@@ -31,7 +31,7 @@ public abstract class Piece {
   
     /**ritorna il valore dell'attributo killed
      * 
-     * @return killed true se è stato catturato, false altrimenti
+     * @return killed true se e' stato catturato, false altrimenti
      */
     public boolean isKilled() { 
         return this.killed; 
@@ -46,7 +46,7 @@ public abstract class Piece {
     
     /**ritorna il valore dell'attributo moved
      * 
-     * @return moved true se il pezzo è stato mosso, false altrimenti
+     * @return moved true se il pezzo e' stato mosso, false altrimenti
      */
     public boolean isMoved() {
     	return this.moved;
@@ -60,12 +60,11 @@ public abstract class Piece {
     }
     
     /**metodo che stampa a console il corrispondente carattere Unicode del pezzo
-     * stabilendo se è nero o bianco
-<<<<<<< HEAD
+     * stabilendo se e' nero o bianco
      */
     public abstract String draw();
 	
-	/**metodo che stabilisce se il pezzo può muoversi (la mossa è legale)
+	/**metodo che stabilisce se il pezzo puo' muoversi (la mossa e' legale)
 	 * 
 	 * @param board scacchiera attuale
 	 * @param start casa di partenza
