@@ -9,19 +9,16 @@ public class Bishop extends Piece {
 
 	@Override
 	public String draw() {
-		if(isWhite())
-		{
+		if (isWhite()) {
 			return "\u2657";
-		}
-		else
-		{
+		} else {
 			return "\u265d";
 		}
 
 	}
-	
+
 	@Override
-	boolean canMove(Board board, Spot start, Spot end) {
+	boolean canMove(Board board, Spot start, Spot end, boolean isWhiteTurn) {
 		return false;
 	}
 }

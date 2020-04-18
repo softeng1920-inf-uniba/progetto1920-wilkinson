@@ -143,12 +143,5 @@ public class Board {
 		System.out.println("");
 		System.out.println("      a b c d e f g h");
 	}
-
-	public Spot[][] getBoxes() {
-		return boxes;
-	}
-
-	public void setBoxes(Spot[][] boxes) {
-		this.boxes = boxes;
-	}
 }
+

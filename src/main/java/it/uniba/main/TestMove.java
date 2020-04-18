@@ -14,9 +14,8 @@ public class TestMove {
 		
 		Move move = new Move(command, game);
 		
-		System.out.println(move.getEnd());
-		System.out.println(move.getStart());
-		move.getPieceMoved().draw();
-		
+		System.out.println("start"+move.getStart());
+		System.out.println("  end"+move.getEnd());
+		System.out.println(move.getPieceMoved().draw());
 	}
 }

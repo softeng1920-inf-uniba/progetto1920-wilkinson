@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import it.uniba.main.Move.GameStatus;
 
 public class Game {
-	Board board; // oggetto scacchiera per la partita in corso
-	boolean whiteTurn = true; // true se turno del bianco, false se turno del nero
-	GameStatus status; // stato della partita (se ACTIVE si continua a giocare, altrimenti si quitta)
-	ArrayList<String> allMoves; // lista con le mosse effettuate dal bianco
-	ArrayList<Piece> whiteCaptures; // lista con i pezzi catturati dal bianco (quindi pezzi neri)
-	ArrayList<Piece> blackCaptures; // lista con i pezzi catturati dal nero (quindi pezzi bianchi)
-	boolean isCapture = false;
+	private Board board; // oggetto scacchiera per la partita in corso
+	private boolean whiteTurn; // true se turno del bianco, false se turno del nero
+	private GameStatus status; // stato della partita (se ACTIVE si continua a giocare, altrimenti si quitta)
+	private ArrayList<String> allMoves; // lista con le mosse effettuate dal bianco
+	private ArrayList<Piece> whiteCaptures; // lista con i pezzi catturati dal bianco (quindi pezzi neri)
+	private ArrayList<Piece> blackCaptures; // lista con i pezzi catturati dal nero (quindi pezzi bianchi)
+	private boolean isCapture; // true se c'è una cattura nel turno in corso
 
 	/**
 	 * Costruttore pubblic di Game
@@ -21,9 +21,9 @@ public class Game {
 	}
 
 	/**
-	 * Il metodo initialize, pone inizio alla partita. 
-	 * - Inizia la board, setta lo status su Attivo 
-	 * - Inizializza gli Array per registrare le farie mosse e catture
+	 * Il metodo initialize, pone inizio alla partita. - Inizia la board, setta lo
+	 * status su Attivo - Inizializza gli Array per registrare le farie mosse e
+	 * catture
 	 */
 	public void initialize() {
 		board = new Board();
@@ -31,12 +31,13 @@ public class Game {
 		allMoves = new ArrayList<String>();
 		whiteCaptures = new ArrayList<Piece>();
 		blackCaptures = new ArrayList<Piece>();
+		isCapture = false;
+		whiteTurn = true;
 	}
 
 	/**
-	 * Il metodo isEnd: 
-	 * - @return true se la partita e' terminata 
-	 * - @return false se la partita e' ancora in corso
+	 * Il metodo isEnd: - @return true se la partita e' terminata - @return false se
+	 * la partita e' ancora in corso
 	 */
 	public boolean isEnd() {
 		if (status != GameStatus.ACTIVE) {
@@ -51,10 +52,10 @@ public class Game {
 	 * 
 	 * @param command e' il comando/mossa inserita dall'utente
 	 */
-	public void currentGame(String command) {
+	public void currentGame(final String command) {
 		Move move = new Move(command, this);
 		if (move.getStart() != null && makeMove(move)) {
-			allMoves.add(move.getPieceMoved().draw()+ " " + command);
+			allMoves.add(move.getPieceMoved().draw() + " " + command);
 			whiteTurn = (!whiteTurn);
 		} else {
 			System.out.println("\nCOMANDO O MOSSA NON VALIDA");
@@ -62,13 +63,9 @@ public class Game {
 	}
 
 	/**
-	 * Il metodo makeMove e' un booleano che effettua la mossa. 
-	 * Tiene conto di questi fattori: 
-	 * - che pezzo si deve muovere 
-	 * - se la mossa e' valida 
-	 * - se c'e' una cattura 
-	 * - se c'e' una cattura en-passant 
-	 * - muove il pezzo da start ad end
+	 * Il metodo makeMove e' un booleano che effettua la mossa. Tiene conto di
+	 * questi fattori: - che pezzo si deve muovere - se la mossa e' valida - se c'e'
+	 * una cattura - se c'e' una cattura en-passant - muove il pezzo da start ad end
 	 * 
 	 * @param move mossa da effettuare
 	 * @return true se la mossa e' stata effettuata, false viceversa
@@ -84,46 +81,35 @@ public class Game {
 		 * puo' essere mosso in questo turno - se la mossa e' scritta in notazione
 		 * corretta
 		 */
-		if (start.getPiece() != null && start.getPiece().isWhite() == this.whiteTurn && move.getInterpreter().isGoodMove()) {
+		if (start.getPiece() != null && start.getPiece().isWhite() == isWhiteTurn() && move.getInterpreter().isGoodMove()) {
 			
 			// effettuo il movimento
-			if (start.getPiece().canMove(getBoard(), start, end)) {
+			if (start.getPiece().canMove(getBoard(), start, end, isWhiteTurn())) {
 
 				/*
 				 * Controllo: - se la mossa e' una cattura - se nel comando c'e' il simbolo 'x'
 				 * - se la cattura e' en-passant
 				 */
 				if (checkIfIsCapture(move.getInterpreter())) {
-					if (isCapture) {
+					if (isCapture()) {
+						
 						if (start.getPiece() instanceof Pawn) {
-							if (((Pawn) start.getPiece()).isCapturingEnPassant) {
+							if (((Pawn) start.getPiece()).isCapturingEnPassant()) {
+								addCapture(getBoard().getSpot(start.getX(), end.getY()).getPiece());
 								getBoard().getSpot(start.getX(), end.getY()).setPiece(null);
-								if (whiteTurn) {
-									whiteCaptures.add(end.getPiece());
-								} else {
-									blackCaptures.add(end.getPiece());
-								}
 								end.setPiece(start.getPiece());
 								start.setPiece(null);
 								end.getPiece().setAsMoved();
 								return true;
 							} else {
-								if (whiteTurn) {
-									whiteCaptures.add(end.getPiece());
-								} else {
-									blackCaptures.add(end.getPiece());
-								}
+								addCapture(end.getPiece());
 								end.setPiece(start.getPiece());
 								start.setPiece(null);
 								end.getPiece().setAsMoved();
 								return true;
 							}
 						}
-						if (whiteTurn) {
-							whiteCaptures.add(end.getPiece());
-						} else {
-							blackCaptures.add(end.getPiece());
-						}
+						addCapture(end.getPiece());
 						end.setPiece(start.getPiece());
 						start.setPiece(null);
 						end.getPiece().setAsMoved();
@@ -131,7 +117,7 @@ public class Game {
 					} else {
 						return false;
 					}
-				} else if (!isCapture) {
+				} else if (!isCapture()) {
 					setAllPawnNotEP(getBoard());
 					if (start.getPiece() instanceof Pawn) {
 						
@@ -152,7 +138,21 @@ public class Game {
 		return false;
 	}
 
-	/** showMoves e' il metodo che mostrera' le mosse giocate durante la partita
+	/**
+	 * aggiunge il parametro al corrispondente arraylist di catture
+	 * 
+	 * @param piece pezzo catturato
+	 */
+	private void addCapture(Piece piece) {
+		if (isWhiteTurn()) {
+			whiteCaptures.add(piece);
+		} else {
+			blackCaptures.add(piece);
+		}
+	}
+
+	/**
+	 * showMoves e' il metodo che mostrera' le mosse giocate durante la partita
 	 * 
 	 */
 	public void showMoves() {
@@ -170,10 +170,9 @@ public class Game {
 		}
 	}
 
-	/** showCaptures e' il metodo che mostrera' le catture fatte durante la partita.
-	 * Distingue in:
-	 * - catture del bianco
-	 * - catture del nero
+	/**
+	 * showCaptures e' il metodo che mostrera' le catture fatte durante la partita.
+	 * Distingue in: - catture del bianco - catture del nero
 	 */
 	public void showCaptures() {
 		System.out.print("Catture del bianco: ");
@@ -190,11 +189,9 @@ public class Game {
 		}
 	}
 
-	/** Il metodo checkIfIsCapture e' un booleano.
-	 * Controlla se il comando e' una cattura
-	 * Il metodo:
-	 * - @return true se e' una cattura
-	 * - @return false viceversa
+	/**
+	 * Il metodo checkIfIsCapture e' un booleano. Controlla se il comando e' una
+	 * cattura Il metodo: - @return true se e' una cattura - @return false viceversa
 	 * 
 	 * @param check
 	 */
@@ -205,12 +202,13 @@ public class Game {
 		return false;
 	}
 
-	/** Il metodo checkIfEnPassant e' un booleano.
-	 * Controlla se il comando e' una cattura en-passant
+	/**
+	 * Il metodo checkIfEnPassant e' un booleano. Controlla se il comando e' una
+	 * cattura en-passant
 	 * 
-	 * Il metodo:
-	 * - @return true se la cattura e' en-passant
-	 * - @return false viceversa
+	 * Il metodo: - @return true se la cattura e' en-passant - @return false
+	 * viceversa
+	 * 
 	 * @param check
 	 */
 	public boolean checkIfEnPassant(AlgebraicNotation check) {
@@ -220,7 +218,8 @@ public class Game {
 		return false;
 	}
 
-	/** searchForCapture e' il metodo che controlla se un pezzo puo' catturare
+	/**
+	 * searchForCapture e' il metodo che controlla se un pezzo puo' catturare
 	 * 
 	 * @param board
 	 */
@@ -236,10 +235,10 @@ public class Game {
 		}
 	}
 
-	/** toString e' il metodo che restituisce delle stringhe.
-	 * Indicano il turno
-	 * - @return (Turno del bianco) se e' il turno del bianco
-	 * - @return (Turno del nero) se e' il turno del nero
+	/**
+	 * toString e' il metodo che restituisce delle stringhe. Indicano il turno
+	 * - @return (Turno del bianco) se e' il turno del bianco - @return (Turno del
+	 * nero) se e' il turno del nero
 	 */
 	public String toString() {
 		if (this.whiteTurn) {
@@ -248,10 +247,12 @@ public class Game {
 			return "(Turno del nero)";
 		}
 	}
-	
+
 	// Di seguito GETTER e SETTER
 
-	/** Il metodo setAllPawnNotEP setta false la possibile cattura en-passant di tutti i pedoni ogni turno
+	/**
+	 * Il metodo setAllPawnNotEP setta false la possibile cattura en-passant di
+	 * tutti i pedoni ogni turno
 	 * 
 	 * @param board
 	 */
@@ -260,16 +261,16 @@ public class Game {
 			for (int j = 0; j < 8; j++) {
 				Spot currentSpot = getBoard().getSpot(i, j);
 				if (currentSpot.getPiece() instanceof Pawn) {
-					if (((Pawn) currentSpot.getPiece()).isWhite() != whiteTurn) {
+					if (((Pawn) currentSpot.getPiece()).isWhite() != isWhiteTurn()) {
 						((Pawn) currentSpot.getPiece()).setPossibleEnPassantCapture(false);
-						((Pawn) currentSpot.getPiece()).isCapturingEnPassant = false;
+						((Pawn) currentSpot.getPiece()).setCapturingEnPassant(false);
 					}
-
 				}
 			}
 		}
 	}
-	
+
+	// Getters & Setters
 	public GameStatus getStatus() {
 		return status;
 	}
@@ -292,5 +293,13 @@ public class Game {
 
 	public void setWhiteTurn(boolean whiteTurn) {
 		this.whiteTurn = whiteTurn;
+	}
+
+	public boolean isCapture() {
+		return isCapture;
+	}
+
+	public void setCapture(boolean isCapture) {
+		this.isCapture = isCapture;
 	}
 }

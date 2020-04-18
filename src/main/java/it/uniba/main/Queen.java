@@ -6,24 +6,19 @@ public class Queen extends Piece {
 		super(white);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Override
 	public String draw() {
-		if(isWhite())
-		{
+		if (isWhite()) {
 			return "\u2655";
-		}
-		else
-		{
+		} else {
 			return "\u265b";
 		}
 	}
 
 	@Override
-	boolean canMove(Board board, Spot start, Spot end) {
+	boolean canMove(Board board, Spot start, Spot end, boolean isWhiteTurn) {
 		return false;
 	}
-
-
 
 }
