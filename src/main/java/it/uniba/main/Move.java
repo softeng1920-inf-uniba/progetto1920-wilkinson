@@ -163,8 +163,7 @@ public final class Move {
 			for (int i = 0; i < BOARD_HEIGHT; i++) {
 				Spot start = game.getBoard().getSpot(i, convertCoordinate(algebraicFinalSpot.substring(0, 1)));
 				Spot end2 = game.getBoard().getSpot(end.getX(), end.getY());
-				if (start.getPiece() != null && start.getPiece().canMove(game.getBoard(), start, end2)
-						&& start.getPiece().isWhite() == game.isWhiteTurn()) {
+				if (start.getPiece() != null && start.getPiece().canMove(game.getBoard(), start, end2, game.isWhiteTurn())) {
 					this.start = start;
 				}
 			}
@@ -173,8 +172,7 @@ public final class Move {
 				for (int j = 0; j < BOARD_LENGTH; j++) {
 					Spot start = game.getBoard().getSpot(i, j);
 					Spot end2 = game.getBoard().getSpot(end.getX(), end.getY());
-					if (start.getPiece() != null && start.getPiece().canMove(game.getBoard(), start, end2)
-							&& start.getPiece().isWhite() == game.isWhiteTurn()) {
+					if (start.getPiece() != null && start.getPiece().canMove(game.getBoard(), start, end2, game.isWhiteTurn())) {
 						this.start = start;
 					}
 

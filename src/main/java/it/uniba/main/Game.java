@@ -84,7 +84,7 @@ public class Game {
 		if (start.getPiece() != null && start.getPiece().isWhite() == isWhiteTurn() && move.getInterpreter().isGoodMove()) {
 			
 			// effettuo il movimento
-			if (start.getPiece().canMove(getBoard(), start, end)) {
+			if (start.getPiece().canMove(getBoard(), start, end, isWhiteTurn())) {
 
 				/*
 				 * Controllo: - se la mossa e' una cattura - se nel comando c'e' il simbolo 'x'
