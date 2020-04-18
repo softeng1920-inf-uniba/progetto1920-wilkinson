@@ -156,7 +156,9 @@ public class Game {
 				turnControl++;
 				System.out.print(currentMove + " ");
 			}
-		}//end for
+		} /*else {
+			System.out.println("\nNessuna mossa effettuata finora.");
+		}*/
 	}
 
 	public void showCaptures() {
@@ -165,14 +167,15 @@ public class Game {
 			for (Piece currentPiece: whiteCaptures) {
 				System.out.print(currentPiece.draw() +" ");
 			}
-		}
+		} 
 
 		System.out.print("\nCatture del nero: ");
 		if(!blackCaptures.isEmpty()) {
 			for (Piece currentPiece: blackCaptures) {
 				System.out.print(currentPiece.draw() + " ");
 			}
-		}
+		} 
+		
 	}
 
 	/**controlla se il comando e' una cattura
