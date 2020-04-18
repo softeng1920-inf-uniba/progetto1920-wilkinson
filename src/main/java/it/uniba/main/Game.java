@@ -147,14 +147,16 @@ public class Game {
 	public void showMoves() {
 		int moveNumber = 0;
 		int turnControl = 0;
-		for (String currentMove: allMoves) {
+                if(!allMoves.isEmpty()){
+		   for (String currentMove: allMoves) {
 			if(turnControl % 2 == 0) {
 				moveNumber++;
 				System.out.print("\n" + moveNumber + ".");
 			}
 			turnControl++;
 			System.out.print(currentMove + " ");
-		}//end for
+		    }
+                 }//end for
 	}
 	
 	public void showCaptures() {
