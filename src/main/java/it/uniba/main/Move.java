@@ -35,10 +35,10 @@ public final class Move {
 		}
 	}
 
-	final static int EXPECTED_COMMAND_LENGTH = 2;
-	final static int EXPECTED_AMBIGUOUS_COMMAND_LENGTH = 3;
-	final static int BOARD_LENGTH = 8;
-	final static int BOARD_HEIGHT = 8;
+	static final int EXPECTED_COMMAND_LENGTH = 2;
+	static final int EXPECTED_AMBIGUOUS_COMMAND_LENGTH = 3;
+	static final int BOARD_LENGTH = 8;
+	static final int BOARD_HEIGHT = 8;
 
 	/**
 	 * estrae le coordinate della casa di arrivo
