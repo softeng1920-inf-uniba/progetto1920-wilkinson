@@ -1,29 +1,35 @@
 package it.uniba.main;
 
 public class Board {
-	Spot[][] boxes = new Spot[8][8]; // matrice scacchiera formata da caselle (elementi di classe Spot)
+	private Spot[][] boxes; // matrice scacchiera formata da caselle (elementi di classe Spot)
+	private static final int BOARDDIM = 8; // dimensioni della scacchiera
+	private static final int INITEMPTYRAW = 2;
+	private static final int ENDEMPTYRAW = 6;
 
-	// costruttore di Board, inizializza la scacchiera con la configurazione
-	// iniziale usando il metodo resetBoard()
-
+	/**
+	 * costruttore di Board, inizializza la scacchiera con la configurazione
+	 * iniziale usando il metodo resetBoard()
+	 */
 	public Board() {
+		boxes = new Spot[BOARDDIM][BOARDDIM];
 		this.resetBoard();
-
-		// TODO
 	}
 
-	// metodo che ritorna una casa della scacchiera identificato con (riga, colonna)
-	// @param x riga
-	// @param y colonna
-	// @return elemento di classe Spot
-
+	/**
+	 * metodo che ritorna una casa della scacchiera identificato con (riga, colonna)
+	 * 
+	 * @param x riga
+	 * @param y colonna
+	 * @return elemento di classe Spot
+	 */
 	public Spot getSpot(int x, int y) {
 		return boxes[x][y];
 	}
 
-	// metodo che inizializza la scacchiera con pezzi nelle posizioni iniziali
-
-	void resetBoard() {
+	/**
+	 * metodo che inizializza la scacchiera con pezzi nelle posizioni iniziali
+	 */
+	private void resetBoard() {
 
 		boxes[1][0] = new Spot(1, 0, new Pawn(false));
 		boxes[1][1] = new Spot(1, 1, new Pawn(false));
@@ -58,15 +64,16 @@ public class Board {
 		boxes[0][4] = new Spot(0, 4, new King(false));
 		boxes[7][4] = new Spot(7, 4, new King(true));
 
-		for (int x = 2; x < 6; x++) {
-			for (int j = 0; j < 8; j++) {
+		for (int x = INITEMPTYRAW; x < ENDEMPTYRAW; x++) {
+			for (int j = 0; j < BOARDDIM; j++) {
 				boxes[x][j] = new Spot(x, j, null);
 			}
 		}
 	}
 
-	// metodo che permette la stampa a video della scacchiera nella configurazione
-	// attuale
+	/**
+	 * metodo che permette la stampa a video della scacchiera nella configurazione attuale
+	 */
 	public void showBoard() {
 		String upline = "\u2550";
 		String upline2 = "\u2566";
@@ -86,7 +93,7 @@ public class Board {
 		boolean isblack = true;
 
 		System.out.print("    " + cornersxline);
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < BOARDDIM; i++) {
 			System.out.print(upline);
 			System.out.print(upline2);
 		}
@@ -95,13 +102,14 @@ public class Board {
 		System.out.println("");
 		// stampa delle coordinate sulle colonne
 
-		for (int i = 0; i < 8; i++) {
-			System.out.print("  " + (8 - i) + " ");
+		for (int i = 0; i < BOARDDIM; i++) {
+			System.out.print("  " + (BOARDDIM - i) + " ");
 			System.out.print(sxline2);
 			System.out.print(" ");
-			for (int j = 0; j < 8; j++) {
+			for (int j = 0; j < BOARDDIM; j++) {
 				Piece piece = this.getSpot(i, j).getPiece();
 				if (piece == null) {
+					//stampa casella vuota
 					if (isblack) {
 						System.out.print("\u25A1");
 						isblack = false;
@@ -110,6 +118,7 @@ public class Board {
 						isblack = true;
 					}
 				} else {
+					// stampa del pezzo nello spot corrente in carattere unicode sulla scacchiera
 					piece.draw();
 					System.out.print(piece.draw());
 					isblack = !isblack;
@@ -118,14 +127,14 @@ public class Board {
 			}
 
 			System.out.print(dxline);
-			System.out.print(" " + (8 - i));
+			System.out.print(" " + (BOARDDIM - i));
 			isblack = !isblack;
 			System.out.println("\t");
 		}
-		// stampa dei pedoni in carattere unicode sulla scacchiera
+		
 
 		System.out.print("    " + cornersxline2);
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < BOARDDIM; i++) {
 			System.out.print(upline);
 			System.out.print(downline2);
 		}
