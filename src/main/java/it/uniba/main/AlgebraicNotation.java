@@ -23,6 +23,7 @@ public class AlgebraicNotation {
 	private static final int MINLENGTHENDSQ = 1;
 	private static final int MAXLENGTHENDSQ = 3;
 	private static final int MAXSYMBOLS = 2;
+	private static final int ENPASSANTLENGTH = 3;
 	
 	//costanti per le posizioni nell'arraylist di tutti i simboli possibili
 	private static final int CHECKINDEX = 0;
@@ -32,12 +33,21 @@ public class AlgebraicNotation {
 	private static final int ENPASSANTINDEX = 4;
 	private static final int STARTINDEXCASTLING = 5;
 
+	/**
+	 * costruttore, inizializza l'arraylist dei simboli, interpreta la stringa in input e 
+	 * decide se è una stringa valida
+	 * 
+	 * @param command stringa da interpretare
+	 */
 	AlgebraicNotation(String command){
 		initializeSymbolList();
 		divideCommand(command);
 		isGoodMove = isValidAlgebraicNotation();
 	}
 
+	/**
+	 * inizializza la lista dei possibili simboli ritrovabili
+	 */
 	void initializeSymbolList() {	//elenco simboli possibili
 		symbolList.add("+");
 		symbolList.add("x");
@@ -48,6 +58,11 @@ public class AlgebraicNotation {
 		symbolList.add("0-0");
 	}
 
+	/**
+	 * interpreta la stringa in input avvalorando gli attributi di classe
+	 * 
+	 * @param command stringa in input da interpretare
+	 */
 	void divideCommand(String command){
 		if(!isPawn(command)) {	//controllo lettera se non pedone
 			this.pieceLetter = command.substring(STARTINDEX,PIECELETTERINDEX);
@@ -65,17 +80,23 @@ public class AlgebraicNotation {
 		}
 
 		if(isEnPassant) {	//caso en passant
-			setEndSquareId(command.substring(STARTINDEX, 3)); //elimino la dicitura e.p. 
+			setEndSquareId(command.substring(STARTINDEX, ENPASSANTLENGTH)); //elimino la dicitura e.p. 
 			setEndSquareId(reduceString(getEndSquareId(), " "));
 		} else if(isCastle) {	//caso arrocco
 			setEndSquareId("");
 		} else {
-			setEndSquareId(command);	//il resto della stringa � la casella di partenza/arrivo
+			setEndSquareId(command);	//il resto della stringa è la casella di partenza/arrivo
 		}
 
 	}
 
-	boolean isPawn(String command) {	//controllo se la mossa � di un pedone (nessuna lettera iniziale)
+	/**
+	 * controllo se il comando riguarda un pedone
+	 * 
+	 * @param command stringa in input da interpretare
+	 * @return
+	 */
+	boolean isPawn(String command) {	//controllo se la mossa è di un pedone (nessuna lettera iniziale)
 
 		char firstLetter = command.charAt(STARTINDEX);
 		if(Character.isUpperCase(firstLetter)) {
@@ -85,7 +106,11 @@ public class AlgebraicNotation {
 		return true;
 	}
 
-
+	/**
+	 * estrae i simboli contenuti nel comando
+	 * 
+	 * @param command stringa in input
+	 */
 	void extractSymbol(String command) {	//estrae l'eventuale simbolo speciale 
 		int pos = 0;
 
@@ -120,9 +145,16 @@ public class AlgebraicNotation {
 		}
 	}
 
+	/**
+	 * riduce la prima stringa togliendo il contenuto della seconda
+	 * 
+	 * @param command prima stringa contenente il comando da ridurre
+	 * @param extracted seconda stringa da sottrarre a command
+	 * @return stringa ridotta
+	 */
 	String reduceString(String command, String extracted) {	//riduce la stringa di comando eliminando i caratteri gi� estratti
 
-		/*controllo se la stringa da sottrarre � vuota o se contiene un simbolo da trattare diversamente*/
+		//controllo se la stringa da sottrarre è vuota o se contiene un simbolo da trattare diversamente*/
 		if(!extracted.isEmpty() && !(extracted == symbolList.get(ENPASSANTINDEX)) && !(extracted == symbolList.get(DOUBLECHECKINDEX))) {
 			String newCommand = "";
 
@@ -142,7 +174,8 @@ public class AlgebraicNotation {
 		return command;
 	}
 	
-	/**controlla se il comando inserito e' scritto 
+	/**
+	 * controlla se il comando inserito e' scritto 
 	 * in notazione algebrica abbreviata ed e' sintatticamente corretto
 	 * 
 	 * @return true se comando valido, false altrimenti
@@ -196,7 +229,7 @@ public class AlgebraicNotation {
 		return true;
 	}
 
-
+	
 	public String toString(){	//stampa a video del comando scomposto
 		String output = "";
 		output += "Nome Pezzo: "+getPieceLetter()+"\nCasa di arrivo: "+getEndSquareId()+"\nSimbolo speciale: "+getSymbol();
@@ -205,7 +238,7 @@ public class AlgebraicNotation {
 	}
 
 
-	/*Getters & Setters*/
+	//Getters & Setters
 	public String getPieceLetter() {
 		return pieceLetter;
 	}
