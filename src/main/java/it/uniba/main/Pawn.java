@@ -108,7 +108,7 @@ public class Pawn extends Piece {
 
 		// controllo che nell'arrivo non ci siano pezzi e che nello spot esaminato ci sia
 		if (start.getPiece() != null && end.getPiece() == null) {
-			if (examinedSpot1.getPiece() != null) {
+			if (examinedSpot1 != null && examinedSpot1.getPiece() != null) {
 				Piece possibleCapture = examinedSpot1.getPiece();
 				if ((start.getPiece().isWhite() != possibleCapture.isWhite()) && (possibleCapture instanceof Pawn)) {
 					if (((Pawn) possibleCapture).isPossibleEnPassantCapture()) {// controllo se il booleano e' true
@@ -117,7 +117,7 @@ public class Pawn extends Piece {
 					}
 				}
 			} 
-			if (examinedSpot2.getPiece() != null) {
+			if (examinedSpot2 != null && examinedSpot2.getPiece() != null) {
 				Piece possibleCapture = examinedSpot2.getPiece();
 				if ((start.getPiece().isWhite() != possibleCapture.isWhite()) && (possibleCapture instanceof Pawn)) {
 					if (((Pawn) possibleCapture).isPossibleEnPassantCapture()) {// controllo se il booleano e' true
