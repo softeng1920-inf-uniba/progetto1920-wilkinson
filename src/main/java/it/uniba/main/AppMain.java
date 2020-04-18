@@ -83,6 +83,7 @@ public final class AppMain {
 						if (userChoice.compareTo("si")== 0) {
 							System.out.println("...ripristino partita");
 							game.initialize();
+							game.setWhiteTurn(true);
 						} else if (userChoice.compareTo("no")== 0){
 							quitGame = false;
 						} else {
