@@ -43,7 +43,7 @@ public class AlgebraicNotation {
 		symbolList.add("x");
 		symbolList.add("#");
 		symbolList.add("++");
-		symbolList.add("e.p.");
+		symbolList.add("ep");
 		symbolList.add("0-0-0");
 		symbolList.add("0-0");
 	}
@@ -65,17 +65,17 @@ public class AlgebraicNotation {
 		}
 
 		if(isEnPassant) {	//caso en passant
-			setEndSquareId(command.substring(STARTINDEX, command.length()-ENPASSANTINDEX)); //elimino la dicitura e.p. 
+			setEndSquareId(command.substring(STARTINDEX, 3)); //elimino la dicitura e.p. 
 			setEndSquareId(reduceString(getEndSquareId(), " "));
 		} else if(isCastle) {	//caso arrocco
 			setEndSquareId("");
 		} else {
-			setEndSquareId(command);	//il resto della stringa è la casella di partenza/arrivo
+			setEndSquareId(command);	//il resto della stringa ï¿½ la casella di partenza/arrivo
 		}
 
 	}
 
-	boolean isPawn(String command) {	//controllo se la mossa è di un pedone (nessuna lettera iniziale)
+	boolean isPawn(String command) {	//controllo se la mossa ï¿½ di un pedone (nessuna lettera iniziale)
 
 		char firstLetter = command.charAt(STARTINDEX);
 		if(Character.isUpperCase(firstLetter)) {
@@ -103,8 +103,13 @@ public class AlgebraicNotation {
 					this.isCapture = true;
 				} else if(pos == CHECKINDEX) {
 					this.isCheck = true;
+				} 
+				
+				if(command.contains("e.p.") || command.contains("e.p")) {
+					this.isEnPassant = true;
+					getSymbol().add("ep");
 				}
-
+				
 				getSymbol().add(currentSymbol);
 
 				if(isCastle) {	//interrompo se arrocco
@@ -115,9 +120,9 @@ public class AlgebraicNotation {
 		}
 	}
 
-	String reduceString(String command, String extracted) {	//riduce la stringa di comando eliminando i caratteri già estratti
+	String reduceString(String command, String extracted) {	//riduce la stringa di comando eliminando i caratteri giï¿½ estratti
 
-		/*controllo se la stringa da sottrarre è vuota o se contiene un simbolo da trattare diversamente*/
+		/*controllo se la stringa da sottrarre ï¿½ vuota o se contiene un simbolo da trattare diversamente*/
 		if(!extracted.isEmpty() && !(extracted == symbolList.get(ENPASSANTINDEX)) && !(extracted == symbolList.get(DOUBLECHECKINDEX))) {
 			String newCommand = "";
 
@@ -137,8 +142,8 @@ public class AlgebraicNotation {
 		return command;
 	}
 	
-	/**controlla se il comando inserito è scritto 
-	 * in notazione algebrica abbreviata ed è sintatticamente corretto
+	/**controlla se il comando inserito ï¿½ scritto 
+	 * in notazione algebrica abbreviata ed ï¿½ sintatticamente corretto
 	 * 
 	 * @return true se comando valido, false altrimenti
 	 */
