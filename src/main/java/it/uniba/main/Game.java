@@ -41,7 +41,7 @@ public class Game {
 	public void currentGame(String command) { //
 		Move move = new Move(command, this);
 		if(move.getStart() != null && makeMove (move)) {
-			allMoves.add(command);
+			allMoves.add(move.getPieceMoved().draw() + command);
 			whiteTurn = (!whiteTurn);
 		} else {
 			System.out.println("Mossa non valida, reinserirla");
