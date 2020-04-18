@@ -142,8 +142,8 @@ public class AlgebraicNotation {
 		return command;
 	}
 	
-	/**controlla se il comando inserito � scritto 
-	 * in notazione algebrica abbreviata ed � sintatticamente corretto
+	/**controlla se il comando inserito e' scritto 
+	 * in notazione algebrica abbreviata ed e' sintatticamente corretto
 	 * 
 	 * @return true se comando valido, false altrimenti
 	 */
