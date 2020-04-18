@@ -75,7 +75,7 @@ public class Game {
 		Spot start = board.getSpot(move.getStart().getX(), move.getStart().getY());
 		Spot end = board.getSpot(move.getEnd().getX(), move.getEnd().getY());
 		searchForCapture(getBoard());
-
+		setAllPawnNotEP(getBoard());
 		/*
 		 * Controllo: - se c'e' un pezzo nella casa di partenza - se il pezzo da muovere
 		 * puo' essere mosso in questo turno - se la mossa e' scritta in notazione
@@ -118,7 +118,7 @@ public class Game {
 						return false;
 					}
 				} else if (!isCapture()) {
-					setAllPawnNotEP(getBoard());
+					
 					if (start.getPiece() instanceof Pawn) {
 						
 						/*se il movimento riguarda un pedone ed e' la sua prima mossa,

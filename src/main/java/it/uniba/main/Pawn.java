@@ -55,6 +55,7 @@ public class Pawn extends Piece {
 				if((start.getY() == end.getY()) && (start.getX() == (end.getX()+1))) {
 					return true;
 				} else if((start.getY() == end.getY()) && (start.getX() == (end.getX()+2)) && (!start.getPiece().isMoved())){
+					((Pawn)start.getPiece()).possibleEnPassantCapture = true;
 					return true;
 				} else if (start.getX() == XENPASSANTWHITE) {// controllo che il pedone bianco sia nella riga giusta per
 					// effettuare la cattura en-passant
@@ -69,6 +70,7 @@ public class Pawn extends Piece {
 				if((start.getY() == end.getY()) && (start.getX() == (end.getX()-1))) {
 					return true;
 				} else if((start.getY() == end.getY()) && (start.getX() == (end.getX()-2)) && (!start.getPiece().isMoved())){
+					((Pawn)start.getPiece()).possibleEnPassantCapture = true;
 					return true;
 				} else if (start.getX() == XENPASSANTBLACK) {
 					if (enPassantCheck(board, start, end)) {
