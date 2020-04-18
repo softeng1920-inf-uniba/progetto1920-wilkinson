@@ -52,7 +52,7 @@ public class Game {
 	 * 
 	 * @param command e' il comando/mossa inserita dall'utente
 	 */
-	public void currentGame(String command) {
+	public void currentGame(final String command) {
 		Move move = new Move(command, this);
 		if (move.getStart() != null && makeMove(move)) {
 			allMoves.add(move.getPieceMoved().draw() + " " + command);
@@ -71,11 +71,9 @@ public class Game {
 	 * @return true se la mossa e' stata effettuata, false viceversa
 	 */
 	private boolean makeMove(Move move) {
-		setCapture(false);
-		Spot start = getBoard().getSpot(move.getStart().getX(), move.getStart().getY());
-		Spot end = getBoard().getSpot(move.getEnd().getX(), move.getEnd().getY());
-		Piece pieceMoved = start.getPiece();
-		AlgebraicNotation interpreter = move.getInterpreter();
+		isCapture = false;
+		Spot start = board.getSpot(move.getStart().getX(), move.getStart().getY());
+		Spot end = board.getSpot(move.getEnd().getX(), move.getEnd().getY());
 		searchForCapture(getBoard());
 
 		/*
@@ -83,47 +81,36 @@ public class Game {
 		 * puo' essere mosso in questo turno - se la mossa e' scritta in notazione
 		 * corretta
 		 */
-		if (pieceMoved != null && pieceMoved.isWhite() == isWhiteTurn() && interpreter.isGoodMove()) {
-
+		if (start.getPiece() != null && start.getPiece().isWhite() == isWhiteTurn() && move.getInterpreter().isGoodMove()) {
+			
 			// effettuo il movimento
-			if (pieceMoved.canMove(getBoard(), start, end)) {
+			if (start.getPiece().canMove(getBoard(), start, end)) {
 
 				/*
 				 * Controllo: - se la mossa e' una cattura - se nel comando c'e' il simbolo 'x'
 				 * - se la cattura e' en-passant
 				 */
-				if (checkIfIsCapture(interpreter)) {
+				if (checkIfIsCapture(move.getInterpreter())) {
 					if (isCapture()) {
-						if (pieceMoved instanceof Pawn) {
-							if (((Pawn) pieceMoved).isCapturingEnPassant()) {
+						
+						if (start.getPiece() instanceof Pawn) {
+							if (((Pawn) start.getPiece()).isCapturingEnPassant()) {
+								addCapture(getBoard().getSpot(start.getX(), end.getY()).getPiece());
 								getBoard().getSpot(start.getX(), end.getY()).setPiece(null);
-								if (isWhiteTurn()) {
-									whiteCaptures.add(end.getPiece());
-								} else {
-									blackCaptures.add(end.getPiece());
-								}
-								end.setPiece(pieceMoved);
+								end.setPiece(start.getPiece());
 								start.setPiece(null);
 								end.getPiece().setAsMoved();
 								return true;
 							} else {
-								if (isWhiteTurn()) {
-									whiteCaptures.add(end.getPiece());
-								} else {
-									blackCaptures.add(end.getPiece());
-								}
-								end.setPiece(pieceMoved);
+								addCapture(end.getPiece());
+								end.setPiece(start.getPiece());
 								start.setPiece(null);
 								end.getPiece().setAsMoved();
 								return true;
 							}
 						}
-						if (isWhiteTurn()) {
-							whiteCaptures.add(end.getPiece());
-						} else {
-							blackCaptures.add(end.getPiece());
-						}
-						end.setPiece(pieceMoved);
+						addCapture(end.getPiece());
+						end.setPiece(start.getPiece());
 						start.setPiece(null);
 						end.getPiece().setAsMoved();
 						return true;
@@ -132,17 +119,16 @@ public class Game {
 					}
 				} else if (!isCapture()) {
 					setAllPawnNotEP(getBoard());
-					if (pieceMoved instanceof Pawn) {
-
-						/*
-						 * se il movimento riguarda un pedone ed e' la sua prima mossa, setto a true la
-						 * possibile cattura en passant
-						 */
-						if (!pieceMoved.isMoved()) {
-							((Pawn) pieceMoved).setPossibleEnPassantCapture(true);
+					if (start.getPiece() instanceof Pawn) {
+						
+						/*se il movimento riguarda un pedone ed e' la sua prima mossa,
+						*setto a true la possibile cattura en passant
+						*/
+						if (!start.getPiece().isMoved()) {
+							((Pawn) start.getPiece()).setPossibleEnPassantCapture(true);
 						}
 					}
-					end.setPiece(pieceMoved);
+					end.setPiece(start.getPiece());
 					start.setPiece(null);
 					end.getPiece().setAsMoved();
 					return true;
@@ -150,6 +136,19 @@ public class Game {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * aggiunge il parametro al corrispondente arraylist di catture
+	 * 
+	 * @param piece pezzo catturato
+	 */
+	private void addCapture(Piece piece) {
+		if (isWhiteTurn()) {
+			whiteCaptures.add(piece);
+		} else {
+			blackCaptures.add(piece);
+		}
 	}
 
 	/**
@@ -262,18 +261,16 @@ public class Game {
 			for (int j = 0; j < 8; j++) {
 				Spot currentSpot = getBoard().getSpot(i, j);
 				if (currentSpot.getPiece() instanceof Pawn) {
-					if (((Pawn) currentSpot.getPiece()).isWhite() != whiteTurn) {
+					if (((Pawn) currentSpot.getPiece()).isWhite() != isWhiteTurn()) {
 						((Pawn) currentSpot.getPiece()).setPossibleEnPassantCapture(false);
 						((Pawn) currentSpot.getPiece()).setCapturingEnPassant(false);
 					}
-
 				}
 			}
 		}
 	}
 
-	
-	//Getters & Setters
+	// Getters & Setters
 	public GameStatus getStatus() {
 		return status;
 	}
