@@ -3,25 +3,25 @@ package it.uniba.main;
 import java.util.ArrayList;
 
 public final class AlgebraicNotation {
-	private String pieceLetter;	//lettera corrispondente al pezzo 
-	private ArrayList<String> symbol;	//simbolo speciale nel comando
-	private String endSquareId;	//casa di arrivo del pezzo
-	private static ArrayList<String> symbolList;	//simboli possibili
+	private String pieceLetter; // lettera corrispondente al pezzo
+	private ArrayList<String> symbol; // simbolo speciale nel comando
+	private String endSquareId; // casa di arrivo del pezzo
+	private static ArrayList<String> symbolList; // simboli possibili
 	private boolean isCastle = false;
 	private boolean isEnPassant = false;
 	private boolean isDoubleCheck = false;
 	private boolean isCapture = false;
 	private boolean isCheck = false;
 	private boolean isGoodMove = false;
-	//costanti per lettera corrispondente al pezzo
+	// costanti per lettera corrispondente al pezzo
 	private static final int STARTINDEX = 0;
 	private static final int PIECELETTERINDEX = 1;
-	//costanti per le lunghezze delle stringhe
+	// costanti per le lunghezze delle stringhe
 	private static final int MINLENGTHENDSQ = 1;
 	private static final int MAXLENGTHENDSQ = 3;
 	private static final int MAXSYMBOLS = 2;
 	private static final int ENPASSANTLENGTH = 3;
-	//costanti per le posizioni nell'arraylist di tutti i simboli possibili
+	// costanti per le posizioni nell'arraylist di tutti i simboli possibili
 	private static final int CHECKINDEX = 0;
 	private static final int CAPTUREINDEX = 1;
 	private static final int DOUBLECHECKSPOTS = 2;
@@ -30,8 +30,8 @@ public final class AlgebraicNotation {
 	private static final int STARTINDEXCASTLING = 5;
 
 	/**
-	 * costruttore, inizializza i membri, l'arraylist dei simboli, interpreta la stringa in input e 
-	 * decide se è una stringa valida
+	 * costruttore, inizializza i membri, l'arraylist dei simboli, interpreta la
+	 * stringa in input e decide se è una stringa valida
 	 * 
 	 * @param command stringa da interpretare
 	 */
@@ -47,7 +47,7 @@ public final class AlgebraicNotation {
 	/**
 	 * inizializza la lista dei possibili simboli ritrovabili
 	 */
-	private static void initializeSymbolList() {	//elenco simboli possibili
+	private static void initializeSymbolList() { // elenco simboli possibili
 		symbolList.add("+");
 		symbolList.add("x");
 		symbolList.add("#");
@@ -64,28 +64,29 @@ public final class AlgebraicNotation {
 	 */
 	private final void divideCommand(final String command) {
 		String commandInterpreted = command;
-		if (!isPawn(commandInterpreted)) {	//controllo lettera se non pedone
+		if (!isPawn(commandInterpreted)) { // controllo lettera se non pedone
 			this.pieceLetter = commandInterpreted.substring(STARTINDEX, PIECELETTERINDEX);
 			commandInterpreted = reduceString(commandInterpreted, getPieceLetter());
 		}
 
-		extractSymbol(commandInterpreted);	//estrazione simbolo speciale
+		extractSymbol(commandInterpreted); // estrazione simbolo speciale
 
-		if (isDoubleCheck) {	//caso scacco doppio
-			commandInterpreted = commandInterpreted.substring(STARTINDEX, commandInterpreted.length() - DOUBLECHECKSPOTS);
+		if (isDoubleCheck) { // caso scacco doppio
+			commandInterpreted = commandInterpreted.substring(STARTINDEX,
+					commandInterpreted.length() - DOUBLECHECKSPOTS);
 		}
 
-		for (String currentSymbol: getSymbol()) {	//elimino eventuali altri simboli
+		for (String currentSymbol : getSymbol()) { // elimino eventuali altri simboli
 			commandInterpreted = reduceString(commandInterpreted, currentSymbol);
 		}
 
-		if (isEnPassant) {	//caso en passant
-			setEndSquareId(commandInterpreted.substring(STARTINDEX, ENPASSANTLENGTH)); //elimino la dicitura e.p. 
+		if (isEnPassant) { // caso en passant
+			setEndSquareId(commandInterpreted.substring(STARTINDEX, ENPASSANTLENGTH)); // elimino la dicitura e.p.
 			setEndSquareId(reduceString(getEndSquareId(), " "));
-		} else if (isCastle) {	//caso arrocco
+		} else if (isCastle) { // caso arrocco
 			setEndSquareId("");
 		} else {
-			setEndSquareId(commandInterpreted);	//il resto della stringa è la casella di partenza/arrivo
+			setEndSquareId(commandInterpreted); // il resto della stringa è la casella di partenza/arrivo
 		}
 	}
 
@@ -95,7 +96,7 @@ public final class AlgebraicNotation {
 	 * @param command stringa in input da interpretare
 	 * @return
 	 */
-	private boolean isPawn(String command) {	//controllo se la mossa è di un pedone (nessuna lettera iniziale)
+	private boolean isPawn(String command) { // controllo se la mossa è di un pedone (nessuna lettera iniziale)
 		char firstLetter = command.charAt(STARTINDEX);
 		if (Character.isUpperCase(firstLetter)) {
 			return false;
@@ -108,13 +109,13 @@ public final class AlgebraicNotation {
 	 * 
 	 * @param command stringa in input
 	 */
-	private void extractSymbol(String command) {	//estrae l'eventuale simbolo speciale 
+	private void extractSymbol(String command) { // estrae l'eventuale simbolo speciale
 		int pos = 0;
 
-		for (String currentSymbol: symbolList) {
+		for (String currentSymbol : symbolList) {
 			if (command.contains(currentSymbol)) {
 
-				if (pos >= STARTINDEXCASTLING) {	//check di simboli che innescano eventi
+				if (pos >= STARTINDEXCASTLING) { // check di simboli che innescano eventi
 					this.isCastle = true;
 				} else if (pos == ENPASSANTINDEX) {
 					this.isEnPassant = true;
@@ -125,16 +126,16 @@ public final class AlgebraicNotation {
 					this.isCapture = true;
 				} else if (pos == CHECKINDEX) {
 					this.isCheck = true;
-				} 
-				
+				}
+
 				if (command.contains("e.p.") || command.contains("e.p")) {
 					this.isEnPassant = true;
 					getSymbol().add("ep");
 				}
-				
+
 				getSymbol().add(currentSymbol);
 
-				if (isCastle) {	//interrompo se arrocco
+				if (isCastle) { // interrompo se arrocco
 					break;
 				}
 			}
@@ -145,20 +146,23 @@ public final class AlgebraicNotation {
 	/**
 	 * riduce la prima stringa togliendo il contenuto della seconda
 	 * 
-	 * @param command prima stringa contenente il comando da ridurre
+	 * @param command   prima stringa contenente il comando da ridurre
 	 * @param extracted seconda stringa da sottrarre a command
 	 * @return stringa ridotta
 	 */
-	private String reduceString(String command, String extracted) {	//riduce la stringa di comando eliminando i caratteri gi� estratti
+	private String reduceString(String command, String extracted) { // riduce la stringa di comando eliminando i
+																	// caratteri gi� estratti
 
-		//controllo se la stringa da sottrarre è vuota o se contiene un simbolo da trattare diversamente*/
-		if (!extracted.isEmpty() && !(extracted == symbolList.get(ENPASSANTINDEX)) && !(extracted == symbolList.get(DOUBLECHECKINDEX))) {
+		// controllo se la stringa da sottrarre è vuota o se contiene un simbolo da
+		// trattare diversamente*/
+		if (!extracted.isEmpty() && !(extracted == symbolList.get(ENPASSANTINDEX))
+				&& !(extracted == symbolList.get(DOUBLECHECKINDEX))) {
 			String newCommand = "";
 
-			for (int i=0; i<command.length(); i++) {
+			for (int i = 0; i < command.length(); i++) {
 				char commandToken = command.charAt(i);
 
-				for (int j=0; j<extracted.length(); j++) {
+				for (int j = 0; j < extracted.length(); j++) {
 					char extractedToken = extracted.charAt(j);
 
 					if (commandToken != extractedToken) {
@@ -170,17 +174,21 @@ public final class AlgebraicNotation {
 		}
 		return command;
 	}
-	
+
 	/**
-	 * controlla se il comando inserito e' scritto 
-	 * in notazione algebrica abbreviata ed e' sintatticamente corretto
+	 * controlla se il comando inserito e' scritto in notazione algebrica abbreviata
+	 * ed e' sintatticamente corretto
 	 * 
 	 * @return true se comando valido, false altrimenti
 	 */
 	public boolean isValidAlgebraicNotation() {
 		if (this.getPieceLetter() != "") {
 			switch (this.getPieceLetter()) {
-			case "A": case "T": case "C": case "D": case "R":
+			case "A":
+			case "T":
+			case "C":
+			case "D":
+			case "R":
 				break;
 			default:
 				return false;
@@ -202,7 +210,7 @@ public final class AlgebraicNotation {
 					return false;
 				}
 				square = reduceString(square, square.substring(STARTINDEX, PIECELETTERINDEX));
-			} 
+			}
 
 			switch (square) {
 			case "a1": case "a2": case "a3": case "a4": case "a5": case "a6": case "a7": case "a8":
@@ -217,14 +225,14 @@ public final class AlgebraicNotation {
 			default:
 				return false;
 			}
-		} 
+		}
 		if (getSymbol().size() > MAXSYMBOLS) {
 			return false;
-		} 
+		}
 		return true;
 	}
 
-	//Getters & Setters
+	// Getters & Setters
 	public String getPieceLetter() {
 		return pieceLetter;
 	}
