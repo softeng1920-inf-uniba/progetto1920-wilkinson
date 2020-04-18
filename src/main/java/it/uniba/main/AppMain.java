@@ -112,7 +112,7 @@ public final class AppMain {
 						game.showCaptures();
 						break;
 					case "quit":
-						System.out.println("\nSei sicuro di voler chiudere la partita?\n");
+						System.out.println("\nSei sicuro di voler chiudere la partita?");
 						System.out.println("\n COMANDI ");
 						System.out.println(">si        ::   conferma");
 						System.out.println(">no        ::   annulla");
