@@ -1,9 +1,9 @@
 package it.uniba.main;
 
 public abstract class Piece {
-	boolean killed = false;	//true se pezzo catturato, false altrimenti
-	boolean white = false;	//true se pezzo bianco, false altrimenti
-	boolean moved = false;  //true se pezzo mosso, false altrimenti
+	private boolean killed = false;	//true se pezzo catturato, false altrimenti
+	private boolean white = false;	//true se pezzo bianco, false altrimenti
+	private boolean moved = false;  //true se pezzo mosso, false altrimenti
 	
 	/**costruttore della classe Pezzo
 	 * 
@@ -13,7 +13,7 @@ public abstract class Piece {
         this.setWhite(white); 
     } 
   
-	/**ritorna il valore dell'attributo ehite
+	/**restituisce il valore dell'attributo white
 	 * 
 	 * @return white true se il pezzo e' bianco, false se il pezzo e' nero
 	 */
@@ -29,7 +29,7 @@ public abstract class Piece {
         this.white = white; 
     } 
   
-    /**ritorna il valore dell'attributo killed
+    /**restituisce il valore dell'attributo killed
      * 
      * @return killed true se e' stato catturato, false altrimenti
      */
@@ -44,7 +44,7 @@ public abstract class Piece {
         this.killed = true; 
     } 
     
-    /**ritorna il valore dell'attributo moved
+    /**restituisce il valore dell'attributo moved
      * 
      * @return moved true se il pezzo e' stato mosso, false altrimenti
      */
