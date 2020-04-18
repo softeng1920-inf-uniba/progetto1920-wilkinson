@@ -2,7 +2,8 @@ package it.uniba.main;
 
 import java.util.Scanner;
 
-/**
+/** *Il file AppMain.java avvia l'applicazione per giocare a scacchi
+ * non va rinominato in quanto il nome innesca diversi processi automatici.
  * <b>DO NOT RENAME</b>
  */
 public final class AppMain {
@@ -30,7 +31,9 @@ public final class AppMain {
 		Scanner scanner=new Scanner(System.in);
 
 		/* Il ciclo di immissione comandi continua fino a che l'utente non digita il comando >quit 
-		 * che setta il flag da true a false, uscendo dal programma
+		 * che setta il flag da true a false, uscendo dal programma.
+		 * Se il giocatore sceglie il comando "play" dopo aver già avviato una partita,
+		 * il programma fara' partire una nuova partita previa conferma del giocatore.
 		 */
 		while(quitFlag==false) {    
 			System.out.print("Inserire il comando che si intende eseguire => ");
