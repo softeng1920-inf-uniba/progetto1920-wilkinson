@@ -17,7 +17,7 @@ public class Knight extends Piece {
 	}
 
 	@Override
-	boolean canMove(Board board, Spot start, Spot end) {
+	boolean canMove(Board board, Spot start, Spot end, boolean isWhiteTurn) {
 		return false;
 	}
 }
