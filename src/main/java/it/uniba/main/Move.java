@@ -12,6 +12,7 @@ public final class Move {
 	private Spot end; // casa di arrivo
 	private Piece pieceMoved; // pezzo che deve eseguire il movimento
 	private boolean isAmbiguity = false; // caso in cui ci sia ambiguita' di movimento
+	private String ambiguity; // primo carattere di un'ambiguità
 
 	/**
 	 * costruttore dell'oggetto Move
@@ -23,16 +24,40 @@ public final class Move {
 		this.interpreter = new AlgebraicNotation(command); // Istanzio l'oggetto interpreter
 
 		if (this.getInterpreter().isGoodMove()) {
+			// estrae le coordinate di arrivo del pezzo
+			this.end = extractCoordinates(interpreter.getEndSquareId());
 
-			this.end = extractCoordinates(interpreter.getEndSquareId()); // estrae le coordinate di arrivo
+			// individua che tipo di pezzo muovere e cerca lo spot di partenza giusto
+			Piece classPiece = classPieceMoved(interpreter.getPieceLetter());
+			findStartSpot(game.getBoard(), classPiece, game.isWhiteTurn());
 
-			findStartSpotOnBoard(game, this.end, interpreter.getPieceLetter(), /* estrae le coordinate di partenza */
-					interpreter.getEndSquareId());
+			//			System.out.println("Start founded: " + getStart()); ----> stampa lo start trovato
 
+			// se trova uno start
 			if (this.start != null) {
-				this.pieceMoved = start.getPiece(); // prende il pezzo che si muove dallo Spot di partenza
+				// avvalora il pezzo da muovere prendendolo da start
+				this.pieceMoved = start.getPiece();
+				// capisce se è una cattura en passant
+				if (pieceMoved instanceof Pawn && game.getBoard().isFrontDiagonal(start, end) && end.getPiece() == null
+						&& game.getBoard().getSpot(start.getX(), end.getY()).getPiece() instanceof Pawn
+						&& ((Pawn) game.getBoard().getSpot(start.getX(), end.getY()).getPiece())
+						.isPossibleEnPassantCapture()) {
+					((Pawn) start.getPiece()).setCapturingEnPassant(true);
+				}
 			}
 		}
+	}
+
+	/**
+	 * costruttore secondario di un oggetto Move semplice (solo spot di
+	 * partenza/arrivo)
+	 * 
+	 * @param start
+	 * @param end
+	 */
+	public Move(Spot start, Spot end) {
+		this.start = start;
+		this.end = end;
 	}
 
 	static final int EXPECTED_COMMAND_LENGTH = 2;
@@ -53,13 +78,50 @@ public final class Move {
 					convertCoordinate(algebraicFinalSpot.substring(0, 1)), null);
 			return endSpot;
 		} else if (algebraicFinalSpot.length() == EXPECTED_AMBIGUOUS_COMMAND_LENGTH) { // caso in cui la stringa sia
-																						// lunga 3 (ambiguita')
+			// lunga 3 (ambiguita')
 			endSpot = new Spot(convertCoordinate(algebraicFinalSpot.substring(2, 3)),
 					convertCoordinate(algebraicFinalSpot.substring(1, 2)), null);
+			ambiguity = algebraicFinalSpot.substring(0, 1);
+
 			setAmbiguity(true);
 			return endSpot;
 		}
 		return null;
+	}
+
+	/**
+	 * trova lo spot di partenza cercando il pezzo con: 1) casa di arrivo
+	 * corrispodente a quella inserita 2) controlla solo i pezzi della classe
+	 * inserita dall'utente 3) controlla eventuali ambiguità
+	 * 
+	 * @param board
+	 * @param piece
+	 * @return
+	 */
+	boolean findStartSpot(Board board, Piece piece, boolean turn) {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				Spot currentSpot = board.getSpot(i, j);
+				if (currentSpot.getPiece() != null
+						&& currentSpot.getPiece().getClass().getName() == piece.getClass().getName()
+						&& currentSpot.getPiece().isWhite() == turn) {
+					for (Move currentMove : currentSpot.getPiece().getLegalMoves()) {
+						if (isAmbiguity) {
+							if (sameEnd(currentMove) && samePartialStart(currentMove, ambiguity)) {
+								this.setStart(currentMove.getStart());
+								break;
+							}
+						} else {
+							if (sameEnd(currentMove)) {
+								this.setStart(currentMove.getStart());
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -101,25 +163,6 @@ public final class Move {
 	}
 
 	/**
-	 * ricerca lo spot di partenza nella scacchiera a partire da:
-	 * 
-	 * @param game.getBoard() scacchiera
-	 * @param endSpot         punto di arrivo
-	 * @param piece           lettera del pezzo da muovere
-	 * @return spot di partenza
-	 */
-	void findStartSpotOnBoard(final Game game, final Spot endSpot, final String piece,
-			final String algebraicFinalSpot) {
-		Piece currentPiece = classPieceMoved(piece); // tipo di pezzo da muovere (instanziato come elemento della classe
-
-		if (isAmbiguity) {
-			findCandidates(game, currentPiece, endSpot, algebraicFinalSpot);
-		} else {
-			findCandidates(game, currentPiece, endSpot, null); // Spot candidati ad essere spot di partenza
-		}
-	}
-
-	/**
 	 * Intepreta la lettera inserita dall'utente e la converte nel pezzo mosso
 	 * 
 	 * @param algebraicPiece pezzo mosso in notazione algebrica
@@ -151,37 +194,6 @@ public final class Move {
 	}
 
 	/**
-	 * Trova i candidati possibili come punto di partenza di una mossa
-	 * 
-	 * @param game               la partita attuale
-	 * @param piece              il pezzo che deve muoversi
-	 * @param end                il punto d'arrivo
-	 * @param algebraicFinalSpot casella d'arrivo in notazione algebrica
-	 */
-	private void findCandidates(final Game game, final Piece piece, final Spot end, final String algebraicFinalSpot) {
-		if (isAmbiguity) { // se c'e' un'ambiguita' di notazione
-			for (int i = 0; i < BOARD_HEIGHT; i++) {
-				Spot start = game.getBoard().getSpot(i, convertCoordinate(algebraicFinalSpot.substring(0, 1)));
-				Spot end2 = game.getBoard().getSpot(end.getX(), end.getY());
-				if (start.getPiece() != null && start.getPiece().canMove(game.getBoard(), start, end2, game.isWhiteTurn())) {
-					this.start = start;
-				}
-			}
-		} else {
-			for (int i = 0; i < BOARD_HEIGHT; i++) {
-				for (int j = 0; j < BOARD_LENGTH; j++) {
-					Spot start = game.getBoard().getSpot(i, j);
-					Spot end2 = game.getBoard().getSpot(end.getX(), end.getY());
-					if (start.getPiece() != null && start.getPiece().canMove(game.getBoard(), start, end2, game.isWhiteTurn())) {
-						this.start = start;
-					}
-
-				}
-			}
-		}
-	}
-
-	/**
 	 * enumerazione dello stato di gioco (per verificare se la partita � ancora in
 	 * corso)
 	 * 
@@ -190,6 +202,59 @@ public final class Move {
 	 */
 	enum GameStatus {
 		ACTIVE, BLACK_WIN, WHITE_WIN, DRAW, FORCED_END
+	}
+
+	/**
+	 * confronta due oggetti di tipo Move e controlla se hanno le stesse coordinate
+	 * 
+	 * @param move
+	 * @return true se hanno le stesse coordinate, false altrimenti
+	 */
+	public boolean equals(Move move) {
+		if (this.getEnd().getX() == move.getEnd().getX() && this.getEnd().getY() == move.getEnd().getY()
+				&& this.getStart().getX() == move.getStart().getX()
+				&& this.getStart().getY() == move.getStart().getY()) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * controlla se due oggetti di tipo move hanno la stessa casa di arrivo
+	 * 
+	 * @param move
+	 * @return
+	 */
+	public boolean sameEnd(Move move) {
+		if (this.getEnd().getX() == move.getEnd().getX() && this.getEnd().getY() == move.getEnd().getY()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * controlla se la casa di start della mossa corrisponde parzialmente
+	 * all'ambiguità
+	 * 
+	 * @param move
+	 * @param coord
+	 * @return
+	 */
+	public boolean samePartialStart(Move move, String coord) {
+		if (Character.isDigit(coord.charAt(0))) {
+			if (move.getStart().getX() == convertCoordinate(coord)) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			if (move.getStart().getY() == convertCoordinate(coord)) {
+				return true;
+			} else {
+				return false;
+			}
+		}
 	}
 
 	// Getters & Setters
@@ -232,4 +297,10 @@ public final class Move {
 	public void setPieceMoved(final Piece pieceMoved) {
 		this.pieceMoved = pieceMoved;
 	}
+
+	public String toString() {
+		String output = "";
+		return output += "[start: " + start + " end: " + end + "]";
+	}
+
 }
