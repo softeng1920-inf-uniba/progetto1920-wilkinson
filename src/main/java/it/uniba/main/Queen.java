@@ -21,4 +21,10 @@ public class Queen extends Piece {
 		return false;
 	}
 
+	@Override
+	void findLegalMoves(Board board, Spot currentSpot) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
