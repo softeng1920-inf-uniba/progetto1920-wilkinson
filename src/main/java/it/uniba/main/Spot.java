@@ -16,6 +16,38 @@ public class Spot {
 		this.y = y;
 		this.piece = piece;
 	}
+	
+	public Spot(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	/**converte la coordinata Y di uno spot in lettera
+	 * 
+	 * @param coordinate
+	 * @return
+	 */
+	private String convertCoordinate(final int coordinate) {
+		switch (coordinate) {
+		case 0:
+			return "a";
+		case 1:
+			return "b";
+		case 2:
+			return "c";
+		case 3:
+			return "d";
+		case 4:
+			return "e";
+		case 5:
+			return "f";
+		case 6:
+			return "g";
+		case 7:
+			return "h";
+		}
+		return null;
+	}
 
 	//Getters & Setters
 	public Piece getPiece() {
@@ -40,5 +72,10 @@ public class Spot {
 
 	public void setPiece(Piece piece) {
 		this.piece = piece;
+	}
+	
+	public String toString() {
+		String output = "";
+		return output += convertCoordinate(y) + (8-x);
 	}
 }
