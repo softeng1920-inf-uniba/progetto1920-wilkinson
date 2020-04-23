@@ -1,10 +1,17 @@
 package it.uniba.main;
 
+/**
+ * rappresenta una scacchiera (matrice 8x8)
+ * ogni casa è un elemento di classe Spot
+ * 
+ * @author wilkinson
+ *
+ */
 public class Board {
 	private Spot[][] boxes; // matrice scacchiera formata da caselle (elementi di classe Spot)
 	private static final int BOARDDIM = 8; // dimensioni della scacchiera
-	private static final int INITEMPTYRAW = 2;
-	private static final int ENDEMPTYRAW = 6;
+	private static final int INITEMPTYRAW = 2; // indice di riga di partenza scacchiera iniziale vuota
+	private static final int ENDEMPTYRAW = 6;  // indice di riga di fine scacchiera iniziale vuota
 
 	/**
 	 * costruttore di Board, inizializza la scacchiera con la configurazione
@@ -80,11 +87,12 @@ public class Board {
 		}
 	}
 
-	/**stabilisce se i due spot in input sono diagonali rispetto alla direzione del pezzo
-	 * [E][ ][E]...  direzione giusta per i bianchi
-	 * [ ][S][ ]...
-	 * [E][ ][E]...  direzione giusta per i neri
-	 * ............
+	/**
+	 * stabilisce se i due spot in input sono diagonali 
+	 * rispetto alla direzione del pezzo 
+	 * [E][ ][E]... direzione giusta per i bianchi 
+	 * [ ][S][ ]... 
+	 * [E][ ][E]... direzione giusta per i neri 
 	 * 
 	 * @param start
 	 * @param end
@@ -102,6 +110,68 @@ public class Board {
 				}
 			} else {
 				if (diffX == -1 && Math.abs(diffY) == 1) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}
+		return false;
+	}
+
+	/**stabilisce se lo spot di arrivo è una casella avanti allo spot di partenza
+	 * [ ][E][ ]... direzione giusta per i bianchi
+	 * [ ][S][ ]...
+	 * [ ][E][ ]... direzione giusta per i neri
+	 * 
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	boolean isFrontSpot(Spot start, Spot end) {
+		int diffX = (start.getX() - end.getX());
+		int diffY = (start.getX() - end.getX());
+		if (start.getPiece() != null) {
+			if (start.getPiece().isWhite()) {
+				if (diffX == 1 && diffY == 0) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				if (diffX == -1 && diffY == 0) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}
+		return false;
+	}
+	
+	/**stabilisce se lo spot di arrivo è due caselle avanti allo spot di partenza
+	 * [ ][E][ ]... direzione giusta per i bianchi
+	 * [ ][ ][ ]...
+	 * [ ][S][ ]...
+	 * [ ][ ][ ]...
+	 * [ ][E][ ]... direzione giusta per i neri
+	 * 
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	boolean isTwoSpotsAhead(Spot start, Spot end) {
+		int diffX = (start.getX() - end.getX());
+		int diffY = (start.getX() - end.getX());
+		if (start.getPiece() != null) {
+			if (start.getPiece().isWhite()) {
+				if (diffX == 2 && diffY == 0) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				if (diffX == -2 && diffY == 0) {
 					return true;
 				} else {
 					return false;
@@ -174,7 +244,8 @@ public class Board {
 		System.out.print("      a   b   c   d   e   f   g   h\n");
 	}
 
-	/**mostra tutte le possibili mosse di ogni pezzo sulla scacchiera
+	/**
+	 * mostra tutte le possibili mosse di ogni pezzo sulla scacchiera
 	 * 
 	 */
 	public String toString() {
