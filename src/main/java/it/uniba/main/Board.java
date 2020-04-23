@@ -100,7 +100,7 @@ public class Board {
 	 */
 	boolean isFrontDiagonal(Spot start, Spot end) {
 		int diffX = (start.getX() - end.getX());
-		int diffY = (start.getX() - end.getX());
+		int diffY = (start.getY() - end.getY());
 		if (start.getPiece() != null) {
 			if (start.getPiece().isWhite()) {
 				if (diffX == 1 && Math.abs(diffY) == 1) {
@@ -130,7 +130,7 @@ public class Board {
 	 */
 	boolean isFrontSpot(Spot start, Spot end) {
 		int diffX = (start.getX() - end.getX());
-		int diffY = (start.getX() - end.getX());
+		int diffY = (start.getY() - end.getY());
 		if (start.getPiece() != null) {
 			if (start.getPiece().isWhite()) {
 				if (diffX == 1 && diffY == 0) {
@@ -162,7 +162,7 @@ public class Board {
 	 */
 	boolean isTwoSpotsAhead(Spot start, Spot end) {
 		int diffX = (start.getX() - end.getX());
-		int diffY = (start.getX() - end.getX());
+		int diffY = (start.getY() - end.getY());
 		if (start.getPiece() != null) {
 			if (start.getPiece().isWhite()) {
 				if (diffX == 2 && diffY == 0) {
