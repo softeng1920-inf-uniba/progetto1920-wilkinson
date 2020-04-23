@@ -4,6 +4,12 @@ import java.util.ArrayList;
 
 import it.uniba.main.Move.GameStatus;
 
+/**rappresenta una partita di scacchi in corso
+ * ha associato uno stato e una scacchiera
+ * 
+ * @author wilkinson
+ *
+ */
 public class Game {
 	private Board board; // oggetto scacchiera per la partita in corso
 	private boolean whiteTurn; // true se turno del bianco, false se turno del nero
@@ -56,7 +62,22 @@ public class Game {
 	public void currentGame(final String command) {
 		Move move = new Move(command, this);
 		if (move.getStart() != null && makeMove(move)) {
-			getAllMoves().add(move.getPieceMoved().draw() + " " + command);
+			if (move.getPieceMoved() instanceof Pawn 
+					&& ((Pawn)move.getPieceMoved()).isCapturingEnPassant()) {
+				// se en passant riscrivo la mossa e la aggiungo allo storico
+				String enPassantCommand = command.substring(0, 4) + " e.p.";
+				getAllMoves().add(move.getPieceMoved().draw() + " " + enPassantCommand);
+			} else {
+				//aggiunto la mossa all'arraylist dello storico mosse
+				getAllMoves().add(move.getPieceMoved().draw() + " " + command);
+			}
+			
+			// ricalcolo le mosse legali per ogni pezzo
+			recalLegalMoves();
+			// setto false i booleani dei pedoni che regolano l'en passant
+			setAllPawnNotEP(getBoard());
+			
+			
 			whiteTurn = (!whiteTurn);
 		} else {
 			System.out.println("\nCOMANDO O MOSSA NON VALIDA");
@@ -116,11 +137,6 @@ public class Game {
 		// muovo il pezzo e svuoto la casa di partenza
 		end.setPiece(start.getPiece());
 		start.setPiece(null);
-
-		// ricalcolo le mosse legali per ogni pezzo
-		recalLegalMoves();
-		// setto false i booleani dei pedoni che regolano l'en passant
-		setAllPawnNotEP(getBoard());
 
 		// System.out.println(getBoard()); ---> attivare questa linea di codice per
 		// avere
@@ -318,44 +334,26 @@ public class Game {
 		this.isCapture = isCapture;
 	}
 
-	/**
-	 * @return the allMoves
-	 */
 	public ArrayList<String> getAllMoves() {
 		return allMoves;
 	}
 
-	/**
-	 * @param allMoves the allMoves to set
-	 */
 	public void setAllMoves(ArrayList<String> allMoves) {
 		this.allMoves = allMoves;
 	}
 
-	/**
-	 * @return the whiteCaptures
-	 */
 	public ArrayList<Piece> getWhiteCaptures() {
 		return whiteCaptures;
 	}
 
-	/**
-	 * @param whiteCaptures the whiteCaptures to set
-	 */
 	public void setWhiteCaptures(ArrayList<Piece> whiteCaptures) {
 		this.whiteCaptures = whiteCaptures;
 	}
 
-	/**
-	 * @return the blackCaptures
-	 */
 	public ArrayList<Piece> getBlackCaptures() {
 		return blackCaptures;
 	}
 
-	/**
-	 * @param blackCaptures the blackCaptures to set
-	 */
 	public void setBlackCaptures(ArrayList<Piece> blackCaptures) {
 		this.blackCaptures = blackCaptures;
 	}
