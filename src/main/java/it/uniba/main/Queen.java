@@ -1,5 +1,10 @@
 package it.uniba.main;
 
+/**rappresenta una regina sulla scacchiera
+ * 
+ * @author wilkinson
+ *
+ */
 public class Queen extends Piece {
 
 	public Queen(boolean white) {

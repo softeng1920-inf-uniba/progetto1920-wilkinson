@@ -2,6 +2,11 @@ package it.uniba.main;
 
 import java.util.ArrayList;
 
+/**interpreta un comando scritto in notazione algebrica abbreviata
+ * 
+ * @author wilkinson
+ *
+ */
 public final class AlgebraicNotation {
 	private String pieceLetter; // lettera corrispondente al pezzo
 	private ArrayList<String> symbol; // simbolo speciale nel comando

@@ -1,5 +1,10 @@
 package it.uniba.main;
 
+/**rappresenta un re sulla scacchiera
+ * 
+ * @author wilkinson
+ *
+ */
 public class King extends Piece {
 
 	public King(boolean white) {

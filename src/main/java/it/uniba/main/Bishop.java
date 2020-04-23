@@ -1,5 +1,10 @@
 package it.uniba.main;
 
+/**rappresenta un alfiere sulla scacchiera
+ * 
+ * @author wilkinson
+ *
+ */
 public class Bishop extends Piece {
 
 	public Bishop(boolean white) {

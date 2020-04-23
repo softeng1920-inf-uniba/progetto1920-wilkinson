@@ -2,6 +2,12 @@ package it.uniba.main;
 
 import java.util.ArrayList;
 
+/**rappresenta un pezzo degli scacchi generico
+ * implementa un metodo che stabilisce il movimento di ogni pezzo
+ * 
+ * @author wilkinson
+ *
+ */
 public abstract class Piece {
 	boolean killed = false; // true se pezzo catturato, false altrimenti
 	boolean white = false; // true se pezzo bianco, false altrimenti

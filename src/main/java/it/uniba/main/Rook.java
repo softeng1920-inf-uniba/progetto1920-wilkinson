@@ -1,5 +1,10 @@
 package it.uniba.main;
 
+/**rappresenta una torre sulla scacchiera
+ * 
+ * @author wilkinson
+ *
+ */
 public class Rook extends Piece {
 
 	public Rook(boolean white) {

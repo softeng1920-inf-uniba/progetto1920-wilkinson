@@ -1,5 +1,11 @@
 package it.uniba.main;
 
+/**rappresenta una casa della scacchiera
+ * ha una coordinata X e una Y corrispondenti a numeri (da 1 a 8) e lettere (da 'a' ad 'h')
+ * 
+ * @author pierpaolo
+ *
+ */
 public class Spot {
 	Piece piece; // pezzo che la occupa
 	int x; // coordinata riga
