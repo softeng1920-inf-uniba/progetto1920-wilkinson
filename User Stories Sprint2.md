@@ -146,7 +146,7 @@ _______________
  >>>    - [***per il Bianco***] il *Re* da **e1** muove in **g1**, la *Torre* da **h1** muove in **f1**
  >>>    - [***per il Nero***] il *Re* da **e8** muove in **g8**, la *Torre* da **h8** muove in **f8**
 _______________
-### 7) EFFETTUARE UN ARROCCO CLUNGO
+### 7) EFFETTUARE UN ARROCCO LUNGO
   - permettere l'esecuzione di un arrocco lungo
   > #### CRITERI DI ACCETTAZIONE
 >> scrivendo il comando '0-0-0' in notazione algebrica abbreviata degli scacchi
