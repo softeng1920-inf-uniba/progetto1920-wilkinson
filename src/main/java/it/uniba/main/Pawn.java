@@ -1,8 +1,15 @@
 package it.uniba.main;
 
+/**rappresenta un pedone sulla scacchiera
+ * 
+ * @author wilkinson
+ *
+ */
 public class Pawn extends Piece {
 	private boolean possibleEnPassantCapture;
 	private boolean isCapturingEnPassant;
+	private static final int ENPASSANT_WHITE_X = 3;
+	private static final int ENPASSANT_BLACK_X = 4;
 
 	public Pawn(boolean white) {
 		super(white); // chiamo il costruttore della classe astratta Piece
@@ -31,8 +38,6 @@ public class Pawn extends Piece {
 	boolean canMove(Board board, Spot start, Spot end, boolean isWhiteTurn) {
 		Pawn startPiece = (Pawn) start.getPiece();
 		Piece endPiece = end.getPiece();
-		int diffX = start.getX() - end.getX(); // differenza fra le coordinate X dei due spot
-		int diffY = start.getY() - end.getY(); // differenza fra le coordinate Y dei due spot
 
 		// turno del bianco
 		if (isWhiteTurn) {
@@ -41,21 +46,17 @@ public class Pawn extends Piece {
 				// nessun pezzo in end
 				if (endPiece == null) {
 					// movimento in avanti di una casella (standard)
-					if (diffY == 0 && diffX == 1) {
+					if (board.isFrontSpot(start, end)) {
 						return true;
 						// movimento in avanti di due caselle (se prima mossa)
-					} else if (diffY == 0 && diffX == 2 && !startPiece.isMoved()) {
+					} else if (board.isTwoSpotsAhead(start, end) && !startPiece.isMoved()) {
 						return true;
 					}
 					// stabilisce se il movimento è una cattura en passant
-					if (start.getX() == 3) {
-						if (Math.abs(diffY) == 1 && diffX == 1) {
-							if (board.getSpot(start.getX(), end.getY()).getPiece() != null
-									&& board.getSpot(start.getX(), end.getY()).getPiece() instanceof Pawn) {
-								Pawn possibleCapture = (Pawn) board.getSpot(start.getX(), end.getY()).getPiece();
-								if (!possibleCapture.isWhite() && possibleCapture.isPossibleEnPassantCapture()) {
-									return true;
-								}
+					if (start.getX() == ENPASSANT_WHITE_X) {
+						if (board.isFrontDiagonal(start, end)) {
+							if (isCapturingEnPassant(board, start, end)) {
+								return true;
 							}
 						}
 					}
@@ -65,7 +66,7 @@ public class Pawn extends Piece {
 						return false;
 					} else {
 						// cattura del pezzo se in diagonale
-						if (Math.abs(diffY) == 1 && diffX == 1) {
+						if (board.isFrontDiagonal(start, end)) {
 							return true;
 						} else {
 							return false;
@@ -84,21 +85,17 @@ public class Pawn extends Piece {
 				// nessun pezzo in end
 				if (endPiece == null) {
 					// movimento in avanti di una casella (standard)
-					if (diffY == 0 && diffX == -1) {
+					if (board.isFrontSpot(start, end)) {
 						return true;
 						// movimento in avanti di due caselle (se prima mossa)
-					} else if (diffY == 0 && diffX == -2 && !startPiece.isMoved()) {
+					} else if (board.isTwoSpotsAhead(start, end) && !startPiece.isMoved()) {
 						return true;
 					}
 					// stabilisce se il movimento è una cattura en passant
-					if (start.getX() == 4) {
-						if (Math.abs(diffY) == 1 && diffX == -1) {
-							if (board.getSpot(start.getX(), end.getY()).getPiece() != null
-									&& board.getSpot(start.getX(), end.getY()).getPiece() instanceof Pawn) {
-								Pawn possibleCapture = (Pawn) board.getSpot(start.getX(), end.getY()).getPiece();
-								if (possibleCapture.isWhite() && possibleCapture.isPossibleEnPassantCapture()) {
-									return true;
-								}
+					if (start.getX() == ENPASSANT_BLACK_X) {
+						if (board.isFrontDiagonal(start, end)) {
+							if (isCapturingEnPassant(board, start, end)) {
+								return true;
 							}
 						}
 					}
@@ -108,7 +105,7 @@ public class Pawn extends Piece {
 						return false;
 					} else {
 						// cattura del pezzo se in diagonale
-						if (Math.abs(diffY) == 1 && diffX == -1) {
+						if (board.isFrontDiagonal(start, end)) {
 							return true;
 						} else {
 							return false;
@@ -118,6 +115,24 @@ public class Pawn extends Piece {
 				// turno del nero ma pezzo bianco da muovere
 			} else {
 				return false;
+			}
+		}
+		return false;
+	}
+	
+	/**stabilisce se il pedone in start può catturare en passant finendo in end
+	 * 
+	 * @param board
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	boolean isCapturingEnPassant(Board board, Spot start, Spot end) {
+		if (board.getSpot(start.getX(), end.getY()).getPiece() != null
+				&& board.getSpot(start.getX(), end.getY()).getPiece() instanceof Pawn) {
+			Pawn possibleCapture = (Pawn) board.getSpot(start.getX(), end.getY()).getPiece();
+			if (possibleCapture.isWhite() && possibleCapture.isPossibleEnPassantCapture()) {
+				return true;
 			}
 		}
 		return false;
