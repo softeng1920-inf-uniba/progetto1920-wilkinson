@@ -25,58 +25,6 @@ public abstract class Piece {
 	}
 
 	/**
-	 * ritorna il valore dell'attributo ehite
-	 * 
-	 * @return white true se il pezzo e' bianco, false se il pezzo e' nero
-	 */
-	public boolean isWhite() {
-		return this.white;
-	}
-
-	/**
-	 * setta il colore del pezzo
-	 * 
-	 * @param white true se pezzo bianco, false se pezzo nero
-	 */
-	public void setWhite(boolean white) {
-		this.white = white;
-	}
-
-	/**
-	 * ritorna il valore dell'attributo killed
-	 * 
-	 * @return killed true se e' stato catturato, false altrimenti
-	 */
-	public boolean isKilled() {
-		return this.killed;
-	}
-
-	/**
-	 * setta il pezzo come catturato
-	 * 
-	 */
-	public void setAsKilled() {
-		this.killed = true;
-	}
-
-	/**
-	 * ritorna il valore dell'attributo moved
-	 * 
-	 * @return moved true se il pezzo e' stato mosso, false altrimenti
-	 */
-	public boolean isMoved() {
-		return this.moved;
-	}
-
-	/**
-	 * setta il pezzo come mosso
-	 * 
-	 */
-	public void setAsMoved() {
-		this.moved = true;
-	}
-
-	/**
 	 * metodo che stampa a console il corrispondente carattere Unicode del pezzo
 	 * stabilendo se e' nero o bianco
 	 */
@@ -131,6 +79,59 @@ public abstract class Piece {
 		return output;
 	}
 
+	//Getters & Setters
+	/**
+	 * ritorna il valore dell'attributo ehite
+	 * 
+	 * @return white true se il pezzo e' bianco, false se il pezzo e' nero
+	 */
+	public boolean isWhite() {
+		return this.white;
+	}
+
+	/**
+	 * setta il colore del pezzo
+	 * 
+	 * @param white true se pezzo bianco, false se pezzo nero
+	 */
+	public void setWhite(boolean white) {
+		this.white = white;
+	}
+
+	/**
+	 * ritorna il valore dell'attributo killed
+	 * 
+	 * @return killed true se e' stato catturato, false altrimenti
+	 */
+	public boolean isKilled() {
+		return this.killed;
+	}
+
+	/**
+	 * setta il pezzo come catturato
+	 * 
+	 */
+	public void setAsKilled() {
+		this.killed = true;
+	}
+
+	/**
+	 * ritorna il valore dell'attributo moved
+	 * 
+	 * @return moved true se il pezzo e' stato mosso, false altrimenti
+	 */
+	public boolean isMoved() {
+		return this.moved;
+	}
+
+	/**
+	 * setta il pezzo come mosso
+	 * 
+	 */
+	public void setAsMoved() {
+		this.moved = true;
+	}
+	
 	public ArrayList<Move> getLegalMoves() {
 		return legalMoves;
 	}
