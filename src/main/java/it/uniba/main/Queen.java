@@ -25,11 +25,4 @@ public class Queen extends Piece {
 	boolean canMove(Board board, Spot start, Spot end, boolean isWhiteTurn) {
 		return false;
 	}
-
-	@Override
-	void findLegalMoves(Board board, Spot currentSpot) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
