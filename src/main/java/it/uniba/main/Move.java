@@ -38,10 +38,7 @@ public final class Move {
 				// avvalora il pezzo da muovere prendendolo da start
 				this.pieceMoved = start.getPiece();
 				// capisce se è una cattura en passant
-				if (pieceMoved instanceof Pawn && game.getBoard().isFrontDiagonal(start, end) && end.getPiece() == null
-						&& game.getBoard().getSpot(start.getX(), end.getY()).getPiece() instanceof Pawn
-						&& ((Pawn) game.getBoard().getSpot(start.getX(), end.getY()).getPiece())
-						.isPossibleEnPassantCapture()) {
+				if (isEnPassantMove(pieceMoved, start, end, game.getBoard())) {
 					((Pawn) start.getPiece()).setCapturingEnPassant(true);
 				}
 			}
@@ -202,6 +199,25 @@ public final class Move {
 	 */
 	enum GameStatus {
 		ACTIVE, BLACK_WIN, WHITE_WIN, DRAW, FORCED_END
+	}
+	
+	/**capisce se il pezzo che sta muovendo sta catturando en passant
+	 * 
+	 * @param piece pezzo mosso
+	 * @param start casa di partenza
+	 * @param end casa di arrivo
+	 * @param board scacchiera
+	 * @return true se cattura en passant, false altrimenti
+	 */
+	boolean isEnPassantMove(Piece piece, Spot start, Spot end, Board board) {
+		if (piece instanceof Pawn 
+				&& board.isFrontDiagonal(start, end) 
+				&& end.getPiece() == null
+				&& board.getSpot(start.getX(), end.getY()).getPiece() instanceof Pawn
+				&& ((Pawn) board.getSpot(start.getX(), end.getY()).getPiece()).isPossibleEnPassantCapture()) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
