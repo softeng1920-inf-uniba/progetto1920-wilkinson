@@ -42,13 +42,10 @@ public class Queen extends Piece {
 						return true;
 					}*/
 					
-					if(board.isColumn(start, end)) {
+					if(board.isColumn(start, end) || board.isRow(start, end) ) {
 						return true;
 					}
-					if(board.isRow(start, end)) {
-						return true;
-					}
-
+				
 					// turno del bianco ma pezzo nero da muovere
 				} else {
 					return false;
@@ -61,10 +58,7 @@ public class Queen extends Piece {
 					// nessun pezzo in end
 					if (endPiece == null) {
 					//TODO speculare a cio' che implementero' nel ramo del bianco
-						if(board.isColumn(start, end)) {
-							return true;
-						}
-						if(board.isRow(start, end)) {
+						if(board.isColumn(start, end) || board.isRow(start, end) ) {
 							return true;
 						}
 

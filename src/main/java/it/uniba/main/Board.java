@@ -191,7 +191,6 @@ public class Board {
 		 */
 		boolean isColumn(Spot start, Spot end) {
 			int diffX = (start.getX() - end.getX());
-			//int diffY = (start.getY() - end.getY());
 			if (start.getPiece() != null) {
 				if (start.getPiece().isWhite()) {
 					if (diffX == 0) {
