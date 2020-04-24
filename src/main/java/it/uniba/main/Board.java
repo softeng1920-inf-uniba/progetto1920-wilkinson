@@ -154,6 +154,56 @@ public class Board {
 		return false;
 	}
 
+	
+	//TODO
+	/**stabilisce se lo spot di arrivo e' sulla stessa riga 
+	 * dello spot di partenza
+	
+	 * 
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	boolean isRow(Spot start, Spot end) {
+		//int diffX = (start.getX() - end.getX());
+		int diffY = (start.getY() - end.getY());
+		if (start.getPiece() != null) {
+			if (start.getPiece().isWhite()) {
+				if (diffY == 0) {
+					return true;
+				} else {
+					return false;
+				}
+			} 
+		}
+		return false;
+	}
+
+	
+	//TODO
+		/**stabilisce se lo spot di arrivo e' sulla stessa colonna 
+		 * dello spot di partenza
+		
+		 * 
+		 * @param start
+		 * @param end
+		 * @return
+		 */
+		boolean isColumn(Spot start, Spot end) {
+			int diffX = (start.getX() - end.getX());
+			//int diffY = (start.getY() - end.getY());
+			if (start.getPiece() != null) {
+				if (start.getPiece().isWhite()) {
+					if (diffX == 0) {
+						return true;
+					} else {
+						return false;
+					}
+				} 
+			}
+			return false;
+		}
+
 	/**stabilisce se lo spot di arrivo è due caselle avanti allo spot di partenza
 	 * [ ][E][ ]... direzione giusta per i bianchi
 	 * [ ][ ][ ]...
