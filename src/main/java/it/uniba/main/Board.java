@@ -203,6 +203,30 @@ public class Board {
 			return false;
 		}
 
+		
+		//TODO
+		/**stabilisce se lo spot di arrivo e' in diagonale rispetto allo 
+		 *  spot di partenza
+		
+		 * 
+		 * @param start
+		 * @param end
+		 * @return
+		 */
+		boolean isDiagonal(Spot start, Spot end) {
+			int diffX = (start.getX() - end.getX());
+			int diffY = (start.getY() - end.getY());
+			if (start.getPiece() != null) {
+				if (start.getPiece().isWhite()) {
+					if (Math.abs(diffX) == Math.abs(diffY)) {
+						return true;
+					} else {
+						return false;
+					}
+				} 
+			}
+			return false;
+		}
 	/**stabilisce se lo spot di arrivo è due caselle avanti allo spot di partenza
 	 * [ ][E][ ]... direzione giusta per i bianchi
 	 * [ ][ ][ ]...
