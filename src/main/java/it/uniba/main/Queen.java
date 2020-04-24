@@ -23,6 +23,9 @@ public class Queen extends Piece {
 
 	@Override
 	boolean canMove(Board board, Spot start, Spot end, boolean isWhiteTurn) {
+		Queen startPiece = (Queen) start.getPiece();
+		Piece endPiece = end.getPiece();
+		//TODO
 		return false;
 	}
 }
