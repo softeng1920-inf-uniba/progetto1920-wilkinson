@@ -219,24 +219,17 @@ public class Board {
 
 				if((i+j) %2 != 0) {
 					if (piece != null) {
-						if (piece.isWhite()) {
-							// stampa del pezzo nello spot corrente in carattere unicode sulla scacchiera
-							System.out.print(ANSI_BACKGROUND+ANSI_WHITE+" "+ piece.draw() +" "+ANSI_RESET);
-						} else {
-							System.out.print(ANSI_BACKGROUND+ANSI_BLACK+" "+ piece.draw() +" "+ANSI_RESET);
-						}
-						
+						System.out.print(ANSI_BACKGROUND + ANSI_BLACK + " " + piece.draw() + " " +ANSI_RESET);						
 					} else {
-						System.out.print(ANSI_BACKGROUND+"   "+ANSI_RESET);
+						System.out.print(ANSI_BACKGROUND + "   " + ANSI_RESET);
 					}
 				} else {
 					if (piece != null) {
-						System.out.print(ANSI_WHITE_BACKGROUND+" "+ piece.draw() +" "+ANSI_RESET);
+						System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + " " + piece.draw() + " " + ANSI_RESET);
 					} else {
-						System.out.print(ANSI_WHITE_BACKGROUND+"   "+ANSI_RESET);
+						System.out.print(ANSI_WHITE_BACKGROUND + "   " + ANSI_RESET);
 					}
 				}
-
 				System.out.print(vertline);
 			}
 			System.out.print(" " + (BOARDDIM - i));
