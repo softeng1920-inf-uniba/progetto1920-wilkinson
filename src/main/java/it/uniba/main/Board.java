@@ -12,6 +12,9 @@ public class Board {
 	private static final int BOARDDIM = 8; // dimensioni della scacchiera
 	private static final int INITEMPTYRAW = 2; // indice di riga di partenza scacchiera iniziale vuota
 	private static final int ENDEMPTYRAW = 6;  // indice di riga di fine scacchiera iniziale vuota
+	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_BACKGROUND = "\u001B[46m";
+	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
 	/**
 	 * costruttore di Board, inizializza la scacchiera con la configurazione
@@ -148,7 +151,7 @@ public class Board {
 		}
 		return false;
 	}
-	
+
 	/**stabilisce se lo spot di arrivo è due caselle avanti allo spot di partenza
 	 * [ ][E][ ]... direzione giusta per i bianchi
 	 * [ ][ ][ ]...
@@ -211,21 +214,23 @@ public class Board {
 			System.out.print(vertline);
 			for (int j = 0; j < BOARDDIM; j++) {
 				Piece piece = this.getSpot(i, j).getPiece();
-				if (piece != null) {
-					// stampa del pezzo nello spot corrente in carattere unicode sulla scacchiera
-					System.out.print(" " + piece.draw() + " ");
-					System.out.print(vertline);
-					isBlack = !isBlack;
-				} else {
-					if (isBlack) {
-						System.out.print(" \u25A1 ");
-						isBlack = !isBlack;
+
+				if((i+j) %2 != 0) {
+					if (piece != null) {
+						// stampa del pezzo nello spot corrente in carattere unicode sulla scacchiera
+						System.out.print(ANSI_BACKGROUND+" "+ piece.draw() +" "+ANSI_RESET);
 					} else {
-						System.out.print(" \u25A0 ");
-						isBlack = !isBlack;
+						System.out.print(ANSI_BACKGROUND+"   "+ANSI_RESET);
 					}
-					System.out.print(vertline);
+				} else {
+					if (piece != null) {
+						System.out.print(ANSI_WHITE_BACKGROUND+" "+ piece.draw() +" "+ANSI_RESET);
+					} else {
+						System.out.print(ANSI_WHITE_BACKGROUND+"   "+ANSI_RESET);
+					}
 				}
+
+				System.out.print(vertline);
 			}
 			System.out.print(" " + (BOARDDIM - i));
 
