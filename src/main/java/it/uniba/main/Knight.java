@@ -1,5 +1,10 @@
 package it.uniba.main;
 
+/**rappresenta un cavallo sulla scacchiera
+ * 
+ * @author wilkinson
+ *
+ */
 public class Knight extends Piece {
 
 	public Knight(boolean white) {

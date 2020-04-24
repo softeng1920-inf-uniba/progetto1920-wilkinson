@@ -1,5 +1,11 @@
 package it.uniba.main;
 
+/**rappresenta una casa della scacchiera
+ * ha una coordinata X e una Y corrispondenti a numeri (da 1 a 8) e lettere (da 'a' ad 'h')
+ * 
+ * @author pierpaolo
+ *
+ */
 public class Spot {
 	Piece piece; // pezzo che la occupa
 	int x; // coordinata riga
@@ -15,6 +21,38 @@ public class Spot {
 		this.x = x;
 		this.y = y;
 		this.piece = piece;
+	}
+	
+	public Spot(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	/**converte la coordinata Y di uno spot in lettera
+	 * 
+	 * @param coordinate
+	 * @return
+	 */
+	private String convertCoordinate(final int coordinate) {
+		switch (coordinate) {
+		case 0:
+			return "a";
+		case 1:
+			return "b";
+		case 2:
+			return "c";
+		case 3:
+			return "d";
+		case 4:
+			return "e";
+		case 5:
+			return "f";
+		case 6:
+			return "g";
+		case 7:
+			return "h";
+		}
+		return null;
 	}
 
 	//Getters & Setters
@@ -40,5 +78,10 @@ public class Spot {
 
 	public void setPiece(Piece piece) {
 		this.piece = piece;
+	}
+	
+	public String toString() {
+		String output = "";
+		return output += convertCoordinate(y) + (8-x);
 	}
 }
