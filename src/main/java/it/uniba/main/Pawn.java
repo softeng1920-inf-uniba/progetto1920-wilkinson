@@ -131,7 +131,8 @@ public class Pawn extends Piece {
 		if (board.getSpot(start.getX(), end.getY()).getPiece() != null
 				&& board.getSpot(start.getX(), end.getY()).getPiece() instanceof Pawn) {
 			Pawn possibleCapture = (Pawn) board.getSpot(start.getX(), end.getY()).getPiece();
-			if (possibleCapture.isWhite() && possibleCapture.isPossibleEnPassantCapture()) {
+			if (possibleCapture.isWhite() != board.getSpot(start.getX(), start.getY()).getPiece().isWhite() 
+					&& possibleCapture.isPossibleEnPassantCapture()) {
 				return true;
 			}
 		}
