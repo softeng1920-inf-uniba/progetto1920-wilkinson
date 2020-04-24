@@ -13,6 +13,8 @@ public class Board {
 	private static final int INITEMPTYRAW = 2; // indice di riga di partenza scacchiera iniziale vuota
 	private static final int ENDEMPTYRAW = 6;  // indice di riga di fine scacchiera iniziale vuota
 	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_BLACK = "\u001B[30m";
+	public static final String ANSI_WHITE = "\u001B[37m";
 	public static final String ANSI_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
@@ -217,8 +219,13 @@ public class Board {
 
 				if((i+j) %2 != 0) {
 					if (piece != null) {
-						// stampa del pezzo nello spot corrente in carattere unicode sulla scacchiera
-						System.out.print(ANSI_BACKGROUND+" "+ piece.draw() +" "+ANSI_RESET);
+						if (piece.isWhite()) {
+							// stampa del pezzo nello spot corrente in carattere unicode sulla scacchiera
+							System.out.print(ANSI_BACKGROUND+ANSI_WHITE+" "+ piece.draw() +" "+ANSI_RESET);
+						} else {
+							System.out.print(ANSI_BACKGROUND+ANSI_BLACK+" "+ piece.draw() +" "+ANSI_RESET);
+						}
+						
 					} else {
 						System.out.print(ANSI_BACKGROUND+"   "+ANSI_RESET);
 					}
