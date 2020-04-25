@@ -10,7 +10,6 @@ public class Queen extends Piece {
 
 	public Queen(boolean white) {
 		super(white);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -26,51 +25,19 @@ public class Queen extends Piece {
 	boolean canMove(Board board, Spot start, Spot end, boolean isWhiteTurn) {
 		Queen startPiece = (Queen) start.getPiece();
 		Piece endPiece = end.getPiece();
-
-		// turno del bianco
-		if (isWhiteTurn) {
-			// pezzo in start bianco
-			if (startPiece.isWhite()) {
-				// nessun pezzo in end
-				if (endPiece == null) { //TODO implementare i diversi movimenti in questo if
-					
-					/*ESEMPIO DEI DUE MOVIMENTI STANDARD DEL PEDONE
-					 * if (board.isFrontSpot(start, end)) {
-						return true;
-						// movimento in avanti di due caselle (se prima mossa)
-					} else if (board.isTwoSpotsAhead(start, end) && !startPiece.isMoved()) {
-						return true;
-					}*/
-					
-					if(board.isColumn(start, end) || board.isRow(start, end) || board.isDiagonal(start, end)) {
-						return true;
-					}
-				
-					// turno del bianco ma pezzo nero da muovere
-				} else {
-					return false;
-				}
-
-				// turno del nero
-			} else {
-				// pezzo in start nero
-				if (!startPiece.isWhite()) {
-					// nessun pezzo in end
-					if (endPiece == null) {
-					//TODO speculare a cio' che implementero' nel ramo del bianco
-						if(board.isColumn(start, end) || board.isRow(start, end) || board.isDiagonal(start, end)) {
-							return true;
-						}
-
-						// turno del nero ma pezzo bianco da muovere
-					} else {
-						return false;
-					}
-				}
-				return false;
+		
+		if (endPiece == null) {
+			if (board.isColumn(start, end) || board.isRow(start, end) || board.isDiagonal(start, end)) {
+				return true;
 			}
+		} else if (startPiece.isWhite() != endPiece.isWhite()) {
+			if (board.isColumn(start, end) || board.isRow(start, end) || board.isDiagonal(start, end)) {
+				return true;
+			}
+			
 		}
 		return false;
 	}
-
+	
+	
 }
