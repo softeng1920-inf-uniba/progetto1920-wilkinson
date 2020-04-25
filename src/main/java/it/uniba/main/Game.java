@@ -111,7 +111,8 @@ public class Game {
 			if (checkIfIsCapture(move.getInterpreter())) {
 				addCapture(); // aggiunge la cattura all'array corrispondente
 				// controllo se c'è una cattura en passant
-				if (((Pawn) start.getPiece()).isCapturingEnPassant()) {
+				if (start.getPiece() instanceof Pawn && 
+						((Pawn) start.getPiece()).isCapturingEnPassant()) {
 					// svuoto la casa dell'en passant
 					getBoard().getSpot(start.getX(), end.getY()).setPiece(null);
 				} else if (checkIfEnPassant(move.getInterpreter())) {
