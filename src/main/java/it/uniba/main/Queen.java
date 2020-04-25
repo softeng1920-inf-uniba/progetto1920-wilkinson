@@ -27,17 +27,19 @@ public class Queen extends Piece {
 		Piece endPiece = end.getPiece();
 		
 		if (endPiece == null) {
-			if (board.isColumn(start, end) || board.isRow(start, end) || board.isDiagonal(start, end)) {
+			if (board.isFreeColumn(start, end) || board.isFreeRow(start, end) || board.isFreeDiagonal(start, end)) {
 				return true;
 			}
 		} else if (startPiece.isWhite() != endPiece.isWhite()) {
-			if (board.isColumn(start, end) || board.isRow(start, end) || board.isDiagonal(start, end)) {
+			if (board.isFreeColumn(start, end) || board.isFreeRow(start, end) || board.isFreeDiagonal(start, end)) {
 				return true;
 			}
 			
 		}
 		return false;
 	}
+
 	
 	
+
 }

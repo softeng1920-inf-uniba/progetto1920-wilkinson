@@ -155,7 +155,6 @@ public class Board {
 	}
 
 	
-	//TODO
 	/**stabilisce se lo spot di arrivo e' sulla stessa riga 
 	 * dello spot di partenza
 	
@@ -164,17 +163,19 @@ public class Board {
 	 * @param end
 	 * @return
 	 */
-	boolean isRow(Spot start, Spot end) {
-		//int diffX = (start.getX() - end.getX());
-		int diffY = (start.getY() - end.getY());
+	
+	//TODO
+	boolean isFreeRow(Spot start, Spot end) {
+		int diffX = (start.getX() - end.getX());
 		if (start.getPiece() != null) {
-			if (start.getPiece().isWhite()) {
-				if (diffY == 0) {
+				if (diffX == 0) {
 					return true;
 				} else {
 					return false;
 				}
-			} 
+			
+		} else {//caso nero
+			
 		}
 		return false;
 	}
@@ -189,18 +190,25 @@ public class Board {
 		 * @param end
 		 * @return
 		 */
-		boolean isColumn(Spot start, Spot end) {
-			int diffX = (start.getX() - end.getX());
+		boolean isFreeColumn(Spot start, Spot end) {
+			int diffY = (start.getY() - end.getY());
+		//	int diffX = (start.getX() - end.getX());
+			
 			if (start.getPiece() != null) {
-				if (start.getPiece().isWhite()) {
-					if (diffX == 0) {
-						return true;
+					if (diffY == 0) {
+					
+							Spot next = new Spot(start.getX() - 1, start.getY());
+							if(next.getPiece() == null) {
+								return true;	
+								}
+						
+					}
+						
 					} else {
 						return false;
 					}
-				} 
-			}
 			return false;
+			
 		}
 
 		
@@ -213,20 +221,21 @@ public class Board {
 		 * @param end
 		 * @return
 		 */
-		boolean isDiagonal(Spot start, Spot end) {
+		boolean isFreeDiagonal(Spot start, Spot end) {
 			int diffX = (start.getX() - end.getX());
 			int diffY = (start.getY() - end.getY());
 			if (start.getPiece() != null) {
-				if (start.getPiece().isWhite()) {
+				
 					if (Math.abs(diffX) == Math.abs(diffY)) {
 						return true;
 					} else {
 						return false;
 					}
-				} 
+				 
 			}
 			return false;
 		}
+		
 	/**stabilisce se lo spot di arrivo è due caselle avanti allo spot di partenza
 	 * [ ][E][ ]... direzione giusta per i bianchi
 	 * [ ][ ][ ]...
@@ -338,4 +347,81 @@ public class Board {
 		}
 		return output;
 	}
+	
+	 
+	//TODO
+	/**stabilisce se lo spot di arrivo e' sulla stessa riga 
+	 * dello spot di partenza
+	
+	 * 
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	/*
+	boolean isRow(Spot start, Spot end) {
+		//int diffX = (start.getX() - end.getX());
+		int diffY = (start.getY() - end.getY());
+		if (start.getPiece() != null) {
+			if (start.getPiece().isWhite()) {
+				if (diffY == 0) {
+					return true;
+				} else {
+					return false;
+				}
+			} 
+		}
+		return false;
+	}*/
+
+	
+	//TODO
+		/**stabilisce se lo spot di arrivo e' sulla stessa colonna 
+		 * dello spot di partenza
+		
+		 * 
+		 * @param start
+		 * @param end
+		 * @return
+		 */
+		boolean isColumn(Spot start, Spot end) {
+			int diffY = (start.getY() - end.getY());
+			if (start.getPiece() != null) {
+				//if (start.getPiece().isWhite()) {
+					if (diffY == 0) {
+						return true;
+					} else {
+						return false;
+					}
+				//} 
+			}
+			return false;
+		}
+
+		
+		//TODO
+		/**stabilisce se lo spot di arrivo e' in diagonale rispetto allo 
+		 *  spot di partenza
+		
+		 * 
+		 * @param start
+		 * @param end
+		 * @return
+		 */
+	/*
+		boolean isDiagonal(Spot start, Spot end) {
+			int diffX = (start.getX() - end.getX());
+			int diffY = (start.getY() - end.getY());
+			if (start.getPiece() != null) {
+				if (start.getPiece().isWhite()) {
+					if (Math.abs(diffX) == Math.abs(diffY)) {
+						return true;
+					} else {
+						return false;
+					}
+				} 
+			}
+			return false;
+		}*/
+	
 }
