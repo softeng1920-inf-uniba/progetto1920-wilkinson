@@ -185,6 +185,34 @@ public class Board {
 		}
 		return false;
 	}
+	
+	/**
+	 * metodo che stabilisce se lo spot di arrivo e' sulla stessa RIGA dello spot di partenza
+	 */
+	boolean isCurrentRow(Spot start, Spot end) {
+		int startX = start.getX();
+		int endX = end.getX();
+		if (start.getPiece() != null) {
+				if (startX == endX)
+					return true;
+			     } else {
+				    return false;
+			     }
+	}
+	
+	/**
+	 * metodo che stabilisce se lo spot di arrivo e' sulla stessa COLONNA dello spot di partenza
+	 */
+	boolean isCurrentColumn(Spot start, Spot end) {
+		int startY = start.getY();
+		int endY = end.getY();
+		if (start.getPiece() != null) {
+				if (startY == endY)
+					return true;
+			     } else {
+				    return false;
+			     }
+	}
 
 	/**
 	 * metodo che permette la stampa a video della scacchiera nella configurazione
