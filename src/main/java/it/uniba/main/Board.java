@@ -196,11 +196,10 @@ public class Board {
 			
 			if (start.getPiece() != null) {
 					if (diffY == 0) {
-					
-							Spot next = new Spot(start.getX() - 1, start.getY());
-							if(next.getPiece() == null) {
+						//	Spot next = new Spot(start.getX() - 1, start.getY());
+						//	if(next.getPiece() == null) {
 								return true;	
-								}
+							//	}
 						
 					}
 						

@@ -26,7 +26,69 @@ public class Queen extends Piece {
 		Queen startPiece = (Queen) start.getPiece();
 		Piece endPiece = end.getPiece();
 		
-		if (endPiece == null) {
+		
+		// turno del bianco
+				if (isWhiteTurn) {
+					// pezzo in start bianco
+					if (startPiece.isWhite()) {
+						// nessun pezzo in end
+						if (endPiece == null) {
+							// movimento in colonna
+							if (board.isFreeColumn(start, end)) {
+								return true;
+								// movimento in riga
+								} 
+							if (board.isFreeRow(start, end)) {
+								return true;
+							}
+							
+							if(board.isFreeDiagonal(start, end)) {
+								return true;
+							}
+					
+						} else {
+							// pezzo in end bianco (stesso colore)
+							if (endPiece.isWhite()) {
+								return false;
+							} 
+						}
+						// turno del bianco ma pezzo nero da muovere
+					} else {
+						return false;
+					}
+
+					// turno del nero
+				} else {
+					// pezzo in start nero
+					if (!startPiece.isWhite()) {
+						// nessun pezzo in end
+						if (endPiece == null) {
+							// movimento in colonna
+							if (board.isFreeColumn(start, end)) {
+								return true;
+								// movimento in riga
+								} 
+							if (board.isFreeRow(start, end)) {
+								return true;
+							}
+							
+							if(board.isFreeDiagonal(start, end)) {
+								return true;
+							}
+					
+						} else {
+							// pezzo in end bianco (stesso colore)
+							if (endPiece.isWhite()) {
+								return false;
+							} 
+						}
+					} else {
+						return false;
+					}
+				}
+				return false;
+		
+		/*if (endPiece == null) {
 			if (board.isFreeColumn(start, end) || board.isFreeRow(start, end) || board.isFreeDiagonal(start, end)) {
 				return true;
 			}
@@ -36,7 +98,7 @@ public class Queen extends Piece {
 			}
 			
 		}
-		return false;
+		return false;*/
 	}
 
 	
