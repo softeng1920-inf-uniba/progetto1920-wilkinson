@@ -22,7 +22,18 @@ public class King extends Piece {
 	}
 
 	@Override
-	boolean canMove(Board board, Spot start, Spot end, boolean isWhiteTurn) {
+	public boolean canMove(Board board, Spot start, Spot end, boolean isWhiteTurn) {
+		King startPiece = (King) start.getPiece();
+		Piece endPiece = end.getPiece();
+		if(endPiece==null) {
+			if (board.isFrontSpot(start, end) || board.isFrontDiagonal(start,  end)) {
+				return true;
+			}
+		} else if(startPiece.isWhite() != endPiece.isWhite()) {
+			if (board.isFrontSpot(start, end) || board.isFrontDiagonal(start,  end)) {
+				return true;
+			}
+		}
 		return false;
 	}
 }
