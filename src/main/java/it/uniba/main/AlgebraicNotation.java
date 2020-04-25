@@ -12,7 +12,8 @@ public final class AlgebraicNotation {
 	private ArrayList<String> symbol; // simbolo speciale nel comando
 	private String endSquareId; // casa di arrivo del pezzo
 	private static ArrayList<String> symbolList; // simboli possibili
-	private boolean isCastle = false;
+	private boolean isCastleShort = false;
+	private boolean isCastleLong = false;
 	private boolean isEnPassant = false;
 	private boolean isDoubleCheck = false;
 	private boolean isCapture = false;
@@ -33,6 +34,8 @@ public final class AlgebraicNotation {
 	private static final int DOUBLECHECKINDEX = 3;
 	private static final int ENPASSANTINDEX = 4;
 	private static final int STARTINDEXCASTLING = 5;
+	private static final int CASTLELONGINDEX = 5;
+	private static final int CASTLESHORTINDEX = 6;
 
 	/**
 	 * costruttore, inizializza i membri, l'arraylist dei simboli, interpreta la
@@ -88,7 +91,7 @@ public final class AlgebraicNotation {
 		if (isEnPassant) { // caso en passant
 			setEndSquareId(commandInterpreted.substring(STARTINDEX, ENPASSANTLENGTH)); // elimino la dicitura e.p.
 			setEndSquareId(reduceString(getEndSquareId(), " "));
-		} else if (isCastle) { // caso arrocco
+		} else if (isCastleLong || isCastleShort) { // caso arrocco
 			setEndSquareId("");
 		} else {
 			setEndSquareId(commandInterpreted); // il resto della stringa è la casella di partenza/arrivo
@@ -120,8 +123,16 @@ public final class AlgebraicNotation {
 		for (String currentSymbol : symbolList) {
 			if (command.contains(currentSymbol)) {
 
+				getSymbol().add(currentSymbol);
+				
 				if (pos >= STARTINDEXCASTLING) { // check di simboli che innescano eventi
-					this.isCastle = true;
+					if (pos == CASTLELONGINDEX) {
+						this.isCastleLong = true;
+						break;
+					} else if (pos == CASTLESHORTINDEX) {
+						this.isCastleShort = true;
+						break;
+					}
 				} else if (pos == ENPASSANTINDEX) {
 					this.isEnPassant = true;
 				} else if (pos == DOUBLECHECKINDEX) {
@@ -136,12 +147,6 @@ public final class AlgebraicNotation {
 				if (command.contains("e.p.") || command.contains("e.p")) {
 					this.isEnPassant = true;
 					getSymbol().add("ep");
-				}
-
-				getSymbol().add(currentSymbol);
-
-				if (isCastle) { // interrompo se arrocco
-					break;
 				}
 			}
 			pos++;
@@ -237,6 +242,13 @@ public final class AlgebraicNotation {
 		return true;
 	}
 
+	public String toString() {
+		String output = "";
+		return output += "Pezzo mosso: " + this.getPieceLetter() +
+					"\nCasa d'arrivo: " + this.getEndSquareId() +
+					"\nSimboli: " + this.getSymbol();
+	}
+	
 	// Getters & Setters
 	public String getPieceLetter() {
 		return pieceLetter;
@@ -260,14 +272,6 @@ public final class AlgebraicNotation {
 
 	public void setEndSquareId(String endSquareId) {
 		this.endSquareId = endSquareId;
-	}
-
-	public boolean isCastle() {
-		return isCastle;
-	}
-
-	public void setCastle(boolean isCastle) {
-		this.isCastle = isCastle;
 	}
 
 	public boolean isEnPassant() {
@@ -308,5 +312,33 @@ public final class AlgebraicNotation {
 
 	public void setGoodMove(boolean isGoodMove) {
 		this.isGoodMove = isGoodMove;
+	}
+
+	/**
+	 * @return the isCastleShort
+	 */
+	public boolean isCastleShort() {
+		return isCastleShort;
+	}
+
+	/**
+	 * @param isCastleShort the isCastleShort to set
+	 */
+	public void setCastleShort(boolean isCastleShort) {
+		this.isCastleShort = isCastleShort;
+	}
+
+	/**
+	 * @return the isCastleLong
+	 */
+	public boolean isCastleLong() {
+		return isCastleLong;
+	}
+
+	/**
+	 * @param isCastleLong the isCastleLong to set
+	 */
+	public void setCastleLong(boolean isCastleLong) {
+		this.isCastleLong = isCastleLong;
 	}
 }
