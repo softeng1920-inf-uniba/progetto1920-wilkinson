@@ -186,6 +186,22 @@ public class Board {
 		return false;
 	}
 
+	/**Stabilisce se lo spot di arrivo e' dato da un movimento ad L
+	 * [ ][E][ ][E][ ]...
+	 * [E][ ][ ][ ][E]...
+	 * [ ][ ][S][ ][ ]...
+	 * [E][ ][ ][ ][E]...
+	 * [ ][E][ ][E][ ]...
+	 * @param start
+	 * @param end
+	 * @return True se e' un movimento ad L altrimenti False
+	 */
+	boolean isLMove(Spot start, Spot end) {
+		int diffX = Math.abs(start.getX() - end.getX());
+		int diffY = Math.abs(start.getY() - end.getY());
+		return diffX * diffY == 2;
+	}
+	
 	/**
 	 * metodo che permette la stampa a video della scacchiera nella configurazione
 	 * attuale
