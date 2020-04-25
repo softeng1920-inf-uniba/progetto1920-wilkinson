@@ -89,7 +89,7 @@ public final class AppMain {
 						System.out.println(">si        ::   conferma");
 						System.out.println(">no        ::   annulla");
 						System.out.print("Inserire comando che si intende eseguire => ");
-						userChoice = scanner.nextLine().toLowerCase();
+						userChoice = scanner.nextLine();
 						if (userChoice.compareTo("si") == 0) {
 							System.out.println("...ripristino partita");
 							game.initialize();
