@@ -193,11 +193,13 @@ public class Board {
 		int startX = start.getX();
 		int endX = end.getX();
 		if (start.getPiece() != null) {
-				if (startX == endX)
-					return true;
-			     } else {
-				    return false;
-			     }
+			if (startX == endX) {
+				return true;
+			} else {
+				return false;
+			}
+	    }
+		return false;
 	}
 	
 	/**
@@ -207,11 +209,13 @@ public class Board {
 		int startY = start.getY();
 		int endY = end.getY();
 		if (start.getPiece() != null) {
-				if (startY == endY)
-					return true;
-			     } else {
-				    return false;
-			     }
+			if (startY == endY) {
+				return true;
+			} else {
+				return false;
+			}
+	    }
+		return false;
 	}
 
 	/**
