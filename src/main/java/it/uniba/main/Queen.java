@@ -50,7 +50,20 @@ public class Queen extends Piece {
 							// pezzo in end bianco (stesso colore)
 							if (endPiece.isWhite()) {
 								return false;
-							} 
+							}  else{
+							//TODOIMPLEMENTARE QUI LA CATTURA
+								if (board.isFreeColumn(start, end)) {
+									return true;
+									// movimento in riga
+									} 
+								if (board.isFreeRow(start, end)) {
+									return true;
+								}
+								
+								if(board.isFreeDiagonal(start, end)) {
+									return true;
+								}
+							}
 						}
 						// turno del bianco ma pezzo nero da muovere
 					} else {
@@ -77,12 +90,25 @@ public class Queen extends Piece {
 							}
 					
 						} else {
-							// pezzo in end bianco (stesso colore)
-							if (endPiece.isWhite()) {
+							// pezzo in end nero (stesso colore)
+							if (!endPiece.isWhite()) {
 								return false;
+							} else{
+							//TODOIMPLEMENTARE QUI LA CATTURA
+								if (board.isFreeColumn(start, end)) {
+									return true;
+									// movimento in riga
+									} 
+								if (board.isFreeRow(start, end)) {
+									return true;
+								}
+								
+								if(board.isFreeDiagonal(start, end)) {
+									return true;
+								}
 							} 
 						}
-					} else {
+					}else {
 						return false;
 					}
 				}
