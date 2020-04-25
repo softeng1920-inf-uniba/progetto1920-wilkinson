@@ -42,7 +42,7 @@ public class Queen extends Piece {
 						return true;
 					}*/
 					
-					if(board.isColumn(start, end) || board.isRow(start, end) ) {
+					if(board.isColumn(start, end) || board.isRow(start, end) || board.isDiagonal(start, end)) {
 						return true;
 					}
 				
@@ -58,7 +58,7 @@ public class Queen extends Piece {
 					// nessun pezzo in end
 					if (endPiece == null) {
 					//TODO speculare a cio' che implementero' nel ramo del bianco
-						if(board.isColumn(start, end) || board.isRow(start, end) ) {
+						if(board.isColumn(start, end) || board.isRow(start, end) || board.isDiagonal(start, end)) {
 							return true;
 						}
 
