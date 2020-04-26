@@ -139,7 +139,7 @@ public class Game {
 		end.setPiece(start.getPiece());
 		start.setPiece(null);
 
-		// System.out.println(getBoard()); ---> attivare questa linea di codice per
+		//System.out.println(getBoard()); ---> attivare questa linea di codice per
 		// avere
 		// la stampa di tutti i pezzi sulla scacchiera
 		// e le relative mosse possibili
