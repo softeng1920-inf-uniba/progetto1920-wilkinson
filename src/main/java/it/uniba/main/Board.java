@@ -85,7 +85,7 @@ public class Board {
 		for (int i = 0; i < BOARDDIM; i++) {
 			for (int j = 0; j < BOARDDIM; j++) {
 				Spot currentSpot = getSpot(i, j);
-				if (currentSpot.isEmpty()) {
+				if (currentSpot.getPiece() != null) {
 					currentSpot.getPiece().findLegalMoves(this, currentSpot);
 				}
 			}
@@ -106,7 +106,7 @@ public class Board {
 	boolean isFrontDiagonal(Spot start, Spot end) {
 		int diffX = (start.getX() - end.getX());
 		int diffY = (start.getY() - end.getY());
-		if (!start.isEmpty()) {
+		if (start.getPiece() != null) {
 			if (start.getPiece().isWhite()) {
 				if (diffX == 1 && Math.abs(diffY) == 1) {
 					return true;
@@ -136,7 +136,7 @@ public class Board {
 	boolean isFrontSpot(Spot start, Spot end) {
 		int diffX = (start.getX() - end.getX());
 		int diffY = (start.getY() - end.getY());
-		if (!start.isEmpty()) {
+		if (start.getPiece() != null) {
 			if (start.getPiece().isWhite()) {
 				if (diffX == 1 && diffY == 0) {
 					return true;
@@ -168,7 +168,7 @@ public class Board {
 	boolean isTwoSpotsAhead(Spot start, Spot end) {
 		int diffX = (start.getX() - end.getX());
 		int diffY = (start.getY() - end.getY());
-		if (!start.isEmpty()) {
+		if (start.getPiece() != null) {
 			if (start.getPiece().isWhite()) {
 				if (diffX == 2 && diffY == 0) {
 					return true;
@@ -182,202 +182,6 @@ public class Board {
 					return false;
 				}
 			}
-		}
-		return false;
-	}
-
-	/**stabilisce se lo spot di arrivo è in diagonale rispetto allo spot di partenza
-	 * [ ][ ][ ][E]... 
-	 * [E][ ][E][ ]...
-	 * [ ][S][ ][ ]...
-	 * [E][ ][E][ ]...
-	 * [ ][ ][ ][E]... 
-	 * 
-	 * @param start
-	 * @param end
-	 * @return
-	 */
-	boolean isDiagonal(Spot start, Spot end) {
-		int diffX = (start.getX() - end.getX());
-		int diffY = (start.getY() - end.getY());
-		if (!start.isEmpty()) {
-			if (Math.abs(diffX) == Math.abs(diffY)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	/**stabilisce se lo spot di arrivo è sulla stessa colonna o riga rispetto allo spot di partenza
-	 * [ ][E][ ][ ]... 
-	 * [ ][E][ ][ ]...
-	 * [E][S][E][E]...
-	 * [ ][E][ ][ ]...
-	 * [ ][E][ ][ ]... 
-	 * 
-	 * @param start
-	 * @param end
-	 * @return
-	 */
-	boolean isStraight(Spot start, Spot end) {
-		if (!start.isEmpty()) {
-			if (start.getX() == end.getX() || start.getY() == end.getY()) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	/**controlla se il percorso dal punto di partenza a quello di arrivo è libero
-	 * 
-	 * @param start
-	 * @param end
-	 * @return
-	 */
-	boolean isFreePath(Spot start, Spot end) {
-		if (!start.isEmpty()) {
-			if (isDiagonal(start, end)) {
-				if (start.getPiece() instanceof Queen || start.getPiece() instanceof Bishop) {
-					if (start.getX() > end.getX()) {
-						if (start.getY() > end.getY()) {
-							for (int i = 1; i < 8; i++) {	// SE
-								Spot examined = getSpot(start.getX()+i, start.getY()+i);
-								if (!examined.isEmpty()) {
-									if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
-										return true;
-									} else {
-										return false;
-									}
-								} 
-								if (examined.equals(end)) {
-									break;
-								}
-							}
-						} else {
-							for (int i = 1; i < 8; i++) {	// SW
-								Spot examined = getSpot(start.getX()+i, start.getY()-i);
-								if (!examined.isEmpty()) {
-									if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
-										return true;
-									} else {
-										return false;
-									}
-								} 
-								if (examined.equals(end)) {
-									break;
-								}
-							}
-						}
-					} else {
-						if (start.getY() > end.getY()) {
-							for (int i = 1; i < 8; i++) {	// NE
-								Spot examined = getSpot(start.getX()-i, start.getY()+i);
-								if (!examined.isEmpty()) {
-									if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
-										return true;
-									} else {
-										return false;
-									}
-								} 
-								if (examined.equals(end)) {
-									break;
-								}
-							}
-						} else {
-							for (int i = 1; i < 8; i++) {	// NW
-								Spot examined = getSpot(start.getX()-i, start.getY()-i);
-								if (!examined.isEmpty()) {
-									if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
-										return true;
-									} else {
-										return false;
-									}
-								} 
-								if (examined.equals(end)) {
-									break;
-								}
-							}
-						}
-					}
-				} 
-			} else if (isStraight(start, end)) {
-				if (start.getPiece() instanceof Queen || start.getPiece() instanceof Rook) {
-					if (start.getX() == end.getX()) {
-						if (start.getY() > end.getY()) {	
-							for (int i = 1; i < 8; i++) { //SX
-								Spot examined = getSpot(start.getX(), start.getY()-i);
-								if (!examined.isEmpty()) {
-									if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
-										return true;
-									} else {
-										return false;
-									}
-								} 
-								if (examined.equals(end)) {
-									break;
-								}
-							}
-						} else {
-							for (int i = 1; i < 8; i++) { //DX
-								Spot examined = getSpot(start.getX(), start.getY()+i);
-								if (!examined.isEmpty()) {
-									if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
-										return true;
-									} else {
-										return false;
-									}
-								} 
-								if (examined.equals(end)) {
-									break;
-								}
-							}
-						}
-					} else if (start.getY() == end.getY()) {
-						if (start.getX() > end.getX()) {
-							for (int i = 1; i < 8; i++) { //UP
-								Spot examined = getSpot(start.getX()-i, start.getY());
-								if (!examined.isEmpty()) {
-									if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
-										return true;
-									} else {
-										return false;
-									}
-								} 
-								if (examined.equals(end)) {
-									break;
-								}
-							}
-						} else {
-							for (int i = 1; i < 8; i++) { //DOWN
-								Spot examined = getSpot(start.getX()+i, start.getY());
-								if (!examined.isEmpty()) {
-									if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
-										return true;
-									} else {
-										return false;
-									}
-								} 
-								if (examined.equals(end)) {
-									break;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		return false;
-	}
-
-	/**controlla se lo spot di coordinate (x, y) è libero
-	 * 
-	 * @param x
-	 * @param y
-	 * @return
-	 */
-	boolean isFreeSpot(int x, int y) {
-		if (getSpot(x, y).isEmpty()) {
-			return true;
 		}
 		return false;
 	}
@@ -454,7 +258,7 @@ public class Board {
 		for (int i = 0; i < BOARDDIM; i++) {
 			for (int j = 0; j < BOARDDIM; j++) {
 				Spot currentSpot = getSpot(i, j);
-				if (currentSpot.isEmpty()) {
+				if (currentSpot.getPiece() != null) {
 					output += currentSpot.getPiece() + "\n";
 				}
 			}
