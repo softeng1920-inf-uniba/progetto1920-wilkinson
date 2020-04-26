@@ -51,7 +51,7 @@ public class Queen extends Piece {
 							if (endPiece.isWhite()) {
 								return false;
 							}  else{
-							//TODOIMPLEMENTARE QUI LA CATTURA
+							//Caso della cattura di un pezzo nero
 								if (board.isFreeColumn(start, end)) {
 									return true;
 									// movimento in riga
@@ -94,7 +94,7 @@ public class Queen extends Piece {
 							if (!endPiece.isWhite()) {
 								return false;
 							} else{
-							//TODOIMPLEMENTARE QUI LA CATTURA
+							//CASO DELLA CATTURA di un pezzo bianco
 								if (board.isFreeColumn(start, end)) {
 									return true;
 									// movimento in riga
