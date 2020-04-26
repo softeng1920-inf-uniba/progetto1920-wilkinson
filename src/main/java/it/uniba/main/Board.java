@@ -1,5 +1,6 @@
 package it.uniba.main;
 
+
 /**
  * rappresenta una scacchiera (matrice 8x8)
  * ogni casa è un elemento di classe Spot
@@ -192,9 +193,26 @@ public class Board {
 		 */
 		boolean isFreeColumn(Spot start, Spot end) {
 			int diffY = (start.getY() - end.getY());
-		//	int diffX = (start.getX() - end.getX());
 			
-			if (start.getPiece() != null) {
+		//	int diffX = (start.getX() - end.getX());
+		//	boolean free = true;
+				
+			
+			/*for (int i = 0; i < BOARDDIM; i++) {
+			for (int j = 0; j < BOARDDIM; j++) {
+				Spot currentSpot = getSpot(i, j);
+				if (currentSpot.getPiece() != null) {
+					output += currentSpot.getPiece() + "\n";
+				}
+			}
+		}*/
+			/*for (int i = 0; i < dim; i++) {
+				Spot currentSpot = getSpot(start.getX() + i, start.getY());
+					if (currentSpot.getPiece() != null) {
+						free = false;
+					}
+				}*/
+			if (start.getPiece() != null /*&& free*/) {
 					if (diffY == 0) {
 						//	Spot next = new Spot(start.getX() - 1, start.getY());
 						//	if(next.getPiece() == null) {
@@ -357,7 +375,7 @@ public class Board {
 	 * @param end
 	 * @return
 	 */
-	/*
+	
 	boolean isRow(Spot start, Spot end) {
 		//int diffX = (start.getX() - end.getX());
 		int diffY = (start.getY() - end.getY());
@@ -371,7 +389,7 @@ public class Board {
 			} 
 		}
 		return false;
-	}*/
+	}
 
 	
 	//TODO
@@ -407,7 +425,7 @@ public class Board {
 		 * @param end
 		 * @return
 		 */
-	/*
+	
 		boolean isDiagonal(Spot start, Spot end) {
 			int diffX = (start.getX() - end.getX());
 			int diffY = (start.getY() - end.getY());
@@ -421,6 +439,6 @@ public class Board {
 				} 
 			}
 			return false;
-		}*/
+		}
 	
 }

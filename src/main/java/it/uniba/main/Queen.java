@@ -1,5 +1,7 @@
 package it.uniba.main;
 
+import java.util.ArrayList;
+
 /**
  * rappresenta una regina sulla scacchiera
  * 
@@ -29,12 +31,13 @@ public class Queen extends Piece {
 		
 		// turno del bianco
 				if (isWhiteTurn) {
+				//	System.out.println(hasFreePath(board, start, end));
 					// pezzo in start bianco
 					if (startPiece.isWhite()) {
 						// nessun pezzo in end
 						if (endPiece == null) {
 							// movimento in colonna
-							if (board.isFreeColumn(start, end)) {
+							if (board.isFreeColumn(start, end) /*&& hasFreePath(board, start, end)*/) {
 								return true;
 								// movimento in riga
 								} 
@@ -128,6 +131,31 @@ public class Queen extends Piece {
 	}
 
 	
-	
+	/**stabilisce se la regina ha percorsi liberi
+	 * 
+	 * @param board
+	 * @param start
+	 * @param end
+	 * @return
+	 */
 
+	boolean hasFreePath(Board board, Spot start, Spot end) {
+		ArrayList<String> path = new ArrayList<String>();
+		int dim = Math.abs(start.getX() - end.getX());
+		//System.out.println(dim);
+		boolean free = true;
+		for (int i = 0; i < dim; i++) {
+			path.add(start.toString());
+					}
+		
+		for (String s : path) {
+			System.out.println(s);
+			if(s.equals("")){
+			
+				free = false;
+			}
+		}
+		
+		return free;
+	}
 }
