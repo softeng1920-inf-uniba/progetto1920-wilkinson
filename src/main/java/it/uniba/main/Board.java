@@ -198,14 +198,7 @@ public class Board {
 		//	boolean free = true;
 				
 			
-			/*for (int i = 0; i < BOARDDIM; i++) {
-			for (int j = 0; j < BOARDDIM; j++) {
-				Spot currentSpot = getSpot(i, j);
-				if (currentSpot.getPiece() != null) {
-					output += currentSpot.getPiece() + "\n";
-				}
-			}
-		}*/
+	
 			/*for (int i = 0; i < dim; i++) {
 				Spot currentSpot = getSpot(start.getX() + i, start.getY());
 					if (currentSpot.getPiece() != null) {
