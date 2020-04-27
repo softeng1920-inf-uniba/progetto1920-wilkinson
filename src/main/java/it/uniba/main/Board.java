@@ -220,7 +220,11 @@ public class Board {
 	 * @return
 	 */
 	boolean isStraight(Spot start, Spot end) {
-	
+		if (!start.isEmpty()) {
+			if (start.getX() == end.getX() || start.getY() == end.getY()) {
+				return true;
+			}
+		}
 		return false;
 	}
 
