@@ -28,6 +28,13 @@ public class Spot {
 		this.y = y;
 	}
 	
+	public boolean isEmpty() {
+		if (getPiece() == null) {
+			return true;
+		}
+		return false;
+	}
+	
 	/**converte la coordinata Y di uno spot in lettera
 	 * 
 	 * @param coordinate
@@ -78,6 +85,18 @@ public class Spot {
 
 	public void setPiece(Piece piece) {
 		this.piece = piece;
+	}
+	
+	/**controlla se le coordinate di due spot sono uguali
+	 * 
+	 * @param compare
+	 * @return
+	 */
+	public boolean equals(Spot compare) {
+		if (this.getX() == compare.getX() && this.getY() == compare.getY()) {
+			return true;
+		}
+		return false;
 	}
 	
 	public String toString() {
