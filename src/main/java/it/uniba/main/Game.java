@@ -238,6 +238,14 @@ public class Game {
 				}
 			}
 		}
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				Spot currentSpot = getBoard().getSpot(i, j);
+				if (!currentSpot.isEmpty() && currentSpot.getPiece() instanceof King) {
+					((King) currentSpot.getPiece()).recalculateMoves(getBoard());
+				}
+			}
+		}
 	}
 
 	/**

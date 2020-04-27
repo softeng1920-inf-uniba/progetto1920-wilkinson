@@ -9,7 +9,6 @@ public class King extends Piece {
 
 	public King(boolean white) {
 		super(white);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -23,6 +22,32 @@ public class King extends Piece {
 
 	@Override
 	boolean canMove(Board board, Spot start, Spot end, boolean isWhiteTurn) {
+		if (board.isSpotAround(start, end)) {
+			if (end.isEmpty()) {
+				return true;
+			} else if (this.isWhite() != end.getPiece().isWhite()) {
+				return true;
+			}
+		}
 		return false;
+	}
+	
+	void recalculateMoves(Board board) {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j <8; j++) {
+				Spot currentSpot = board.getSpot(i, j);
+				if (!currentSpot.isEmpty()) {
+					if (currentSpot.getPiece().isWhite() != this.isWhite()) {
+						for (Move pieceMove: currentSpot.getPiece().getLegalMoves()) {
+							for (Move kingMove: this.getLegalMoves()) {
+								if (pieceMove.sameEnd(kingMove)) {
+									this.getLegalMoves().remove(kingMove);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 }

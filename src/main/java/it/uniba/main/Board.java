@@ -185,6 +185,17 @@ public class Board {
 		}
 		return false;
 	}
+	
+	public boolean isSpotAround (Spot start, Spot end) {
+		int diffX = Math.abs(start.getX() - end.getX());
+		int diffY = Math.abs(start.getY() - end.getY());
+		if(!start.isEmpty()){
+			if(( diffX==0 || diffX==1 ) && ( diffY==0 || diffY==1 )) {
+				return true; 
+			}
+		}
+		return false;
+	}
 
 	/**stabilisce se lo spot di arrivo è in diagonale rispetto allo spot di partenza
 	 * [ ][ ][ ][E]... 
