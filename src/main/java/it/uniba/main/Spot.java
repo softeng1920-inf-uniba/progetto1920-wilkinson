@@ -11,6 +11,12 @@ public class Spot {
 	int x; // coordinata riga
 	int y; // coordinata colonna
 
+	public boolean isEmpty() {
+		if (getPiece()==null) {
+			return true;
+		}
+		return false;
+	}
 	/**
 	 * costruttore di Spot (che rappresenta una casella della scacchiera)
 	 * 
