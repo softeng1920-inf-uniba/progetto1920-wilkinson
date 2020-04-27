@@ -9,7 +9,6 @@ public class King extends Piece {
 
 	public King(boolean white) {
 		super(white);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -26,14 +25,27 @@ public class King extends Piece {
 		King startPiece = (King) start.getPiece();
 		Piece endPiece = end.getPiece();
 		if(endPiece==null) {
-			if (board.isFrontSpot(start, end) || board.isFrontDiagonal(start,  end)) {
+			if (board.isSpotAround(start,end)) {
 				return true;
 			}
 		} else if(startPiece.isWhite() != endPiece.isWhite()) {
-			if (board.isFrontSpot(start, end) || board.isFrontDiagonal(start,  end)) {
+			if (board.isSpotAround(start,end)) {
 				return true;
 			}
 		}
 		return false;
 	}
+	/*King startPiece = (King) start.getPiece();
+	Piece endPiece = end.getPiece();
+	if(endPiece==null) {
+		if (isSpotAround(Spstart, Spot end)) {
+			return true;
+		}
+	} else if(startPiece.isWhite() != endPiece.isWhite()) {
+		if (board.isKingSpot(start, end)) {
+			return true;
+		}
+	}
+	return false;
+	}*/
 }
