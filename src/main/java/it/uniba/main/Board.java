@@ -185,6 +185,17 @@ public class Board {
 		}
 		return false;
 	}
+	
+	public boolean isSpotAround (Spot start, Spot end) {
+		int diffX = Math.abs(start.getX() - end.getX());
+		int diffY = Math.abs(start.getY() - end.getY());
+		if(!start.isEmpty()){
+			if(( diffX==0 || diffX==1 ) && ( diffY==0 || diffY==1 )) {
+				return true; 
+			}
+		}
+		return false;
+	}
 
 	/**
 	 * metodo che permette la stampa a video della scacchiera nella configurazione
