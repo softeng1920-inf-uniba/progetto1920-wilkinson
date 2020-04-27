@@ -220,11 +220,7 @@ public class Board {
 	 * @return
 	 */
 	boolean isStraight(Spot start, Spot end) {
-		if (!start.isEmpty()) {
-			if (start.getX() == end.getX() || start.getY() == end.getY()) {
-				return true;
-			}
-		}
+	
 		return false;
 	}
 
@@ -239,16 +235,15 @@ public class Board {
 		int startY = start.getY();
 		int endX = end.getX();
 		int endY = end.getY();
-		
+
 		if (!start.isEmpty()) {
 			if (isDiagonal(start, end)) {
 				if (start.getPiece() instanceof Queen || start.getPiece() instanceof Bishop) {
 					if (startX > endX) {
 						if (startY > endY) {
-							for (int i = 1; i < 8; i++) {	// NW
-								if ((startX-i >= 0 && startX-i < 8) && 
-										(startY-i >= 0 && startY-i < 8)) {
-									Spot examined = getSpot(startX-i, startY-i);
+							for (int i = 1; i < 8; i++) { // NW
+								if ((startX - i >= 0 && startX - i < 8) && (startY - i >= 0 && startY - i < 8)) {
+									Spot examined = getSpot(startX - i, startY - i);
 									if (!examined.isEmpty()) {
 										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
 											if (examined.equals(end)) {
@@ -259,21 +254,21 @@ public class Board {
 										} else {
 											return false;
 										}
-									} 
+									}
 									if (examined.equals(end)) {
 										return true;
 									}
 								}
 							}
-						} 
 						}
+					}
 				}
-						return false;
-					}
-					
-					}
+				return false;
+			}
+
+		}
 		return false;
-	}//end isFreePath
+	}// end isFreePath
 
 	/**
 	 * metodo che permette la stampa a video della scacchiera nella configurazione
