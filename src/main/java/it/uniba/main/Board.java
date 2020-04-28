@@ -279,7 +279,25 @@ public class Board {
 				if (start.getPiece() instanceof Queen || start.getPiece() instanceof Rook) {
 					if (startX == endX) {
 						if (startY > endY) {	
-							//TODO SX
+							for (int i = 1; i < 8; i++) { //SX
+								if ((startY-i >= 0 && startY-i < 8)) {
+									Spot examined = getSpot(startX, startY-i);
+									if (!examined.isEmpty()) {
+										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
+											if (examined.equals(end)) {
+												return true;
+											} else {
+												return false;
+											}
+										} else {
+											return false;
+										}
+									} 
+									if (examined.equals(end)) {
+										return true;
+									}
+								}
+							}
 						} else {
 							//TODO DX
 						}
