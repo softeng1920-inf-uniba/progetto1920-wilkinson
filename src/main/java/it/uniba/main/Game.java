@@ -111,7 +111,10 @@ public class Game {
 			if (checkIfIsCapture(move.getInterpreter())) {
 				addCapture(); // aggiunge la cattura all'array corrispondente
 				// controllo se c'è una cattura en passant
-				if (start.getPiece() instanceof Pawn && ((Pawn) start.getPiece()).isCapturingEnPassant()) {
+
+				if (start.getPiece() instanceof Pawn && 
+						((Pawn) start.getPiece()).isCapturingEnPassant()) {
+
 					// svuoto la casa dell'en passant
 					getBoard().getSpot(start.getX(), end.getY()).setPiece(null);
 				} else if (checkIfEnPassant(move.getInterpreter())) {
@@ -138,7 +141,7 @@ public class Game {
 		end.setPiece(start.getPiece());
 		start.setPiece(null);
 
-		// System.out.println(getBoard()); ---> attivare questa linea di codice per
+		//System.out.println(getBoard()); ---> attivare questa linea di codice per
 		// avere
 		// la stampa di tutti i pezzi sulla scacchiera
 		// e le relative mosse possibili
@@ -234,6 +237,14 @@ public class Game {
 				Spot currentSpot = getBoard().getSpot(i, j);
 				if (currentSpot.getPiece() != null) {
 					currentSpot.getPiece().findLegalMoves(getBoard(), currentSpot);
+				}
+			}
+		}
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				Spot currentSpot = getBoard().getSpot(i, j);
+				if (!currentSpot.isEmpty() && currentSpot.getPiece() instanceof King) {
+					((King) currentSpot.getPiece()).recalculateMoves(getBoard());
 				}
 			}
 		}

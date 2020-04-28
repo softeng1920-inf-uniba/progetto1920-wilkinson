@@ -11,6 +11,7 @@ public class Spot {
 	int x; // coordinata riga
 	int y; // coordinata colonna
 
+	
 	/**
 	 * costruttore di Spot (che rappresenta una casella della scacchiera)
 	 * 
@@ -26,6 +27,13 @@ public class Spot {
 	public Spot(int x, int y) {
 		this.x = x;
 		this.y = y;
+	}
+	
+	public boolean isEmpty() {
+		if (getPiece() == null) {
+			return true;
+		}
+		return false;
 	}
 	
 	/**converte la coordinata Y di uno spot in lettera
@@ -78,6 +86,18 @@ public class Spot {
 
 	public void setPiece(Piece piece) {
 		this.piece = piece;
+	}
+	
+	/**controlla se le coordinate di due spot sono uguali
+	 * 
+	 * @param compare
+	 * @return
+	 */
+	public boolean equals(Spot compare) {
+		if (this.getX() == compare.getX() && this.getY() == compare.getY()) {
+			return true;
+		}
+		return false;
 	}
 	
 	public String toString() {

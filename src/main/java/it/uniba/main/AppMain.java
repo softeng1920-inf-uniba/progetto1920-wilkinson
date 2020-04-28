@@ -41,7 +41,7 @@ public final class AppMain {
 		 */
 		while (quitFlag == false) {
 			System.out.print("Inserire il comando che si intende eseguire => ");
-			userChoice = scanner.nextLine().toLowerCase();
+			userChoice = scanner.nextLine();
 			switch (userChoice) {
 			case "exit":
 				System.out.println("Sei sicuro di voler chiudere il gioco?\n");
@@ -49,7 +49,7 @@ public final class AppMain {
 				System.out.println(">si        ::  conferma");
 				System.out.println(">no        ::  annulla");
 				System.out.print("Inserire comando che si intende eseguire => ");
-				userChoice = scanner.nextLine().toLowerCase();
+				userChoice = scanner.nextLine();
 				if (userChoice.compareTo("si") == 0) {
 					System.out.println("...uscita dal gioco");
 					quitFlag = true;
@@ -69,7 +69,7 @@ public final class AppMain {
 				while (!game.isEnd() && !quitGame) {
 					System.out.print("\n" + game + " \nInserire comando "
 							+ "o mossa che si intende eseguire => ");
-					userChoice = scanner.nextLine().toLowerCase();
+					userChoice = scanner.nextLine();
 					if (userChoice.compareTo("exit") == 0) {
 						userChoice = "quit";
 					}
@@ -89,7 +89,7 @@ public final class AppMain {
 						System.out.println(">si        ::   conferma");
 						System.out.println(">no        ::   annulla");
 						System.out.print("Inserire comando che si intende eseguire => ");
-						userChoice = scanner.nextLine().toLowerCase();
+						userChoice = scanner.nextLine();
 						if (userChoice.compareTo("si") == 0) {
 							System.out.println("...ripristino partita");
 							game.initialize();
@@ -117,7 +117,7 @@ public final class AppMain {
 						System.out.println(">si        ::   conferma");
 						System.out.println(">no        ::   annulla");
 						System.out.print("Inserire comando che si intende eseguire => ");
-						userChoice = scanner.nextLine().toLowerCase();
+						userChoice = scanner.nextLine();
 						if (userChoice.compareTo("si") == 0) {
 							System.out.println("...ritorno al menu principale");
 							quitGame = true;
