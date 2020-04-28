@@ -293,9 +293,26 @@ public class Board {
 						}
 					}
 				} else {
-					if (startY > endY) {
-						// TODO SW
-
+					if (startY > endY) {for (int i = 1; i < 8; i++) {	// SW
+						if ((startX+i >= 0 && startX+i < 8) && 
+								(startY-i >= 0 && startY-i < 8)) {
+							Spot examined = getSpot(startX+i, startY-i);
+							if (!examined.isEmpty()) {
+								if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
+									if (examined.equals(end)) {
+										return true;
+									} else {
+										return false;
+									}
+								} else {
+									return false;
+								}
+							} 
+							if (examined.equals(end)) {
+								return true;
+							}
+						}
+					}
 					} else {
 						// TODO SE
 					}
