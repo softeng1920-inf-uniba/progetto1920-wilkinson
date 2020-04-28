@@ -313,11 +313,29 @@ public class Board {
 							}
 						}
 					}
-					} else {
-						// TODO SE
+					} else {for (int i = 1; i < 8; i++) {	// SE
+						if ((startX+i >= 0 && startX+i < 8) && 
+								(startY+i >= 0 && startY+i < 8)) {
+							Spot examined = getSpot(startX+i, startY+i);
+							if (!examined.isEmpty()) {
+								if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
+									if (examined.equals(end)) {
+										return true;
+									} else {
+										return false;
+									}
+								} else {
+									return false;
+								}
+							} 
+							if (examined.equals(end)) {
+								return true;
+							}
+						}
+					}
 					}
 				}
-			}
+			} 
 		} else if (isStraight(start, end)) {
 			if (start.getPiece() instanceof Queen || start.getPiece() instanceof Rook) {
 				if (startX == endX) {
