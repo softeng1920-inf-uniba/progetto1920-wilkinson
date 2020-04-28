@@ -1,5 +1,7 @@
 package it.uniba.main;
 
+import java.util.ArrayList;
+
 /**rappresenta un re sulla scacchiera
  * 
  * @author wilkinson
@@ -33,15 +35,16 @@ public class King extends Piece {
 	}
 	
 	void recalculateMoves(Board board) {
+		ArrayList<Move> movesToRemove = new ArrayList <Move>();
 		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j <8; j++) {
+			for (int j = 0; j < 8; j++) {
 				Spot currentSpot = board.getSpot(i, j);
 				if (!currentSpot.isEmpty()) {
 					if (currentSpot.getPiece().isWhite() != this.isWhite()) {
 						for (Move pieceMove: currentSpot.getPiece().getLegalMoves()) {
 							for (Move kingMove: this.getLegalMoves()) {
 								if (pieceMove.sameEnd(kingMove)) {
-									this.getLegalMoves().remove(kingMove);
+									movesToRemove.add(kingMove);
 								}
 							}
 						}
@@ -49,5 +52,6 @@ public class King extends Piece {
 				}
 			}
 		}
+		this.getLegalMoves().removeAll(movesToRemove);
 	}
 }
