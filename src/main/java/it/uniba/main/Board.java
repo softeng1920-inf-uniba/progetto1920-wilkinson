@@ -2,7 +2,7 @@ package it.uniba.main;
 
 /**
  * rappresenta una scacchiera (matrice 8x8)
- * ogni casa Ã¨ un elemento di classe Spot
+ * ogni casa è un elemento di classe Spot
  * 
  * @author wilkinson
  *
@@ -85,7 +85,7 @@ public class Board {
 		for (int i = 0; i < BOARDDIM; i++) {
 			for (int j = 0; j < BOARDDIM; j++) {
 				Spot currentSpot = getSpot(i, j);
-				if (currentSpot.getPiece() != null) {
+				if (!currentSpot.isEmpty()) {
 					currentSpot.getPiece().findLegalMoves(this, currentSpot);
 				}
 			}
@@ -106,7 +106,7 @@ public class Board {
 	boolean isFrontDiagonal(Spot start, Spot end) {
 		int diffX = (start.getX() - end.getX());
 		int diffY = (start.getY() - end.getY());
-		if (start.getPiece() != null) {
+		if (!start.isEmpty()) {
 			if (start.getPiece().isWhite()) {
 				if (diffX == 1 && Math.abs(diffY) == 1) {
 					return true;
@@ -124,7 +124,7 @@ public class Board {
 		return false;
 	}
 
-	/**stabilisce se lo spot di arrivo Ã¨ una casella avanti allo spot di partenza
+	/**stabilisce se lo spot di arrivo è una casella avanti allo spot di partenza
 	 * [ ][E][ ]... direzione giusta per i bianchi
 	 * [ ][S][ ]...
 	 * [ ][E][ ]... direzione giusta per i neri
@@ -136,7 +136,7 @@ public class Board {
 	boolean isFrontSpot(Spot start, Spot end) {
 		int diffX = (start.getX() - end.getX());
 		int diffY = (start.getY() - end.getY());
-		if (start.getPiece() != null) {
+		if (!start.isEmpty()) {
 			if (start.getPiece().isWhite()) {
 				if (diffX == 1 && diffY == 0) {
 					return true;
@@ -154,7 +154,7 @@ public class Board {
 		return false;
 	}
 
-	/**stabilisce se lo spot di arrivo Ã¨ due caselle avanti allo spot di partenza
+	/**stabilisce se lo spot di arrivo è due caselle avanti allo spot di partenza
 	 * [ ][E][ ]... direzione giusta per i bianchi
 	 * [ ][ ][ ]...
 	 * [ ][S][ ]...
@@ -168,7 +168,7 @@ public class Board {
 	boolean isTwoSpotsAhead(Spot start, Spot end) {
 		int diffX = (start.getX() - end.getX());
 		int diffY = (start.getY() - end.getY());
-		if (start.getPiece() != null) {
+		if (!start.isEmpty()) {
 			if (start.getPiece().isWhite()) {
 				if (diffX == 2 && diffY == 0) {
 					return true;
@@ -180,6 +180,127 @@ public class Board {
 					return true;
 				} else {
 					return false;
+				}
+			}
+		}
+		return false;
+	}
+
+	/**stabilisce se lo spot di arrivo è in diagonale rispetto allo spot di partenza
+	 * [ ][ ][ ][E]... 
+	 * [E][ ][E][ ]...
+	 * [ ][S][ ][ ]...
+	 * [E][ ][E][ ]...
+	 * [ ][ ][ ][E]... 
+	 * 
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	boolean isDiagonal(Spot start, Spot end) {
+		int diffX = (start.getX() - end.getX());
+		int diffY = (start.getY() - end.getY());
+		if (!start.isEmpty()) {
+			if (Math.abs(diffX) == Math.abs(diffY)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	boolean isSpotAround(Spot start, Spot end) {
+		int diffX = Math.abs(start.getX() - end.getX());
+		int diffY = Math.abs(start.getY() - end.getY());
+		if (!start.isEmpty()) {
+			if ((diffX ==0 || diffX ==1) && (diffY == 0 || diffY == 1)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**stabilisce se lo spot di arrivo è sulla stessa colonna o riga rispetto allo spot di partenza
+	 * [ ][E][ ][ ]... 
+	 * [ ][E][ ][ ]...
+	 * [E][S][E][E]...
+	 * [ ][E][ ][ ]...
+	 * [ ][E][ ][ ]... 
+	 * 
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	boolean isStraight(Spot start, Spot end) {
+		if (!start.isEmpty()) {
+			if (start.getX() == end.getX() || start.getY() == end.getY()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**controlla se il percorso dal punto di partenza a quello di arrivo è libero
+	 * 
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	boolean isFreePath(Spot start, Spot end) {
+		int startX = start.getX();
+		int startY = start.getY();
+		int endX = end.getX();
+		int endY = end.getY();
+		
+		if (!start.isEmpty()) {
+			if (isDiagonal(start, end)) {
+				if (start.getPiece() instanceof Queen || start.getPiece() instanceof Bishop) {
+					if (startX > endX) {
+						if (startY > endY) {
+							// TODO: NW
+						} else {
+							// TODO: NE
+						}
+					} else {
+						if (startY > endY) {
+							// TODO: SW
+						} else {
+							//TODO: SE
+						}
+					}
+				} 
+			} else if (isStraight(start, end)) {
+				if (start.getPiece() instanceof Queen || start.getPiece() instanceof Rook) {
+					if (startX == endX) {
+						if (startY > endY) {	
+							for (int i = 1; i < 8; i++) { //SX
+								if ((startY-i >= 0 && startY-i < 8)) {
+									Spot examined = getSpot(startX, startY-i);
+									if (!examined.isEmpty()) {
+										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
+											if (examined.equals(end)) {
+												return true;
+											} else {
+												return false;
+											}
+										} else {
+											return false;
+										}
+									} 
+									if (examined.equals(end)) {
+										return true;
+									}
+								}
+							}
+						} else {
+							// TODO: DX
+						}
+					} else if (startY == endY) {
+						if (startX > endX) {
+							// TODO: UP
+						} else {
+							// TODO: DOWN
+						}
+					}
 				}
 			}
 		}
@@ -258,7 +379,7 @@ public class Board {
 		for (int i = 0; i < BOARDDIM; i++) {
 			for (int j = 0; j < BOARDDIM; j++) {
 				Spot currentSpot = getSpot(i, j);
-				if (currentSpot.getPiece() != null) {
+				if (!currentSpot.isEmpty()) {
 					output += currentSpot.getPiece() + "\n";
 				}
 			}
