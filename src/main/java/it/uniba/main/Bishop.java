@@ -24,6 +24,9 @@ public class Bishop extends Piece {
 
 	@Override
 	boolean canMove(Board board, Spot start, Spot end, boolean isWhiteTurn) {
+		if (board.isFreePath(start, end)) {
+			return true;
+		}
 		return false;
 	}
 }
