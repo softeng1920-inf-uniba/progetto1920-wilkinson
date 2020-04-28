@@ -51,7 +51,7 @@ public class King extends Piece {
 					}
 				}
 			}
-			this.getLegalMoves().removeAll(movesToRemove);
 		}
+		this.getLegalMoves().removeAll(movesToRemove);
 	}
 }
