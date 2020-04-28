@@ -1,8 +1,8 @@
 package it.uniba.main;
 
 /**
- * rappresenta una scacchiera (matrice 8x8)
- * ogni casa è un elemento di classe Spot
+ * rappresenta una scacchiera (matrice 8x8) ogni casa ï¿½ un elemento di classe
+ * Spot
  * 
  * @author wilkinson
  *
@@ -11,7 +11,7 @@ public class Board {
 	private Spot[][] boxes; // matrice scacchiera formata da caselle (elementi di classe Spot)
 	private static final int BOARDDIM = 8; // dimensioni della scacchiera
 	private static final int INITEMPTYRAW = 2; // indice di riga di partenza scacchiera iniziale vuota
-	private static final int ENDEMPTYRAW = 6;  // indice di riga di fine scacchiera iniziale vuota
+	private static final int ENDEMPTYRAW = 6; // indice di riga di fine scacchiera iniziale vuota
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
 	public static final String ANSI_WHITE = "\u001B[37m";
@@ -93,11 +93,9 @@ public class Board {
 	}
 
 	/**
-	 * stabilisce se i due spot in input sono diagonali 
-	 * rispetto alla direzione del pezzo 
-	 * [E][ ][E]... direzione giusta per i bianchi 
-	 * [ ][S][ ]... 
-	 * [E][ ][E]... direzione giusta per i neri 
+	 * stabilisce se i due spot in input sono diagonali rispetto alla direzione del
+	 * pezzo [E][ ][E]... direzione giusta per i bianchi [ ][S][ ]... [E][ ][E]...
+	 * direzione giusta per i neri
 	 * 
 	 * @param start
 	 * @param end
@@ -124,10 +122,10 @@ public class Board {
 		return false;
 	}
 
-	/**stabilisce se lo spot di arrivo è una casella avanti allo spot di partenza
-	 * [ ][E][ ]... direzione giusta per i bianchi
-	 * [ ][S][ ]...
-	 * [ ][E][ ]... direzione giusta per i neri
+	/**
+	 * stabilisce se lo spot di arrivo ï¿½ una casella avanti allo spot di partenza [
+	 * ][E][ ]... direzione giusta per i bianchi [ ][S][ ]... [ ][E][ ]... direzione
+	 * giusta per i neri
 	 * 
 	 * @param start
 	 * @param end
@@ -154,12 +152,10 @@ public class Board {
 		return false;
 	}
 
-	/**stabilisce se lo spot di arrivo è due caselle avanti allo spot di partenza
-	 * [ ][E][ ]... direzione giusta per i bianchi
-	 * [ ][ ][ ]...
-	 * [ ][S][ ]...
-	 * [ ][ ][ ]...
-	 * [ ][E][ ]... direzione giusta per i neri
+	/**
+	 * stabilisce se lo spot di arrivo ï¿½ due caselle avanti allo spot di partenza [
+	 * ][E][ ]... direzione giusta per i bianchi [ ][ ][ ]... [ ][S][ ]... [ ][ ][
+	 * ]... [ ][E][ ]... direzione giusta per i neri
 	 * 
 	 * @param start
 	 * @param end
@@ -185,24 +181,22 @@ public class Board {
 		}
 		return false;
 	}
-	
-	public boolean isSpotAround (Spot start, Spot end) {
+
+	public boolean isSpotAround(Spot start, Spot end) {
 		int diffX = Math.abs(start.getX() - end.getX());
 		int diffY = Math.abs(start.getY() - end.getY());
-		if(!start.isEmpty()){
-			if(( diffX==0 || diffX==1 ) && ( diffY==0 || diffY==1 )) {
-				return true; 
+		if (!start.isEmpty()) {
+			if ((diffX == 0 || diffX == 1) && (diffY == 0 || diffY == 1)) {
+				return true;
 			}
 		}
 		return false;
 	}
 
-	/**stabilisce se lo spot di arrivo è in diagonale rispetto allo spot di partenza
-	 * [ ][ ][ ][E]... 
-	 * [E][ ][E][ ]...
-	 * [ ][S][ ][ ]...
-	 * [E][ ][E][ ]...
-	 * [ ][ ][ ][E]... 
+	/**
+	 * stabilisce se lo spot di arrivo ï¿½ in diagonale rispetto allo spot di partenza
+	 * [ ][ ][ ][E]... [E][ ][E][ ]... [ ][S][ ][ ]... [E][ ][E][ ]... [ ][ ][
+	 * ][E]...
 	 * 
 	 * @param start
 	 * @param end
@@ -219,12 +213,10 @@ public class Board {
 		return false;
 	}
 
-	/**stabilisce se lo spot di arrivo è sulla stessa colonna o riga rispetto allo spot di partenza
-	 * [ ][E][ ][ ]... 
-	 * [ ][E][ ][ ]...
-	 * [E][S][E][E]...
-	 * [ ][E][ ][ ]...
-	 * [ ][E][ ][ ]... 
+	/**
+	 * stabilisce se lo spot di arrivo ï¿½ sulla stessa colonna o riga rispetto allo
+	 * spot di partenza [ ][E][ ][ ]... [ ][E][ ][ ]... [E][S][E][E]... [ ][E][ ][
+	 * ]... [ ][E][ ][ ]...
 	 * 
 	 * @param start
 	 * @param end
@@ -239,13 +231,10 @@ public class Board {
 		return false;
 	}
 
-
-	/**controlla se il percorso dal punto di partenza a quello di arrivo è libero
-	 * [S][x][x][E]... controllo su riga 
-	 * [x][x][ ][ ]... 
-	 * [x][ ][x][ ]...
-	 * [x][ ][ ][E]... controllo su diagonale
-	 * [E][ ][ ][ ]... controllo su colonna
+	/**
+	 * controlla se il percorso dal punto di partenza a quello di arrivo ï¿½ libero
+	 * [S][x][x][E]... controllo su riga [x][x][ ][ ]... [x][ ][x][ ]... [x][ ][
+	 * ][E]... controllo su diagonale [E][ ][ ][ ]... controllo su colonna
 	 * 
 	 * @param start
 	 * @param end
@@ -262,16 +251,91 @@ public class Board {
 				if (start.getPiece() instanceof Queen || start.getPiece() instanceof Bishop) {
 					if (startX > endX) {
 						if (startY > endY) {
-							//TODO NW
+							for (int i = 1; i < 8; i++) {	// NW
+								if ((startX-i >= 0 && startX-i < 8) && 
+										(startY-i >= 0 && startY-i < 8)) {
+									Spot examined = getSpot(startX-i, startY-i);
+									if (!examined.isEmpty()) {
+										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
+											if (examined.equals(end)) {
+												return true;
+											} else {
+												return false;
+											}
+										} else {
+											return false;
+										}
+									} 
+									if (examined.equals(end)) {
+										return true;
+									}
+								}
+							}
 						} else {
-							//TODO NE
+							for (int i = 1; i < 8; i++) {	// NE
+								if ((startX-i >= 0 && startX-i < 8) && 
+										(startY+i >= 0 && startY+i < 8)) {
+									Spot examined = getSpot(startX-i, startY+i);
+									if (!examined.isEmpty()) {
+										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
+											if (examined.equals(end)) {
+												return true;
+											} else {
+												return false;
+											}
+										} else {
+											return false;
+										}
+									} 
+									if (examined.equals(end)) {
+										return true;
+									}
+								}
+							}
 						}
 					} else {
 						if (startY > endY) {
-							//TODO SW
-							
+							for (int i = 1; i < 8; i++) {	// SW
+								if ((startX+i >= 0 && startX+i < 8) && 
+										(startY-i >= 0 && startY-i < 8)) {
+									Spot examined = getSpot(startX+i, startY-i);
+									if (!examined.isEmpty()) {
+										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
+											if (examined.equals(end)) {
+												return true;
+											} else {
+												return false;
+											}
+										} else {
+											return false;
+										}
+									} 
+									if (examined.equals(end)) {
+										return true;
+									}
+								}
+							}
 						} else {
-							//TODO SE
+							for (int i = 1; i < 8; i++) {	// SE
+								if ((startX+i >= 0 && startX+i < 8) && 
+										(startY+i >= 0 && startY+i < 8)) {
+									Spot examined = getSpot(startX+i, startY+i);
+									if (!examined.isEmpty()) {
+										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
+											if (examined.equals(end)) {
+												return true;
+											} else {
+												return false;
+											}
+										} else {
+											return false;
+										}
+									} 
+									if (examined.equals(end)) {
+										return true;
+									}
+								}
+							}
 						}
 					}
 				} 
@@ -366,8 +430,7 @@ public class Board {
 			}
 		}
 		return false;
-	}//end metodo isFreePath
-
+	}// end metodo isFreePath
 
 	/**
 	 * metodo che permette la stampa a video della scacchiera nella configurazione
@@ -400,9 +463,9 @@ public class Board {
 			for (int j = 0; j < BOARDDIM; j++) {
 				Piece piece = this.getSpot(i, j).getPiece();
 
-				if((i+j) %2 != 0) {
+				if ((i + j) % 2 != 0) {
 					if (piece != null) {
-						System.out.print(ANSI_BACKGROUND + ANSI_BLACK + " " + piece.draw() + " " +ANSI_RESET);						
+						System.out.print(ANSI_BACKGROUND + ANSI_BLACK + " " + piece.draw() + " " + ANSI_RESET);
 					} else {
 						System.out.print(ANSI_BACKGROUND + "   " + ANSI_RESET);
 					}
