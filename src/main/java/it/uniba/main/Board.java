@@ -270,101 +270,120 @@ public class Board {
 									}
 								}
 							}
-						} else {
-							// TODO NE
+						} else {for (int i = 1; i < 8; i++) {	// NE
+							if ((startX-i >= 0 && startX-i < 8) && 
+									(startY+i >= 0 && startY+i < 8)) {
+								Spot examined = getSpot(startX-i, startY+i);
+								if (!examined.isEmpty()) {
+									if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
+										if (examined.equals(end)) {
+											return true;
+										} else {
+											return false;
+										}
+									} else {
+										return false;
+									}
+								} 
+								if (examined.equals(end)) {
+									return true;
+								}
+							}
 						}
-					} else {
-						if (startY > endY) {
-							// TODO SW
-
-						} else {
-							// TODO SE
 						}
 					}
+				} else {
+					if (startY > endY) {
+						// TODO SW
+
+					} else {
+						// TODO SE
+					}
 				}
-			} else if (isStraight(start, end)) {
-				if (start.getPiece() instanceof Queen || start.getPiece() instanceof Rook) {
-					if (startX == endX) {
-						if (startY > endY) {
-							// TODO SX
-						} else {
-							// TODO DX
-						}
-					} else if (startY == endY) {
-						if (startX > endX) {
-							// TODO UP
-						} else {
-							// TODO DOWN
-						}
+			}
+		} else if (isStraight(start, end)) {
+			if (start.getPiece() instanceof Queen || start.getPiece() instanceof Rook) {
+				if (startX == endX) {
+					if (startY > endY) {
+						// TODO SX
+					} else {
+						// TODO DX
+					}
+				} else if (startY == endY) {
+					if (startX > endX) {
+						// TODO UP
+					} else {
+						// TODO DOWN
 					}
 				}
 			}
 		}
-		return false;
-	}// end metodo isFreePath
+	}return false;
 
-	/**
-	 * metodo che permette la stampa a video della scacchiera nella configurazione
-	 * attuale
-	 */
-	public void showBoard() {
-		String orizline = "\u2550";
-		String vertline = "\u2551";
-		String plusline = "\u256c";
+}// end metodo isFreePath
 
-		boolean isBlack = true;
+/**
+ * metodo che permette la stampa a video della scacchiera nella configurazione
+ * attuale
+ */
+public void showBoard() {
+	String orizline = "\u2550";
+	String vertline = "\u2551";
+	String plusline = "\u256c";
 
-		System.out.println("\n      a   b   c   d   e   f   g   h");
-		// stampa delle coordinate sulle righe
+	boolean isBlack = true;
 
-		System.out.print("    " + plusline);
-		for (int i = 0; i < BOARDDIM; i++) {
+	System.out.println("\n      a   b   c   d   e   f   g   h");
+	// stampa delle coordinate sulle righe
+
+	System.out.print("    " + plusline);
+	for (int i = 0; i < BOARDDIM; i++) {
+		System.out.print(orizline);
+		System.out.print(orizline);
+		System.out.print(orizline);
+		System.out.print(plusline);
+	}
+
+	System.out.println("");
+	// stampa delle coordinate sulle colonne
+
+	for (int i = 0; i < BOARDDIM; i++) {
+		System.out.print("  " + (BOARDDIM - i) + " ");
+		System.out.print(vertline);
+		for (int j = 0; j < BOARDDIM; j++) {
+			Piece piece = this.getSpot(i, j).getPiece();
+
+			if ((i + j) % 2 != 0) {
+				if (piece != null) {
+					System.out.print(ANSI_BACKGROUND + ANSI_BLACK + " " + piece.draw() + " " + ANSI_RESET);
+				} else {
+					System.out.print(ANSI_BACKGROUND + "   " + ANSI_RESET);
+				}
+			} else {
+				if (piece != null) {
+					System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + " " + piece.draw() + " " + ANSI_RESET);
+				} else {
+					System.out.print(ANSI_WHITE_BACKGROUND + "   " + ANSI_RESET);
+				}
+			}
+			System.out.print(vertline);
+		}
+		System.out.print(" " + (BOARDDIM - i));
+
+		System.out.print("\n" + "    " + plusline);
+		for (int k = 0; k < BOARDDIM; k++) {
 			System.out.print(orizline);
 			System.out.print(orizline);
 			System.out.print(orizline);
 			System.out.print(plusline);
+
 		}
 
-		System.out.println("");
-		// stampa delle coordinate sulle colonne
-
-		for (int i = 0; i < BOARDDIM; i++) {
-			System.out.print("  " + (BOARDDIM - i) + " ");
-			System.out.print(vertline);
-			for (int j = 0; j < BOARDDIM; j++) {
-				Piece piece = this.getSpot(i, j).getPiece();
-
-				if ((i + j) % 2 != 0) {
-					if (piece != null) {
-						System.out.print(ANSI_BACKGROUND + ANSI_BLACK + " " + piece.draw() + " " + ANSI_RESET);
-					} else {
-						System.out.print(ANSI_BACKGROUND + "   " + ANSI_RESET);
-					}
-				} else {
-					if (piece != null) {
-						System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + " " + piece.draw() + " " + ANSI_RESET);
-					} else {
-						System.out.print(ANSI_WHITE_BACKGROUND + "   " + ANSI_RESET);
-					}
-				}
-				System.out.print(vertline);
-			}
-			System.out.print(" " + (BOARDDIM - i));
-
-			System.out.print("\n" + "    " + plusline);
-			for (int k = 0; k < BOARDDIM; k++) {
-				System.out.print(orizline);
-				System.out.print(orizline);
-				System.out.print(orizline);
-				System.out.print(plusline);
-
-			}
-
-			isBlack = !isBlack;
-			System.out.println("\t");
-		}
-		System.out.print("      a   b   c   d   e   f   g   h\n");
+		isBlack = !isBlack;
+		System.out.println("\t");
 	}
+	System.out.print("      a   b   c   d   e   f   g   h\n");
+}
 
 	/**
 	 * mostra tutte le possibili mosse di ogni pezzo sulla scacchiera
