@@ -314,7 +314,25 @@ public class Board {
 						}
 					} else if (startY == endY) {
 						if (startX > endX) {
-							// TODO: UP
+							for (int i = 1; i < 8; i++) { //UP
+								if ((startX-i >= 0 && startX-i < 8)) {
+									Spot examined = getSpot(startX-i, startY);
+									if (!examined.isEmpty()) {
+										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
+											if (examined.equals(end)) {
+												return true;
+											} else {
+												return false;
+											}
+										} else {
+											return false;
+										}
+									} 
+									if (examined.equals(end)) {
+										return true;
+									}
+								}
+							}
 						} else {
 							// TODO: DOWN
 						}
