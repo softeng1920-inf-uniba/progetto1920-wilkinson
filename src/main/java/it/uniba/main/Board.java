@@ -239,7 +239,13 @@ public class Board {
 		return false;
 	}
 
+
 	/**controlla se il percorso dal punto di partenza a quello di arrivo è libero
+	 * [S][x][x][E]... controllo su riga 
+	 * [x][x][ ][ ]... 
+	 * [x][ ][x][ ]...
+	 * [x][ ][ ][E]... controllo su diagonale
+	 * [E][ ][ ][ ]... controllo su colonna
 	 * 
 	 * @param start
 	 * @param end
@@ -250,40 +256,46 @@ public class Board {
 		int startY = start.getY();
 		int endX = end.getX();
 		int endY = end.getY();
-
+		
 		if (!start.isEmpty()) {
 			if (isDiagonal(start, end)) {
 				if (start.getPiece() instanceof Queen || start.getPiece() instanceof Bishop) {
 					if (startX > endX) {
 						if (startY > endY) {
-							for (int i = 1; i < 8; i++) { // NW
-								if ((startX - i >= 0 && startX - i < 8) && (startY - i >= 0 && startY - i < 8)) {
-									Spot examined = getSpot(startX - i, startY - i);
-									if (!examined.isEmpty()) {
-										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
-											if (examined.equals(end)) {
-												return true;
-											} else {
-												return false;
-											}
-										} else {
-											return false;
-										}
-									}
-									if (examined.equals(end)) {
-										return true;
-									}
-								}
-							}
+							//TODO NW
+						} else {
+							//TODO NE
+						}
+					} else {
+						if (startY > endY) {
+							//TODO SW
+							
+						} else {
+							//TODO SE
+						}
+					}
+				} 
+			} else if (isStraight(start, end)) {
+				if (start.getPiece() instanceof Queen || start.getPiece() instanceof Rook) {
+					if (startX == endX) {
+						if (startY > endY) {	
+							//TODO SX
+						} else {
+							//TODO DX
+						}
+					} else if (startY == endY) {
+						if (startX > endX) {
+							//TODO UP
+						} else {
+							//TODO DOWN
 						}
 					}
 				}
-				return false;
 			}
-
 		}
 		return false;
-	}// end isFreePath
+	}//end metodo isFreePath
+
 
 	/**
 	 * metodo che permette la stampa a video della scacchiera nella configurazione
