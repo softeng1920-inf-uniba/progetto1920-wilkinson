@@ -25,6 +25,7 @@ public class Board {
 	public Board() {
 		boxes = new Spot[BOARDDIM][BOARDDIM];
 		this.resetBoard();
+		this.recalLegalMoves();
 	}
 
 	/**
@@ -79,15 +80,6 @@ public class Board {
 		for (int i = INITEMPTYRAW; i < ENDEMPTYRAW; i++) {
 			for (int j = 0; j < BOARDDIM; j++) {
 				boxes[i][j] = new Spot(i, j, null);
-			}
-		}
-
-		for (int i = 0; i < BOARDDIM; i++) {
-			for (int j = 0; j < BOARDDIM; j++) {
-				Spot currentSpot = getSpot(i, j);
-				if (!currentSpot.isEmpty()) {
-					currentSpot.getPiece().findLegalMoves(this, currentSpot);
-				}
 			}
 		}
 	}
@@ -446,6 +438,28 @@ public class Board {
 		return false;
 	}// end metodo isFreePath
 
+	/**
+	 * ricalcola le mosse legali di tutti i pezzi sulla scacchiera
+	 * 
+	 */
+	void recalLegalMoves() {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				Spot currentSpot = this.getSpot(i, j);
+				if (currentSpot.getPiece() != null) {
+					currentSpot.getPiece().findLegalMoves(this, currentSpot);
+				}
+			}
+		}
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				Spot currentSpot = this.getSpot(i, j);
+				if (!currentSpot.isEmpty() && currentSpot.getPiece() instanceof King) {
+					((King) currentSpot.getPiece()).recalculateMoves(this);
+				}
+			}
+		}
+	}
 
 	/**
 	 * metodo che permette la stampa a video della scacchiera nella configurazione
