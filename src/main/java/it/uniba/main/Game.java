@@ -18,7 +18,7 @@ public class Game {
 	private ArrayList<String> allMoves; // lista con le mosse effettuate dal bianco
 	private ArrayList<Piece> whiteCaptures; // lista con i pezzi catturati dal bianco (quindi pezzi neri)
 	private ArrayList<Piece> blackCaptures; // lista con i pezzi catturati dal nero (quindi pezzi bianchi)
-	private boolean isCapture; // true se c'è una cattura nel turno in corso
+	private boolean isCapture; // true se c'ï¿½ una cattura nel turno in corso
 
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
@@ -49,7 +49,7 @@ public class Game {
 	}
 
 	/**
-	 * stabilisce se la partita è in corso
+	 * stabilisce se la partita ï¿½ in corso
 	 * 
 	 * @return true se in corso, false se terminata
 	 */
@@ -78,11 +78,10 @@ public class Game {
 				getAllMoves().add(move.getPieceMoved().draw() + " " + command);
 			}
 
-			// ricalcolo le mosse legali per ogni pezzo
-			recalLegalMoves();
 			// setto false i booleani dei pedoni che regolano l'en passant
 			setAllPawnNotEP(getBoard());
 
+			System.out.println(board);
 			whiteTurn = (!whiteTurn);
 		} else {
 			System.out.println("\nCOMANDO O MOSSA NON VALIDA");
@@ -102,20 +101,20 @@ public class Game {
 		Spot start = getBoard().getSpot(move.getStart().getX(), move.getStart().getY());
 		Spot end = getBoard().getSpot(move.getEnd().getX(), move.getEnd().getY());
 
-		// se lo spot di partenza è vuoto, non è stato trovato -> mossa illegale
+		// se lo spot di partenza ï¿½ vuoto, non ï¿½ stato trovato -> mossa illegale
 		if (start == null) {
 			return false;
 		}
 
-		// cerca se sulla scacchiera c'è stata una cattura
+		// cerca se sulla scacchiera c'ï¿½ stata una cattura
 		searchForCapture(start, end);
 
 		// gestisce il caso in cui ci sia una cattura
 		if (isCapture) {
-			// controlla se nel comando c'è la x
+			// controlla se nel comando c'ï¿½ la x
 			if (checkIfIsCapture(move.getInterpreter())) {
 				addCapture(); // aggiunge la cattura all'array corrispondente
-				// controllo se c'è una cattura en passant
+				// controllo se c'ï¿½ una cattura en passant
 
 				if (start.getPiece() instanceof Pawn && ((Pawn) start.getPiece()).isCapturingEnPassant()) {
 
@@ -125,16 +124,16 @@ public class Game {
 					return false;
 				}
 			} else {
-				// se c'è una cattura ma l'utente non ha scritto la x
+				// se c'ï¿½ una cattura ma l'utente non ha scritto la x
 				return false;
 			}
 		}
 
-		// controllo se il pezzo non è mai stato mosso
+		// controllo se il pezzo non ï¿½ mai stato mosso
 		if (start.getPiece().isMoved() == false) {
 			// lo setto come mosso
 			start.getPiece().setAsMoved();
-			// se è un pedone mai mosso setto che è possibile catturarlo en passant il
+			// se ï¿½ un pedone mai mosso setto che ï¿½ possibile catturarlo en passant il
 			// prossimo turno
 			if (start.getPiece() instanceof Pawn) {
 				((Pawn) start.getPiece()).setPossibleEnPassantCapture(true);
@@ -145,11 +144,54 @@ public class Game {
 		end.setPiece(start.getPiece());
 		start.setPiece(null);
 
-		// System.out.println(getBoard()); ---> attivare questa linea di codice per
-		// avere
-		// la stampa di tutti i pezzi sulla scacchiera
-		// e le relative mosse possibili
+		// ricalcolo le mosse legali per ogni pezzo
+		board.recalLegalMoves();
+
+		if (kingUnderAttack()) {
+			undoMove(move);
+			return false;
+		}
+
 		return true;
+	}
+
+	/**
+	 * annulla l'ultima mossa effettuata
+	 * 
+	 * @param move
+	 */
+	void undoMove(Move move) {
+		allMoves.remove(allMoves.size() - 1);
+		Spot end = board.getSpot(move.getEnd().getX(), move.getEnd().getY());
+		Spot start = board.getSpot(move.getStart().getX(), move.getStart().getY());
+		start.setPiece(end.getPiece());
+		if (isCapture) {
+			if (isWhiteTurn()) {
+				end.setPiece(whiteCaptures.get(whiteCaptures.size() - 1));
+				whiteCaptures.remove(whiteCaptures.size() - 1);
+			} else {
+				end.setPiece(blackCaptures.get(blackCaptures.size() - 1));
+				blackCaptures.remove(blackCaptures.size() - 1);
+			}
+		} else {
+			end.setPiece(null);
+		}
+		board.recalLegalMoves();
+	}
+
+	boolean kingUnderAttack() {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				Spot currentSpot = getBoard().getSpot(i, j);
+				if (!currentSpot.isEmpty() && currentSpot.getPiece() instanceof King
+						&& currentSpot.getPiece().isWhite() == isWhiteTurn()) {
+					if (currentSpot.isUnderAttack(board, isWhiteTurn())) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -210,7 +252,7 @@ public class Game {
 	}
 
 	/**
-	 * ricerca sulla scacchiera se c'è stata una cattura e setta il pezzo come
+	 * ricerca sulla scacchiera se c'ï¿½ stata una cattura e setta il pezzo come
 	 * killed
 	 * 
 	 * @param start
@@ -229,29 +271,6 @@ public class Game {
 			}
 		}
 
-	}
-
-	/**
-	 * ricalcola le mosse legali di tutti i pezzi sulla scacchiera
-	 * 
-	 */
-	private void recalLegalMoves() {
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				Spot currentSpot = getBoard().getSpot(i, j);
-				if (currentSpot.getPiece() != null) {
-					currentSpot.getPiece().findLegalMoves(getBoard(), currentSpot);
-				}
-			}
-		}
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				Spot currentSpot = getBoard().getSpot(i, j);
-				if (!currentSpot.isEmpty() && currentSpot.getPiece() instanceof King) {
-					((King) currentSpot.getPiece()).recalculateMoves(getBoard());
-				}
-			}
-		}
 	}
 
 	/**
