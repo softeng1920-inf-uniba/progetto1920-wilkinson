@@ -81,7 +81,6 @@ public class Game {
 			// setto false i booleani dei pedoni che regolano l'en passant
 			setAllPawnNotEP(getBoard());
 
-			System.out.println(board);
 			whiteTurn = (!whiteTurn);
 		} else {
 			System.out.println("\nCOMANDO O MOSSA NON VALIDA");
