@@ -1,6 +1,8 @@
 
 package it.uniba.main;
 
+import java.util.ArrayList;
+
 /**
  * Rappresenta tutti i movimenti dei pezzi
  *
@@ -29,7 +31,9 @@ public final class Move {
 
 			// individua che tipo di pezzo muovere e cerca lo spot di partenza giusto
 			Piece classPiece = classPieceMoved(interpreter.getPieceLetter());
-			findStartSpot(game.getBoard(), classPiece, game.isWhiteTurn());
+			if (!findStartSpot(game.getBoard(), classPiece, game.isWhiteTurn())) {
+				this.start = null;
+			}
 
 			// System.out.println("Start founded: " + getStart()); ----> stampa lo start
 			// trovato
@@ -97,6 +101,7 @@ public final class Move {
 	 * @return
 	 */
 	boolean findStartSpot(Board board, Piece piece, boolean turn) {
+		ArrayList<Piece> piecesMovable = new ArrayList<Piece>();
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				Spot currentSpot = board.getSpot(i, j);
@@ -106,18 +111,21 @@ public final class Move {
 					for (Move currentMove : currentSpot.getPiece().getLegalMoves()) {
 						if (isAmbiguity) {
 							if (sameEnd(currentMove) && samePartialStart(currentMove, ambiguity)) {
+								piecesMovable.add(currentSpot.getPiece());
 								this.setStart(currentMove.getStart());
-								break;
 							}
 						} else {
 							if (sameEnd(currentMove)) {
+								piecesMovable.add(currentSpot.getPiece());
 								this.setStart(currentMove.getStart());
-								break;
 							}
 						}
 					}
 				}
 			}
+		}
+		if (piecesMovable.size() == 1) {
+			return true;
 		}
 		return false;
 	}
