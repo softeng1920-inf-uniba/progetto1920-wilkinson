@@ -63,12 +63,10 @@ public final class AppMain {
 				quitGame = false;
 				System.out.println("\n**INIZIO PARTITA**\n");
 				System.out.println("Le pedine si muovono usando la notazione algebrica abbreviata.");
-				System.out.println("(Digitare 'help' per visualizzare "
-						+ "la lista dei comandi disponibili)");
+				System.out.println("(Digitare 'help' per visualizzare " + "la lista dei comandi disponibili)");
 				game = new Game();
 				while (!game.isEnd() && !quitGame) {
-					System.out.print("\n" + game + " \nInserire comando "
-							+ "o mossa che si intende eseguire => ");
+					System.out.print("\n" + game + " \nInserire comando " + "o mossa che si intende eseguire => ");
 					userChoice = scanner.nextLine();
 					if (userChoice.compareTo("exit") == 0) {
 						userChoice = "quit";
@@ -83,8 +81,7 @@ public final class AppMain {
 						System.out.println(">quit     ::  esci dalla partita");
 						break;
 					case "play":
-						System.out.println("\nSei sicuro di voler "
-								+ "iniziare una nuova partita?\n");
+						System.out.println("\nSei sicuro di voler " + "iniziare una nuova partita?\n");
 						System.out.println(" COMANDI ");
 						System.out.println(">si        ::   conferma");
 						System.out.println(">no        ::   annulla");
