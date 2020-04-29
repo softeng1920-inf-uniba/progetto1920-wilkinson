@@ -1,6 +1,7 @@
 package it.uniba.main;
 
-/**rappresenta una regina sulla scacchiera
+/**
+ * rappresenta una regina sulla scacchiera
  * 
  * @author wilkinson
  *
