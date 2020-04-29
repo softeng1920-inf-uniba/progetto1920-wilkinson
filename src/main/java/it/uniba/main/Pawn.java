@@ -1,6 +1,7 @@
 package it.uniba.main;
 
-/**rappresenta un pedone sulla scacchiera
+/**
+ * rappresenta un pedone sulla scacchiera
  * 
  * @author wilkinson
  *
@@ -119,8 +120,9 @@ public class Pawn extends Piece {
 		}
 		return false;
 	}
-	
-	/**stabilisce se il pedone in start può catturare en passant finendo in end
+
+	/**
+	 * stabilisce se il pedone in start può catturare en passant finendo in end
 	 * 
 	 * @param board
 	 * @param start
@@ -131,7 +133,7 @@ public class Pawn extends Piece {
 		if (board.getSpot(start.getX(), end.getY()).getPiece() != null
 				&& board.getSpot(start.getX(), end.getY()).getPiece() instanceof Pawn) {
 			Pawn possibleCapture = (Pawn) board.getSpot(start.getX(), end.getY()).getPiece();
-			if (possibleCapture.isWhite() != board.getSpot(start.getX(), start.getY()).getPiece().isWhite() 
+			if (possibleCapture.isWhite() != board.getSpot(start.getX(), start.getY()).getPiece().isWhite()
 					&& possibleCapture.isPossibleEnPassantCapture()) {
 				return true;
 			}

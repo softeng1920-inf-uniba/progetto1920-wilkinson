@@ -1,6 +1,7 @@
 package it.uniba.main;
 
-/**rappresenta un alfiere sulla scacchiera
+/**
+ * rappresenta un alfiere sulla scacchiera
  * 
  * @author wilkinson
  *

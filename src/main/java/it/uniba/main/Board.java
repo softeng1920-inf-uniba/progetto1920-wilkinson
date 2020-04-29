@@ -123,9 +123,9 @@ public class Board {
 	}
 
 	/**
-	 * stabilisce se lo spot di arrivo � una casella avanti allo spot di partenza [
-	 * ][E][ ]... direzione giusta per i bianchi [ ][S][ ]... [ ][E][ ]... direzione
-	 * giusta per i neri
+	 * stabilisce se lo spot di arrivo � una casella avanti allo spot di partenza
+	 * [ ][E][ ]... direzione giusta per i bianchi [ ][S][ ]... [ ][E][ ]...
+	 * direzione giusta per i neri
 	 * 
 	 * @param start
 	 * @param end
@@ -153,8 +153,8 @@ public class Board {
 	}
 
 	/**
-	 * stabilisce se lo spot di arrivo � due caselle avanti allo spot di partenza [
-	 * ][E][ ]... direzione giusta per i bianchi [ ][ ][ ]... [ ][S][ ]... [ ][ ][
+	 * stabilisce se lo spot di arrivo � due caselle avanti allo spot di partenza
+	 * [ ][E][ ]... direzione giusta per i bianchi [ ][ ][ ]... [ ][S][ ]... [ ][ ][
 	 * ]... [ ][E][ ]... direzione giusta per i neri
 	 * 
 	 * @param start
@@ -212,9 +212,9 @@ public class Board {
 	}
 
 	/**
-	 * stabilisce se lo spot di arrivo � in diagonale rispetto allo spot di partenza
-	 * [ ][ ][ ][E]... [E][ ][E][ ]... [ ][S][ ][ ]... [E][ ][E][ ]... [ ][ ][
-	 * ][E]...
+	 * stabilisce se lo spot di arrivo � in diagonale rispetto allo spot di
+	 * partenza [ ][ ][ ][E]... [E][ ][E][ ]... [ ][S][ ][ ]... [E][ ][E][ ]... [ ][
+	 * ][ ][E]...
 	 * 
 	 * @param start
 	 * @param end
@@ -256,23 +256,22 @@ public class Board {
 	 * 
 	 * @param start
 	 * @param end
-	 * @return
+	 * @return un booleano che ci dice se il percorso e' libero
 	 */
 	boolean isFreePath(Spot start, Spot end) {
 		int startX = start.getX();
 		int startY = start.getY();
 		int endX = end.getX();
 		int endY = end.getY();
-		
+
 		if (!start.isEmpty()) {
 			if (isDiagonal(start, end)) {
 				if (start.getPiece() instanceof Queen || start.getPiece() instanceof Bishop) {
 					if (startX > endX) {
 						if (startY > endY) {
-							for (int i = 1; i < 8; i++) {	// NW
-								if ((startX-i >= 0 && startX-i < 8) && 
-										(startY-i >= 0 && startY-i < 8)) {
-									Spot examined = getSpot(startX-i, startY-i);
+							for (int i = 1; i < 8; i++) { // NW: movimento diagonale
+								if ((startX - i >= 0 && startX - i < 8) && (startY - i >= 0 && startY - i < 8)) {
+									Spot examined = getSpot(startX - i, startY - i);
 									if (!examined.isEmpty()) {
 										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
 											if (examined.equals(end)) {
@@ -283,17 +282,16 @@ public class Board {
 										} else {
 											return false;
 										}
-									} 
+									}
 									if (examined.equals(end)) {
 										return true;
 									}
 								}
-							}
+							} // end movimento NW
 						} else {
-							for (int i = 1; i < 8; i++) {	// NE
-								if ((startX-i >= 0 && startX-i < 8) && 
-										(startY+i >= 0 && startY+i < 8)) {
-									Spot examined = getSpot(startX-i, startY+i);
+							for (int i = 1; i < 8; i++) { // NE: movimento diagonale
+								if ((startX - i >= 0 && startX - i < 8) && (startY + i >= 0 && startY + i < 8)) {
+									Spot examined = getSpot(startX - i, startY + i);
 									if (!examined.isEmpty()) {
 										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
 											if (examined.equals(end)) {
@@ -304,19 +302,18 @@ public class Board {
 										} else {
 											return false;
 										}
-									} 
+									}
 									if (examined.equals(end)) {
 										return true;
 									}
 								}
-							}
+							} // end movimento NE
 						}
 					} else {
 						if (startY > endY) {
-							for (int i = 1; i < 8; i++) {	// SW
-								if ((startX+i >= 0 && startX+i < 8) && 
-										(startY-i >= 0 && startY-i < 8)) {
-									Spot examined = getSpot(startX+i, startY-i);
+							for (int i = 1; i < 8; i++) { // SW: movimento diagonale
+								if ((startX + i >= 0 && startX + i < 8) && (startY - i >= 0 && startY - i < 8)) {
+									Spot examined = getSpot(startX + i, startY - i);
 									if (!examined.isEmpty()) {
 										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
 											if (examined.equals(end)) {
@@ -327,17 +324,16 @@ public class Board {
 										} else {
 											return false;
 										}
-									} 
+									}
 									if (examined.equals(end)) {
 										return true;
 									}
 								}
-							}
+							} // end movimento Sw
 						} else {
-							for (int i = 1; i < 8; i++) {	// SE
-								if ((startX+i >= 0 && startX+i < 8) && 
-										(startY+i >= 0 && startY+i < 8)) {
-									Spot examined = getSpot(startX+i, startY+i);
+							for (int i = 1; i < 8; i++) { // SE: movimento diagonale
+								if ((startX + i >= 0 && startX + i < 8) && (startY + i >= 0 && startY + i < 8)) {
+									Spot examined = getSpot(startX + i, startY + i);
 									if (!examined.isEmpty()) {
 										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
 											if (examined.equals(end)) {
@@ -348,22 +344,22 @@ public class Board {
 										} else {
 											return false;
 										}
-									} 
+									}
 									if (examined.equals(end)) {
 										return true;
 									}
 								}
-							}
+							} // end movimento SE
 						}
 					}
-				} 
+				}
 			} else if (isStraight(start, end)) {
 				if (start.getPiece() instanceof Queen || start.getPiece() instanceof Rook) {
 					if (startX == endX) {
-						if (startY > endY) {	
-							for (int i = 1; i < 8; i++) { //SX
-								if ((startY-i >= 0 && startY-i < 8)) {
-									Spot examined = getSpot(startX, startY-i);
+						if (startY > endY) {
+							for (int i = 1; i < 8; i++) { // SX: movimento a sinistra
+								if ((startY - i >= 0 && startY - i < 8)) {
+									Spot examined = getSpot(startX, startY - i);
 									if (!examined.isEmpty()) {
 										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
 											if (examined.equals(end)) {
@@ -374,16 +370,16 @@ public class Board {
 										} else {
 											return false;
 										}
-									} 
+									}
 									if (examined.equals(end)) {
 										return true;
 									}
 								}
-							}
+							} // end movimento SX
 						} else {
-							for (int i = 1; i < 8; i++) { //DX
-								if ((startY+i >= 0 && startY+i < 8)) {
-									Spot examined = getSpot(startX, startY+i);
+							for (int i = 1; i < 8; i++) { // DX: movimento a destra
+								if ((startY + i >= 0 && startY + i < 8)) {
+									Spot examined = getSpot(startX, startY + i);
 									if (!examined.isEmpty()) {
 										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
 											if (examined.equals(end)) {
@@ -394,18 +390,18 @@ public class Board {
 										} else {
 											return false;
 										}
-									} 
+									}
 									if (examined.equals(end)) {
 										return true;
 									}
 								}
-							}
+							} // end movimento DX
 						}
 					} else if (startY == endY) {
 						if (startX > endX) {
-							for (int i = 1; i < 8; i++) { //UP
-								if ((startX-i >= 0 && startX-i < 8)) {
-									Spot examined = getSpot(startX-i, startY);
+							for (int i = 1; i < 8; i++) { // UP: movimento in alto
+								if ((startX - i >= 0 && startX - i < 8)) {
+									Spot examined = getSpot(startX - i, startY);
 									if (!examined.isEmpty()) {
 										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
 											if (examined.equals(end)) {
@@ -416,16 +412,16 @@ public class Board {
 										} else {
 											return false;
 										}
-									} 
+									}
 									if (examined.equals(end)) {
 										return true;
 									}
 								}
-							}
+							} // end movimento UP
 						} else {
-							for (int i = 1; i < 8; i++) { //DOWN
-								if ((startX+i >= 0 && startX+i < 8)) {
-									Spot examined = getSpot(startX+i, startY);
+							for (int i = 1; i < 8; i++) { // DOWN: movimento in basso
+								if ((startX + i >= 0 && startX + i < 8)) {
+									Spot examined = getSpot(startX + i, startY);
 									if (!examined.isEmpty()) {
 										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
 											if (examined.equals(end)) {
@@ -436,12 +432,12 @@ public class Board {
 										} else {
 											return false;
 										}
-									} 
+									}
 									if (examined.equals(end)) {
 										return true;
 									}
 								}
-							}
+							} // end movimento DOWN
 						}
 					}
 				}

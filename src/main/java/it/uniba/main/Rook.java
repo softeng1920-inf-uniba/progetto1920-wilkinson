@@ -1,6 +1,7 @@
 package it.uniba.main;
 
-/**rappresenta una torre sulla scacchiera
+/**
+ * rappresenta una torre sulla scacchiera
  * 
  * @author wilkinson
  *
