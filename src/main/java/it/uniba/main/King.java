@@ -41,10 +41,18 @@ public class King extends Piece {
 				Spot currentSpot = board.getSpot(i, j);
 				if (!currentSpot.isEmpty()) {
 					if (currentSpot.getPiece().isWhite() != this.isWhite()) {
-						for (Move pieceMove: currentSpot.getPiece().getLegalMoves()) {
-							for (Move kingMove: this.getLegalMoves()) {
-								if (pieceMove.sameEnd(kingMove)) {
+						if(currentSpot.getPiece() instanceof Pawn) {
+							for (Move kingMove : this.getLegalMoves()) {
+								if (board.isFrontDiagonal(currentSpot, kingMove.getEnd())) {
 									movesToRemove.add(kingMove);
+								}
+							}
+						} else {
+							for (Move pieceMove : currentSpot.getPiece().getLegalMoves()) {
+								for (Move kingMove : this.getLegalMoves()){
+									if (pieceMove.sameEnd(kingMove)) {
+										movesToRemove.add(kingMove);
+									}
 								}
 							}
 						}
