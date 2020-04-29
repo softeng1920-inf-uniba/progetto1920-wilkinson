@@ -29,9 +29,39 @@ public class Spot {
 		this.y = y;
 	}
 
+	/**
+	 * controlla se lo spot è vuoto
+	 * 
+	 * @return
+	 */
 	public boolean isEmpty() {
 		if (getPiece() == null) {
 			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * controllo se la casa examined è sotto attacco da pezzi avversari
+	 * 
+	 * @param board
+	 * @param examined
+	 * @param color
+	 * @return
+	 */
+	boolean isUnderAttack(Board board, boolean color) {
+		Move examinedMove = new Move(null, this);
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				Spot currentSpot = board.getSpot(i, j);
+				if (!currentSpot.isEmpty() && currentSpot.getPiece().isWhite() != color) {
+					for (Move currentMove : currentSpot.getPiece().getLegalMoves()) {
+						if (currentMove.sameEnd(examinedMove)) {
+							return true;
+						}
+					}
+				}
+			}
 		}
 		return false;
 	}
