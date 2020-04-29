@@ -106,10 +106,12 @@ public final class AppMain {
 					case "moves":
 						System.out.print("\nSERIE DI MOSSE:");
 						game.showMoves();
+						System.out.print("\n");
 						break;
 					case "captures":
 						System.out.println("\nELENCO DELLE CATTURE PER COLORE:");
 						game.showCaptures();
+						System.out.print("\n");
 						break;
 					case "quit":
 						System.out.println("\nSei sicuro di voler chiudere la partita?");

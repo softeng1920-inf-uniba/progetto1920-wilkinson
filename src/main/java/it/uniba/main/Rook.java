@@ -1,6 +1,7 @@
 package it.uniba.main;
 
-/**rappresenta una torre sulla scacchiera
+/**
+ * rappresenta una torre sulla scacchiera
  * 
  * @author wilkinson
  *
@@ -23,6 +24,9 @@ public class Rook extends Piece {
 
 	@Override
 	boolean canMove(Board board, Spot start, Spot end, boolean isWhiteTurn) {
+		if (board.isFreePath(start, end)) {
+			return true;
+		}
 		return false;
 	}
 }

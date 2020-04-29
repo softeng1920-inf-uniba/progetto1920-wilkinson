@@ -369,11 +369,11 @@ Si svolgano le seguenti operazioni:
 
 - se si utilizza Windows selezionare `Switch to Linux containers` nel menu di Docker;
 
-- recarsi alla pagina principale del repository [softeng1920-inf-uniba/docker_1920](https://github.com/softeng1920-inf-uniba/docker_1920) su GitHub e fare click sul link *"package"*, nella barra evidenziata in figura;
-   **N.B.**: se i Secret menzionati in questa guida sono stati impostati correttamente e se almeno un'esecuzione del workflow di GitHub Actions è andata a buon fine, la vostra immagine Docker (nella sua ultima versione) dovrebbe essere disponibile tra quelle elencate alla pagina successiva.
+- recarsi alla pagina principale del repository su GitHub e fare click sul link *"package"*, nella barra evidenziata in figura;
+   **N.B.**: se i Secret menzionati in questa guida sono stati impostati correttamente e se almeno un'esecuzione del workflow di GitHub Actions è andata a buon fine, la vostra immagine Docker (nella sua ultima versione) dovrebbe essere disponibile.
    ![ExecuteDockerImage_1](./res/img/guida-studente/ExecuteDockerImage_1.png)
 
-- nella pagina successiva, fare click sul link del package che riporta il nome del vostro team;
+- nella pagina successiva, fare click sul link sul link del package che la contiene;
 
 - nella pagina dedicata al package è indicato il comando da copiare ed eseguire nel terminale per scaricare l'immagine Docker in locale.
    ![ExecuteDockerImage_2](./res/img/guida-studente/ExecuteDockerImage_2.png)
@@ -389,13 +389,13 @@ Si svolgano le seguenti operazioni:
 
 Ad esempio, se il comando precedente (copiato da GitHub dal riquadro mostrato in figura), è:
 ```
-docker pull docker.pkg.github.com/softeng1920-inf-uniba/provaprogetto1920-prova/prova:latest
+docker pull docker.pkg.github.com/softeng1920-inf-uniba/progetto1920-<nome_gruppo>/scacchi-<nome_gruppo>:latest
 ```
 
 il comando per eseguire il container sarà:
 
 ```
-docker run -it --rm docker.pkg.github.com/softeng1920-inf-uniba/provaprogetto1920-prova/prova:latest
+docker run -it --rm docker.pkg.github.com/softeng1920-inf-uniba/progetto1920-<nome_gruppo>/scacchi-<nome_gruppo>:latest
 ```
 
 (in altre parole, il secondo comando si ottiene dal primo sostituendo a `docker pull` le parole `docker run -it --rm`).

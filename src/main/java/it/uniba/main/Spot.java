@@ -1,7 +1,8 @@
 package it.uniba.main;
 
-/**rappresenta una casa della scacchiera
- * ha una coordinata X e una Y corrispondenti a numeri (da 1 a 8) e lettere (da 'a' ad 'h')
+/**
+ * rappresenta una casa della scacchiera ha una coordinata X e una Y
+ * corrispondenti a numeri (da 1 a 8) e lettere (da 'a' ad 'h')
  * 
  * @author pierpaolo
  *
@@ -11,12 +12,6 @@ public class Spot {
 	int x; // coordinata riga
 	int y; // coordinata colonna
 
-	public boolean isEmpty() {
-		if (getPiece()==null) {
-			return true;
-		}
-		return false;
-	}
 	/**
 	 * costruttore di Spot (che rappresenta una casella della scacchiera)
 	 * 
@@ -28,13 +23,21 @@ public class Spot {
 		this.y = y;
 		this.piece = piece;
 	}
-	
+
 	public Spot(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
-	
-	/**converte la coordinata Y di uno spot in lettera
+
+	public boolean isEmpty() {
+		if (getPiece() == null) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * converte la coordinata Y di uno spot in lettera
 	 * 
 	 * @param coordinate
 	 * @return
@@ -61,7 +64,7 @@ public class Spot {
 		return null;
 	}
 
-	//Getters & Setters
+	// Getters & Setters
 	public Piece getPiece() {
 		return this.piece;
 	}
@@ -85,9 +88,22 @@ public class Spot {
 	public void setPiece(Piece piece) {
 		this.piece = piece;
 	}
-	
+
+	/**
+	 * controlla se le coordinate di due spot sono uguali
+	 * 
+	 * @param compare
+	 * @return
+	 */
+	public boolean equals(Spot compare) {
+		if (this.getX() == compare.getX() && this.getY() == compare.getY()) {
+			return true;
+		}
+		return false;
+	}
+
 	public String toString() {
 		String output = "";
-		return output += convertCoordinate(y) + (8-x);
+		return output += convertCoordinate(y) + (8 - x);
 	}
 }

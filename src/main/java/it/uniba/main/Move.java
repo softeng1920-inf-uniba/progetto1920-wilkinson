@@ -31,7 +31,8 @@ public final class Move {
 			Piece classPiece = classPieceMoved(interpreter.getPieceLetter());
 			findStartSpot(game.getBoard(), classPiece, game.isWhiteTurn());
 
-			//			System.out.println("Start founded: " + getStart()); ----> stampa lo start trovato
+			// System.out.println("Start founded: " + getStart()); ----> stampa lo start
+			// trovato
 
 			// se trova uno start
 			if (this.start != null) {
@@ -200,19 +201,18 @@ public final class Move {
 	enum GameStatus {
 		ACTIVE, BLACK_WIN, WHITE_WIN, DRAW, FORCED_END
 	}
-	
-	/**capisce se il pezzo che sta muovendo sta catturando en passant
+
+	/**
+	 * capisce se il pezzo che sta muovendo sta catturando en passant
 	 * 
 	 * @param piece pezzo mosso
 	 * @param start casa di partenza
-	 * @param end casa di arrivo
+	 * @param end   casa di arrivo
 	 * @param board scacchiera
 	 * @return true se cattura en passant, false altrimenti
 	 */
 	boolean isEnPassantMove(Piece piece, Spot start, Spot end, Board board) {
-		if (piece instanceof Pawn 
-				&& board.isFrontDiagonal(start, end) 
-				&& end.getPiece() == null
+		if (piece instanceof Pawn && board.isFrontDiagonal(start, end) && end.getPiece() == null
 				&& board.getSpot(start.getX(), end.getY()).getPiece() instanceof Pawn
 				&& ((Pawn) board.getSpot(start.getX(), end.getY()).getPiece()).isPossibleEnPassantCapture()) {
 			return true;
