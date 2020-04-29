@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 import it.uniba.main.Move.GameStatus;
 
-/**rappresenta una partita di scacchi in corso
- * ha associato uno stato e una scacchiera
+/**
+ * rappresenta una partita di scacchi in corso ha associato uno stato e una
+ * scacchiera
  * 
  * @author wilkinson
  *
@@ -68,22 +69,20 @@ public class Game {
 	public void currentGame(final String command) {
 		Move move = new Move(command, this);
 		if (move.getStart() != null && makeMove(move)) {
-			if (move.getPieceMoved() instanceof Pawn 
-					&& ((Pawn)move.getPieceMoved()).isCapturingEnPassant()) {
+			if (move.getPieceMoved() instanceof Pawn && ((Pawn) move.getPieceMoved()).isCapturingEnPassant()) {
 				// se en passant riscrivo la mossa e la aggiungo allo storico
 				String enPassantCommand = command.substring(0, 4) + " e.p.";
 				getAllMoves().add(move.getPieceMoved().draw() + " " + enPassantCommand);
 			} else {
-				//aggiunto la mossa all'arraylist dello storico mosse
+				// aggiunto la mossa all'arraylist dello storico mosse
 				getAllMoves().add(move.getPieceMoved().draw() + " " + command);
 			}
-			
+
 			// ricalcolo le mosse legali per ogni pezzo
 			recalLegalMoves();
 			// setto false i booleani dei pedoni che regolano l'en passant
 			setAllPawnNotEP(getBoard());
-			
-			
+
 			whiteTurn = (!whiteTurn);
 		} else {
 			System.out.println("\nCOMANDO O MOSSA NON VALIDA");
@@ -117,8 +116,9 @@ public class Game {
 			if (checkIfIsCapture(move.getInterpreter())) {
 				addCapture(); // aggiunge la cattura all'array corrispondente
 				// controllo se c'è una cattura en passant
-				if (start.getPiece() instanceof Pawn && 
-						((Pawn) start.getPiece()).isCapturingEnPassant()) {
+
+				if (start.getPiece() instanceof Pawn && ((Pawn) start.getPiece()).isCapturingEnPassant()) {
+
 					// svuoto la casa dell'en passant
 					getBoard().getSpot(start.getX(), end.getY()).setPiece(null);
 				} else if (checkIfEnPassant(move.getInterpreter())) {
@@ -145,7 +145,7 @@ public class Game {
 		end.setPiece(start.getPiece());
 		start.setPiece(null);
 
-		//System.out.println(getBoard()); ---> attivare questa linea di codice per
+		// System.out.println(getBoard()); ---> attivare questa linea di codice per
 		// avere
 		// la stampa di tutti i pezzi sulla scacchiera
 		// e le relative mosse possibili
