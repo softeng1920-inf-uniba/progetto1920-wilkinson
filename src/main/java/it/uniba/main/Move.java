@@ -247,7 +247,17 @@ public final class Move {
 		if (game.isWhiteTurn()) {
 			Spot whiteKingSpot = game.getBoard().getSpot(7, 4);
 			if (this.getInterpreter().isCastleShort()) {
-				// TODO arrocco corto (bianchi)
+				Spot whiteDxRookSpot = game.getBoard().getSpot(7, 7);
+				Spot whiteNewKingSpot = game.getBoard().getSpot(7, 6);
+				Spot whiteNewRookSpot = game.getBoard().getSpot(7, 5);
+				if (isCastlePossible(game.getBoard(), whiteNewKingSpot, whiteNewRookSpot, whiteKingSpot,
+						whiteDxRookSpot, null)) {
+					whiteNewKingSpot.setPiece(whiteKingSpot.getPiece());
+					whiteNewRookSpot.setPiece(whiteDxRookSpot.getPiece());
+					whiteKingSpot.setPiece(null);
+					whiteDxRookSpot.setPiece(null);
+					return true;
+				}
 			} else if (this.getInterpreter().isCastleLong()) {
 				// TODO arrocco lungo (bianchi)
 			}
