@@ -350,6 +350,30 @@ public final class Move {
 		}
 		return false;
 	}
+	/**
+	 * applica una serie di controlli per stabilire se l'arrocco è possibile
+	 * 
+	 * @param board
+	 * @param king
+	 * @param rook
+	 * @param kingSpot
+	 * @param rookSpot
+	 * @param kingOrigin
+	 * @return
+	 */
+	private boolean isCastlePossible(Board board, Spot kingSpot, Spot rookSpot, Spot kingOrigin, Spot rookOrigin,
+			Spot knightSpot) {
+		if (areCastlePiecesThere(kingOrigin, rookOrigin)) {
+			if (areCastlePiecesNotMoved((King) kingOrigin.getPiece(), (Rook) rookOrigin.getPiece())) {
+				if (isPathCastleFree(board, kingSpot, rookSpot, knightSpot)) {
+					if (isPathCastleNotAttacked(board, kingSpot, rookSpot, kingOrigin)) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
 
 	/**
 	 * confronta due oggetti di tipo Move e controlla se hanno le stesse coordinate
