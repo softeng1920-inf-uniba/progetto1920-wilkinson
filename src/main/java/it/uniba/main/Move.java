@@ -287,7 +287,18 @@ public final class Move {
 					return true;
 				}
 			} else if (this.getInterpreter().isCastleLong()) {
-				// TODO arrocco lungo (neri)
+				Spot blackSxRookSpot = game.getBoard().getSpot(0, 0);
+				Spot blackNewKingSpot = game.getBoard().getSpot(0, 2);
+				Spot blackNewRookSpot = game.getBoard().getSpot(0, 3);
+				Spot knightSpot = game.getBoard().getSpot(0, 1);
+				if (isCastlePossible(game.getBoard(), blackNewKingSpot, blackNewRookSpot, blackKingSpot,
+						blackSxRookSpot, knightSpot)) {
+					blackNewKingSpot.setPiece(blackKingSpot.getPiece());
+					blackNewRookSpot.setPiece(blackSxRookSpot.getPiece());
+					blackKingSpot.setPiece(null);
+					blackSxRookSpot.setPiece(null);
+					return true;
+				}
 			}
 		}
 		return false;
@@ -444,10 +455,6 @@ public final class Move {
 		return interpreter;
 	}
 
-	public void setInterpreter(final AlgebraicNotation interpreter) {
-		this.interpreter = interpreter;
-	}
-
 	public Spot getStart() {
 		return start;
 	}
@@ -484,5 +491,4 @@ public final class Move {
 		String output = "";
 		return output += "[start: " + start + " end: " + end + "]";
 	}
-
 }
