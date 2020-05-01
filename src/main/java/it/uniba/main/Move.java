@@ -259,7 +259,18 @@ public final class Move {
 					return true;
 				}
 			} else if (this.getInterpreter().isCastleLong()) {
-				// TODO arrocco lungo (bianchi)
+				Spot whiteSxRookSpot = game.getBoard().getSpot(7, 0);
+				Spot whiteNewKingSpot = game.getBoard().getSpot(7, 2);
+				Spot whiteNewRookSpot = game.getBoard().getSpot(7, 3);
+				Spot knightSpot = game.getBoard().getSpot(7, 1);
+				if (isCastlePossible(game.getBoard(), whiteNewKingSpot, whiteNewRookSpot, whiteKingSpot,
+						whiteSxRookSpot, knightSpot)) {
+					whiteNewKingSpot.setPiece(whiteKingSpot.getPiece());
+					whiteNewRookSpot.setPiece(whiteSxRookSpot.getPiece());
+					whiteKingSpot.setPiece(null);
+					whiteSxRookSpot.setPiece(null);
+					return true;
+				}
 			}
 		} else {
 			Spot blackKingSpot = game.getBoard().getSpot(0, 4);
@@ -351,7 +362,7 @@ public final class Move {
 		return false;
 	}
 	/**
-	 * applica una serie di controlli per stabilire se l'arrocco è possibile
+	 * applica una serie di controlli per stabilire se l'arrocco ï¿½ possibile
 	 * 
 	 * @param board
 	 * @param king
