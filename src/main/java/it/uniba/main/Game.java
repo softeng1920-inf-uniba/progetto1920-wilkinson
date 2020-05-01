@@ -18,7 +18,7 @@ public class Game {
 	private ArrayList<String> allMoves; // lista con le mosse effettuate dal bianco
 	private ArrayList<Piece> whiteCaptures; // lista con i pezzi catturati dal bianco (quindi pezzi neri)
 	private ArrayList<Piece> blackCaptures; // lista con i pezzi catturati dal nero (quindi pezzi bianchi)
-	private boolean isCapture; // true se c'è una cattura nel turno in corso
+	private boolean isCapture; // true se c'ï¿½ una cattura nel turno in corso
 
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
@@ -49,7 +49,7 @@ public class Game {
 	}
 
 	/**
-	 * stabilisce se la partita è in corso
+	 * stabilisce se la partita ï¿½ in corso
 	 * 
 	 * @return true se in corso, false se terminata
 	 */
@@ -72,10 +72,10 @@ public class Game {
 			if (move.getPieceMoved() instanceof Pawn && ((Pawn) move.getPieceMoved()).isCapturingEnPassant()) {
 				// se en passant riscrivo la mossa e la aggiungo allo storico
 				String enPassantCommand = command.substring(0, 4) + " e.p.";
-				getAllMoves().add(move.getPieceMoved().draw() + " " + enPassantCommand);
+				getAllMoves().add(" " + enPassantCommand);
 			} else {
 				// aggiunto la mossa all'arraylist dello storico mosse
-				getAllMoves().add(move.getPieceMoved().draw() + " " + command);
+				getAllMoves().add(" " + command);
 			}
 
 			// ricalcolo le mosse legali per ogni pezzo
@@ -98,24 +98,32 @@ public class Game {
 	 * @return true se la mossa e' stata effettuata, false viceversa
 	 */
 	private boolean makeMove(Move move) {
+		// controllo se la mossa Ã¨ un arrocco
+		if (move.isCastle()) {
+			if (move.makeCastling(this)) {
+				return true;
+			}
+			return false;
+		}
+
 		// spot di partenza e arrivo derivati dall'interpretazione di move
 		Spot start = getBoard().getSpot(move.getStart().getX(), move.getStart().getY());
 		Spot end = getBoard().getSpot(move.getEnd().getX(), move.getEnd().getY());
 
-		// se lo spot di partenza è vuoto, non è stato trovato -> mossa illegale
+		// se lo spot di partenza ï¿½ vuoto, non ï¿½ stato trovato -> mossa illegale
 		if (start == null) {
 			return false;
 		}
 
-		// cerca se sulla scacchiera c'è stata una cattura
+		// cerca se sulla scacchiera c'ï¿½ stata una cattura
 		searchForCapture(start, end);
 
 		// gestisce il caso in cui ci sia una cattura
 		if (isCapture) {
-			// controlla se nel comando c'è la x
+			// controlla se nel comando c'ï¿½ la x
 			if (checkIfIsCapture(move.getInterpreter())) {
 				addCapture(); // aggiunge la cattura all'array corrispondente
-				// controllo se c'è una cattura en passant
+				// controllo se c'ï¿½ una cattura en passant
 
 				if (start.getPiece() instanceof Pawn && ((Pawn) start.getPiece()).isCapturingEnPassant()) {
 
@@ -125,16 +133,16 @@ public class Game {
 					return false;
 				}
 			} else {
-				// se c'è una cattura ma l'utente non ha scritto la x
+				// se c'ï¿½ una cattura ma l'utente non ha scritto la x
 				return false;
 			}
 		}
 
-		// controllo se il pezzo non è mai stato mosso
+		// controllo se il pezzo non ï¿½ mai stato mosso
 		if (start.getPiece().isMoved() == false) {
 			// lo setto come mosso
 			start.getPiece().setAsMoved();
-			// se è un pedone mai mosso setto che è possibile catturarlo en passant il
+			// se ï¿½ un pedone mai mosso setto che ï¿½ possibile catturarlo en passant il
 			// prossimo turno
 			if (start.getPiece() instanceof Pawn) {
 				((Pawn) start.getPiece()).setPossibleEnPassantCapture(true);
@@ -210,7 +218,7 @@ public class Game {
 	}
 
 	/**
-	 * ricerca sulla scacchiera se c'è stata una cattura e setta il pezzo come
+	 * ricerca sulla scacchiera se c'ï¿½ stata una cattura e setta il pezzo come
 	 * killed
 	 * 
 	 * @param start
