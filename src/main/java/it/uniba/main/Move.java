@@ -302,6 +302,20 @@ public final class Move {
 	}
 
 	/**
+	 * controlla se re e torre non sono stati mossi
+	 * 
+	 * @param king
+	 * @param rook
+	 * @return
+	 */
+	private boolean areCastlePiecesNotMoved(King king, Rook rook) {
+		if (king.isMoved() || rook.isMoved()) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
 	 * confronta due oggetti di tipo Move e controlla se hanno le stesse coordinate
 	 * 
 	 * @param move
