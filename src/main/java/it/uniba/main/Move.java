@@ -12,7 +12,7 @@ public final class Move {
 	private Spot end; // casa di arrivo
 	private Piece pieceMoved; // pezzo che deve eseguire il movimento
 	private boolean isAmbiguity = false; // caso in cui ci sia ambiguita' di movimento
-	private String ambiguity; // primo carattere di un'ambiguità
+	private String ambiguity; // primo carattere di un'ambiguitÃ 
 
 	/**
 	 * costruttore dell'oggetto Move
@@ -23,7 +23,7 @@ public final class Move {
 	public Move(final String command, final Game game) {
 		this.interpreter = new AlgebraicNotation(command); // Istanzio l'oggetto interpreter
 
-		if (this.isCastle()) { // se è un arrocco dò le coordinate di partenza del re
+		if (this.isCastle()) { // se Ã¨ un arrocco dÃ² le coordinate di partenza del re
 			if (game.isWhiteTurn()) {
 				this.start = new Spot(7, 4);
 			} else {
@@ -43,7 +43,7 @@ public final class Move {
 			if (this.start != null) {
 				// avvalora il pezzo da muovere prendendolo da start
 				this.pieceMoved = start.getPiece();
-				// capisce se è una cattura en passant
+				// capisce se Ã¨ una cattura en passant
 				if (isEnPassantMove(pieceMoved, start, end, game.getBoard())) {
 					((Pawn) start.getPiece()).setCapturingEnPassant(true);
 				}
@@ -95,7 +95,7 @@ public final class Move {
 	/**
 	 * trova lo spot di partenza cercando il pezzo con: 1) casa di arrivo
 	 * corrispodente a quella inserita 2) controlla solo i pezzi della classe
-	 * inserita dall'utente 3) controlla eventuali ambiguità
+	 * inserita dall'utente 3) controlla eventuali ambiguitÃ 
 	 * 
 	 * @param board
 	 * @param piece
@@ -197,7 +197,7 @@ public final class Move {
 	}
 
 	/**
-	 * enumerazione dello stato di gioco (per verificare se la partita � ancora in
+	 * enumerazione dello stato di gioco (per verificare se la partita ï¿½ ancora in
 	 * corso)
 	 * 
 	 * @author wilkinson
@@ -226,7 +226,7 @@ public final class Move {
 	}
 
 	/**
-	 * controlla se l'input è un arrocco
+	 * controlla se l'input Ã¨ un arrocco
 	 * 
 	 * @return
 	 */
@@ -238,7 +238,7 @@ public final class Move {
 	}
 
 	/**
-	 * controlla se è possibile arroccare ed effettua l'arrocco
+	 * controlla se Ã¨ possibile arroccare ed effettua l'arrocco
 	 * 
 	 * @param game
 	 * @return
@@ -259,7 +259,18 @@ public final class Move {
 					return true;
 				}
 			} else if (this.getInterpreter().isCastleLong()) {
-				// TODO arrocco lungo (bianchi)
+				Spot whiteSxRookSpot = game.getBoard().getSpot(7, 0);
+				Spot whiteNewKingSpot = game.getBoard().getSpot(7, 2);
+				Spot whiteNewRookSpot = game.getBoard().getSpot(7, 3);
+				Spot knightSpot = game.getBoard().getSpot(7, 1);
+				if (isCastlePossible(game.getBoard(), whiteNewKingSpot, whiteNewRookSpot, whiteKingSpot,
+						whiteSxRookSpot, knightSpot)) {
+					whiteNewKingSpot.setPiece(whiteKingSpot.getPiece());
+					whiteNewRookSpot.setPiece(whiteSxRookSpot.getPiece());
+					whiteKingSpot.setPiece(null);
+					whiteSxRookSpot.setPiece(null);
+					return true;
+				}
 			}
 		} else {
 			Spot blackKingSpot = game.getBoard().getSpot(0, 4);
@@ -276,7 +287,18 @@ public final class Move {
 					return true;
 				}
 			} else if (this.getInterpreter().isCastleLong()) {
-				// TODO arrocco lungo (neri)
+				Spot blackSxRookSpot = game.getBoard().getSpot(0, 0);
+				Spot blackNewKingSpot = game.getBoard().getSpot(0, 2);
+				Spot blackNewRookSpot = game.getBoard().getSpot(0, 3);
+				Spot knightSpot = game.getBoard().getSpot(0, 1);
+				if (isCastlePossible(game.getBoard(), blackNewKingSpot, blackNewRookSpot, blackKingSpot,
+						blackSxRookSpot, knightSpot)) {
+					blackNewKingSpot.setPiece(blackKingSpot.getPiece());
+					blackNewRookSpot.setPiece(blackSxRookSpot.getPiece());
+					blackKingSpot.setPiece(null);
+					blackSxRookSpot.setPiece(null);
+					return true;
+				}
 			}
 		}
 		return false;
@@ -351,7 +373,7 @@ public final class Move {
 		return false;
 	}
 	/**
-	 * applica una serie di controlli per stabilire se l'arrocco � possibile
+	 * applica una serie di controlli per stabilire se l'arrocco è possibile
 	 * 
 	 * @param board
 	 * @param king
@@ -406,7 +428,7 @@ public final class Move {
 
 	/**
 	 * controlla se la casa di start della mossa corrisponde parzialmente
-	 * all'ambiguità
+	 * all'ambiguitÃ 
 	 * 
 	 * @param move
 	 * @param coord
@@ -431,10 +453,6 @@ public final class Move {
 	// Getters & Setters
 	public AlgebraicNotation getInterpreter() {
 		return interpreter;
-	}
-
-	public void setInterpreter(final AlgebraicNotation interpreter) {
-		this.interpreter = interpreter;
 	}
 
 	public Spot getStart() {
@@ -473,5 +491,4 @@ public final class Move {
 		String output = "";
 		return output += "[start: " + start + " end: " + end + "]";
 	}
-
 }
