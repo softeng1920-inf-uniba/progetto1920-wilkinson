@@ -264,7 +264,17 @@ public final class Move {
 		} else {
 			Spot blackKingSpot = game.getBoard().getSpot(0, 4);
 			if (this.getInterpreter().isCastleShort()) {
-				// TODO arrocco corto (neri)
+				Spot blackDxRookSpot = game.getBoard().getSpot(0, 7);
+				Spot blackNewKingSpot = game.getBoard().getSpot(0, 6);
+				Spot blackNewRookSpot = game.getBoard().getSpot(0, 5);
+				if (isCastlePossible(game.getBoard(), blackNewKingSpot, blackNewRookSpot, blackKingSpot,
+						blackDxRookSpot, null)) {
+					blackNewKingSpot.setPiece(blackKingSpot.getPiece());
+					blackNewRookSpot.setPiece(blackDxRookSpot.getPiece());
+					blackKingSpot.setPiece(null);
+					blackDxRookSpot.setPiece(null);
+					return true;
+				}
 			} else if (this.getInterpreter().isCastleLong()) {
 				// TODO arrocco lungo (neri)
 			}
