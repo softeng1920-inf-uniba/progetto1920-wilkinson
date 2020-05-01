@@ -90,12 +90,15 @@ public final class AlgebraicNotation {
 		}
 
 		if (isEnPassant) { // caso en passant
-			setEndSquareId(commandInterpreted.substring(STARTINDEX, ENPASSANTLENGTH)); // elimino la dicitura e.p.
+			// elimino la dicitura e.p.
+			setEndSquareId(commandInterpreted.substring(STARTINDEX, ENPASSANTLENGTH));
 			setEndSquareId(reduceString(getEndSquareId(), " "));
-		} else if (isCastleLong || isCastleShort) { // caso arrocco
+		} else if (isCastleLong || isCastleShort) {
+			// caso arrocco
 			setEndSquareId("");
 		} else {
-			setEndSquareId(commandInterpreted); // il resto della stringa è la casella di partenza/arrivo
+			// il resto della stringa è la casella di partenza/arrivo
+			setEndSquareId(commandInterpreted);
 		}
 	}
 
@@ -162,7 +165,7 @@ public final class AlgebraicNotation {
 	 * @return stringa ridotta
 	 */
 	private String reduceString(String command, String extracted) { // riduce la stringa di comando eliminando i
-																	// caratteri gi� estratti
+																	// caratteri gia' estratti
 
 		// controllo se la stringa da sottrarre è vuota o se contiene un simbolo da
 		// trattare diversamente*/

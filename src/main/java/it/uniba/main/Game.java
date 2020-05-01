@@ -18,7 +18,7 @@ public class Game {
 	private ArrayList<String> allMoves; // lista con le mosse effettuate dal bianco
 	private ArrayList<Piece> whiteCaptures; // lista con i pezzi catturati dal bianco (quindi pezzi neri)
 	private ArrayList<Piece> blackCaptures; // lista con i pezzi catturati dal nero (quindi pezzi bianchi)
-	private boolean isCapture; // true se c'� una cattura nel turno in corso
+	private boolean isCapture; // true se c'e' una cattura nel turno in corso
 
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
@@ -49,7 +49,7 @@ public class Game {
 	}
 
 	/**
-	 * stabilisce se la partita � in corso
+	 * stabilisce se la partita e' in corso
 	 * 
 	 * @return true se in corso, false se terminata
 	 */
@@ -110,20 +110,20 @@ public class Game {
 		Spot start = getBoard().getSpot(move.getStart().getX(), move.getStart().getY());
 		Spot end = getBoard().getSpot(move.getEnd().getX(), move.getEnd().getY());
 
-		// se lo spot di partenza � vuoto, non � stato trovato -> mossa illegale
+		// se lo spot di partenza e' vuoto, non e' stato trovato -> mossa illegale
 		if (start == null) {
 			return false;
 		}
 
-		// cerca se sulla scacchiera c'� stata una cattura
+		// cerca se sulla scacchiera c'e' stata una cattura
 		searchForCapture(start, end);
 
 		// gestisce il caso in cui ci sia una cattura
 		if (isCapture) {
-			// controlla se nel comando c'� la x
+			// controlla se nel comando c'e' la x
 			if (checkIfIsCapture(move.getInterpreter())) {
 				addCapture(); // aggiunge la cattura all'array corrispondente
-				// controllo se c'� una cattura en passant
+				// controllo se c'e' una cattura en passant
 
 				if (start.getPiece() instanceof Pawn && ((Pawn) start.getPiece()).isCapturingEnPassant()) {
 
@@ -133,16 +133,16 @@ public class Game {
 					return false;
 				}
 			} else {
-				// se c'� una cattura ma l'utente non ha scritto la x
+				// se c'e' una cattura ma l'utente non ha scritto la x
 				return false;
 			}
 		}
 
-		// controllo se il pezzo non � mai stato mosso
+		// controllo se il pezzo non e' mai stato mosso
 		if (start.getPiece().isMoved() == false) {
 			// lo setto come mosso
 			start.getPiece().setAsMoved();
-			// se � un pedone mai mosso setto che � possibile catturarlo en passant il
+			// se e' un pedone mai mosso setto che e' possibile catturarlo en passant il
 			// prossimo turno
 			if (start.getPiece() instanceof Pawn) {
 				((Pawn) start.getPiece()).setPossibleEnPassantCapture(true);
@@ -152,11 +152,6 @@ public class Game {
 		// muovo il pezzo e svuoto la casa di partenza
 		end.setPiece(start.getPiece());
 		start.setPiece(null);
-
-		// System.out.println(getBoard()); ---> attivare questa linea di codice per
-		// avere
-		// la stampa di tutti i pezzi sulla scacchiera
-		// e le relative mosse possibili
 		return true;
 	}
 
@@ -218,7 +213,7 @@ public class Game {
 	}
 
 	/**
-	 * ricerca sulla scacchiera se c'� stata una cattura e setta il pezzo come
+	 * ricerca sulla scacchiera se c'e' stata una cattura e setta il pezzo come
 	 * killed
 	 * 
 	 * @param start

@@ -34,6 +34,12 @@ public class King extends Piece {
 		return false;
 	}
 	
+	/**
+	 * ricalcola le mosse del re in base alle case d'arrivo minacciate da pezzi
+	 * avversari
+	 * 
+	 * @param board
+	 */
 	void recalculateMoves(Board board) {
 		ArrayList<Move> movesToRemove = new ArrayList <Move>();
 		for (int i = 0; i < 8; i++) {

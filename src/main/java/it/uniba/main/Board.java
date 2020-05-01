@@ -1,8 +1,8 @@
 package it.uniba.main;
 
 /**
- * rappresenta una scacchiera (matrice 8x8) ogni casa � un elemento di classe
- * Spot
+ * rappresenta una scacchiera (matrice 8x8) ogni casella e' un elemento di
+ * classe Spot
  * 
  * @author wilkinson
  *
@@ -12,6 +12,8 @@ public class Board {
 	private static final int BOARDDIM = 8; // dimensioni della scacchiera
 	private static final int INITEMPTYRAW = 2; // indice di riga di partenza scacchiera iniziale vuota
 	private static final int ENDEMPTYRAW = 6; // indice di riga di fine scacchiera iniziale vuota
+
+	// costanti ANSI per background o colore font
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
 	public static final String ANSI_WHITE = "\u001B[37m";
@@ -123,9 +125,9 @@ public class Board {
 	}
 
 	/**
-	 * stabilisce se lo spot di arrivo � una casella avanti allo spot di partenza
-	 * [ ][E][ ]... direzione giusta per i bianchi [ ][S][ ]... [ ][E][ ]...
-	 * direzione giusta per i neri
+	 * stabilisce se lo spot di arrivo e' una casella avanti allo spot di partenza [
+	 * ][E][ ]... direzione giusta per i bianchi [ ][S][ ]... [ ][E][ ]...
+	 * direzionengiusta per i neri
 	 * 
 	 * @param start
 	 * @param end
@@ -153,8 +155,8 @@ public class Board {
 	}
 
 	/**
-	 * stabilisce se lo spot di arrivo � due caselle avanti allo spot di partenza
-	 * [ ][E][ ]... direzione giusta per i bianchi [ ][ ][ ]... [ ][S][ ]... [ ][ ][
+	 * stabilisce se lo spot di arrivo e' due caselle avanti allo spot di partenza [
+	 * ][E][ ]... direzione giusta per i bianchi [ ][ ][ ]... [ ][S][ ]... [ ][ ][
 	 * ]... [ ][E][ ]... direzione giusta per i neri
 	 * 
 	 * @param start
@@ -212,7 +214,7 @@ public class Board {
 	}
 
 	/**
-	 * stabilisce se lo spot di arrivo � in diagonale rispetto allo spot di
+	 * stabilisce se lo spot di arrivo e' in diagonale rispetto allo spot di
 	 * partenza [ ][ ][ ][E]... [E][ ][E][ ]... [ ][S][ ][ ]... [E][ ][E][ ]... [ ][
 	 * ][ ][E]...
 	 * 
@@ -232,7 +234,7 @@ public class Board {
 	}
 
 	/**
-	 * stabilisce se lo spot di arrivo � sulla stessa colonna o riga rispetto allo
+	 * stabilisce se lo spot di arrivo e' sulla stessa colonna o riga rispetto allo
 	 * spot di partenza [ ][E][ ][ ]... [ ][E][ ][ ]... [E][S][E][E]... [ ][E][ ][
 	 * ]... [ ][E][ ][ ]...
 	 * 
@@ -250,7 +252,7 @@ public class Board {
 	}
 
 	/**
-	 * controlla se il percorso dal punto di partenza a quello di arrivo � libero
+	 * controlla se il percorso dal punto di partenza a quello di arrivo e' libero
 	 * [S][x][x][E]... controllo su riga [x][x][ ][ ]... [x][ ][x][ ]... [x][ ][
 	 * ][E]... controllo su diagonale [E][ ][ ][ ]... controllo su colonna
 	 * 

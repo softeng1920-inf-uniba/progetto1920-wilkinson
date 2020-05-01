@@ -81,7 +81,7 @@ public abstract class Piece {
 
 	//Getters & Setters
 	/**
-	 * ritorna il valore dell'attributo ehite
+	 * ritorna il valore dell'attributo white
 	 * 
 	 * @return white true se il pezzo e' bianco, false se il pezzo e' nero
 	 */

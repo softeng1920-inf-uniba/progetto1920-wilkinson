@@ -130,7 +130,8 @@ public class Pawn extends Piece {
 	 * @return
 	 */
 	boolean isCapturingEnPassant(Board board, Spot start, Spot end) {
-		if (board.getSpot(start.getX(), end.getY()).getPiece() != null
+
+		if (!board.getSpot(start.getX(), end.getY()).isEmpty()
 				&& board.getSpot(start.getX(), end.getY()).getPiece() instanceof Pawn) {
 			Pawn possibleCapture = (Pawn) board.getSpot(start.getX(), end.getY()).getPiece();
 			if (possibleCapture.isWhite() != board.getSpot(start.getX(), start.getY()).getPiece().isWhite()
