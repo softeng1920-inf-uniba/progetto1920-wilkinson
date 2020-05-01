@@ -281,6 +281,27 @@ public final class Move {
 	}
 
 	/**
+	 * controlla se le case fra re e torre sono libere da pezzi
+	 * 
+	 * @param board
+	 * @param kingSpot
+	 * @param rookSpot
+	 * @return
+	 */
+	private boolean isPathCastleFree(Board board, Spot kingSpot, Spot rookSpot, Spot knightPos) {
+		if (this.getInterpreter().isCastleShort()) {
+			if (kingSpot.isEmpty() && rookSpot.isEmpty()) {
+				return true;
+			}
+		} else if (this.getInterpreter().isCastleLong()) {
+			if (kingSpot.isEmpty() && rookSpot.isEmpty() && knightPos.isEmpty()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * confronta due oggetti di tipo Move e controlla se hanno le stesse coordinate
 	 * 
 	 * @param move
