@@ -316,6 +316,22 @@ public final class Move {
 	}
 
 	/**
+	 * controlla che i pezzi nelle case di partenza di re e torre siano giusti
+	 * 
+	 * @param king
+	 * @param rook
+	 * @return
+	 */
+	private boolean areCastlePiecesThere(Spot king, Spot rook) {
+		if (!king.isEmpty() && !rook.isEmpty()) {
+			if (king.getPiece() instanceof King && rook.getPiece() instanceof Rook) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * confronta due oggetti di tipo Move e controlla se hanno le stesse coordinate
 	 * 
 	 * @param move
