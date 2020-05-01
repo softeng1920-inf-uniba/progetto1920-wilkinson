@@ -263,6 +263,24 @@ public final class Move {
 	}
 
 	/**
+	 * controlla se le case fra re e torre sono sotto attacco
+	 * 
+	 * @param board
+	 * @param kingSpot
+	 * @param rookSpot
+	 * @param king
+	 * @return
+	 */
+	private boolean isPathCastleNotAttacked(Board board, Spot kingSpot, Spot rookSpot, Spot king) {
+		if (king.isUnderAttack(board, king.getPiece().isWhite())
+				|| kingSpot.isUnderAttack(board, king.getPiece().isWhite())
+				|| rookSpot.isUnderAttack(board, king.getPiece().isWhite())) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
 	 * confronta due oggetti di tipo Move e controlla se hanno le stesse coordinate
 	 * 
 	 * @param move
