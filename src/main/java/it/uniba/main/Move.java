@@ -247,14 +247,34 @@ public final class Move {
 		if (game.isWhiteTurn()) {
 			Spot whiteKingSpot = game.getBoard().getSpot(7, 4);
 			if (this.getInterpreter().isCastleShort()) {
-				// TODO arrocco corto (bianchi)
+				Spot whiteDxRookSpot = game.getBoard().getSpot(7, 7);
+				Spot whiteNewKingSpot = game.getBoard().getSpot(7, 6);
+				Spot whiteNewRookSpot = game.getBoard().getSpot(7, 5);
+				if (isCastlePossible(game.getBoard(), whiteNewKingSpot, whiteNewRookSpot, whiteKingSpot,
+						whiteDxRookSpot, null)) {
+					whiteNewKingSpot.setPiece(whiteKingSpot.getPiece());
+					whiteNewRookSpot.setPiece(whiteDxRookSpot.getPiece());
+					whiteKingSpot.setPiece(null);
+					whiteDxRookSpot.setPiece(null);
+					return true;
+				}
 			} else if (this.getInterpreter().isCastleLong()) {
 				// TODO arrocco lungo (bianchi)
 			}
 		} else {
 			Spot blackKingSpot = game.getBoard().getSpot(0, 4);
 			if (this.getInterpreter().isCastleShort()) {
-				// TODO arrocco corto (neri)
+				Spot blackDxRookSpot = game.getBoard().getSpot(0, 7);
+				Spot blackNewKingSpot = game.getBoard().getSpot(0, 6);
+				Spot blackNewRookSpot = game.getBoard().getSpot(0, 5);
+				if (isCastlePossible(game.getBoard(), blackNewKingSpot, blackNewRookSpot, blackKingSpot,
+						blackDxRookSpot, null)) {
+					blackNewKingSpot.setPiece(blackKingSpot.getPiece());
+					blackNewRookSpot.setPiece(blackDxRookSpot.getPiece());
+					blackKingSpot.setPiece(null);
+					blackDxRookSpot.setPiece(null);
+					return true;
+				}
 			} else if (this.getInterpreter().isCastleLong()) {
 				// TODO arrocco lungo (neri)
 			}
@@ -326,6 +346,30 @@ public final class Move {
 		if (!king.isEmpty() && !rook.isEmpty()) {
 			if (king.getPiece() instanceof King && rook.getPiece() instanceof Rook) {
 				return true;
+			}
+		}
+		return false;
+	}
+	/**
+	 * applica una serie di controlli per stabilire se l'arrocco è possibile
+	 * 
+	 * @param board
+	 * @param king
+	 * @param rook
+	 * @param kingSpot
+	 * @param rookSpot
+	 * @param kingOrigin
+	 * @return
+	 */
+	private boolean isCastlePossible(Board board, Spot kingSpot, Spot rookSpot, Spot kingOrigin, Spot rookOrigin,
+			Spot knightSpot) {
+		if (areCastlePiecesThere(kingOrigin, rookOrigin)) {
+			if (areCastlePiecesNotMoved((King) kingOrigin.getPiece(), (Rook) rookOrigin.getPiece())) {
+				if (isPathCastleFree(board, kingSpot, rookSpot, knightSpot)) {
+					if (isPathCastleNotAttacked(board, kingSpot, rookSpot, kingOrigin)) {
+						return true;
+					}
+				}
 			}
 		}
 		return false;
