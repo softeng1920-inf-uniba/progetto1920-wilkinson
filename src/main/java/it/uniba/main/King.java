@@ -2,14 +2,15 @@ package it.uniba.main;
 
 import java.util.ArrayList;
 
-/**rappresenta un re sulla scacchiera
+/**
+ * rappresenta un re sulla scacchiera
  * 
  * @author wilkinson
  *
  */
 public class King extends Piece {
 
-	public King(boolean white) {
+	public King(final boolean white) {
 		super(white);
 	}
 
@@ -23,7 +24,7 @@ public class King extends Piece {
 	}
 
 	@Override
-	boolean canMove(Board board, Spot start, Spot end) {
+	boolean canMove(final Board board, final Spot start, final Spot end) {
 		if (board.isSpotAround(start, end)) {
 			if (end.isEmpty()) {
 				return true;
@@ -42,18 +43,18 @@ public class King extends Piece {
 	void recalculateMoves(final Board board) {
 		ArrayList<Move> movesCopy = new ArrayList<Move>();
 		ArrayList<Move> movesToRemove = new ArrayList<Move>();
-
 		if (!this.getLegalMoves().isEmpty()) {
+			// faccio una copia dell'array di mosse lagali del re
 			for (Move currentMove : this.getLegalMoves()) {
 				movesCopy.add(currentMove);
 			}
-
+			// controllo se ogni casa di destinazione non sia sotto attacco
 			for (Move currentMove : movesCopy) {
 				if (board.kingUnderAttackNext(currentMove.getStart(), currentMove.getEnd())) {
 					movesToRemove.add(currentMove);
 				}
 			}
-
+			// rimuovo le mosse non valide
 			this.getLegalMoves().removeAll(movesToRemove);
 		}
 	}

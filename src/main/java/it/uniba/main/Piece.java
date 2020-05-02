@@ -10,17 +10,19 @@ import java.util.ArrayList;
  *
  */
 public abstract class Piece {
-	boolean killed = false; // true se pezzo catturato, false altrimenti
-	boolean white = false; // true se pezzo bianco, false altrimenti
-	boolean moved = false; // true se pezzo mosso, false altrimenti
+	private boolean killed = false; // true se pezzo catturato, false altrimenti
+	private boolean white = false; // true se pezzo bianco, false altrimenti
+	private boolean moved = false; // true se pezzo mosso, false altrimenti
 	private ArrayList<Move> legalMoves;
+	private static final int BOARDDIM = 8;
+	private static final int FIRST = 0;
 
 	/**
 	 * costruttore della classe Pezzo
 	 * 
 	 * @param white true se pezzo bianco, false se pezzo nero
 	 */
-	public Piece(boolean white) {
+	public Piece(final boolean white) {
 		this.legalMoves = new ArrayList<Move>();
 		this.setWhite(white);
 	}
@@ -35,10 +37,10 @@ public abstract class Piece {
 	 * trova tutte le possibili mosse legali del pezzo corrente
 	 * 
 	 */
-	void findLegalMoves(Board board, Spot currentSpot) {
+	void findLegalMoves(final Board board, final Spot currentSpot) {
 		this.legalMoves.clear();
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
+		for (int i = FIRST; i < BOARDDIM; i++) {
+			for (int j = FIRST; j < BOARDDIM; j++) {
 				Spot startSpot = board.getSpot(currentSpot.getX(), currentSpot.getY());
 				Spot endSpot = board.getSpot(i, j);
 				Move currentMove = new Move(startSpot, endSpot);
@@ -67,7 +69,7 @@ public abstract class Piece {
 		String output = "";
 		output += this.draw() + " ";
 		if (!legalMoves.isEmpty()) {
-			output += legalMoves.get(0).getStart();
+			output += legalMoves.get(FIRST).getStart();
 		}
 		output += " Mosse possibili: \n";
 		for (Move cmove : legalMoves) {

@@ -12,7 +12,7 @@ public class Pawn extends Piece {
 	private static final int ENPASSANT_WHITE_X = 3;
 	private static final int ENPASSANT_BLACK_X = 4;
 
-	public Pawn(boolean white) {
+	public Pawn(final boolean white) {
 		super(white); // chiamo il costruttore della classe astratta Piece
 		possibleEnPassantCapture = false; // settato a true quando il pezzo potra' essere catturato en-passant
 		isCapturingEnPassant = false; // settato a true quando il pezzo stara' catturando en-passant
@@ -30,13 +30,13 @@ public class Pawn extends Piece {
 		}
 	}
 
+	@Override
 	/**
 	 * metodo che verifica il possibile movimento di una o due posizioni del pedone
 	 * e che verifica la possibile cattura di un pezzo avversario attraverso una
 	 * cattura classica o attraverso la cattura en-passant
 	 */
-	@Override
-	boolean canMove(Board board, Spot start, Spot end) {
+	boolean canMove(final Board board, final Spot start, final Spot end) {
 		Pawn startPiece = (Pawn) start.getPiece();
 		Piece endPiece = end.getPiece();
 

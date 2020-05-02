@@ -8,9 +8,8 @@ package it.uniba.main;
  */
 public class Bishop extends Piece {
 
-	public Bishop(boolean white) {
+	public Bishop(final boolean white) {
 		super(white);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -24,7 +23,7 @@ public class Bishop extends Piece {
 	}
 
 	@Override
-	boolean canMove(Board board, Spot start, Spot end) {
+	boolean canMove(final Board board, final Spot start, final Spot end) {
 		if (board.isFreePath(start, end)) {
 			return true;
 		}

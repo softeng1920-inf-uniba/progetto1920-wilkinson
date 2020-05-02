@@ -8,9 +8,8 @@ package it.uniba.main;
  */
 public class Rook extends Piece {
 
-	public Rook(boolean white) {
+	public Rook(final boolean white) {
 		super(white);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -23,7 +22,7 @@ public class Rook extends Piece {
 	}
 
 	@Override
-	boolean canMove(Board board, Spot start, Spot end) {
+	boolean canMove(final Board board, final Spot start, final Spot end) {
 		if (board.isFreePath(start, end)) {
 			return true;
 		}

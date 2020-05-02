@@ -8,9 +8,9 @@ package it.uniba.main;
  *
  */
 public class Spot {
-	Piece piece; // pezzo che la occupa
-	int x; // coordinata riga
-	int y; // coordinata colonna
+	private Piece piece; // pezzo che la occupa
+	private int x; // coordinata riga
+	private int y; // coordinata colonna
 
 	/**
 	 * costruttore di Spot (che rappresenta una casella della scacchiera)
@@ -18,7 +18,7 @@ public class Spot {
 	 * @param x coordinata della riga (corrispondente ad un numero)
 	 * @param y coordinata della colonna (corrispondente ad una lettera)
 	 */
-	public Spot(int x, int y, Piece piece) {
+	public Spot(final int x, final int y, final Piece piece) {
 		this.x = x;
 		this.y = y;
 		this.piece = piece;
@@ -30,7 +30,7 @@ public class Spot {
 	 * @param x
 	 * @param y
 	 */
-	public Spot(int x, int y) {
+	public Spot(final int x, final int y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -55,7 +55,7 @@ public class Spot {
 	 * @param color    colore del pezzo amico
 	 * @return true se lo Spot corrente e' sotto attacco, false altrimenti
 	 */
-	boolean isUnderAttack(Board board, boolean color) {
+	boolean isUnderAttack(final Board board, final boolean color) {
 		Move examinedMove = new Move(null, this);
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
@@ -102,8 +102,9 @@ public class Spot {
 			return "g";
 		case 7:
 			return "h";
+		default:
+			return null;
 		}
-		return null;
 	}
 
 	// Getters & Setters

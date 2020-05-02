@@ -7,21 +7,16 @@ package it.uniba.main;
  *
  */
 public class Knight extends Piece {
-
 	/**
 	 * Costruttore
 	 * 
 	 * @param white
 	 */
-	public Knight(boolean white) {
+	public Knight(final boolean white) {
 		super(white);
 
 	}
 
-	/**
-	 * Metodo per ottenere l'unicode del cavallo nero e di quello bianco
-	 * 
-	 */
 	@Override
 	public String draw() {
 		if (isWhite()) {
@@ -31,19 +26,8 @@ public class Knight extends Piece {
 		}
 	}
 
-	/**
-	 * Metodo che verifica che il movimento del cavallo, indicato dall'utente, sia
-	 * possibile
-	 *
-	 * @param board       scacchiera attuale
-	 * @param start       posizione di partenza del pezzo
-	 * @param end         posizione di arrivo del pezzo
-	 * @param isWhiteTurn turno del giocatore
-	 *
-	 * @return True se e' una mossa legale altrimenti False
-	 */
 	@Override
-	boolean canMove(Board board, Spot start, Spot end) {
+	boolean canMove(final Board board, final Spot start, final Spot end) {
 		Knight startPiece = (Knight) start.getPiece();
 		Piece endPiece = end.getPiece();
 
