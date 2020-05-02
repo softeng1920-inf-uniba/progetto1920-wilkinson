@@ -15,6 +15,13 @@ public final class Move {
 	private Piece pieceMoved; // pezzo che deve eseguire il movimento
 	private boolean isAmbiguity = false; // caso in cui ci sia ambiguita' di movimento
 	private String ambiguity; // primo carattere di un'ambiguitÃ 
+	
+	private static final int BKING_RAW = 0;
+	private static final int BKING_COL = 4;
+	private static final int WKING_RAW = 7;
+	private static final int WKING_COL = 4;
+	private static final int FIRST = 0;
+	private static final int PIECES_LEGAL = 1;
 
 	/**
 	 * costruttore dell'oggetto Move
@@ -27,9 +34,10 @@ public final class Move {
 
 		if (this.isCastle()) { // se e' un arrocco setta le coordinate di partenza del re
 			if (game.isWhiteTurn()) {
-				this.start = new Spot(7, 4);
+				this.start = new Spot(WKING_RAW, WKING_COL);
 			} else {
-				this.start = new Spot(0, 4);
+				
+				this.start = new Spot(BKING_RAW, BKING_COL);
 			}
 		}
 
@@ -129,7 +137,7 @@ public final class Move {
 				}
 			}
 		}
-		if (piecesMovable.size() == 1) {
+		if (piecesMovable.size() == PIECES_LEGAL) {
 			return true;
 		}
 		return false;
@@ -245,6 +253,23 @@ public final class Move {
 		return false;
 	}
 
+	private static final int RAW_1 = 7;
+	private static final int RAW_2 = 6;
+	private static final int RAW_3 = 5;
+	private static final int RAW_4 = 4;
+	private static final int RAW_5 = 3;
+	private static final int RAW_6 = 2;
+	private static final int RAW_7 = 1;
+	private static final int RAW_8 = 0;
+	private static final int COL_H = 7;
+	private static final int COL_G = 6;
+	private static final int COL_F = 5;
+	private static final int COL_E = 4;
+	private static final int COL_D = 3;
+	private static final int COL_C = 2;
+	private static final int COL_B = 1;
+	private static final int COL_A = 0;
+	
 	/**
 	 * controlla se e' possibile arroccare ed effettua l'arrocco
 	 * 
@@ -253,11 +278,11 @@ public final class Move {
 	 */
 	boolean makeCastling(Game game) {
 		if (game.isWhiteTurn()) {
-			Spot whiteKingSpot = game.getBoard().getSpot(7, 4);
+			Spot whiteKingSpot = game.getBoard().getSpot(RAW_1, COL_E);
 			if (this.getInterpreter().isCastleShort()) { // arrocco corto bianco
-				Spot whiteDxRookSpot = game.getBoard().getSpot(7, 7);
-				Spot whiteNewKingSpot = game.getBoard().getSpot(7, 6);
-				Spot whiteNewRookSpot = game.getBoard().getSpot(7, 5);
+				Spot whiteDxRookSpot = game.getBoard().getSpot(RAW_1, COL_H);
+				Spot whiteNewKingSpot = game.getBoard().getSpot(RAW_1, COL_G);
+				Spot whiteNewRookSpot = game.getBoard().getSpot(RAW_1, COL_F);
 				if (isCastlePossible(game.getBoard(), whiteNewKingSpot, whiteNewRookSpot, whiteKingSpot,
 						whiteDxRookSpot, null)) {
 					whiteNewKingSpot.setPiece(whiteKingSpot.getPiece());
@@ -267,10 +292,10 @@ public final class Move {
 					return true;
 				}
 			} else if (this.getInterpreter().isCastleLong()) { // arrocco lungo bianco
-				Spot whiteSxRookSpot = game.getBoard().getSpot(7, 0);
-				Spot whiteNewKingSpot = game.getBoard().getSpot(7, 2);
-				Spot whiteNewRookSpot = game.getBoard().getSpot(7, 3);
-				Spot knightSpot = game.getBoard().getSpot(7, 1);
+				Spot whiteSxRookSpot = game.getBoard().getSpot(RAW_1, COL_A);
+				Spot whiteNewKingSpot = game.getBoard().getSpot(RAW_1, COL_C);
+				Spot whiteNewRookSpot = game.getBoard().getSpot(RAW_1, COL_D);
+				Spot knightSpot = game.getBoard().getSpot(RAW_1, COL_B);
 				if (isCastlePossible(game.getBoard(), whiteNewKingSpot, whiteNewRookSpot, whiteKingSpot,
 						whiteSxRookSpot, knightSpot)) {
 					whiteNewKingSpot.setPiece(whiteKingSpot.getPiece());
@@ -281,11 +306,11 @@ public final class Move {
 				}
 			}
 		} else {
-			Spot blackKingSpot = game.getBoard().getSpot(0, 4);
+			Spot blackKingSpot = game.getBoard().getSpot(RAW_8, COL_E);
 			if (this.getInterpreter().isCastleShort()) { // arrocco corto nero
-				Spot blackDxRookSpot = game.getBoard().getSpot(0, 7);
-				Spot blackNewKingSpot = game.getBoard().getSpot(0, 6);
-				Spot blackNewRookSpot = game.getBoard().getSpot(0, 5);
+				Spot blackDxRookSpot = game.getBoard().getSpot(RAW_8, COL_H);
+				Spot blackNewKingSpot = game.getBoard().getSpot(RAW_8, COL_G);
+				Spot blackNewRookSpot = game.getBoard().getSpot(RAW_8, COL_F);
 				if (isCastlePossible(game.getBoard(), blackNewKingSpot, blackNewRookSpot, blackKingSpot,
 						blackDxRookSpot, null)) {
 					blackNewKingSpot.setPiece(blackKingSpot.getPiece());
@@ -295,10 +320,10 @@ public final class Move {
 					return true;
 				}
 			} else if (this.getInterpreter().isCastleLong()) { // arrocco lungo nero
-				Spot blackSxRookSpot = game.getBoard().getSpot(0, 0);
-				Spot blackNewKingSpot = game.getBoard().getSpot(0, 2);
-				Spot blackNewRookSpot = game.getBoard().getSpot(0, 3);
-				Spot knightSpot = game.getBoard().getSpot(0, 1);
+				Spot blackSxRookSpot = game.getBoard().getSpot(RAW_8, COL_A);
+				Spot blackNewKingSpot = game.getBoard().getSpot(RAW_8, COL_C);
+				Spot blackNewRookSpot = game.getBoard().getSpot(RAW_8, COL_D);
+				Spot knightSpot = game.getBoard().getSpot(RAW_8, COL_B);
 				if (isCastlePossible(game.getBoard(), blackNewKingSpot, blackNewRookSpot, blackKingSpot,
 						blackSxRookSpot, knightSpot)) {
 					blackNewKingSpot.setPiece(blackKingSpot.getPiece());
@@ -380,6 +405,7 @@ public final class Move {
 		}
 		return false;
 	}
+
 	/**
 	 * applica una serie di controlli per stabilire se l'arrocco è possibile
 	 * 
@@ -391,8 +417,8 @@ public final class Move {
 	 * @param kingOrigin
 	 * @return
 	 */
-	private boolean isCastlePossible(Board board, Spot kingSpot, Spot rookSpot, Spot kingOrigin, Spot rookOrigin,
-			Spot knightSpot) {
+	private boolean isCastlePossible(Board board, Spot kingSpot, Spot rookSpot, 
+			Spot kingOrigin, Spot rookOrigin, Spot knightSpot) {
 		if (areCastlePiecesThere(kingOrigin, rookOrigin)) {
 			if (areCastlePiecesNotMoved((King) kingOrigin.getPiece(), (Rook) rookOrigin.getPiece())) {
 				if (isPathCastleFree(board, kingSpot, rookSpot, knightSpot)) {
@@ -443,7 +469,7 @@ public final class Move {
 	 * @return
 	 */
 	public boolean samePartialStart(Move move, String coord) {
-		if (Character.isDigit(coord.charAt(0))) {
+		if (Character.isDigit(coord.charAt(FIRST))) {
 			if (move.getStart().getX() == convertCoordinate(coord)) {
 				return true;
 			} else {

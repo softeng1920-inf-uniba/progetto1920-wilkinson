@@ -19,6 +19,9 @@ public class Game {
 	private ArrayList<Piece> whiteCaptures; // lista con i pezzi catturati dal bianco (quindi pezzi neri)
 	private ArrayList<Piece> blackCaptures; // lista con i pezzi catturati dal nero (quindi pezzi bianchi)
 	private boolean isCapture; // true se c'e' una cattura nel turno in corso
+	
+	private static final int BOARDDIM = 8;
+	private static final int EN_PASSANT = 4;
 
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
@@ -56,9 +59,8 @@ public class Game {
 	public boolean isEnd() {
 		if (status != GameStatus.ACTIVE) {
 			return true;
-		} else {
-			return false;
-		}
+		} 
+		return false;
 	}
 
 	/**
@@ -69,9 +71,11 @@ public class Game {
 	public void currentGame(final String command) {
 		Move move = new Move(command, this);
 		if (move.getStart() != null && makeMove(move)) {
-			if (move.getPieceMoved() instanceof Pawn && ((Pawn) move.getPieceMoved()).isCapturingEnPassant()) {
+			if (move.getPieceMoved() instanceof Pawn && 
+					((Pawn) move.getPieceMoved()).isCapturingEnPassant()) {
 				// se en passant riscrivo la mossa e la aggiungo allo storico
-				String enPassantCommand = command.substring(0, 4) + " e.p.";
+				String enPassantCommand = command.substring(0, EN_PASSANT) + " e.p.";
+				//TODO risolvere se en passant scritto senza ambiguita' (es: 'xd5' invece di 'exd5')
 				getAllMoves().add(" " + enPassantCommand);
 			} else {
 				// aggiunto la mossa all'arraylist dello storico mosse
@@ -100,7 +104,7 @@ public class Game {
 	 * @param move mossa da effettuare
 	 * @return true se la mossa e' stata effettuata, false viceversa
 	 */
-	private boolean makeMove(Move move) {
+	private boolean makeMove(final Move move) {
 		// controllo se la mossa è un arrocco
 		if (move.isCastle()) {
 			if (move.makeCastling(this)) {
@@ -128,7 +132,8 @@ public class Game {
 				addCapture(); // aggiunge la cattura all'array corrispondente
 
 				// controllo se c'e' una cattura en passant
-				if (start.getPiece() instanceof Pawn && ((Pawn) start.getPiece()).isCapturingEnPassant()) {
+				if (start.getPiece() instanceof Pawn && 
+						((Pawn) start.getPiece()).isCapturingEnPassant()) {
 					// svuoto la casa dell'en passant
 					getBoard().getSpot(start.getX(), end.getY()).setPiece(null);
 				} else if (checkIfEnPassant(move.getInterpreter())) {
@@ -163,8 +168,8 @@ public class Game {
 	 * 
 	 */
 	private void addCapture() {
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
+		for (int i = 0; i < BOARDDIM; i++) {
+			for (int j = 0; j < BOARDDIM; j++) {
 				Spot currentSpot = getBoard().getSpot(i, j);
 				if (currentSpot.getPiece() != null && currentSpot.getPiece().isKilled()) {
 					if (isWhiteTurn()) {
@@ -204,13 +209,15 @@ public class Game {
 		System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + "Catture del bianco:" + ANSI_RESET);
 		if (!whiteCaptures.isEmpty()) {
 			for (Piece currentPiece : whiteCaptures) {
-				System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + " " + currentPiece.draw() + " " + ANSI_RESET);
+				System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + " " 
+						+ currentPiece.draw() + " " + ANSI_RESET);
 			}
 		}
 		System.out.print(ANSI_BLACK_BACKGROUND + ANSI_WHITE + "\nCatture del nero:::" + ANSI_RESET);
 		if (!blackCaptures.isEmpty()) {
 			for (Piece currentPiece : blackCaptures) {
-				System.out.print(ANSI_BLACK_BACKGROUND + ANSI_WHITE + " " + currentPiece.draw() + " " + ANSI_RESET);
+				System.out.print(ANSI_BLACK_BACKGROUND + ANSI_WHITE + " " 
+						+ currentPiece.draw() + " " + ANSI_RESET);
 			}
 		}
 	}
@@ -222,19 +229,19 @@ public class Game {
 	 * @param start
 	 * @param end
 	 */
-	private void searchForCapture(Spot start, Spot end) {
-		if (end.getPiece() != null) {
+	private void searchForCapture(final Spot start, final Spot end) {
+		if (!end.isEmpty()) {
 			isCapture = true;
 			end.getPiece().setAsKilled();
 		} else {
-			if (start.getPiece() instanceof Pawn && ((Pawn) start.getPiece()).isCapturingEnPassant()) {
+			if (start.getPiece() instanceof Pawn && 
+					((Pawn) start.getPiece()).isCapturingEnPassant()) {
 				isCapture = true;
 				getBoard().getSpot(start.getX(), end.getY()).getPiece().setAsKilled();
 			} else {
 				isCapture = false;
 			}
 		}
-
 	}
 
 	/**
@@ -243,9 +250,9 @@ public class Game {
 	 * 
 	 * @param board
 	 */
-	private void setAllPawnNotEP(Board board) {
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
+	private void setAllPawnNotEP(final Board board) {
+		for (int i = 0; i < BOARDDIM; i++) {
+			for (int j = 0; j < BOARDDIM; j++) {
 				Spot currentSpot = getBoard().getSpot(i, j);
 				if (currentSpot.getPiece() instanceof Pawn) {
 					if (((Pawn) currentSpot.getPiece()).isWhite() != isWhiteTurn()) {
@@ -263,7 +270,7 @@ public class Game {
 	 * 
 	 * @param check
 	 */
-	private boolean checkIfIsCapture(AlgebraicNotation check) {
+	private boolean checkIfIsCapture(final AlgebraicNotation check) {
 		if (check.isCapture()) {
 			return true;
 		}
@@ -279,7 +286,7 @@ public class Game {
 	 * 
 	 * @param check
 	 */
-	public boolean checkIfEnPassant(AlgebraicNotation check) {
+	public boolean checkIfEnPassant(final AlgebraicNotation check) {
 		if (check.isEnPassant()) {
 			return true;
 		}

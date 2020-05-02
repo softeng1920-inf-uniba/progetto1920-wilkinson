@@ -11,6 +11,8 @@ public class Spot {
 	private Piece piece; // pezzo che la occupa
 	private int x; // coordinata riga
 	private int y; // coordinata colonna
+	private static final int BOARDDIM = 8;
+	private static final int START = 0;
 
 	/**
 	 * costruttore di Spot (che rappresenta una casella della scacchiera)
@@ -57,8 +59,8 @@ public class Spot {
 	 */
 	boolean isUnderAttack(final Board board, final boolean color) {
 		Move examinedMove = new Move(null, this);
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
+		for (int i = START; i < BOARDDIM; i++) {
+			for (int j = START; j < BOARDDIM; j++) {
 				Spot currentSpot = board.getSpot(i, j);
 				if (!currentSpot.isEmpty() && currentSpot.getPiece().isWhite() != color) {
 					for (Move currentMove : currentSpot.getPiece().getLegalMoves()) {
