@@ -70,7 +70,7 @@ public final class Move {
 	 * @param start
 	 * @param end
 	 */
-	public Move(Spot start, Spot end) {
+	public Move(final Spot start, final Spot end) {
 		this.start = start;
 		this.end = end;
 	}
@@ -113,7 +113,7 @@ public final class Move {
 	 * @param piece
 	 * @return
 	 */
-	boolean findStartSpot(Board board, Piece piece, boolean turn) {
+	boolean findStartSpot(final Board board, final Piece piece, boolean turn) {
 		ArrayList<Piece> piecesMovable = new ArrayList<Piece>();
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
@@ -232,7 +232,7 @@ public final class Move {
 	 * @param board scacchiera
 	 * @return true se cattura en passant, false altrimenti
 	 */
-	boolean isEnPassantMove(Piece piece, Spot start, Spot end, Board board) {
+	boolean isEnPassantMove(final Piece piece, final Spot start, final Spot end, final Board board) {
 		if (piece instanceof Pawn && board.isFrontDiagonal(start, end) && end.getPiece() == null
 				&& board.getSpot(start.getX(), end.getY()).getPiece() instanceof Pawn
 				&& ((Pawn) board.getSpot(start.getX(), end.getY()).getPiece()).isPossibleEnPassantCapture()) {
@@ -254,12 +254,12 @@ public final class Move {
 	}
 
 	private static final int RAW_1 = 7;
-	private static final int RAW_2 = 6;
-	private static final int RAW_3 = 5;
-	private static final int RAW_4 = 4;
-	private static final int RAW_5 = 3;
-	private static final int RAW_6 = 2;
-	private static final int RAW_7 = 1;
+//	private static final int RAW_2 = 6;
+//	private static final int RAW_3 = 5;
+//	private static final int RAW_4 = 4;
+//	private static final int RAW_5 = 3;
+//	private static final int RAW_6 = 2;
+//	private static final int RAW_7 = 1;
 	private static final int RAW_8 = 0;
 	private static final int COL_H = 7;
 	private static final int COL_G = 6;
@@ -276,7 +276,7 @@ public final class Move {
 	 * @param game
 	 * @return
 	 */
-	boolean makeCastling(Game game) {
+	boolean makeCastling(final Game game) {
 		if (game.isWhiteTurn()) {
 			Spot whiteKingSpot = game.getBoard().getSpot(RAW_1, COL_E);
 			if (this.getInterpreter().isCastleShort()) { // arrocco corto bianco
@@ -346,7 +346,8 @@ public final class Move {
 	 * @param king
 	 * @return
 	 */
-	private boolean isPathCastleNotAttacked(Board board, Spot kingSpot, Spot rookSpot, Spot king) {
+	private boolean isPathCastleNotAttacked(final Board board, final Spot kingSpot, 
+									final Spot rookSpot, final Spot king) {
 		if (king.isUnderAttack(board, king.getPiece().isWhite())
 				|| kingSpot.isUnderAttack(board, king.getPiece().isWhite())
 				|| rookSpot.isUnderAttack(board, king.getPiece().isWhite())) {
@@ -363,7 +364,8 @@ public final class Move {
 	 * @param rookSpot
 	 * @return
 	 */
-	private boolean isPathCastleFree(Board board, Spot kingSpot, Spot rookSpot, Spot knightPos) {
+	private boolean isPathCastleFree(final Board board, final Spot kingSpot, 
+										final Spot rookSpot, final Spot knightPos) {
 		if (this.getInterpreter().isCastleShort()) {
 			if (kingSpot.isEmpty() && rookSpot.isEmpty()) {
 				return true;
@@ -383,7 +385,7 @@ public final class Move {
 	 * @param rook
 	 * @return
 	 */
-	private boolean areCastlePiecesNotMoved(King king, Rook rook) {
+	private boolean areCastlePiecesNotMoved(final King king, final Rook rook) {
 		if (king.isMoved() || rook.isMoved()) {
 			return false;
 		}
@@ -397,7 +399,7 @@ public final class Move {
 	 * @param rook
 	 * @return
 	 */
-	private boolean areCastlePiecesThere(Spot king, Spot rook) {
+	private boolean areCastlePiecesThere(final Spot king, final Spot rook) {
 		if (!king.isEmpty() && !rook.isEmpty()) {
 			if (king.getPiece() instanceof King && rook.getPiece() instanceof Rook) {
 				return true;
@@ -417,8 +419,8 @@ public final class Move {
 	 * @param kingOrigin
 	 * @return
 	 */
-	private boolean isCastlePossible(Board board, Spot kingSpot, Spot rookSpot, 
-			Spot kingOrigin, Spot rookOrigin, Spot knightSpot) {
+	private boolean isCastlePossible(final Board board, final Spot kingSpot, final Spot rookSpot, 
+			final Spot kingOrigin, final Spot rookOrigin, final Spot knightSpot) {
 		if (areCastlePiecesThere(kingOrigin, rookOrigin)) {
 			if (areCastlePiecesNotMoved((King) kingOrigin.getPiece(), (Rook) rookOrigin.getPiece())) {
 				if (isPathCastleFree(board, kingSpot, rookSpot, knightSpot)) {
@@ -437,7 +439,7 @@ public final class Move {
 	 * @param move
 	 * @return true se hanno le stesse coordinate, false altrimenti
 	 */
-	public boolean equals(Move move) {
+	public boolean equals(final Move move) {
 		if (this.getEnd().getX() == move.getEnd().getX() && this.getEnd().getY() == move.getEnd().getY()
 				&& this.getStart().getX() == move.getStart().getX()
 				&& this.getStart().getY() == move.getStart().getY()) {
@@ -452,7 +454,7 @@ public final class Move {
 	 * @param move
 	 * @return
 	 */
-	public boolean sameEnd(Move move) {
+	public boolean sameEnd(final Move move) {
 		if (this.getEnd().getX() == move.getEnd().getX() && this.getEnd().getY() == move.getEnd().getY()) {
 			return true;
 		} else {
@@ -468,7 +470,7 @@ public final class Move {
 	 * @param coord
 	 * @return
 	 */
-	public boolean samePartialStart(Move move, String coord) {
+	public boolean samePartialStart(final Move move, final String coord) {
 		if (Character.isDigit(coord.charAt(FIRST))) {
 			if (move.getStart().getX() == convertCoordinate(coord)) {
 				return true;
