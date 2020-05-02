@@ -20,6 +20,7 @@ public class Board {
 	public static final String ANSI_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
+
 	/**
 	 * costruttore di Board, inizializza la scacchiera con la configurazione
 	 * iniziale usando il metodo resetBoard()
@@ -27,6 +28,16 @@ public class Board {
 	public Board() {
 		boxes = new Spot[BOARDDIM][BOARDDIM];
 		this.resetBoard();
+		this.recalLegalMoves();
+	}
+
+	public Board(boolean empty) {
+		boxes = new Spot[BOARDDIM][BOARDDIM];
+		for (int i = 0; i < BOARDDIM; i++) {
+			for (int j = 0; j < BOARDDIM; j++) {
+				boxes[i][j] = new Spot(i, j, null);
+			}
+		}
 	}
 
 	/**
@@ -83,11 +94,17 @@ public class Board {
 				boxes[i][j] = new Spot(i, j, null);
 			}
 		}
+	}
 
-		for (int i = 0; i < BOARDDIM; i++) {
-			for (int j = 0; j < BOARDDIM; j++) {
-				Spot currentSpot = getSpot(i, j);
-				if (!currentSpot.isEmpty()) {
+	/**
+	 * ricalcola le mosse legali di tutti i pezzi sulla scacchiera
+	 * 
+	 */
+	void recalLegalMoves() {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				Spot currentSpot = this.getSpot(i, j);
+				if (currentSpot.getPiece() != null) {
 					currentSpot.getPiece().findLegalMoves(this, currentSpot);
 				}
 			}
@@ -95,9 +112,71 @@ public class Board {
 	}
 
 	/**
-	 * stabilisce se i due spot in input sono diagonali rispetto alla direzione del
-	 * pezzo [E][ ][E]... direzione giusta per i bianchi [ ][S][ ]... [E][ ][E]...
-	 * direzione giusta per i neri
+	 * ricalcola le mosse legali dei due re sulla scacchiera
+	 */
+	void recalKingMoves() {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				Spot currentSpot = this.getSpot(i, j);
+				if (!currentSpot.isEmpty() && currentSpot.getPiece() instanceof King) {
+					((King) currentSpot.getPiece()).recalculateMoves(this);
+				}
+			}
+		}
+	}
+
+	/**
+	 * controlla se il re è sotto attacco dopo aver effettuato la mossa
+	 * 
+	 * @return
+	 */
+	boolean kingUnderAttackNext(Spot start, Spot end) {
+		// creo una nuova scacchiera
+		Board newBoard = new Board(true);
+		// copio la configurazione della scacchiera attuale
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				Spot currentSpot = newBoard.getSpot(i, j);
+				Piece currentPiece = this.getSpot(i, j).getPiece();
+				if (currentPiece instanceof King) {
+					currentSpot.setPiece(new King(currentPiece.isWhite()));
+				} else if (currentPiece instanceof Rook) {
+					currentSpot.setPiece(new Rook(currentPiece.isWhite()));
+				} else if (currentPiece instanceof Bishop) {
+					currentSpot.setPiece(new Bishop(currentPiece.isWhite()));
+				} else if (currentPiece instanceof Queen) {
+					currentSpot.setPiece(new Queen(currentPiece.isWhite()));
+				} else if (currentPiece instanceof Knight) {
+					currentSpot.setPiece(new Knight(currentPiece.isWhite()));
+				} else if (currentPiece instanceof Pawn) {
+					currentSpot.setPiece(new Pawn(currentPiece.isWhite()));
+				}
+			}
+		}
+		// ricalcolo le mosse legali
+		newBoard.recalLegalMoves();
+		// analizzo la mossa corrente del re
+		Spot newEnd = newBoard.getSpot(end.getX(), end.getY());
+		Spot newStart = newBoard.getSpot(start.getX(), start.getY());
+		// se c'è un pezzo nemico lo setto null per vedere se la casa
+		// sarebbe sotto attacco dopo il movimento
+		newEnd.setPiece(null);
+		// ricalcolo le mosse legali dei pezzi
+		newBoard.recalLegalMoves();
+		// controllo se la casa di movimento è sotto attacco o meno
+		if (newEnd.isUnderAttack(newBoard, newStart.getPiece().isWhite())) {
+			return true;
+		}
+		// se il movimento non mette il re sotto scacco, ritorno false
+		return false;
+	}
+
+	/**
+	 * stabilisce se i due spot in input sono diagonali 
+	 * rispetto alla direzione del pezzo 
+	 * [E][ ][E]... direzione giusta per i bianchi 
+	 * [ ][S][ ]... 
+	 * [E][ ][E]... direzione giusta per i neri 
 	 * 
 	 * @param start
 	 * @param end
@@ -125,9 +204,10 @@ public class Board {
 	}
 
 	/**
-	 * stabilisce se lo spot di arrivo e' una casella avanti allo spot di partenza [
-	 * ][E][ ]... direzione giusta per i bianchi [ ][S][ ]... [ ][E][ ]...
-	 * direzionengiusta per i neri
+	 * stabilisce se lo spot di arrivo è una casella avanti allo spot di partenza
+	 * [ ][E][ ]... direzione giusta per i bianchi
+	 * [ ][S][ ]...
+	 * [ ][E][ ]... direzione giusta per i neri
 	 * 
 	 * @param start
 	 * @param end
@@ -155,9 +235,12 @@ public class Board {
 	}
 
 	/**
-	 * stabilisce se lo spot di arrivo e' due caselle avanti allo spot di partenza [
-	 * ][E][ ]... direzione giusta per i bianchi [ ][ ][ ]... [ ][S][ ]... [ ][ ][
-	 * ]... [ ][E][ ]... direzione giusta per i neri
+	 *stabilisce se lo spot di arrivo è due caselle avanti allo spot di partenza
+	 * [ ][E][ ]... direzione giusta per i bianchi
+	 * [ ][ ][ ]...
+	 * [ ][S][ ]...
+	 * [ ][ ][ ]...
+	 * [ ][E][ ]... direzione giusta per i neri
 	 * 
 	 * @param start
 	 * @param end
@@ -185,23 +268,35 @@ public class Board {
 	}
 
 
-	/**Stabilisce se lo spot di arrivo e' dato da un movimento ad L
-	 * [ ][E][ ][E][ ]...
-	 * [E][ ][ ][ ][E]...
-	 * [ ][ ][S][ ][ ]...
-	 * [E][ ][ ][ ][E]...
-	 * [ ][E][ ][E][ ]...
+	/**
+	 * stabilisce se lo spot di arrivo è una casella valida per il cavallo 
+	 * rispetto allo spot di partenza
+	 * [E][ ][E][ ]... 
+	 * [ ][ ][ ][E]...
+	 * [ ][S][ ][ ]...
+	 * [ ][ ][ ][E]...
+	 * [E][ ][E][ ]... 
+	 * 
 	 * @param start
 	 * @param end
-	 * @return True se e' un movimento ad L altrimenti False
+	 * @return
 	 */
 	boolean isLMove(Spot start, Spot end) {
 		int diffX = Math.abs(start.getX() - end.getX());
 		int diffY = Math.abs(start.getY() - end.getY());
 		return diffX * diffY == 2;
 	}
-	
 
+	/**
+	 * stabilisce se lo spot di arrivo è una casella intorno allo spot di partenza
+	 * [E][E][E]... 
+	 * [E][S][E]...
+	 * [E][E][E]... 
+	 * 
+	 * @param start
+	 * @param end
+	 * @return
+	 */
 	public boolean isSpotAround(Spot start, Spot end) {
 		int diffX = Math.abs(start.getX() - end.getX());
 		int diffY = Math.abs(start.getY() - end.getY());
@@ -214,9 +309,12 @@ public class Board {
 	}
 
 	/**
-	 * stabilisce se lo spot di arrivo e' in diagonale rispetto allo spot di
-	 * partenza [ ][ ][ ][E]... [E][ ][E][ ]... [ ][S][ ][ ]... [E][ ][E][ ]... [ ][
-	 * ][ ][E]...
+	 * stabilisce se lo spot di arrivo è in diagonale rispetto allo spot di partenza
+	 * [ ][ ][ ][E]... 
+	 * [E][ ][E][ ]...
+	 * [ ][S][ ][ ]...
+	 * [E][ ][E][ ]...
+	 * [ ][ ][ ][E]... 
 	 * 
 	 * @param start
 	 * @param end
@@ -234,9 +332,12 @@ public class Board {
 	}
 
 	/**
-	 * stabilisce se lo spot di arrivo e' sulla stessa colonna o riga rispetto allo
-	 * spot di partenza [ ][E][ ][ ]... [ ][E][ ][ ]... [E][S][E][E]... [ ][E][ ][
-	 * ]... [ ][E][ ][ ]...
+	 * stabilisce se lo spot di arrivo è sulla stessa colonna o riga rispetto allo spot di partenza
+	 * [ ][E][ ][ ]... 
+	 * [ ][E][ ][ ]...
+	 * [E][S][E][E]...
+	 * [ ][E][ ][ ]...
+	 * [ ][E][ ][ ]... 
 	 * 
 	 * @param start
 	 * @param end
@@ -252,14 +353,17 @@ public class Board {
 	}
 
 	/**
-	 * controlla se il percorso dal punto di partenza a quello di arrivo e' libero
-	 * [S][x][x][E]... controllo su riga [x][x][ ][ ]... [x][ ][x][ ]... [x][ ][
-	 * ][E]... controllo su diagonale [E][ ][ ][ ]... controllo su colonna
-	 * 
-	 * @param start
-	 * @param end
-	 * @return un booleano che ci dice se il percorso e' libero
-	 */
+	 * controlla se il percorso dal punto di partenza a quello di arrivo è libero
+     * [S][x][x][E]... controllo su riga 
+     * [x][x][ ][ ]... 
+     * [x][ ][x][ ]...
+     * [x][ ][ ][E]... controllo su diagonale
+     * [E][ ][ ][ ]... controllo su colonna
+     * 
+     * @param start
+     * @param end
+     * @return
+     */
 	boolean isFreePath(Spot start, Spot end) {
 		int startX = start.getX();
 		int startY = start.getY();
@@ -521,7 +625,7 @@ public class Board {
 		for (int i = 0; i < BOARDDIM; i++) {
 			for (int j = 0; j < BOARDDIM; j++) {
 				Spot currentSpot = getSpot(i, j);
-				if (!currentSpot.isEmpty()) {
+				if (!currentSpot.isEmpty() && currentSpot.getPiece() instanceof King) {
 					output += currentSpot.getPiece() + "\n";
 				}
 			}
