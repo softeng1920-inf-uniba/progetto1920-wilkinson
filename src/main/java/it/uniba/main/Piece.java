@@ -2,8 +2,9 @@ package it.uniba.main;
 
 import java.util.ArrayList;
 
-/**rappresenta un pezzo degli scacchi generico
- * implementa un metodo che stabilisce il movimento di ogni pezzo
+/**
+ * rappresenta un pezzo degli scacchi generico implementa un metodo che
+ * stabilisce il movimento di ogni pezzo
  * 
  * @author wilkinson
  *
@@ -41,7 +42,7 @@ public abstract class Piece {
 				Spot startSpot = board.getSpot(currentSpot.getX(), currentSpot.getY());
 				Spot endSpot = board.getSpot(i, j);
 				Move currentMove = new Move(startSpot, endSpot);
-				if (this.canMove(board, startSpot, endSpot, this.isWhite())) {
+				if (this.canMove(board, startSpot, endSpot)) {
 					this.legalMoves.add(currentMove);
 				}
 			}
@@ -56,9 +57,10 @@ public abstract class Piece {
 	 * @param end   casa di arrivo
 	 * @return true se movimento possibile, false se mossa illegale
 	 */
-	abstract boolean canMove(Board board, Spot start, Spot end, boolean insWhiteTurn);
+	abstract boolean canMove(Board board, Spot start, Spot end);
 
-	/**stampa di un pezzo e le sue mosse legali
+	/**
+	 * stampa di un pezzo e le sue mosse legali
 	 * 
 	 */
 	public String toString() {
@@ -68,18 +70,18 @@ public abstract class Piece {
 			output += legalMoves.get(0).getStart();
 		}
 		output += " Mosse possibili: \n";
-		for (Move cmove: legalMoves) {
+		for (Move cmove : legalMoves) {
 			output += cmove + "\n";
 		}
 		if (this instanceof Pawn) {
-			output += "capturing EP: " + ((Pawn)this).isCapturingEnPassant() + "\n";
-			output += "capturable EP: " + ((Pawn)this).isPossibleEnPassantCapture() + "\n";
-			output += "isKilled: " + ((Pawn)this).isKilled() + "\n";
+			output += "capturing EP: " + ((Pawn) this).isCapturingEnPassant() + "\n";
+			output += "capturable EP: " + ((Pawn) this).isPossibleEnPassantCapture() + "\n";
+			output += "isKilled: " + ((Pawn) this).isKilled() + "\n";
 		}
 		return output;
 	}
 
-	//Getters & Setters
+	// Getters & Setters
 	/**
 	 * ritorna il valore dell'attributo white
 	 * 
@@ -131,7 +133,7 @@ public abstract class Piece {
 	public void setAsMoved() {
 		this.moved = true;
 	}
-	
+
 	public ArrayList<Move> getLegalMoves() {
 		return legalMoves;
 	}

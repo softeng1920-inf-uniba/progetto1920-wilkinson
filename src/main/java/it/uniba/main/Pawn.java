@@ -36,88 +36,51 @@ public class Pawn extends Piece {
 	 * cattura classica o attraverso la cattura en-passant
 	 */
 	@Override
-	boolean canMove(Board board, Spot start, Spot end, boolean isWhiteTurn) {
+	boolean canMove(Board board, Spot start, Spot end) {
 		Pawn startPiece = (Pawn) start.getPiece();
 		Piece endPiece = end.getPiece();
 
-		// turno del bianco
-		if (isWhiteTurn) {
-			// pezzo in start bianco
-			if (startPiece.isWhite()) {
-				// nessun pezzo in end
-				if (endPiece == null) {
-					// movimento in avanti di una casella (standard)
-					if (board.isFrontSpot(start, end)) {
-						return true;
-						// movimento in avanti di due caselle (se prima mossa)
-					} else if (board.isTwoSpotsAhead(start, end) && !startPiece.isMoved()) {
-						return true;
-					}
-					// stabilisce se il movimento è una cattura en passant
-					if (start.getX() == ENPASSANT_WHITE_X) {
-						if (board.isFrontDiagonal(start, end)) {
-							if (isCapturingEnPassant(board, start, end)) {
-								return true;
-							}
-						}
-					}
-				} else {
-					// pezzo in end bianco (stesso colore)
-					if (endPiece.isWhite()) {
-						return false;
-					} else {
-						// cattura del pezzo se in diagonale
-						if (board.isFrontDiagonal(start, end)) {
-							return true;
-						} else {
-							return false;
-						}
-					}
-				}
-				// turno del bianco ma pezzo nero da muovere
-			} else {
-				return false;
+		// nessun pezzo in end
+		if (endPiece == null) {
+			// movimento in avanti di una casella (standard)
+			if (board.isFrontSpot(start, end)) {
+				return true;
+				// movimento in avanti di due caselle (se prima mossa)
+			} else if (board.isTwoSpotsAhead(start, end) && !startPiece.isMoved()) {
+				return true;
 			}
-
-			// turno del nero
-		} else {
-			// pezzo in start nero
-			if (!startPiece.isWhite()) {
-				// nessun pezzo in end
-				if (endPiece == null) {
-					// movimento in avanti di una casella (standard)
-					if (board.isFrontSpot(start, end)) {
-						return true;
-						// movimento in avanti di due caselle (se prima mossa)
-					} else if (board.isTwoSpotsAhead(start, end) && !startPiece.isMoved()) {
-						return true;
-					}
-					// stabilisce se il movimento è una cattura en passant
-					if (start.getX() == ENPASSANT_BLACK_X) {
-						if (board.isFrontDiagonal(start, end)) {
-							if (isCapturingEnPassant(board, start, end)) {
-								return true;
-							}
-						}
-					}
-					// pezzo in end nero (stesso colore)
-				} else {
-					if (!endPiece.isWhite()) {
-						return false;
-					} else {
-						// cattura del pezzo se in diagonale
-						if (board.isFrontDiagonal(start, end)) {
+			// stabilisce se il movimento è una cattura en passant
+			if (startPiece.isWhite()) {
+				if (start.getX() == ENPASSANT_WHITE_X) { // per il bianco
+					if (board.isFrontDiagonal(start, end)) {
+						if (isCapturingEnPassant(board, start, end)) {
 							return true;
-						} else {
-							return false;
 						}
 					}
 				}
-				// turno del nero ma pezzo bianco da muovere
 			} else {
+				if (start.getX() == ENPASSANT_BLACK_X) { // per il nero
+					if (board.isFrontDiagonal(start, end)) {
+						if (isCapturingEnPassant(board, start, end)) {
+							return true;
+						}
+					}
+				}
+			}
+		} else {
+			// pezzo in end dello stesso colore
+			if (startPiece.isWhite() == endPiece.isWhite()) {
 				return false;
+			} else {
+				// cattura del pezzo se in diagonale
+				if (board.isFrontDiagonal(start, end)) {
+					return true;
+				} else {
+					return false;
+				}
 			}
 		}
+
 		return false;
 	}
 
