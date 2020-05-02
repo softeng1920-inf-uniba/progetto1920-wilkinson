@@ -377,18 +377,7 @@ public class Board {
 								if ((startX - i >= 0 && startX - i < BOARDDIM)
 										&& (startY - i >= 0 && startY - i < BOARDDIM)) {
 									Spot examined = getSpot(startX - i, startY - i);
-									if (!examined.isEmpty()) {
-										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
-											if (examined.equals(end)) {
-												return true;
-											} else {
-												return false;
-											}
-										} else {
-											return false;
-										}
-									}
-									if (examined.equals(end)) {
+									if (controlPath(examined, start, end)) {
 										return true;
 									}
 								}
@@ -398,18 +387,7 @@ public class Board {
 								if ((startX - i >= 0 && startX - i < BOARDDIM)
 										&& (startY + i >= 0 && startY + i < BOARDDIM)) {
 									Spot examined = getSpot(startX - i, startY + i);
-									if (!examined.isEmpty()) {
-										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
-											if (examined.equals(end)) {
-												return true;
-											} else {
-												return false;
-											}
-										} else {
-											return false;
-										}
-									}
-									if (examined.equals(end)) {
+									if (controlPath(examined, start, end)) {
 										return true;
 									}
 								}
@@ -421,18 +399,7 @@ public class Board {
 								if ((startX + i >= 0 && startX + i < BOARDDIM)
 										&& (startY - i >= 0 && startY - i < BOARDDIM)) {
 									Spot examined = getSpot(startX + i, startY - i);
-									if (!examined.isEmpty()) {
-										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
-											if (examined.equals(end)) {
-												return true;
-											} else {
-												return false;
-											}
-										} else {
-											return false;
-										}
-									}
-									if (examined.equals(end)) {
+									if (controlPath(examined, start, end)) {
 										return true;
 									}
 								}
@@ -442,18 +409,7 @@ public class Board {
 								if ((startX + i >= 0 && startX + i < BOARDDIM)
 										&& (startY + i >= 0 && startY + i < BOARDDIM)) {
 									Spot examined = getSpot(startX + i, startY + i);
-									if (!examined.isEmpty()) {
-										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
-											if (examined.equals(end)) {
-												return true;
-											} else {
-												return false;
-											}
-										} else {
-											return false;
-										}
-									}
-									if (examined.equals(end)) {
+									if (controlPath(examined, start, end)) {
 										return true;
 									}
 								}
@@ -468,18 +424,7 @@ public class Board {
 							for (int i = 1; i < BOARDDIM; i++) { // SX: movimento a sinistra
 								if ((startY - i >= 0 && startY - i < BOARDDIM)) {
 									Spot examined = getSpot(startX, startY - i);
-									if (!examined.isEmpty()) {
-										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
-											if (examined.equals(end)) {
-												return true;
-											} else {
-												return false;
-											}
-										} else {
-											return false;
-										}
-									}
-									if (examined.equals(end)) {
+									if (controlPath(examined, start, end)) {
 										return true;
 									}
 								}
@@ -488,18 +433,7 @@ public class Board {
 							for (int i = 1; i < BOARDDIM; i++) { // DX: movimento a destra
 								if ((startY + i >= 0 && startY + i < BOARDDIM)) {
 									Spot examined = getSpot(startX, startY + i);
-									if (!examined.isEmpty()) {
-										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
-											if (examined.equals(end)) {
-												return true;
-											} else {
-												return false;
-											}
-										} else {
-											return false;
-										}
-									}
-									if (examined.equals(end)) {
+									if (controlPath(examined, start, end)) {
 										return true;
 									}
 								}
@@ -510,18 +444,7 @@ public class Board {
 							for (int i = 1; i < BOARDDIM; i++) { // UP: movimento in alto
 								if ((startX - i >= 0 && startX - i < BOARDDIM)) {
 									Spot examined = getSpot(startX - i, startY);
-									if (!examined.isEmpty()) {
-										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
-											if (examined.equals(end)) {
-												return true;
-											} else {
-												return false;
-											}
-										} else {
-											return false;
-										}
-									}
-									if (examined.equals(end)) {
+									if (controlPath(examined, start, end)) {
 										return true;
 									}
 								}
@@ -530,18 +453,7 @@ public class Board {
 							for (int i = 1; i < BOARDDIM; i++) { // DOWN: movimento in basso
 								if ((startX + i >= 0 && startX + i < BOARDDIM)) {
 									Spot examined = getSpot(startX + i, startY);
-									if (!examined.isEmpty()) {
-										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
-											if (examined.equals(end)) {
-												return true;
-											} else {
-												return false;
-											}
-										} else {
-											return false;
-										}
-									}
-									if (examined.equals(end)) {
+									if (controlPath(examined, start, end)) {
 										return true;
 									}
 								}
@@ -553,6 +465,29 @@ public class Board {
 		}
 		return false;
 	}// end metodo isFreePath
+	
+	/**
+	 * controlla se lo Spot examined e' vuoto, se invece contiene un pezzo 
+	 * ne verifica il colore, dopodiche' se examined coincide con end restituisce vero
+	 * 
+	 * @param examined
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	private boolean controlPath(final Spot examined, final Spot start, final Spot end) {
+		if (!examined.isEmpty()) {
+			if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
+				if (examined.equals(end)) {
+					return true;
+				} 
+			} 
+		}
+		if (examined.equals(end)) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * metodo che permette la stampa a video della scacchiera nella configurazione
