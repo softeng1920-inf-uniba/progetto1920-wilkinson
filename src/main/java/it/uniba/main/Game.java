@@ -72,10 +72,10 @@ public class Game {
 			if (move.getPieceMoved() instanceof Pawn && ((Pawn) move.getPieceMoved()).isCapturingEnPassant()) {
 				// se en passant riscrivo la mossa e la aggiungo allo storico
 				String enPassantCommand = command.substring(0, 4) + " e.p.";
-				getAllMoves().add(move.getPieceMoved().draw() + " " + enPassantCommand);
+				getAllMoves().add(" " + enPassantCommand);
 			} else {
 				// aggiunto la mossa all'arraylist dello storico mosse
-				getAllMoves().add(move.getPieceMoved().draw() + " " + command);
+				getAllMoves().add(" " + command);
 			}
 
 			// setto false i booleani dei pedoni che regolano l'en passant
@@ -96,6 +96,14 @@ public class Game {
 	 * @return true se la mossa e' stata effettuata, false viceversa
 	 */
 	private boolean makeMove(Move move) {
+		// controllo se la mossa è un arrocco
+		if (move.isCastle()) {
+			if (move.makeCastling(this)) {
+				return true;
+			}
+			return false;
+		}
+
 		// spot di partenza e arrivo derivati dall'interpretazione di move
 		Spot start = getBoard().getSpot(move.getStart().getX(), move.getStart().getY());
 		Spot end = getBoard().getSpot(move.getEnd().getX(), move.getEnd().getY());

@@ -30,7 +30,7 @@ public class Spot {
 	}
 
 	/**
-	 * controlla se lo spot è vuoto
+	 * controlla se lo spot corrente Ã¨ vuoto
 	 * 
 	 * @return
 	 */
@@ -42,7 +42,7 @@ public class Spot {
 	}
 
 	/**
-	 * controllo se la casa examined è sotto attacco da pezzi avversari
+	 * controllo se la casa examined Ã¨ sotto attacco da pezzi avversari
 	 * 
 	 * @param board
 	 * @param examined
