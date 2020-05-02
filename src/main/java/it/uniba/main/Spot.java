@@ -24,6 +24,12 @@ public class Spot {
 		this.piece = piece;
 	}
 
+	/**
+	 * costruttore di uno spot generico (per confronti tra spot)
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public Spot(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -42,12 +48,12 @@ public class Spot {
 	}
 
 	/**
-	 * controllo se la casa examined è sotto attacco da pezzi avversari
+	 * controllo se la casa examined e' sotto attacco da pezzi avversari
 	 * 
-	 * @param board
-	 * @param examined
-	 * @param color
-	 * @return
+	 * @param board    scacchiera attuale
+	 * @param examined mossa che ha come end lo spot corrente
+	 * @param color    colore del pezzo amico
+	 * @return true se lo Spot corrente e' sotto attacco, false altrimenti
 	 */
 	boolean isUnderAttack(Board board, boolean color) {
 		Move examinedMove = new Move(null, this);
@@ -56,7 +62,13 @@ public class Spot {
 				Spot currentSpot = board.getSpot(i, j);
 				if (!currentSpot.isEmpty() && currentSpot.getPiece().isWhite() != color) {
 					for (Move currentMove : currentSpot.getPiece().getLegalMoves()) {
-						if (currentMove.sameEnd(examinedMove)) {
+						if (currentSpot.getPiece() instanceof Pawn) {
+							// caso in cui ci sia un pedone di fronte che catturerebbe in diagonale
+							if (board.isFrontDiagonal(currentSpot, examinedMove.getEnd())) {
+								return true;
+							}
+							// pezzo avversario che minaccia la casa
+						} else if (currentMove.sameEnd(examinedMove)) {
 							return true;
 						}
 					}
