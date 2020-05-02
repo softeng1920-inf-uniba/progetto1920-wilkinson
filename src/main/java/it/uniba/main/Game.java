@@ -79,11 +79,14 @@ public class Game {
 			}
 
 			// ricalcolo le mosse legali per ogni pezzo
-			recalLegalMoves();
+			board.recalLegalMoves();
+			board.recalKingMoves();
 			// setto false i booleani dei pedoni che regolano l'en passant
 			setAllPawnNotEP(getBoard());
 
 			whiteTurn = (!whiteTurn);
+
+			System.out.print(board);
 		} else {
 			System.out.println("\nCOMANDO O MOSSA NON VALIDA");
 		}
@@ -123,10 +126,9 @@ public class Game {
 			// controlla se nel comando c'e' la x
 			if (checkIfIsCapture(move.getInterpreter())) {
 				addCapture(); // aggiunge la cattura all'array corrispondente
+
 				// controllo se c'e' una cattura en passant
-
 				if (start.getPiece() instanceof Pawn && ((Pawn) start.getPiece()).isCapturingEnPassant()) {
-
 					// svuoto la casa dell'en passant
 					getBoard().getSpot(start.getX(), end.getY()).setPiece(null);
 				} else if (checkIfEnPassant(move.getInterpreter())) {
@@ -152,6 +154,7 @@ public class Game {
 		// muovo il pezzo e svuoto la casa di partenza
 		end.setPiece(start.getPiece());
 		start.setPiece(null);
+
 		return true;
 	}
 
@@ -232,29 +235,6 @@ public class Game {
 			}
 		}
 
-	}
-
-	/**
-	 * ricalcola le mosse legali di tutti i pezzi sulla scacchiera
-	 * 
-	 */
-	private void recalLegalMoves() {
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				Spot currentSpot = getBoard().getSpot(i, j);
-				if (currentSpot.getPiece() != null) {
-					currentSpot.getPiece().findLegalMoves(getBoard(), currentSpot);
-				}
-			}
-		}
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				Spot currentSpot = getBoard().getSpot(i, j);
-				if (!currentSpot.isEmpty() && currentSpot.getPiece() instanceof King) {
-					((King) currentSpot.getPiece()).recalculateMoves(getBoard());
-				}
-			}
-		}
 	}
 
 	/**
