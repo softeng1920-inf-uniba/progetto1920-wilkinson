@@ -71,7 +71,7 @@ public final class AlgebraicNotation {
 	 * 
 	 * @param command stringa in input da interpretare
 	 */
-	private final void divideCommand(final String command) {
+	private void divideCommand(final String command) {
 		String commandInterpreted = command;
 		if (!isPawn(commandInterpreted)) { // controllo lettera se non pedone
 			this.pieceLetter = commandInterpreted.substring(STARTINDEX, PIECELETTERINDEX);
@@ -108,8 +108,8 @@ public final class AlgebraicNotation {
 	 * @param command stringa in input da interpretare
 	 * @return
 	 */
-	private boolean isPawn(String command) { // controllo se la mossa è di un pedone (nessuna lettera iniziale)
-		char firstLetter = command.charAt(STARTINDEX);
+	private boolean isPawn(final String command) { // controllo se la mossa è di un pedone
+		char firstLetter = command.charAt(STARTINDEX); // (nessuna lettera iniziale)
 		if (Character.isUpperCase(firstLetter)) {
 			return false;
 		}
@@ -121,7 +121,7 @@ public final class AlgebraicNotation {
 	 * 
 	 * @param command stringa in input
 	 */
-	private void extractSymbol(String command) { // estrae l'eventuale simbolo speciale
+	private void extractSymbol(final String command) { // estrae l'eventuale simbolo speciale
 		int pos = 0;
 
 		for (String currentSymbol : symbolList) {
@@ -164,11 +164,9 @@ public final class AlgebraicNotation {
 	 * @param extracted seconda stringa da sottrarre a command
 	 * @return stringa ridotta
 	 */
-	private String reduceString(String command, String extracted) { // riduce la stringa di comando eliminando i
-																	// caratteri gia' estratti
-
+	private String reduceString(final String command, final String extracted) { 
 		// controllo se la stringa da sottrarre è vuota o se contiene un simbolo da
-		// trattare diversamente*/
+		// trattare diversamente
 		if (!extracted.isEmpty() && !(extracted == symbolList.get(ENPASSANTINDEX))
 				&& !(extracted == symbolList.get(DOUBLECHECKINDEX))) {
 			String newCommand = "";
@@ -196,7 +194,7 @@ public final class AlgebraicNotation {
 	 * @return true se comando valido, false altrimenti
 	 */
 	public boolean isValidAlgebraicNotation() {
-		if (this.getPieceLetter() != "") {
+		if (this.getPieceLetter() != "") { // check sulla lettera
 			switch (this.getPieceLetter()) {
 			case "A":
 			case "T":
@@ -209,30 +207,17 @@ public final class AlgebraicNotation {
 			}
 		}
 
+		// check sulla lunghezza della stringa contenente lo spot di arrivo
 		if (getEndSquareId().length() > MAXLENGTHENDSQ || getEndSquareId().length() <= MINLENGTHENDSQ) {
 			return false;
 		} else {
 			int length = getEndSquareId().length();
 			String square = getEndSquareId();
 
-			if (length == MAXLENGTHENDSQ) {
+			if (length == MAXLENGTHENDSQ) { // ambiguita'
 				switch (square.substring(STARTINDEX, PIECELETTERINDEX)) {
-				case "a":
-				case "b":
-				case "c":
-				case "d":
-				case "e":
-				case "f":
-				case "g":
-				case "h":
-				case "1":
-				case "2":
-				case "3":
-				case "4":
-				case "5":
-				case "6":
-				case "7":
-				case "8":
+				case "a": case "b": case "c": case "d": case "e": case "f": case "g": case "h":
+				case "1": case "2": case "3": case "4": case "5": case "6": case "7": case "8":
 					break;
 				default:
 					return false;
@@ -240,71 +225,15 @@ public final class AlgebraicNotation {
 				square = reduceString(square, square.substring(STARTINDEX, PIECELETTERINDEX));
 			}
 
-			switch (square) {
-			case "a1":
-			case "a2":
-			case "a3":
-			case "a4":
-			case "a5":
-			case "a6":
-			case "a7":
-			case "a8":
-			case "b1":
-			case "b2":
-			case "b3":
-			case "b4":
-			case "b5":
-			case "b6":
-			case "b7":
-			case "b8":
-			case "c1":
-			case "c2":
-			case "c3":
-			case "c4":
-			case "c5":
-			case "c6":
-			case "c7":
-			case "c8":
-			case "d1":
-			case "d2":
-			case "d3":
-			case "d4":
-			case "d5":
-			case "d6":
-			case "d7":
-			case "d8":
-			case "e1":
-			case "e2":
-			case "e3":
-			case "e4":
-			case "e5":
-			case "e6":
-			case "e7":
-			case "e8":
-			case "f1":
-			case "f2":
-			case "f3":
-			case "f4":
-			case "f5":
-			case "f6":
-			case "f7":
-			case "f8":
-			case "g1":
-			case "g2":
-			case "g3":
-			case "g4":
-			case "g5":
-			case "g6":
-			case "g7":
-			case "g8":
-			case "h1":
-			case "h2":
-			case "h3":
-			case "h4":
-			case "h5":
-			case "h6":
-			case "h7":
-			case "h8":
+			switch(square) {
+			case "a1": case "a2": case "a3": case "a4": case "a5": case "a6": case "a7": case "a8":
+			case "b1": case "b2": case "b3": case "b4": case "b5": case "b6": case "b7": case "b8":
+			case "c1": case "c2": case "c3": case "c4": case "c5": case "c6": case "c7": case "c8":
+			case "d1": case "d2": case "d3": case "d4": case "d5": case "d6": case "d7": case "d8":
+			case "e1": case "e2": case "e3": case "e4": case "e5": case "e6": case "e7": case "e8":
+			case "f1": case "f2": case "f3": case "f4": case "f5": case "f6": case "f7": case "f8":
+			case "g1": case "g2": case "g3": case "g4": case "g5": case "g6": case "g7": case "g8":
+			case "h1": case "h2": case "h3": case "h4": case "h5": case "h6": case "h7": case "h8":
 				break;
 			default:
 				return false;
@@ -387,30 +316,18 @@ public final class AlgebraicNotation {
 		this.isGoodMove = isGoodMove;
 	}
 
-	/**
-	 * @return the isCastleShort
-	 */
 	public boolean isCastleShort() {
 		return isCastleShort;
 	}
 
-	/**
-	 * @param isCastleShort the isCastleShort to set
-	 */
 	public void setCastleShort(boolean isCastleShort) {
 		this.isCastleShort = isCastleShort;
 	}
 
-	/**
-	 * @return the isCastleLong
-	 */
 	public boolean isCastleLong() {
 		return isCastleLong;
 	}
 
-	/**
-	 * @param isCastleLong the isCastleLong to set
-	 */
 	public void setCastleLong(boolean isCastleLong) {
 		this.isCastleLong = isCastleLong;
 	}
