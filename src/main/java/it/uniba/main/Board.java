@@ -26,10 +26,9 @@ public class Board {
 	private static final int COL_C = 2;
 	private static final int COL_B = 1;
 	private static final int COL_A = 0;
-	
+	// costanti che indicano il colore dei pezzi
 	private static final boolean WHITE = true;
 	private static final boolean BLACK = false;
-
 	// costanti ANSI per background o colore font
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
@@ -52,7 +51,7 @@ public class Board {
 	 * 
 	 * @param empty
 	 */
-	public Board(boolean empty) {
+	public Board(final boolean empty) {
 		boxes = new Spot[BOARDDIM][BOARDDIM];
 		for (int i = RAW_8; i < BOARDDIM; i++) {
 			for (int j = COL_A; j < BOARDDIM; j++) {
@@ -68,7 +67,7 @@ public class Board {
 	 * @param y colonna
 	 * @return elemento di classe Spot
 	 */
-	public Spot getSpot(int x, int y) {
+	public Spot getSpot(final int x, final int y) {
 		return boxes[x][y];
 	}
 
@@ -84,7 +83,7 @@ public class Board {
 		for (int j = COL_A; j < BOARDDIM; j++) {
 			boxes[RAW_2][j] = new Spot(RAW_2, j, new Pawn(WHITE));
 		}
-		
+		// riempio con i pezzi pesanti
 		boxes[RAW_8][COL_A] = new Spot(RAW_8, COL_A, new Rook(BLACK));
 		boxes[RAW_8][COL_H] = new Spot(RAW_8, COL_H, new Rook(BLACK));
 		boxes[RAW_1][COL_A] = new Spot(RAW_1, COL_A, new Rook(WHITE));
@@ -101,7 +100,6 @@ public class Board {
 		boxes[RAW_1][COL_D] = new Spot(RAW_1, COL_D, new Queen(WHITE));
 		boxes[RAW_8][COL_E] = new Spot(RAW_8, COL_E, new King(BLACK));
 		boxes[RAW_1][COL_E] = new Spot(RAW_1, COL_E, new King(WHITE));
-
 		// riempio gli spot vuoti
 		for (int i = RAW_6; i < RAW_2; i++) {
 			for (int j = COL_A; j < BOARDDIM; j++) {
@@ -144,7 +142,7 @@ public class Board {
 	 * 
 	 * @return
 	 */
-	boolean kingUnderAttackNext(Spot start, Spot end) {
+	boolean kingUnderAttackNext(final Spot start, final Spot end) {
 		// creo una nuova scacchiera
 		Board newBoard = new Board(true);
 		// copio la configurazione della scacchiera attuale
@@ -196,21 +194,17 @@ public class Board {
 	 * @param end
 	 * @return
 	 */
-	boolean isFrontDiagonal(Spot start, Spot end) {
+	boolean isFrontDiagonal(final Spot start, final Spot end) {
 		int diffX = (start.getX() - end.getX());
 		int diffY = (start.getY() - end.getY());
 		if (!start.isEmpty()) {
 			if (start.getPiece().isWhite()) {
 				if (diffX == 1 && Math.abs(diffY) == 1) {
 					return true;
-				} else {
-					return false;
 				}
 			} else {
 				if (diffX == -1 && Math.abs(diffY) == 1) {
 					return true;
-				} else {
-					return false;
 				}
 			}
 		}
@@ -227,22 +221,18 @@ public class Board {
 	 * @param end
 	 * @return
 	 */
-	boolean isFrontSpot(Spot start, Spot end) {
+	boolean isFrontSpot(final Spot start, final Spot end) {
 		int diffX = (start.getX() - end.getX());
 		int diffY = (start.getY() - end.getY());
 		if (!start.isEmpty()) {
 			if (start.getPiece().isWhite()) {
 				if (diffX == 1 && diffY == 0) {
 					return true;
-				} else {
-					return false;
-				}
+				} 
 			} else {
 				if (diffX == -1 && diffY == 0) {
 					return true;
-				} else {
-					return false;
-				}
+				} 
 			}
 		}
 		return false;
@@ -260,27 +250,22 @@ public class Board {
 	 * @param end
 	 * @return
 	 */
-	boolean isTwoSpotsAhead(Spot start, Spot end) {
+	boolean isTwoSpotsAhead(final Spot start, final Spot end) {
 		int diffX = (start.getX() - end.getX());
 		int diffY = (start.getY() - end.getY());
 		if (!start.isEmpty()) {
 			if (start.getPiece().isWhite()) {
 				if (diffX == 2 && diffY == 0) {
 					return true;
-				} else {
-					return false;
-				}
+				} 
 			} else {
 				if (diffX == -2 && diffY == 0) {
 					return true;
-				} else {
-					return false;
 				}
 			}
 		}
 		return false;
 	}
-
 
 	/**
 	 * stabilisce se lo spot di arrivo è una casella valida per il cavallo 
@@ -295,7 +280,7 @@ public class Board {
 	 * @param end
 	 * @return
 	 */
-	boolean isLMove(Spot start, Spot end) {
+	boolean isLMove(final Spot start, final Spot end) {
 		int diffX = Math.abs(start.getX() - end.getX());
 		int diffY = Math.abs(start.getY() - end.getY());
 		return diffX * diffY == 2;
@@ -311,7 +296,7 @@ public class Board {
 	 * @param end
 	 * @return
 	 */
-	public boolean isSpotAround(Spot start, Spot end) {
+	public boolean isSpotAround(final Spot start, final Spot end) {
 		int diffX = Math.abs(start.getX() - end.getX());
 		int diffY = Math.abs(start.getY() - end.getY());
 		if (!start.isEmpty()) {
@@ -334,7 +319,7 @@ public class Board {
 	 * @param end
 	 * @return
 	 */
-	boolean isDiagonal(Spot start, Spot end) {
+	boolean isDiagonal(final Spot start, final Spot end) {
 		int diffX = (start.getX() - end.getX());
 		int diffY = (start.getY() - end.getY());
 		if (!start.isEmpty()) {
@@ -357,7 +342,7 @@ public class Board {
 	 * @param end
 	 * @return
 	 */
-	boolean isStraight(Spot start, Spot end) {
+	boolean isStraight(final Spot start, final Spot end) {
 		if (!start.isEmpty()) {
 			if (start.getX() == end.getX() || start.getY() == end.getY()) {
 				return true;
@@ -378,19 +363,19 @@ public class Board {
      * @param end
      * @return
      */
-	boolean isFreePath(Spot start, Spot end) {
+	boolean isFreePath(final Spot start, final Spot end) {
 		int startX = start.getX();
 		int startY = start.getY();
 		int endX = end.getX();
 		int endY = end.getY();
-
 		if (!start.isEmpty()) {
 			if (isDiagonal(start, end)) {
 				if (start.getPiece() instanceof Queen || start.getPiece() instanceof Bishop) {
 					if (startX > endX) {
 						if (startY > endY) {
 							for (int i = 1; i < BOARDDIM; i++) { // NW: movimento diagonale
-								if ((startX - i >= 0 && startX - i < BOARDDIM) && (startY - i >= 0 && startY - i < BOARDDIM)) {
+								if ((startX - i >= 0 && startX - i < BOARDDIM)
+										&& (startY - i >= 0 && startY - i < BOARDDIM)) {
 									Spot examined = getSpot(startX - i, startY - i);
 									if (!examined.isEmpty()) {
 										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
@@ -410,7 +395,8 @@ public class Board {
 							} // end movimento NW
 						} else {
 							for (int i = 1; i < BOARDDIM; i++) { // NE: movimento diagonale
-								if ((startX - i >= 0 && startX - i < BOARDDIM) && (startY + i >= 0 && startY + i < BOARDDIM)) {
+								if ((startX - i >= 0 && startX - i < BOARDDIM)
+										&& (startY + i >= 0 && startY + i < BOARDDIM)) {
 									Spot examined = getSpot(startX - i, startY + i);
 									if (!examined.isEmpty()) {
 										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
@@ -432,7 +418,8 @@ public class Board {
 					} else {
 						if (startY > endY) {
 							for (int i = 1; i < BOARDDIM; i++) { // SW: movimento diagonale
-								if ((startX + i >= 0 && startX + i < BOARDDIM) && (startY - i >= 0 && startY - i < BOARDDIM)) {
+								if ((startX + i >= 0 && startX + i < BOARDDIM)
+										&& (startY - i >= 0 && startY - i < BOARDDIM)) {
 									Spot examined = getSpot(startX + i, startY - i);
 									if (!examined.isEmpty()) {
 										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
@@ -452,7 +439,8 @@ public class Board {
 							} // end movimento Sw
 						} else {
 							for (int i = 1; i < BOARDDIM; i++) { // SE: movimento diagonale
-								if ((startX + i >= 0 && startX + i < BOARDDIM) && (startY + i >= 0 && startY + i < BOARDDIM)) {
+								if ((startX + i >= 0 && startX + i < BOARDDIM)
+										&& (startY + i >= 0 && startY + i < BOARDDIM)) {
 									Spot examined = getSpot(startX + i, startY + i);
 									if (!examined.isEmpty()) {
 										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
