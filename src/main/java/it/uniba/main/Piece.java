@@ -41,7 +41,7 @@ public abstract class Piece {
 				Spot startSpot = board.getSpot(currentSpot.getX(), currentSpot.getY());
 				Spot endSpot = board.getSpot(i, j);
 				Move currentMove = new Move(startSpot, endSpot);
-				if (this.canMove(board, startSpot, endSpot, this.isWhite())) {
+				if (this.canMove(board, startSpot, endSpot)) {
 					this.legalMoves.add(currentMove);
 				}
 			}
@@ -56,7 +56,7 @@ public abstract class Piece {
 	 * @param end   casa di arrivo
 	 * @return true se movimento possibile, false se mossa illegale
 	 */
-	abstract boolean canMove(Board board, Spot start, Spot end, boolean insWhiteTurn);
+	abstract boolean canMove(Board board, Spot start, Spot end);
 
 	/**stampa di un pezzo e le sue mosse legali
 	 * 
