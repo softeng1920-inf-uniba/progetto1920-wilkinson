@@ -36,7 +36,7 @@ public final class AppMain {
 		/*
 		 * Il ciclo di immissione comandi continua fino a che l'utente non digita il
 		 * comando >quit che setta il flag da true a false, uscendo dal programma. Se il
-		 * giocatore sceglie il comando "play" dopo aver gi� avviato una partita, il
+		 * giocatore sceglie il comando "play" dopo aver gia' avviato una partita, il
 		 * programma fara' partire una nuova partita previa conferma del giocatore.
 		 */
 		while (quitFlag == false) {

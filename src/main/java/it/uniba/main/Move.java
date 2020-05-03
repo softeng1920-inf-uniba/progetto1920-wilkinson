@@ -25,7 +25,7 @@ public final class Move {
 	public Move(final String command, final Game game) {
 		this.interpreter = new AlgebraicNotation(command); // Istanzio l'oggetto interpreter
 
-		if (this.isCastle()) { // se Ã¨ un arrocco dÃ² le coordinate di partenza del re
+		if (this.isCastle()) { // se e' un arrocco setta le coordinate di partenza del re
 			if (game.isWhiteTurn()) {
 				this.start = new Spot(7, 4);
 			} else {
@@ -47,7 +47,7 @@ public final class Move {
 			if (this.start != null) {
 				// avvalora il pezzo da muovere prendendolo da start
 				this.pieceMoved = start.getPiece();
-				// capisce se Ã¨ una cattura en passant
+				// capisce se e' una cattura en passant
 				if (isEnPassantMove(pieceMoved, start, end, game.getBoard())) {
 					((Pawn) start.getPiece()).setCapturingEnPassant(true);
 				}
@@ -99,7 +99,7 @@ public final class Move {
 	/**
 	 * trova lo spot di partenza cercando il pezzo con: 1) casa di arrivo
 	 * corrispodente a quella inserita 2) controlla solo i pezzi della classe
-	 * inserita dall'utente 3) controlla eventuali ambiguitÃ 
+	 * inserita dall'utente 3) controlla eventuali ambiguita' 
 	 * 
 	 * @param board
 	 * @param piece
@@ -205,7 +205,7 @@ public final class Move {
 	}
 
 	/**
-	 * enumerazione dello stato di gioco (per verificare se la partita ï¿½ ancora in
+	 * enumerazione dello stato di gioco (per verificare se la partita e' ancora in
 	 * corso)
 	 * 
 	 * @author wilkinson
@@ -234,7 +234,7 @@ public final class Move {
 	}
 
 	/**
-	 * controlla se l'input Ã¨ un arrocco
+	 * controlla se l'input e' un arrocco
 	 * 
 	 * @return
 	 */
@@ -246,7 +246,7 @@ public final class Move {
 	}
 
 	/**
-	 * controlla se Ã¨ possibile arroccare ed effettua l'arrocco
+	 * controlla se e' possibile arroccare ed effettua l'arrocco
 	 * 
 	 * @param game
 	 * @return
@@ -254,7 +254,7 @@ public final class Move {
 	boolean makeCastling(Game game) {
 		if (game.isWhiteTurn()) {
 			Spot whiteKingSpot = game.getBoard().getSpot(7, 4);
-			if (this.getInterpreter().isCastleShort()) {
+			if (this.getInterpreter().isCastleShort()) { // arrocco corto bianco
 				Spot whiteDxRookSpot = game.getBoard().getSpot(7, 7);
 				Spot whiteNewKingSpot = game.getBoard().getSpot(7, 6);
 				Spot whiteNewRookSpot = game.getBoard().getSpot(7, 5);
@@ -266,7 +266,7 @@ public final class Move {
 					whiteDxRookSpot.setPiece(null);
 					return true;
 				}
-			} else if (this.getInterpreter().isCastleLong()) {
+			} else if (this.getInterpreter().isCastleLong()) { // arrocco lungo bianco
 				Spot whiteSxRookSpot = game.getBoard().getSpot(7, 0);
 				Spot whiteNewKingSpot = game.getBoard().getSpot(7, 2);
 				Spot whiteNewRookSpot = game.getBoard().getSpot(7, 3);
@@ -282,7 +282,7 @@ public final class Move {
 			}
 		} else {
 			Spot blackKingSpot = game.getBoard().getSpot(0, 4);
-			if (this.getInterpreter().isCastleShort()) {
+			if (this.getInterpreter().isCastleShort()) { // arrocco corto nero
 				Spot blackDxRookSpot = game.getBoard().getSpot(0, 7);
 				Spot blackNewKingSpot = game.getBoard().getSpot(0, 6);
 				Spot blackNewRookSpot = game.getBoard().getSpot(0, 5);
@@ -294,7 +294,7 @@ public final class Move {
 					blackDxRookSpot.setPiece(null);
 					return true;
 				}
-			} else if (this.getInterpreter().isCastleLong()) {
+			} else if (this.getInterpreter().isCastleLong()) { // arrocco lungo nero
 				Spot blackSxRookSpot = game.getBoard().getSpot(0, 0);
 				Spot blackNewKingSpot = game.getBoard().getSpot(0, 2);
 				Spot blackNewRookSpot = game.getBoard().getSpot(0, 3);
@@ -436,7 +436,7 @@ public final class Move {
 
 	/**
 	 * controlla se la casa di start della mossa corrisponde parzialmente
-	 * all'ambiguitÃ 
+	 * all'ambiguita'
 	 * 
 	 * @param move
 	 * @param coord

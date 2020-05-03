@@ -23,7 +23,7 @@ public class King extends Piece {
 	}
 
 	@Override
-	boolean canMove(Board board, Spot start, Spot end, boolean isWhiteTurn) {
+	boolean canMove(Board board, Spot start, Spot end) {
 		if (board.isSpotAround(start, end)) {
 			if (end.isEmpty()) {
 				return true;
@@ -33,33 +33,28 @@ public class King extends Piece {
 		}
 		return false;
 	}
-	
-	void recalculateMoves(Board board) {
-		ArrayList<Move> movesToRemove = new ArrayList <Move>();
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				Spot currentSpot = board.getSpot(i, j);
-				if (!currentSpot.isEmpty()) {
-					if (currentSpot.getPiece().isWhite() != this.isWhite()) {
-						if(currentSpot.getPiece() instanceof Pawn) {
-							for (Move kingMove : this.getLegalMoves()) {
-								if (board.isFrontDiagonal(currentSpot, kingMove.getEnd())) {
-									movesToRemove.add(kingMove);
-								}
-							}
-						} else {
-							for (Move pieceMove : currentSpot.getPiece().getLegalMoves()) {
-								for (Move kingMove : this.getLegalMoves()){
-									if (pieceMove.sameEnd(kingMove)) {
-										movesToRemove.add(kingMove);
-									}
-								}
-							}
-						}
-					}
+
+	/**
+	 * ricalcola le mosse del re tenendo conto delle minacce future
+	 * 
+	 * @param board
+	 */
+	void recalculateMoves(final Board board) {
+		ArrayList<Move> movesCopy = new ArrayList<Move>();
+		ArrayList<Move> movesToRemove = new ArrayList<Move>();
+
+		if (!this.getLegalMoves().isEmpty()) {
+			for (Move currentMove : this.getLegalMoves()) {
+				movesCopy.add(currentMove);
+			}
+
+			for (Move currentMove : movesCopy) {
+				if (board.kingUnderAttackNext(currentMove.getStart(), currentMove.getEnd())) {
+					movesToRemove.add(currentMove);
 				}
 			}
+
+			this.getLegalMoves().removeAll(movesToRemove);
 		}
-		this.getLegalMoves().removeAll(movesToRemove);
 	}
 }
