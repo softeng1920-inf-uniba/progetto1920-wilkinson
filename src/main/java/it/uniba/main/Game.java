@@ -121,6 +121,11 @@ public class Game {
 		// cerca se sulla scacchiera c'e' stata una cattura
 		searchForCapture(start, end);
 
+		// controllo se il pezzo da catturare e' il re 
+		if (!end.isEmpty() && end.getPiece() instanceof King) {
+			return false;
+		}
+
 		// gestisce il caso in cui ci sia una cattura
 		if (isCapture) {
 			// controlla se nel comando c'e' la x
@@ -223,9 +228,13 @@ public class Game {
 	 * @param end
 	 */
 	private void searchForCapture(Spot start, Spot end) {
-		if (end.getPiece() != null) {
-			isCapture = true;
-			end.getPiece().setAsKilled();
+		if (!end.isEmpty()) {
+			if (end.getPiece() instanceof King) {
+				isCapture = false;
+			} else {
+				isCapture = true;
+				end.getPiece().setAsKilled();
+			}
 		} else {
 			if (start.getPiece() instanceof Pawn && ((Pawn) start.getPiece()).isCapturingEnPassant()) {
 				isCapture = true;
