@@ -100,12 +100,16 @@ public class Game {
 	 * @param move mossa da effettuare
 	 * @return true se la mossa e' stata effettuata, false viceversa
 	 */
-	private boolean makeMove(Move move) {
+	private boolean makeMove(Move move) {		
 		// controllo se la mossa è un arrocco
 		if (move.isCastle()) {
 			if (move.makeCastling(this)) {
 				return true;
 			}
+			return false;
+		}
+		
+		if (!move.getInterpreter().isGoodMove()) {
 			return false;
 		}
 
@@ -136,6 +140,10 @@ public class Game {
 				}
 			} else {
 				// se c'e' una cattura ma l'utente non ha scritto la x
+				return false;
+			}
+		} else {
+			if (checkIfIsCapture(move.getInterpreter())) {
 				return false;
 			}
 		}
