@@ -184,6 +184,17 @@ public class Board {
 		// se il movimento non mette il re sotto scacco, ritorno false
 		return false;
 	}
+	
+	Spot frontSpot(Spot spot) {
+		if (!spot.isEmpty()) {
+			if (spot.getPiece().isWhite()) {
+				return this.getSpot(spot.getX() - 1, spot.getY());
+			} else {
+				return this.getSpot(spot.getX() + 1, spot.getY());
+			}
+		}
+		return null;
+	}
 
 	/**
 	 * stabilisce se i due spot in input sono diagonali 
