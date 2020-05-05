@@ -271,11 +271,11 @@ public final class AlgebraicNotation {
 		}
 		char[] tokens = this.command.toCharArray();
 		if (isCastleShort()) {
-			if (!command.equals("0-0") || !command.equals("O-O")) {
+			if (!(command.equals("0-0") || command.equals("O-O"))) {
 				return false;
 			}
 		} else if (isCastleLong()) {
-			if (!command.equals("0-0-0") || !command.equals("O-O-O")) {
+			if (!(command.equals("0-0-0") || command.equals("O-O-O"))) {
 				return false;
 			}
 		}
