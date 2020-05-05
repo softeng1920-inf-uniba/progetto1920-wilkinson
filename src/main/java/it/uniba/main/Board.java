@@ -174,11 +174,12 @@ public class Board {
 		Spot newStart = newBoard.getSpot(start.getX(), start.getY());
 		// se c'è un pezzo nemico lo setto null per vedere se la casa
 		// sarebbe sotto attacco dopo il movimento
-		newEnd.setPiece(null);
+		newEnd.setPiece(newStart.getPiece());
+		newStart.setPiece(null);
 		// ricalcolo le mosse legali dei pezzi
 		newBoard.recalLegalMoves();
 		// controllo se la casa di movimento è sotto attacco o meno
-		if (newEnd.isUnderAttack(newBoard, newStart.getPiece().isWhite())) {
+		if (newEnd.isUnderAttack(newBoard, newEnd.getPiece().isWhite())) {
 			return true;
 		}
 		// se il movimento non mette il re sotto scacco, ritorno false
