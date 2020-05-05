@@ -40,10 +40,10 @@ public class Knight extends Piece {
 	 * @param end         posizione di arrivo del pezzo
 	 * @param isWhiteTurn turno del giocatore
 	 *
-	 * @return True se è una mossa legale altrimenti False
+	 * @return True se e' una mossa legale altrimenti False
 	 */
 	@Override
-	boolean canMove(Board board, Spot start, Spot end, boolean isWhiteTurn) {
+	boolean canMove(Board board, Spot start, Spot end) {
 		Knight startPiece = (Knight) start.getPiece();
 		Piece endPiece = end.getPiece();
 

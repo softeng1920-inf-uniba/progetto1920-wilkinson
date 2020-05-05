@@ -1,8 +1,8 @@
 package it.uniba.main;
 
 /**
- * rappresenta una scacchiera (matrice 8x8) ogni casa � un elemento di classe
- * Spot
+ * rappresenta una scacchiera (matrice 8x8) ogni casella e' un elemento di
+ * classe Spot
  * 
  * @author wilkinson
  *
@@ -10,8 +10,27 @@ package it.uniba.main;
 public class Board {
 	private Spot[][] boxes; // matrice scacchiera formata da caselle (elementi di classe Spot)
 	private static final int BOARDDIM = 8; // dimensioni della scacchiera
-	private static final int INITEMPTYRAW = 2; // indice di riga di partenza scacchiera iniziale vuota
-	private static final int ENDEMPTYRAW = 6; // indice di riga di fine scacchiera iniziale vuota
+	private static final int RAW_1 = 7;
+	private static final int RAW_2 = 6;
+//	private static final int RAW_3 = 5;
+//	private static final int RAW_4 = 4;
+//	private static final int RAW_5 = 3;
+	private static final int RAW_6 = 2;
+	private static final int RAW_7 = 1;
+	private static final int RAW_8 = 0;
+	private static final int COL_H = 7;
+	private static final int COL_G = 6;
+	private static final int COL_F = 5;
+	private static final int COL_E = 4;
+	private static final int COL_D = 3;
+	private static final int COL_C = 2;
+	private static final int COL_B = 1;
+	private static final int COL_A = 0;
+	
+	private static final boolean WHITE = true;
+	private static final boolean BLACK = false;
+
+	// costanti ANSI per background o colore font
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
 	public static final String ANSI_WHITE = "\u001B[37m";
@@ -25,6 +44,21 @@ public class Board {
 	public Board() {
 		boxes = new Spot[BOARDDIM][BOARDDIM];
 		this.resetBoard();
+		this.recalLegalMoves();
+	}
+
+	/**
+	 * costruttore di una board vuota
+	 * 
+	 * @param empty
+	 */
+	public Board(boolean empty) {
+		boxes = new Spot[BOARDDIM][BOARDDIM];
+		for (int i = RAW_8; i < BOARDDIM; i++) {
+			for (int j = COL_A; j < BOARDDIM; j++) {
+				boxes[i][j] = new Spot(i, j, null);
+			}
+		}
 	}
 
 	/**
@@ -42,50 +76,49 @@ public class Board {
 	 * metodo che inizializza la scacchiera con pezzi nelle posizioni iniziali
 	 */
 	private void resetBoard() {
+		// inizializzo pedoni neri
+		for (int j = COL_A; j < BOARDDIM; j++) {
+			boxes[RAW_7][j] = new Spot(RAW_7, j, new Pawn(BLACK));
+		}
+		// inizializzo pedoni bianchi
+		for (int j = COL_A; j < BOARDDIM; j++) {
+			boxes[RAW_2][j] = new Spot(RAW_2, j, new Pawn(WHITE));
+		}
+		
+		boxes[RAW_8][COL_A] = new Spot(RAW_8, COL_A, new Rook(BLACK));
+		boxes[RAW_8][COL_H] = new Spot(RAW_8, COL_H, new Rook(BLACK));
+		boxes[RAW_1][COL_A] = new Spot(RAW_1, COL_A, new Rook(WHITE));
+		boxes[RAW_1][COL_H] = new Spot(RAW_1, COL_H, new Rook(WHITE));
+		boxes[RAW_8][COL_B] = new Spot(RAW_8, COL_B, new Knight(BLACK));
+		boxes[RAW_8][COL_G] = new Spot(RAW_8, COL_G, new Knight(BLACK));
+		boxes[RAW_1][COL_B] = new Spot(RAW_1, COL_B, new Knight(WHITE));
+		boxes[RAW_1][COL_G] = new Spot(RAW_1, COL_G, new Knight(WHITE));
+		boxes[RAW_8][COL_C] = new Spot(RAW_8, COL_C, new Bishop(BLACK));
+		boxes[RAW_8][COL_F] = new Spot(RAW_8, COL_F, new Bishop(BLACK));
+		boxes[RAW_1][COL_C] = new Spot(RAW_1, COL_C, new Bishop(WHITE));
+		boxes[RAW_1][COL_F] = new Spot(RAW_1, COL_F, new Bishop(WHITE));
+		boxes[RAW_8][COL_D] = new Spot(RAW_8, COL_D, new Queen(BLACK));
+		boxes[RAW_1][COL_D] = new Spot(RAW_1, COL_D, new Queen(WHITE));
+		boxes[RAW_8][COL_E] = new Spot(RAW_8, COL_E, new King(BLACK));
+		boxes[RAW_1][COL_E] = new Spot(RAW_1, COL_E, new King(WHITE));
 
-		boxes[1][0] = new Spot(1, 0, new Pawn(false));
-		boxes[1][1] = new Spot(1, 1, new Pawn(false));
-		boxes[1][2] = new Spot(1, 2, new Pawn(false));
-		boxes[1][3] = new Spot(1, 3, new Pawn(false));
-		boxes[1][4] = new Spot(1, 4, new Pawn(false));
-		boxes[1][5] = new Spot(1, 5, new Pawn(false));
-		boxes[1][6] = new Spot(1, 6, new Pawn(false));
-		boxes[1][7] = new Spot(1, 7, new Pawn(false));
-		boxes[6][0] = new Spot(6, 0, new Pawn(true));
-		boxes[6][1] = new Spot(6, 1, new Pawn(true));
-		boxes[6][2] = new Spot(6, 2, new Pawn(true));
-		boxes[6][3] = new Spot(6, 3, new Pawn(true));
-		boxes[6][4] = new Spot(6, 4, new Pawn(true));
-		boxes[6][5] = new Spot(6, 5, new Pawn(true));
-		boxes[6][6] = new Spot(6, 6, new Pawn(true));
-		boxes[6][7] = new Spot(6, 7, new Pawn(true));
-		boxes[0][0] = new Spot(0, 0, new Rook(false));
-		boxes[0][7] = new Spot(0, 7, new Rook(false));
-		boxes[7][0] = new Spot(7, 0, new Rook(true));
-		boxes[7][7] = new Spot(7, 7, new Rook(true));
-		boxes[0][1] = new Spot(0, 1, new Knight(false));
-		boxes[0][6] = new Spot(0, 6, new Knight(false));
-		boxes[7][1] = new Spot(7, 1, new Knight(true));
-		boxes[7][6] = new Spot(7, 6, new Knight(true));
-		boxes[0][2] = new Spot(0, 2, new Bishop(false));
-		boxes[0][5] = new Spot(0, 5, new Bishop(false));
-		boxes[7][2] = new Spot(7, 2, new Bishop(true));
-		boxes[7][5] = new Spot(7, 5, new Bishop(true));
-		boxes[0][3] = new Spot(0, 3, new Queen(false));
-		boxes[7][3] = new Spot(7, 3, new Queen(true));
-		boxes[0][4] = new Spot(0, 4, new King(false));
-		boxes[7][4] = new Spot(7, 4, new King(true));
-
-		for (int i = INITEMPTYRAW; i < ENDEMPTYRAW; i++) {
-			for (int j = 0; j < BOARDDIM; j++) {
+		// riempio gli spot vuoti
+		for (int i = RAW_6; i < RAW_2; i++) {
+			for (int j = COL_A; j < BOARDDIM; j++) {
 				boxes[i][j] = new Spot(i, j, null);
 			}
 		}
+	}
 
-		for (int i = 0; i < BOARDDIM; i++) {
-			for (int j = 0; j < BOARDDIM; j++) {
-				Spot currentSpot = getSpot(i, j);
-				if (!currentSpot.isEmpty()) {
+	/**
+	 * ricalcola le mosse legali di tutti i pezzi sulla scacchiera
+	 * 
+	 */
+	void recalLegalMoves() {
+		for (int i = RAW_8; i < BOARDDIM; i++) {
+			for (int j = COL_A; j < BOARDDIM; j++) {
+				Spot currentSpot = this.getSpot(i, j);
+				if (currentSpot.getPiece() != null) {
 					currentSpot.getPiece().findLegalMoves(this, currentSpot);
 				}
 			}
@@ -93,9 +126,71 @@ public class Board {
 	}
 
 	/**
-	 * stabilisce se i due spot in input sono diagonali rispetto alla direzione del
-	 * pezzo [E][ ][E]... direzione giusta per i bianchi [ ][S][ ]... [E][ ][E]...
-	 * direzione giusta per i neri
+	 * ricalcola le mosse legali dei due re sulla scacchiera
+	 */
+	void recalKingMoves() {
+		for (int i = RAW_8; i < BOARDDIM; i++) {
+			for (int j = COL_A; j < BOARDDIM; j++) {
+				Spot currentSpot = this.getSpot(i, j);
+				if (!currentSpot.isEmpty() && currentSpot.getPiece() instanceof King) {
+					((King) currentSpot.getPiece()).recalculateMoves(this);
+				}
+			}
+		}
+	}
+
+	/**
+	 * controlla se il re è sotto attacco dopo aver effettuato la mossa
+	 * 
+	 * @return
+	 */
+	boolean kingUnderAttackNext(Spot start, Spot end) {
+		// creo una nuova scacchiera
+		Board newBoard = new Board(true);
+		// copio la configurazione della scacchiera attuale
+		for (int i = RAW_8; i < BOARDDIM; i++) {
+			for (int j = COL_A; j < BOARDDIM; j++) {
+				Spot currentSpot = newBoard.getSpot(i, j);
+				Piece currentPiece = this.getSpot(i, j).getPiece();
+				if (currentPiece instanceof King) {
+					currentSpot.setPiece(new King(currentPiece.isWhite()));
+				} else if (currentPiece instanceof Rook) {
+					currentSpot.setPiece(new Rook(currentPiece.isWhite()));
+				} else if (currentPiece instanceof Bishop) {
+					currentSpot.setPiece(new Bishop(currentPiece.isWhite()));
+				} else if (currentPiece instanceof Queen) {
+					currentSpot.setPiece(new Queen(currentPiece.isWhite()));
+				} else if (currentPiece instanceof Knight) {
+					currentSpot.setPiece(new Knight(currentPiece.isWhite()));
+				} else if (currentPiece instanceof Pawn) {
+					currentSpot.setPiece(new Pawn(currentPiece.isWhite()));
+				}
+			}
+		}
+		// ricalcolo le mosse legali
+		newBoard.recalLegalMoves();
+		// analizzo la mossa corrente del re
+		Spot newEnd = newBoard.getSpot(end.getX(), end.getY());
+		Spot newStart = newBoard.getSpot(start.getX(), start.getY());
+		// se c'è un pezzo nemico lo setto null per vedere se la casa
+		// sarebbe sotto attacco dopo il movimento
+		newEnd.setPiece(null);
+		// ricalcolo le mosse legali dei pezzi
+		newBoard.recalLegalMoves();
+		// controllo se la casa di movimento è sotto attacco o meno
+		if (newEnd.isUnderAttack(newBoard, newStart.getPiece().isWhite())) {
+			return true;
+		}
+		// se il movimento non mette il re sotto scacco, ritorno false
+		return false;
+	}
+
+	/**
+	 * stabilisce se i due spot in input sono diagonali 
+	 * rispetto alla direzione del pezzo 
+	 * [E][ ][E]... direzione giusta per i bianchi 
+	 * [ ][S][ ]... 
+	 * [E][ ][E]... direzione giusta per i neri 
 	 * 
 	 * @param start
 	 * @param end
@@ -123,9 +218,10 @@ public class Board {
 	}
 
 	/**
-	 * stabilisce se lo spot di arrivo � una casella avanti allo spot di partenza
-	 * [ ][E][ ]... direzione giusta per i bianchi [ ][S][ ]... [ ][E][ ]...
-	 * direzione giusta per i neri
+	 * stabilisce se lo spot di arrivo è una casella avanti allo spot di partenza
+	 * [ ][E][ ]... direzione giusta per i bianchi
+	 * [ ][S][ ]...
+	 * [ ][E][ ]... direzione giusta per i neri
 	 * 
 	 * @param start
 	 * @param end
@@ -153,9 +249,12 @@ public class Board {
 	}
 
 	/**
-	 * stabilisce se lo spot di arrivo � due caselle avanti allo spot di partenza
-	 * [ ][E][ ]... direzione giusta per i bianchi [ ][ ][ ]... [ ][S][ ]... [ ][ ][
-	 * ]... [ ][E][ ]... direzione giusta per i neri
+	 *stabilisce se lo spot di arrivo è due caselle avanti allo spot di partenza
+	 * [ ][E][ ]... direzione giusta per i bianchi
+	 * [ ][ ][ ]...
+	 * [ ][S][ ]...
+	 * [ ][ ][ ]...
+	 * [ ][E][ ]... direzione giusta per i neri
 	 * 
 	 * @param start
 	 * @param end
@@ -183,23 +282,35 @@ public class Board {
 	}
 
 
-	/**Stabilisce se lo spot di arrivo e' dato da un movimento ad L
-	 * [ ][E][ ][E][ ]...
-	 * [E][ ][ ][ ][E]...
-	 * [ ][ ][S][ ][ ]...
-	 * [E][ ][ ][ ][E]...
-	 * [ ][E][ ][E][ ]...
+	/**
+	 * stabilisce se lo spot di arrivo è una casella valida per il cavallo 
+	 * rispetto allo spot di partenza
+	 * [E][ ][E][ ]... 
+	 * [ ][ ][ ][E]...
+	 * [ ][S][ ][ ]...
+	 * [ ][ ][ ][E]...
+	 * [E][ ][E][ ]... 
+	 * 
 	 * @param start
 	 * @param end
-	 * @return True se e' un movimento ad L altrimenti False
+	 * @return
 	 */
 	boolean isLMove(Spot start, Spot end) {
 		int diffX = Math.abs(start.getX() - end.getX());
 		int diffY = Math.abs(start.getY() - end.getY());
 		return diffX * diffY == 2;
 	}
-	
 
+	/**
+	 * stabilisce se lo spot di arrivo è una casella intorno allo spot di partenza
+	 * [E][E][E]... 
+	 * [E][S][E]...
+	 * [E][E][E]... 
+	 * 
+	 * @param start
+	 * @param end
+	 * @return
+	 */
 	public boolean isSpotAround(Spot start, Spot end) {
 		int diffX = Math.abs(start.getX() - end.getX());
 		int diffY = Math.abs(start.getY() - end.getY());
@@ -212,9 +323,12 @@ public class Board {
 	}
 
 	/**
-	 * stabilisce se lo spot di arrivo � in diagonale rispetto allo spot di
-	 * partenza [ ][ ][ ][E]... [E][ ][E][ ]... [ ][S][ ][ ]... [E][ ][E][ ]... [ ][
-	 * ][ ][E]...
+	 * stabilisce se lo spot di arrivo è in diagonale rispetto allo spot di partenza
+	 * [ ][ ][ ][E]... 
+	 * [E][ ][E][ ]...
+	 * [ ][S][ ][ ]...
+	 * [E][ ][E][ ]...
+	 * [ ][ ][ ][E]... 
 	 * 
 	 * @param start
 	 * @param end
@@ -232,9 +346,12 @@ public class Board {
 	}
 
 	/**
-	 * stabilisce se lo spot di arrivo � sulla stessa colonna o riga rispetto allo
-	 * spot di partenza [ ][E][ ][ ]... [ ][E][ ][ ]... [E][S][E][E]... [ ][E][ ][
-	 * ]... [ ][E][ ][ ]...
+	 * stabilisce se lo spot di arrivo è sulla stessa colonna o riga rispetto allo spot di partenza
+	 * [ ][E][ ][ ]... 
+	 * [ ][E][ ][ ]...
+	 * [E][S][E][E]...
+	 * [ ][E][ ][ ]...
+	 * [ ][E][ ][ ]... 
 	 * 
 	 * @param start
 	 * @param end
@@ -250,14 +367,17 @@ public class Board {
 	}
 
 	/**
-	 * controlla se il percorso dal punto di partenza a quello di arrivo � libero
-	 * [S][x][x][E]... controllo su riga [x][x][ ][ ]... [x][ ][x][ ]... [x][ ][
-	 * ][E]... controllo su diagonale [E][ ][ ][ ]... controllo su colonna
-	 * 
-	 * @param start
-	 * @param end
-	 * @return un booleano che ci dice se il percorso e' libero
-	 */
+	 * controlla se il percorso dal punto di partenza a quello di arrivo è libero
+     * [S][x][x][E]... controllo su riga 
+     * [x][x][ ][ ]... 
+     * [x][ ][x][ ]...
+     * [x][ ][ ][E]... controllo su diagonale
+     * [E][ ][ ][ ]... controllo su colonna
+     * 
+     * @param start
+     * @param end
+     * @return
+     */
 	boolean isFreePath(Spot start, Spot end) {
 		int startX = start.getX();
 		int startY = start.getY();
@@ -269,8 +389,8 @@ public class Board {
 				if (start.getPiece() instanceof Queen || start.getPiece() instanceof Bishop) {
 					if (startX > endX) {
 						if (startY > endY) {
-							for (int i = 1; i < 8; i++) { // NW: movimento diagonale
-								if ((startX - i >= 0 && startX - i < 8) && (startY - i >= 0 && startY - i < 8)) {
+							for (int i = 1; i < BOARDDIM; i++) { // NW: movimento diagonale
+								if ((startX - i >= 0 && startX - i < BOARDDIM) && (startY - i >= 0 && startY - i < BOARDDIM)) {
 									Spot examined = getSpot(startX - i, startY - i);
 									if (!examined.isEmpty()) {
 										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
@@ -289,8 +409,8 @@ public class Board {
 								}
 							} // end movimento NW
 						} else {
-							for (int i = 1; i < 8; i++) { // NE: movimento diagonale
-								if ((startX - i >= 0 && startX - i < 8) && (startY + i >= 0 && startY + i < 8)) {
+							for (int i = 1; i < BOARDDIM; i++) { // NE: movimento diagonale
+								if ((startX - i >= 0 && startX - i < BOARDDIM) && (startY + i >= 0 && startY + i < BOARDDIM)) {
 									Spot examined = getSpot(startX - i, startY + i);
 									if (!examined.isEmpty()) {
 										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
@@ -311,8 +431,8 @@ public class Board {
 						}
 					} else {
 						if (startY > endY) {
-							for (int i = 1; i < 8; i++) { // SW: movimento diagonale
-								if ((startX + i >= 0 && startX + i < 8) && (startY - i >= 0 && startY - i < 8)) {
+							for (int i = 1; i < BOARDDIM; i++) { // SW: movimento diagonale
+								if ((startX + i >= 0 && startX + i < BOARDDIM) && (startY - i >= 0 && startY - i < BOARDDIM)) {
 									Spot examined = getSpot(startX + i, startY - i);
 									if (!examined.isEmpty()) {
 										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
@@ -331,8 +451,8 @@ public class Board {
 								}
 							} // end movimento Sw
 						} else {
-							for (int i = 1; i < 8; i++) { // SE: movimento diagonale
-								if ((startX + i >= 0 && startX + i < 8) && (startY + i >= 0 && startY + i < 8)) {
+							for (int i = 1; i < BOARDDIM; i++) { // SE: movimento diagonale
+								if ((startX + i >= 0 && startX + i < BOARDDIM) && (startY + i >= 0 && startY + i < BOARDDIM)) {
 									Spot examined = getSpot(startX + i, startY + i);
 									if (!examined.isEmpty()) {
 										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
@@ -357,8 +477,8 @@ public class Board {
 				if (start.getPiece() instanceof Queen || start.getPiece() instanceof Rook) {
 					if (startX == endX) {
 						if (startY > endY) {
-							for (int i = 1; i < 8; i++) { // SX: movimento a sinistra
-								if ((startY - i >= 0 && startY - i < 8)) {
+							for (int i = 1; i < BOARDDIM; i++) { // SX: movimento a sinistra
+								if ((startY - i >= 0 && startY - i < BOARDDIM)) {
 									Spot examined = getSpot(startX, startY - i);
 									if (!examined.isEmpty()) {
 										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
@@ -377,8 +497,8 @@ public class Board {
 								}
 							} // end movimento SX
 						} else {
-							for (int i = 1; i < 8; i++) { // DX: movimento a destra
-								if ((startY + i >= 0 && startY + i < 8)) {
+							for (int i = 1; i < BOARDDIM; i++) { // DX: movimento a destra
+								if ((startY + i >= 0 && startY + i < BOARDDIM)) {
 									Spot examined = getSpot(startX, startY + i);
 									if (!examined.isEmpty()) {
 										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
@@ -399,8 +519,8 @@ public class Board {
 						}
 					} else if (startY == endY) {
 						if (startX > endX) {
-							for (int i = 1; i < 8; i++) { // UP: movimento in alto
-								if ((startX - i >= 0 && startX - i < 8)) {
+							for (int i = 1; i < BOARDDIM; i++) { // UP: movimento in alto
+								if ((startX - i >= 0 && startX - i < BOARDDIM)) {
 									Spot examined = getSpot(startX - i, startY);
 									if (!examined.isEmpty()) {
 										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
@@ -419,8 +539,8 @@ public class Board {
 								}
 							} // end movimento UP
 						} else {
-							for (int i = 1; i < 8; i++) { // DOWN: movimento in basso
-								if ((startX + i >= 0 && startX + i < 8)) {
+							for (int i = 1; i < BOARDDIM; i++) { // DOWN: movimento in basso
+								if ((startX + i >= 0 && startX + i < BOARDDIM)) {
 									Spot examined = getSpot(startX + i, startY);
 									if (!examined.isEmpty()) {
 										if (start.getPiece().isWhite() != examined.getPiece().isWhite()) {
@@ -445,7 +565,6 @@ public class Board {
 		}
 		return false;
 	}// end metodo isFreePath
-
 
 	/**
 	 * metodo che permette la stampa a video della scacchiera nella configurazione
@@ -472,10 +591,10 @@ public class Board {
 		System.out.println("");
 		// stampa delle coordinate sulle colonne
 
-		for (int i = 0; i < BOARDDIM; i++) {
+		for (int i = RAW_8; i < BOARDDIM; i++) {
 			System.out.print("  " + (BOARDDIM - i) + " ");
 			System.out.print(vertline);
-			for (int j = 0; j < BOARDDIM; j++) {
+			for (int j = COL_A; j < BOARDDIM; j++) {
 				Piece piece = this.getSpot(i, j).getPiece();
 
 				if ((i + j) % 2 != 0) {
@@ -519,7 +638,7 @@ public class Board {
 		for (int i = 0; i < BOARDDIM; i++) {
 			for (int j = 0; j < BOARDDIM; j++) {
 				Spot currentSpot = getSpot(i, j);
-				if (!currentSpot.isEmpty()) {
+				if (!currentSpot.isEmpty() && currentSpot.getPiece() instanceof King) {
 					output += currentSpot.getPiece() + "\n";
 				}
 			}
