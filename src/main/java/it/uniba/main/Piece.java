@@ -74,8 +74,8 @@ public abstract class Piece {
 		if (this instanceof Pawn) {
 			output += "capturing EP: " + ((Pawn)this).isCapturingEnPassant() + "\n";
 			output += "capturable EP: " + ((Pawn)this).isPossibleEnPassantCapture() + "\n";
-			output += "isKilled: " + ((Pawn)this).isKilled() + "\n";
 		}
+		output += "isKilled: " + this.isKilled() + "\n";
 		return output;
 	}
 

@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="JUnit Jupiter" tests="10" skipped="2" failures="0" errors="0" time="0.244" hostname="pierpaolo-XPS-15-9550" timestamp="2020-03-26T17:16:40">
+<testsuite name="JUnit Jupiter" tests="0" skipped="0" failures="0" errors="0" time="0.015" hostname="pierpaolo-XPS-15-9550" timestamp="2020-05-05T11:39:15">
 <properties>
 <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
 <property name="file.encoding" value="UTF-8"/>
 <property name="file.separator" value="/"/>
 <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
 <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
-<property name="java.class.path" value="/home/pierpaolo/Documents/GitHub/IDS1920/progetto1920-wilkinson/build/classes/java/test:/home/pierpaolo/Documents/GitHub/IDS1920/progetto1920-wilkinson/build/resources/test:/home/pierpaolo/Documents/GitHub/IDS1920/progetto1920-wilkinson/build/classes/java/main:/home/pierpaolo/Documents/GitHub/IDS1920/progetto1920-wilkinson/build/resources/main:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/com.google.apis/google-api-services-drive/v3-rev154-1.25.0/b840aeb45c31b97e28f365667f93bbd86fd8790d/google-api-services-drive-v3-rev154-1.25.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/com.google.api-client/google-api-client/1.25.0/e7ff725e89ff5dcbed107be1a24e8102ae2441ee/google-api-client-1.25.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/com.google.oauth-client/google-oauth-client-jetty/1.23.0/e0deaf34371e9ca09f9a04bcbaa854243283cae4/google-oauth-client-jetty-1.23.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/21.0/3a3d111be1be1b745edfa7d91678a12d7ed38709/guava-21.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-engine/5.1.0/c54b96b465bb5b49c7708d734a4180dd95422754/junit-jupiter-engine-5.1.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-api/5.1.0/370218fbc7ce9cf0600c4b5db400bccdf0c01a48/junit-jupiter-api-5.1.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.junit.vintage/junit-vintage-engine/5.1.0/a752dd045d08753ac77622dc83b584dc5abda1e1/junit-vintage-engine-5.1.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/junit/junit/4.12/2973d150c0dc1fefe998f834810d68f278ea58ec/junit-4.12.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/com.google.oauth-client/google-oauth-client-java6/1.23.0/7acbddf56c4ad04efc9d3b48fe015e6250241bf0/google-oauth-client-java6-1.23.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/com.google.oauth-client/google-oauth-client/1.25.0/c9ee14e8b095b4b301b28d57755cc482b8d6f39f/google-oauth-client-1.25.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/com.google.http-client/google-http-client-jackson2/1.25.0/7c5c89bd4d0d34d9f1cb3396e8da6233e5074b5c/google-http-client-jackson2-1.25.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.mortbay.jetty/jetty/6.1.26/2f546e289fddd5b1fab1d4199fbb6e9ef43ee4b0/jetty-6.1.26.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-engine/1.1.0/2596bd4d909e7ea8d029272db4338075445d731b/junit-platform-engine-1.1.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-commons/1.1.0/d6aa21029f9cedfb4cc8a9e9efc0bd97987205b8/junit-platform-commons-1.1.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.apiguardian/apiguardian-api/1.0.0/3ef5276905e36f4d8055fe3cb0bdcc7503ffc85d/apiguardian-api-1.0.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.opentest4j/opentest4j/1.0.0/6f09c598e9ff64bf0ce2fa7e7de49a99ba83c0b4/opentest4j-1.0.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-core/1.3/42a25dc3219429f0e5d060061f71acb49bf010a0/hamcrest-core-1.3.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.mortbay.jetty/jetty-util/6.1.26/e5642fe0399814e1687d55a3862aa5a3417226a9/jetty-util-6.1.26.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.mortbay.jetty/servlet-api/2.5-20081211/22bff70037e1e6fa7e6413149489552ee2064702/servlet-api-2.5-20081211.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/com.google.http-client/google-http-client/1.25.0/5fb16523c393bfe0210c29db44742bd308311841/google-http-client-1.25.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.2/25ea2e8b0c338a877313bd4672d3fe056ea78f0d/jsr305-3.0.2.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.9.6/4e393793c37c77e042ccc7be5a914ae39251b365/jackson-core-2.9.6.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.5.5/1603dfd56ebcd583ccdf337b6c3984ac55d89e58/httpclient-4.5.5.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/com.google.j2objc/j2objc-annotations/1.1/ed28ded51a8b1c6b112568def5f4b455e6809019/j2objc-annotations-1.1.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.4.9/a86ce739e5a7175b4b234c290a00a5fdb80957a0/httpcore-4.4.9.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/4bfc12adfe4842bf07b657f0369c4cb522955686/commons-logging-1.2.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.10/4b95f4897fa13f2cd904aee711aeafc0c5295cd8/commons-codec-1.10.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-console/1.1.0/1ea376db54ab4ec0018c5e99d414e1c7c034387/junit-platform-console-1.1.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-launcher/1.1.0/ba098edde4e59cacd9225e238ea3ad9c946684ab/junit-platform-launcher-1.1.0.jar"/>
+<property name="java.class.path" value="/home/pierpaolo/Documents/GitHub/IDS1920/progetto1920-wilkinson/build/classes/java/test:/home/pierpaolo/Documents/GitHub/IDS1920/progetto1920-wilkinson/build/resources/test:/home/pierpaolo/Documents/GitHub/IDS1920/progetto1920-wilkinson/build/classes/java/main:/home/pierpaolo/Documents/GitHub/IDS1920/progetto1920-wilkinson/build/resources/main:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/com.google.apis/google-api-services-drive/v3-rev154-1.25.0/b840aeb45c31b97e28f365667f93bbd86fd8790d/google-api-services-drive-v3-rev154-1.25.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/com.google.api-client/google-api-client/1.25.0/e7ff725e89ff5dcbed107be1a24e8102ae2441ee/google-api-client-1.25.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/com.google.oauth-client/google-oauth-client-jetty/1.23.0/e0deaf34371e9ca09f9a04bcbaa854243283cae4/google-oauth-client-jetty-1.23.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/21.0/3a3d111be1be1b745edfa7d91678a12d7ed38709/guava-21.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-engine/5.5.1/5e6fdb03ccfc853aca39704c5e97850d732df204/junit-jupiter-engine-5.5.1.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-api/5.5.1/fc466b57ceda453119bd630c830ec68b93bba7f4/junit-jupiter-api-5.5.1.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.junit.vintage/junit-vintage-engine/5.5.1/6afaa240f16f69d324178f7f976461dfcfe42a85/junit-vintage-engine-5.5.1.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/junit/junit/4.13/e49ccba652b735c93bd6e6f59760d8254cf597dd/junit-4.13.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/com.google.oauth-client/google-oauth-client-java6/1.23.0/7acbddf56c4ad04efc9d3b48fe015e6250241bf0/google-oauth-client-java6-1.23.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/com.google.oauth-client/google-oauth-client/1.25.0/c9ee14e8b095b4b301b28d57755cc482b8d6f39f/google-oauth-client-1.25.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/com.google.http-client/google-http-client-jackson2/1.25.0/7c5c89bd4d0d34d9f1cb3396e8da6233e5074b5c/google-http-client-jackson2-1.25.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.mortbay.jetty/jetty/6.1.26/2f546e289fddd5b1fab1d4199fbb6e9ef43ee4b0/jetty-6.1.26.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-engine/1.5.1/ab7d21edb0b176698a8252374fbed4f665519cdd/junit-platform-engine-1.5.1.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-commons/1.5.1/d94bdac345742fe1b0d993f0be51bb7146579b1b/junit-platform-commons-1.5.1.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.apiguardian/apiguardian-api/1.1.0/fc9dff4bb36d627bdc553de77e1f17efd790876c/apiguardian-api-1.1.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.opentest4j/opentest4j/1.2.0/28c11eb91f9b6d8e200631d46e20a7f407f2a046/opentest4j-1.2.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-core/1.3/42a25dc3219429f0e5d060061f71acb49bf010a0/hamcrest-core-1.3.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.mortbay.jetty/jetty-util/6.1.26/e5642fe0399814e1687d55a3862aa5a3417226a9/jetty-util-6.1.26.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.mortbay.jetty/servlet-api/2.5-20081211/22bff70037e1e6fa7e6413149489552ee2064702/servlet-api-2.5-20081211.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/com.google.http-client/google-http-client/1.25.0/5fb16523c393bfe0210c29db44742bd308311841/google-http-client-1.25.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.2/25ea2e8b0c338a877313bd4672d3fe056ea78f0d/jsr305-3.0.2.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.9.6/4e393793c37c77e042ccc7be5a914ae39251b365/jackson-core-2.9.6.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.5.5/1603dfd56ebcd583ccdf337b6c3984ac55d89e58/httpclient-4.5.5.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/com.google.j2objc/j2objc-annotations/1.1/ed28ded51a8b1c6b112568def5f4b455e6809019/j2objc-annotations-1.1.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.4.9/a86ce739e5a7175b4b234c290a00a5fdb80957a0/httpcore-4.4.9.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/4bfc12adfe4842bf07b657f0369c4cb522955686/commons-logging-1.2.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.10/4b95f4897fa13f2cd904aee711aeafc0c5295cd8/commons-codec-1.10.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-console/1.1.0/1ea376db54ab4ec0018c5e99d414e1c7c034387/junit-platform-console-1.1.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-launcher/1.1.0/ba098edde4e59cacd9225e238ea3ad9c946684ab/junit-platform-launcher-1.1.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-engine/1.1.0/2596bd4d909e7ea8d029272db4338075445d731b/junit-platform-engine-1.1.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-commons/1.1.0/d6aa21029f9cedfb4cc8a9e9efc0bd97987205b8/junit-platform-commons-1.1.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.apiguardian/apiguardian-api/1.0.0/3ef5276905e36f4d8055fe3cb0bdcc7503ffc85d/apiguardian-api-1.0.0.jar:/home/pierpaolo/.gradle/caches/modules-2/files-2.1/org.opentest4j/opentest4j/1.0.0/6f09c598e9ff64bf0ce2fa7e7de49a99ba83c0b4/opentest4j-1.0.0.jar"/>
 <property name="java.class.version" value="55.0"/>
 <property name="java.home" value="/usr/lib/jvm/java-11-openjdk-amd64"/>
 <property name="java.io.tmpdir" value="/tmp"/>
 <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/>
 <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
-<property name="java.runtime.version" value="11.0.6+10-post-Ubuntu-1ubuntu119.10.1"/>
+<property name="java.runtime.version" value="11.0.7+10-post-Ubuntu-2ubuntu219.10"/>
 <property name="java.specification.name" value="Java Platform API Specification"/>
 <property name="java.specification.vendor" value="Oracle Corporation"/>
 <property name="java.specification.version" value="11"/>
 <property name="java.vendor" value="Ubuntu"/>
 <property name="java.vendor.url" value="https://ubuntu.com/"/>
 <property name="java.vendor.url.bug" value="https://bugs.launchpad.net/ubuntu/+source/openjdk-lts"/>
-<property name="java.version" value="11.0.6"/>
-<property name="java.version.date" value="2020-01-14"/>
+<property name="java.version" value="11.0.7"/>
+<property name="java.version.date" value="2020-04-14"/>
 <property name="java.vm.compressedOopsMode" value="32-bit"/>
 <property name="java.vm.info" value="mixed mode, sharing"/>
 <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
@@ -28,13 +28,13 @@
 <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
 <property name="java.vm.specification.version" value="11"/>
 <property name="java.vm.vendor" value="Ubuntu"/>
-<property name="java.vm.version" value="11.0.6+10-post-Ubuntu-1ubuntu119.10.1"/>
+<property name="java.vm.version" value="11.0.7+10-post-Ubuntu-2ubuntu219.10"/>
 <property name="jdk.debug" value="release"/>
 <property name="line.separator" value="
 "/>
 <property name="os.arch" value="amd64"/>
 <property name="os.name" value="Linux"/>
-<property name="os.version" value="5.3.0-42-generic"/>
+<property name="os.version" value="5.3.0-51-generic"/>
 <property name="path.separator" value=":"/>
 <property name="sun.arch.data.model" value="64"/>
 <property name="sun.boot.library.path" value="/usr/lib/jvm/java-11-openjdk-amd64/lib"/>
@@ -52,71 +52,9 @@
 <property name="user.home" value="/home/pierpaolo"/>
 <property name="user.language" value="en"/>
 <property name="user.name" value="pierpaolo"/>
-<property name="user.timezone" value="Europe/Rome"/>
+<property name="user.timezone" value="Europe/Prague"/>
 <property name="user.variant" value=""/>
 </properties>
-<testcase name="testConvertToDoubleWithNullArgument()" classname="it.uniba.example.utils.test.StringUtilsTest" time="0.024">
-<system-out><![CDATA[
-unique-id: [engine:junit-jupiter]/[class:it.uniba.example.utils.test.StringUtilsTest]/[method:testConvertToDoubleWithNullArgument()]
-display-name: testConvertToDoubleWithNullArgument()
-]]></system-out>
-</testcase>
-<testcase name="testIsNullOrBlankOK()" classname="it.uniba.example.utils.test.StringUtilsTest" time="0.004">
-<system-out><![CDATA[
-unique-id: [engine:junit-jupiter]/[class:it.uniba.example.utils.test.StringUtilsTest]/[method:testIsNullOrBlankOK()]
-display-name: testIsNullOrBlankOK()
-]]></system-out>
-</testcase>
-<testcase name="testConcatWithAllNullInput()" classname="it.uniba.example.utils.test.StringUtilsTest" time="0">
-<skipped><![CDATA[public void it.uniba.example.utils.test.StringUtilsTest.testConcatWithAllNullInput() is @Disabled]]></skipped>
-<system-out><![CDATA[
-unique-id: [engine:junit-jupiter]/[class:it.uniba.example.utils.test.StringUtilsTest]/[method:testConcatWithAllNullInput()]
-display-name: testConcatWithAllNullInput()
-]]></system-out>
-</testcase>
-<testcase name="testConvertToDoubleOK()" classname="it.uniba.example.utils.test.StringUtilsTest" time="0.015">
-<system-out><![CDATA[
-unique-id: [engine:junit-jupiter]/[class:it.uniba.example.utils.test.StringUtilsTest]/[method:testConvertToDoubleOK()]
-display-name: Convert to double pass
-]]></system-out>
-</testcase>
-<testcase name="testConvertToDoubleThrowException()" classname="it.uniba.example.utils.test.StringUtilsTest" time="0.034">
-<system-out><![CDATA[
-unique-id: [engine:junit-jupiter]/[class:it.uniba.example.utils.test.StringUtilsTest]/[method:testConvertToDoubleThrowException()]
-display-name: testConvertToDoubleThrowException()
-]]></system-out>
-</testcase>
-<testcase name="testConcatWithRegularInput()" classname="it.uniba.example.utils.test.StringUtilsTest" time="0.003">
-<system-out><![CDATA[
-unique-id: [engine:junit-jupiter]/[class:it.uniba.example.utils.test.StringUtilsTest]/[method:testConcatWithRegularInput()]
-display-name: testConcatWithRegularInput()
-]]></system-out>
-</testcase>
-<testcase name="testConcatWithNullInput()" classname="it.uniba.example.utils.test.StringUtilsTest" time="0">
-<system-out><![CDATA[
-unique-id: [engine:junit-jupiter]/[class:it.uniba.example.utils.test.StringUtilsTest]/[method:testConcatWithNullInput()]
-display-name: testConcatWithNullInput()
-]]></system-out>
-</testcase>
-<testcase name="testAddition()" classname="it.uniba.example.utils.test.MathUtilsTest" time="0.019">
-<system-out><![CDATA[
-unique-id: [engine:junit-jupiter]/[class:it.uniba.example.utils.test.MathUtilsTest]/[method:testAddition()]
-display-name: Testing sum of integers
-]]></system-out>
-</testcase>
-<testcase name="testDivision()" classname="it.uniba.example.utils.test.MathUtilsTest" time="0.002">
-<system-out><![CDATA[
-unique-id: [engine:junit-jupiter]/[class:it.uniba.example.utils.test.MathUtilsTest]/[method:testDivision()]
-display-name: Testing division between integers
-]]></system-out>
-</testcase>
-<testcase name="testSomething()" classname="it.uniba.example.db.test.LocalDatabaseConnectionTest" time="0">
-<skipped><![CDATA[public void it.uniba.example.db.test.LocalDatabaseConnectionTest.testSomething() is @Disabled]]></skipped>
-<system-out><![CDATA[
-unique-id: [engine:junit-jupiter]/[class:it.uniba.example.db.test.LocalDatabaseConnectionTest]/[method:testSomething()]
-display-name: testSomething()
-]]></system-out>
-</testcase>
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]
 display-name: JUnit Jupiter
