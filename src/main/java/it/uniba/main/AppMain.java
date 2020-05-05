@@ -24,7 +24,8 @@ public final class AppMain {
 	 */
 	public static void main(final String[] args) {
 		Game game;
-		String userChoice; // Memorizza le scelte che vengono effettuate dall'utente
+		String userChoiceGame; // memorizza le scelte dell'utente durante il gioco, ossia i comandi per il movimento dei pezzi
+		String userChoiceMenu; // Memorizza le scelte che vengono effettuate dall'utente nel menu'
 		boolean quitFlag = false; // Flag per gestire l'uscita dal programma
 		boolean quitGame = false; // Flag per gestire l'uscita dal programma
 		System.out.println("\n**BENVENUTO NEL GIOCO DEGLI SCACCHI**\n");
@@ -41,23 +42,26 @@ public final class AppMain {
 		 */
 		while (quitFlag == false) {
 			System.out.print("Inserire il comando che si intende eseguire => ");
-			userChoice = scanner.nextLine();
-			switch (userChoice) {
+			userChoiceMenu = scanner.nextLine().toLowerCase(); //gestisce la possibile immissione di caratteri maiuscoli
+			switch (userChoiceMenu) {
 			case "exit":
-				System.out.println("Sei sicuro di voler chiudere il gioco?\n");
-				System.out.println(" COMANDI ");
-				System.out.println(">si        ::  conferma");
-				System.out.println(">no        ::  annulla");
-				System.out.print("Inserire comando che si intende eseguire => ");
-				userChoice = scanner.nextLine();
-				if (userChoice.compareTo("si") == 0) {
-					System.out.println("...uscita dal gioco");
-					quitFlag = true;
-				} else if (userChoice.compareTo("no") == 0) {
-					quitFlag = false;
-				} else {
-					System.out.println("COMANDO NON VALIDO\n");
+				do {
+					System.out.println("Sei sicuro di voler chiudere il gioco?\n");
+					System.out.println(" COMANDI ");
+					System.out.println(">si        ::  conferma");
+					System.out.println(">no        ::  annulla");
+					System.out.print("Inserire comando che si intende eseguire => ");
+					userChoiceMenu = scanner.nextLine().toLowerCase();
+					if (userChoiceMenu.compareTo("si") == 0) {
+						System.out.println("...uscita dal gioco");
+						quitFlag = true;
+					} else if (userChoiceMenu.compareTo("no") == 0) {
+						quitFlag = false;
+					} else {
+						System.out.println("COMANDO NON VALIDO\n");
+					}
 				}
+				while  ((!(userChoiceMenu.compareTo("si") == 0)&& !(userChoiceMenu.compareTo("no")==0)));
 				break;
 			case "play":
 				quitGame = false;
@@ -69,11 +73,12 @@ public final class AppMain {
 				while (!game.isEnd() && !quitGame) {
 					System.out.print("\n" + game + " \nInserire comando "
 							+ "o mossa che si intende eseguire => ");
-					userChoice = scanner.nextLine();
-					if (userChoice.compareTo("exit") == 0) {
-						userChoice = "quit";
+					userChoiceMenu = scanner.nextLine();
+					userChoiceGame=userChoiceMenu; //assegno la stringa digitata dall'utente alla variabile userChoigeGame prima di convertire la stringa in miuscolo
+					if (userChoiceMenu.compareTo("exit") == 0) {
+						userChoiceMenu = "quit";
 					}
-					switch (userChoice) {
+					switch (userChoiceMenu.toLowerCase()) { // converto in miniscolo per gestire i casi del menu'
 					case "help":
 						System.out.println("\n COMANDI ");
 						System.out.println(">play     ::  ripristina la partita");
@@ -83,22 +88,26 @@ public final class AppMain {
 						System.out.println(">quit     ::  esci dalla partita");
 						break;
 					case "play":
-						System.out.println("\nSei sicuro di voler "
-								+ "iniziare una nuova partita?\n");
-						System.out.println(" COMANDI ");
-						System.out.println(">si        ::   conferma");
-						System.out.println(">no        ::   annulla");
-						System.out.print("Inserire comando che si intende eseguire => ");
-						userChoice = scanner.nextLine();
-						if (userChoice.compareTo("si") == 0) {
-							System.out.println("...ripristino partita");
-							game.initialize();
-							game.setWhiteTurn(true);
-						} else if (userChoice.compareTo("no") == 0) {
-							quitGame = false;
-						} else {
-							System.out.println("COMANDO NON VALIDO\n");
+						do {
+							System.out.println("\nSei sicuro di voler "
+									+ "iniziare una nuova partita?\n");
+							System.out.println(" COMANDI ");
+							System.out.println(">si        ::   conferma");
+							System.out.println(">no        ::   annulla");
+							System.out.print("Inserire comando che si intende eseguire => ");
+							userChoiceMenu = scanner.nextLine().toLowerCase();
+							if (userChoiceMenu.compareTo("si") == 0) {
+								System.out.println("...ripristino partita");
+								game.initialize();
+								game.setWhiteTurn(true);
+							} else if (userChoiceMenu.compareTo("no") == 0) {
+								quitGame = false;
+							} else {
+								System.out.println("COMANDO NON VALIDO\n");
+							}
 						}
+						while((!(userChoiceMenu.compareTo("si") == 0)&& !(userChoiceMenu.compareTo("no")==0)));
+
 						break;
 					case "board":
 						game.getBoard().showBoard();
@@ -114,24 +123,30 @@ public final class AppMain {
 						System.out.print("\n");
 						break;
 					case "quit":
-						System.out.println("\nSei sicuro di voler chiudere la partita?");
-						System.out.println("\n COMANDI ");
-						System.out.println(">si        ::   conferma");
-						System.out.println(">no        ::   annulla");
-						System.out.print("Inserire comando che si intende eseguire => ");
-						userChoice = scanner.nextLine();
-						if (userChoice.compareTo("si") == 0) {
-							System.out.println("...ritorno al menu principale");
-							quitGame = true;
-						} else if (userChoice.compareTo("no") == 0) {
-							quitGame = false;
-						} else {
-							System.out.println("COMANDO NON VALIDO\n");
+						do {
+							System.out.println("\nSei sicuro di voler chiudere la partita?");
+							System.out.println("\n COMANDI ");
+							System.out.println(">si        ::   conferma");
+							System.out.println(">no        ::   annulla");
+							System.out.print("Inserire comando che si intende eseguire => ");
+
+							userChoiceMenu = scanner.nextLine().toLowerCase();
+
+							if (userChoiceMenu.compareTo("si") == 0) {
+								System.out.println("...ritorno al menu principale");
+								quitGame = true;
+							} else if (userChoiceMenu.compareTo("no") == 0) {
+								quitGame = false;
+							} else {
+								System.out.println("COMANDO NON VALIDO\n");
+							}
 						}
+
+						while ((!(userChoiceMenu.compareTo("si") == 0)&& !(userChoiceMenu.compareTo("no")==0)));
 						break;
 					default:
-						if (!userChoice.matches("")) {
-							game.currentGame(userChoice);
+						if (!userChoiceMenu.matches("")) { 
+							game.currentGame(userChoiceGame); //uso la stringa non convertita in minuscolo per proseguire con l'interpretazione della mossa
 						}
 					}
 				}
