@@ -168,7 +168,8 @@ public final class AlgebraicNotation {
 	 * @param extracted seconda stringa da sottrarre a command
 	 * @return stringa ridotta
 	 */
-	private String reduceString(String command, String extracted) { // riduce la stringa di comando eliminando i
+	private String reduceString(String command, String extracted) { 
+		// riduce la stringa di comando eliminando i
 		// caratteri gia' estratti
 
 		// controllo se la stringa da sottrarre è vuota o se contiene un simbolo da
@@ -285,9 +286,11 @@ public final class AlgebraicNotation {
 
 		for (int i = 0; i < MAXCOMMANDLENGTH; i++) {
 			// la x non e' seguita da una lettera (colonna della casa)
-			if (i < tokens.length && i > FIRST && tokens[i] == 'x') { 
+			if (i < tokens.length && i >= FIRST && tokens[i] == 'x') { 
 				if (this.getPieceLetter().equals("")) {
-					if (!(isGoodLetter(tokens[i-1]) && isGoodLetter(tokens[i+1]))) {
+					if (i == FIRST) {
+						return false;
+					} else if (!(isGoodLetter(tokens[i-1]) && isGoodLetter(tokens[i+1]))) {
 						return false;
 					} 
 				} else {
