@@ -46,7 +46,9 @@ public class Pawn extends Piece {
 			if (board.isFrontSpot(start, end)) {
 				return true;
 				// movimento in avanti di due caselle (se prima mossa)
-			} else if (board.isTwoSpotsAhead(start, end) && !startPiece.isMoved()) {
+			} else if (board.isTwoSpotsAhead(start, end) 
+					&& !startPiece.isMoved() 
+					&& board.frontSpot(start).isEmpty()) {
 				return true;
 			}
 			// stabilisce se il movimento è una cattura en passant
