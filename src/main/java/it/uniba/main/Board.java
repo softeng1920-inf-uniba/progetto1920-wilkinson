@@ -185,6 +185,16 @@ public class Board {
 		return false;
 	}
 	
+	/**
+	 * ritorna lo spot immediatamente di fronte alla casa corrente
+	 * [ ][x][ ]... casa restituita per i bianchi 
+	 * [ ][S][ ]... casa di partenza
+	 * [ ][x][ ]... casa restituita per i neri 
+	 * 
+	 * @param start
+	 * @param end
+	 * @return
+	 */
 	Spot frontSpot(Spot spot) {
 		if (!spot.isEmpty()) {
 			if (spot.getPiece().isWhite()) {
