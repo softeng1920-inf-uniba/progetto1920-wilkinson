@@ -286,7 +286,7 @@ public final class AlgebraicNotation {
 
 		for (int i = 0; i < MAXCOMMANDLENGTH; i++) {
 			// la x non e' seguita da una lettera (colonna della casa)
-			if (i < tokens.length && i >= FIRST && tokens[i] == 'x') { 
+			if (i < tokens.length -1 && i >= FIRST && tokens[i] == 'x') { 
 				if (this.getPieceLetter().equals("")) {
 					if (i == FIRST) {
 						return false;
