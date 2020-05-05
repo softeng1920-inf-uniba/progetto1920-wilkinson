@@ -72,7 +72,8 @@ public final class AlgebraicNotation {
 	 * @param command stringa in input da interpretare
 	 */
 	private final void divideCommand(final String command) {
-		String commandInterpreted = command;
+		String commandInterpreted = command.replace('O', '0');
+		
 		if (!isPawn(commandInterpreted)) { // controllo lettera se non pedone
 			this.pieceLetter = commandInterpreted.substring(STARTINDEX, PIECELETTERINDEX);
 			commandInterpreted = reduceString(commandInterpreted, getPieceLetter());
