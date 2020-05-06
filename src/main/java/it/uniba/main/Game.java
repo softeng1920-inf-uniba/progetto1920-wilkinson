@@ -83,8 +83,12 @@ public class Game {
 				// se en passant riscrivo la mossa e la aggiungo allo storico
 				String enPassantCommand = command.substring(0, 4) + " e.p.";
 				getAllMoves().add(" " + enPassantCommand);
-			} else {
+			} else if(move.isCastle())	 {
+					String commandMod;
+					commandMod = command.replace('O', '0');
 				// aggiunto la mossa all'arraylist dello storico mosse
+				getAllMoves().add(" " + commandMod);
+			} else {
 				getAllMoves().add(" " + command);
 			}
 
@@ -227,12 +231,17 @@ public class Game {
 			for (Piece currentPiece : whiteCaptures) {
 				System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + " " + currentPiece.draw() + " " + ANSI_RESET);
 			}
+		} else {
+			System.out.print(" Nessuna cattura per il bianco.");
 		}
-		System.out.print(ANSI_BLACK_BACKGROUND + ANSI_WHITE + "\nCatture del nero:::" + ANSI_RESET);
+		System.out.print(ANSI_BLACK_BACKGROUND + ANSI_WHITE + "\nCatture del nero  :" + ANSI_RESET);
 		if (!blackCaptures.isEmpty()) {
 			for (Piece currentPiece : blackCaptures) {
 				System.out.print(ANSI_BLACK_BACKGROUND + ANSI_WHITE + " " + currentPiece.draw() + " " + ANSI_RESET);
 			}
+		} else {
+			System.out.print(" Nessuna cattura per il nero.");
+
 		}
 	}
 
