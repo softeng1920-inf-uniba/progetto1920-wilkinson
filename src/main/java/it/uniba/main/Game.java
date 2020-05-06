@@ -232,7 +232,7 @@ public class Game {
 				System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + " " + currentPiece.draw() + " " + ANSI_RESET);
 			}
 		} else {
-			System.out.println(" Nessuna cattura per il bianco.");
+			System.out.print(" Nessuna cattura per il bianco.");
 		}
 		System.out.print(ANSI_BLACK_BACKGROUND + ANSI_WHITE + "\nCatture del nero  :" + ANSI_RESET);
 		if (!blackCaptures.isEmpty()) {
@@ -240,7 +240,7 @@ public class Game {
 				System.out.print(ANSI_BLACK_BACKGROUND + ANSI_WHITE + " " + currentPiece.draw() + " " + ANSI_RESET);
 			}
 		} else {
-			System.out.println(" Nessuna cattura per il nero.");
+			System.out.print(" Nessuna cattura per il nero.");
 
 		}
 	}
