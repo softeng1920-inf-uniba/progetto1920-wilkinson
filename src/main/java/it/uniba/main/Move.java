@@ -4,7 +4,23 @@ package it.uniba.main;
 import java.util.ArrayList;
 
 /**
- * Rappresenta tutti i movimenti dei pezzi
+ * DESCRIZIONE
+ * rappresenta un movimento di un pezzo degli scacchi
+ * da una casa di partenza ad una di arrivo
+ * 
+ * RESPONSABILITA' DI CLASSE
+ * La classe effettua operazioni a partire da un input interpretato
+ * - controllare quale pezzo si vuol muovere
+ * - controllare la casa di arrivo e stabilire quella di partenza
+ * - stabilire se la mossa e' legale
+ * - stabilire se e' possibile una cattura (classica o en-passant)
+ * - controllare casi di ambiguita' nel movimento
+ * - rigettare l'input nel caso di irregolarita'
+ * 
+ * CLASSIFICAZIONE ECB
+ * <<Control>>
+ * essendo responsabile della logica che interessa il movimento
+ * di un pezzo sulla scacchiera, alla base del concetto di "movimento"
  *
  * @author wilkinson
  */

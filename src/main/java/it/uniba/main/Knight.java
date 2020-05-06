@@ -1,10 +1,17 @@
 package it.uniba.main;
 
 /**
- * rappresenta un cavallo sulla scacchiera
+ * DESCRIZIONE
+ * rappresenta un pezzo cavallo
+ *
+ * RESPONSABILITA' DI CLASSE
+ * calcola le mosse legali di un cavallo seguendo le regole ufficiale degli scacchi
+ *
+ * CLASSIFICAZIONE ECB
+ * <<Entity>>
+ * poiche' eredita dalla classe Piece.java
  * 
  * @author wilkinson
- *
  */
 public class Knight extends Piece {
 
@@ -15,7 +22,6 @@ public class Knight extends Piece {
 	 */
 	public Knight(boolean white) {
 		super(white);
-
 	}
 
 	/**

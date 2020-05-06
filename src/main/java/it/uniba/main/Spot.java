@@ -1,11 +1,22 @@
 package it.uniba.main;
 
 /**
- * rappresenta una casa della scacchiera ha una coordinata X e una Y
- * corrispondenti a numeri (da 1 a 8) e lettere (da 'a' ad 'h')
+ * DESCRIZIONE
+ * Rappresenta una casella della scacchiera.
+ * Essa è composta da una coordinata X e una Y.
+ * Tali coordinate corrispondono ai numeri da 1 a 8 (per la X) 
+ * e lettere da 'a' ad 'h' (per la Y).
  * 
- * @author pierpaolo
- *
+ * RESPONSABILITA' DI CLASSE
+ * Si occupa di verificare se su di una casella è presente o meno un pezzo
+ * e controlla se la casa corrente e' sotto attacco da pezzi avversari
+ * 
+ * CLASSIFICAZIONE ECB
+ * <<Entity>>
+ * E' un componente formante della tavola da gioco
+ * e dunque deriva dal concetto concreto di "Scacchiera"
+ * 
+ * @author wilkinson
  */
 public class Spot {
 	Piece piece; // pezzo che la occupa

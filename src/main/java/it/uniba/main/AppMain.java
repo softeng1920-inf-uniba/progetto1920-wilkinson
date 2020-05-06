@@ -3,9 +3,25 @@ package it.uniba.main;
 import java.util.Scanner;
 
 /**
- * *Il file AppMain.java avvia l'applicazione per giocare a scacchi non va
- * rinominato in quanto il nome innesca diversi processi automatici. <b>DO NOT
- * RENAME</b>
+ * DESCRIZIONE
+ * main dell'applicazione scacchi
+ * 
+ * RESPONSABILITA' DI CLASSE 
+ * avvia l'applicazione per giocare a scacchi non va
+ * rinominato in quanto l'innesco di diversi processi automatici e'
+ * associato in maniera specifica al nome "AppMain.java". 
+ * 
+ * CLASSIFICAZIONE ECB
+ * <<Boundary>>
+ * poiché è la classe che comunica con gli attori esterni: cioè i giocatori.
+ * Questa classe è il punto di accesso al programma e quella che permette 
+ * ai giocatori di introdurre i comandi i notazione algebrica per muovere 
+ * i pezzi, e di utilizzare i comandi ausiliari messi a disposizione
+ * dal gioco.
+ * 
+ * - I M P O R T A N T E: -
+ * NON RINOMINARE
+ * <h>DO NOT RENAME</h>
  */
 public final class AppMain {
 
