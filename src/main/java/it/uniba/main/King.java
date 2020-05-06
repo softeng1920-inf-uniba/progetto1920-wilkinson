@@ -2,10 +2,19 @@ package it.uniba.main;
 
 import java.util.ArrayList;
 
-/**rappresenta un re sulla scacchiera
+/**
+ * DESCRIZIONE
+ * rappresenta un pezzo re 
+ *
+ * RESPONSABILITA' DI CLASSE
+ * calcola le mosse legali di un re seguendo le regole ufficiale degli scacchi
+ * e le ricalcola limitando il movimento del re tenendo conto delle minacce avversarie
+ *
+ * CLASSIFICAZIONE ECB
+ * <<Entity>>
+ * poiche' eredita dalla classe Piece.java
  * 
  * @author wilkinson
- *
  */
 public class King extends Piece {
 

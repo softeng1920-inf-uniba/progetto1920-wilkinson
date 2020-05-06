@@ -1,16 +1,22 @@
 package it.uniba.main;
 
 /**
- * rappresenta una regina sulla scacchiera
+ * DESCRIZIONE
+ * rappresenta un pezzo regina 
+ *
+ * RESPONSABILITA' DI CLASSE
+ * calcola le mosse legali di una regina seguendo le regole ufficiale degli scacchi
+ *
+ * CLASSIFICAZIONE ECB
+ * <<Entity>>
+ * poiche' eredita dalla classe Piece.java
  * 
  * @author wilkinson
- *
  */
 public class Queen extends Piece {
 
 	public Queen(boolean white) {
 		super(white);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

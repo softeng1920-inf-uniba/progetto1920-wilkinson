@@ -1,11 +1,21 @@
 package it.uniba.main;
 
 /**
- * rappresenta una scacchiera (matrice 8x8) ogni casella e' un elemento di
- * classe Spot
+ * DESCRIZIONE
+ * rappresenta una scacchiera (matrice 8x8) 
+ * ogni casella e' un elemento di classe Spot
+ * 
+ * RESPONSABILITA' DI CLASSE
+ * si occupa di ricalcolare le mosse legali di ogni pezzo
+ * ed effettua controlli sulla posizione reciproca di due Spot
+ * permette la stampa a video della scacchiera nella configurazione attuale
+ * 
+ * CLASSIFICAZIONE ECB
+ * <<Entity>> 
+ * perchè deriva dal concetto concreto di "Scacchiera"
+ * e tiene traccia dei dati sottoforma di configurazione attuale della scacchiera
  * 
  * @author wilkinson
- *
  */
 public class Board {
 	private Spot[][] boxes; // matrice scacchiera formata da caselle (elementi di classe Spot)

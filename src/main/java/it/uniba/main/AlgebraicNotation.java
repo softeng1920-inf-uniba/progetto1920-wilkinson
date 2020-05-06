@@ -3,10 +3,22 @@ package it.uniba.main;
 import java.util.ArrayList;
 
 /**
- * interpreta un comando scritto in notazione algebrica abbreviata
+ * DESCRIZIONE
+ * interprete di notazione algebrica abbreviata
+ * 
+ * RESPONSABILITA' DI CLASSE
+ * interpreta un comando scritto in notazione algebrica abbreviata, 
+ * capendo che pezzo muovere, la casa finale di movimento sulla scacchiera
+ * e i gli eventuali simboli associati ad eventi specifici
+ * controlla inoltre se il comando inserito dall'utente e' scritto 
+ * con una sintassi corretta
+ * 
+ * CLASSIFICAZIONE ECB
+ * <<Control>>
+ * poichè gestisce l'interpretazione dell'input utente
+ * alla base della logica dell'applicazione
  * 
  * @author wilkinson
- *
  */
 public final class AlgebraicNotation {
 	private String pieceLetter; // lettera corrispondente al pezzo

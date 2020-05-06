@@ -2,11 +2,22 @@ package it.uniba.main;
 
 import java.util.ArrayList;
 
-/**rappresenta un pezzo degli scacchi generico
- * implementa un metodo che stabilisce il movimento di ogni pezzo
+/**
+ * DESCRIZIONE
+ * La classe rappresenta un pezzo degli scacchi generico.
+ * ogni pezzo ha associato un colore, uno stato associato alla cattura,
+ * uno stato riferito a se e' stato mosso o meno e una lista di mosse legali
+ *
+ * RESPONSABILITA' DI CLASSE
+ * la classe e' astratta in quanto generica, si occupa di restituire l'unicode
+ * del pezzo e stabilisce se un pezzo puo' muoversi, quindi se la mossa passata dall'utente e' legale
+ * inoltre ricerca tutte le possibili mosse legali del pezzo corrente
+ *
+ * CLASSIFICAZIONE ECB
+ * <<Entity>>
+ * Componente formante il gioco degli scacchi, che deriva dal concetto concreto di "pezzo"
  * 
  * @author wilkinson
- *
  */
 public abstract class Piece {
 	boolean killed = false; // true se pezzo catturato, false altrimenti

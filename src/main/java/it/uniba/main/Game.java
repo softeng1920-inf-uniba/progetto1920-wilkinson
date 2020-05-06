@@ -5,11 +5,21 @@ import java.util.ArrayList;
 import it.uniba.main.Move.GameStatus;
 
 /**
- * rappresenta una partita di scacchi in corso ha associato uno stato e una
- * scacchiera
+ * DESCRIZIONE
+ * rappresenta una partita di scacchi in corso 
+ * ha associato uno stato e una scacchiera
+ * 
+ * RESPONSABILITA' DI CLASSE
+ * crea e gestisce la partita in corso, ed esegue una mossa a partire dal comando 
+ * in input dell'utente, si occupa dello store delle mosse e delle catture eseguite 
+ * e relativa stampa
+ * 
+ * CLASSIFICAZIONE ECB
+ * <<Control>>
+ * contiene tutta la logica di gioco e fa vari controlli 
+ * sui tipi di mosse da eseguire
  * 
  * @author wilkinson
- *
  */
 public class Game {
 	private Board board; // oggetto scacchiera per la partita in corso
@@ -85,8 +95,6 @@ public class Game {
 			setAllPawnNotEP(getBoard());
 
 			whiteTurn = (!whiteTurn);
-
-			System.out.print(board);
 		} else {
 			System.out.println("\nCOMANDO O MOSSA NON VALIDA");
 		}

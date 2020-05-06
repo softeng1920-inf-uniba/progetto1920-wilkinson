@@ -1,10 +1,18 @@
 package it.uniba.main;
 
 /**
- * rappresenta un pedone sulla scacchiera
+ * DESCRIZIONE
+ * rappresenta un pezzo pedone 
+ * ha associati degli stati per permettere la cattura en passant
+ *
+ * RESPONSABILITA' DI CLASSE
+ * calcola le mosse legali di un pedone seguendo le regole ufficiale degli scacchi
+ *
+ * CLASSIFICAZIONE ECB
+ * <<Entity>>
+ * poiche' eredita dalla classe Piece.java
  * 
  * @author wilkinson
- *
  */
 public class Pawn extends Piece {
 	private boolean possibleEnPassantCapture;
@@ -19,9 +27,6 @@ public class Pawn extends Piece {
 	}
 
 	@Override
-	/**
-	 * Metodo per ottenere l'unicode del pedone nero e del pedone bianco
-	 */
 	public String draw() {
 		if (isWhite()) {
 			return "\u2659"; // unicode del bianco

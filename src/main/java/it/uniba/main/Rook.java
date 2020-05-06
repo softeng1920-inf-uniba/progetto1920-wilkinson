@@ -1,16 +1,22 @@
 package it.uniba.main;
 
 /**
- * rappresenta una torre sulla scacchiera
+ * DESCRIZIONE
+ * rappresenta un pezzo torre 
+ *
+ * RESPONSABILITA' DI CLASSE
+ * calcola le mosse legali di una torre seguendo le regole ufficiale degli scacchi
+ *
+ * CLASSIFICAZIONE ECB
+ * <<Entity>>
+ * poiche' eredita dalla classe Piece.java
  * 
  * @author wilkinson
- *
  */
 public class Rook extends Piece {
 
 	public Rook(boolean white) {
 		super(white);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
