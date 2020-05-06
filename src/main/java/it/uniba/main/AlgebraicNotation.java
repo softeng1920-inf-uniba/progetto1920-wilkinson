@@ -238,7 +238,7 @@ public final class AlgebraicNotation {
 				default:
 					return false;
 				}
-				square = reduceString(square, square.substring(FIRST, PIECELETTERINDEX));
+				square = square.substring(1, 3); // riduco l'ambiguita'
 			}
 
 			switch(square) {
