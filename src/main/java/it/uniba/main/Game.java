@@ -83,8 +83,12 @@ public class Game {
 				// se en passant riscrivo la mossa e la aggiungo allo storico
 				String enPassantCommand = command.substring(0, 4) + " e.p.";
 				getAllMoves().add(" " + enPassantCommand);
-			} else {
+			} else if(move.isCastle())	 {
+					String commandMod;
+					commandMod = command.replace('O', '0');
 				// aggiunto la mossa all'arraylist dello storico mosse
+				getAllMoves().add(" " + commandMod);
+			} else {
 				getAllMoves().add(" " + command);
 			}
 
