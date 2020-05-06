@@ -227,12 +227,17 @@ public class Game {
 			for (Piece currentPiece : whiteCaptures) {
 				System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + " " + currentPiece.draw() + " " + ANSI_RESET);
 			}
+		} else {
+			System.out.println(" Nessuna cattura per il bianco.");
 		}
-		System.out.print(ANSI_BLACK_BACKGROUND + ANSI_WHITE + "\nCatture del nero:::" + ANSI_RESET);
+		System.out.print(ANSI_BLACK_BACKGROUND + ANSI_WHITE + "\nCatture del nero  :" + ANSI_RESET);
 		if (!blackCaptures.isEmpty()) {
 			for (Piece currentPiece : blackCaptures) {
 				System.out.print(ANSI_BLACK_BACKGROUND + ANSI_WHITE + " " + currentPiece.draw() + " " + ANSI_RESET);
 			}
+		} else {
+			System.out.println(" Nessuna cattura per il nero.");
+
 		}
 	}
 
