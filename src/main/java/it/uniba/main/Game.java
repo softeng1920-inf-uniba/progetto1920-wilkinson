@@ -6,19 +6,19 @@ import it.uniba.main.Move.GameStatus;
 
 /**
  * DESCRIZIONE
- * rappresenta una partita di scacchi in corso 
+ * rappresenta una partita di scacchi in corso
  * ha associato uno stato e una scacchiera
- * 
+ *
  * RESPONSABILITA' DI CLASSE
- * crea e gestisce la partita in corso, ed esegue una mossa a partire dal comando 
- * in input dell'utente, si occupa dello store delle mosse e delle catture eseguite 
+ * crea e gestisce la partita in corso, ed esegue una mossa a partire dal comando
+ * in input dell'utente, si occupa dello store delle mosse e delle catture eseguite
  * e relativa stampa
- * 
+ *
  * CLASSIFICAZIONE ECB
  * <<Control>>
- * contiene tutta la logica di gioco e fa vari controlli 
+ * contiene tutta la logica di gioco e fa vari controlli
  * sui tipi di mosse da eseguire
- * 
+ *
  * @author wilkinson
  */
 public class Game {
@@ -60,7 +60,7 @@ public class Game {
 
 	/**
 	 * stabilisce se la partita e' in corso
-	 * 
+	 *
 	 * @return true se in corso, false se terminata
 	 */
 	public boolean isEnd() {
@@ -73,7 +73,7 @@ public class Game {
 
 	/**
 	 * currentGame e' il metodo che gestisce la partita corrente
-	 * 
+	 *
 	 * @param command e' il comando/mossa inserita dall'utente
 	 */
 	public void currentGame(final String command) {
@@ -93,11 +93,13 @@ public class Game {
 			}
 
 			// ricalcolo le mosse legali per ogni pezzo
+			board.searchForKings();
 			board.recalLegalMoves();
-			board.recalKingMoves();
+			board.refineLegalMoves();
 			// setto false i booleani dei pedoni che regolano l'en passant
 			setAllPawnNotEP(getBoard());
 
+			System.out.println(board);
 			whiteTurn = (!whiteTurn);
 		} else {
 			System.out.println("\nCOMANDO O MOSSA NON VALIDA");
@@ -108,11 +110,11 @@ public class Game {
 	 * Il metodo makeMove e' un booleano che effettua la mossa. Tiene conto di
 	 * questi fattori: - che pezzo si deve muovere - se la mossa e' valida - se c'e'
 	 * una cattura - se c'e' una cattura en-passant - muove il pezzo da start ad end
-	 * 
+	 *
 	 * @param move mossa da effettuare
 	 * @return true se la mossa e' stata effettuata, false viceversa
 	 */
-	private boolean makeMove(Move move) {		
+	private boolean makeMove(Move move) {
 		// controllo se la mossa è un arrocco
 		if (move.isCastle()) {
 			if (move.makeCastling(this)) {
@@ -120,7 +122,7 @@ public class Game {
 			}
 			return false;
 		}
-		
+
 		if (!move.getInterpreter().isGoodMove()) {
 			return false;
 		}
@@ -137,7 +139,7 @@ public class Game {
 		// cerca se sulla scacchiera c'e' stata una cattura
 		searchForCapture(start, end);
 
-		// controllo se il pezzo da catturare e' il re 
+		// controllo se il pezzo da catturare e' il re
 		if (!end.isEmpty() && end.getPiece() instanceof King) {
 			return false;
 		}
@@ -185,7 +187,7 @@ public class Game {
 
 	/**
 	 * aggiunge l'eventuale cattura nell'arraylist corrispondente
-	 * 
+	 *
 	 */
 	private void addCapture() {
 		for (int i = 0; i < 8; i++) {
@@ -204,7 +206,7 @@ public class Game {
 
 	/**
 	 * mostra le mosse giocate durante la partita
-	 * 
+	 *
 	 */
 	public void showMoves() {
 		int moveNumber = 0;
@@ -223,7 +225,7 @@ public class Game {
 
 	/**
 	 * mostra i pezzi catturati dalle due fazioni durante la partita
-	 * 
+	 *
 	 */
 	public void showCaptures() {
 		System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + "Catture del bianco:" + ANSI_RESET);
@@ -248,7 +250,7 @@ public class Game {
 	/**
 	 * ricerca sulla scacchiera se c'e' stata una cattura e setta il pezzo come
 	 * killed
-	 * 
+	 *
 	 * @param start
 	 * @param end
 	 */
@@ -274,7 +276,7 @@ public class Game {
 	/**
 	 * Il metodo setAllPawnNotEP setta false la possibile cattura en-passant di
 	 * tutti i pedoni ogni turno
-	 * 
+	 *
 	 * @param board
 	 */
 	private void setAllPawnNotEP(Board board) {
@@ -294,7 +296,7 @@ public class Game {
 	/**
 	 * Il metodo checkIfIsCapture e' un booleano. Controlla se il comando e' una
 	 * cattura Il metodo: - @return true se e' una cattura - @return false viceversa
-	 * 
+	 *
 	 * @param check
 	 */
 	private boolean checkIfIsCapture(AlgebraicNotation check) {
@@ -307,10 +309,10 @@ public class Game {
 	/**
 	 * Il metodo checkIfEnPassant e' un booleano. Controlla se il comando e' una
 	 * cattura en-passant
-	 * 
+	 *
 	 * Il metodo: - @return true se la cattura e' en-passant - @return false
 	 * viceversa
-	 * 
+	 *
 	 * @param check
 	 */
 	public boolean checkIfEnPassant(AlgebraicNotation check) {
@@ -325,6 +327,7 @@ public class Game {
 	 * - @return (Turno del bianco) se e' il turno del bianco - @return (Turno del
 	 * nero) se e' il turno del nero
 	 */
+	@Override
 	public String toString() {
 		if (this.whiteTurn) {
 			return ANSI_WHITE_BACKGROUND + ANSI_BLACK + "(Turno del bianco)" + ANSI_RESET;
