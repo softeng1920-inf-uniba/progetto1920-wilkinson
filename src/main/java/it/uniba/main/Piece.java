@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * CLASSIFICAZIONE ECB
  * <<Entity>>
  * Componente formante il gioco degli scacchi, che deriva dal concetto concreto di "pezzo"
- * 
+ *
  * @author wilkinson
  */
 public abstract class Piece {
@@ -27,7 +27,7 @@ public abstract class Piece {
 
 	/**
 	 * costruttore della classe Pezzo
-	 * 
+	 *
 	 * @param white true se pezzo bianco, false se pezzo nero
 	 */
 	public Piece(boolean white) {
@@ -43,7 +43,7 @@ public abstract class Piece {
 
 	/**
 	 * trova tutte le possibili mosse legali del pezzo corrente
-	 * 
+	 *
 	 */
 	void findLegalMoves(Board board, Spot currentSpot) {
 		this.legalMoves.clear();
@@ -60,8 +60,32 @@ public abstract class Piece {
 	}
 
 	/**
+	 * ricalcola le mosse del re tenendo conto delle minacce future
+	 *
+	 * @param board
+	 */
+	void recalculateMoves(final Board board) {
+		ArrayList<Move> movesCopy = new ArrayList<Move>();
+		ArrayList<Move> movesToRemove = new ArrayList<Move>();
+
+		if (!this.getLegalMoves().isEmpty()) {
+			for (Move currentMove : this.getLegalMoves()) {
+				movesCopy.add(currentMove);
+			}
+
+			for (Move currentMove : movesCopy) {
+				if (board.kingUnderAttackNext(currentMove.getStart(), currentMove.getEnd())) {
+					movesToRemove.add(currentMove);
+				}
+			}
+
+			this.getLegalMoves().removeAll(movesToRemove);
+		}
+	}
+
+	/**
 	 * metodo che stabilisce se il pezzo puo' muoversi (la mossa e' legale)
-	 * 
+	 *
 	 * @param board scacchiera attuale
 	 * @param start casa di partenza
 	 * @param end   casa di arrivo
@@ -70,8 +94,9 @@ public abstract class Piece {
 	abstract boolean canMove(Board board, Spot start, Spot end);
 
 	/**stampa di un pezzo e le sue mosse legali
-	 * 
+	 *
 	 */
+	@Override
 	public String toString() {
 		String output = "";
 		output += this.draw() + " ";
@@ -86,14 +111,13 @@ public abstract class Piece {
 			output += "capturing EP: " + ((Pawn)this).isCapturingEnPassant() + "\n";
 			output += "capturable EP: " + ((Pawn)this).isPossibleEnPassantCapture() + "\n";
 		}
-		output += "isKilled: " + this.isKilled() + "\n";
 		return output;
 	}
 
 	//Getters & Setters
 	/**
 	 * ritorna il valore dell'attributo white
-	 * 
+	 *
 	 * @return white true se il pezzo e' bianco, false se il pezzo e' nero
 	 */
 	public boolean isWhite() {
@@ -102,7 +126,7 @@ public abstract class Piece {
 
 	/**
 	 * setta il colore del pezzo
-	 * 
+	 *
 	 * @param white true se pezzo bianco, false se pezzo nero
 	 */
 	public void setWhite(boolean white) {
@@ -111,7 +135,7 @@ public abstract class Piece {
 
 	/**
 	 * ritorna il valore dell'attributo killed
-	 * 
+	 *
 	 * @return killed true se e' stato catturato, false altrimenti
 	 */
 	public boolean isKilled() {
@@ -120,7 +144,7 @@ public abstract class Piece {
 
 	/**
 	 * setta il pezzo come catturato
-	 * 
+	 *
 	 */
 	public void setAsKilled() {
 		this.killed = true;
@@ -128,7 +152,7 @@ public abstract class Piece {
 
 	/**
 	 * ritorna il valore dell'attributo moved
-	 * 
+	 *
 	 * @return moved true se il pezzo e' stato mosso, false altrimenti
 	 */
 	public boolean isMoved() {
@@ -137,12 +161,12 @@ public abstract class Piece {
 
 	/**
 	 * setta il pezzo come mosso
-	 * 
+	 *
 	 */
 	public void setAsMoved() {
 		this.moved = true;
 	}
-	
+
 	public ArrayList<Move> getLegalMoves() {
 		return legalMoves;
 	}
