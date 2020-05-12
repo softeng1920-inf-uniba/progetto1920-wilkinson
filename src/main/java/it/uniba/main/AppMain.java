@@ -46,7 +46,9 @@ public final class AppMain {
 		System.out.println("\n**BENVENUTO NEL GIOCO DEGLI SCACCHI**\n");
 		System.out.println(" COMANDI ");
 		System.out.println(">play     :: inizia una nuova partita");
-		System.out.println(">exit     :: chiudi il gioco\n");
+		System.out.println(">help     :: stainizia una nuova partita");
+
+		System.out.println(">quit     :: chiudi il gioco\n");
 		Scanner scanner = new Scanner(System.in);
 
 		/*
@@ -100,6 +102,7 @@ public final class AppMain {
 						System.out.println(">board    ::  mostra al scacchiera");
 						System.out.println(">moves    ::  mostra lo storico delle mosse giocate");
 						System.out.println(">captures ::  mostra i pezzi catturati");
+						System.out.println(">help     ::  mostra i comandi disponibili");
 						System.out.println(">quit     ::  esci dalla partita");
 						break;
 					case "play":
