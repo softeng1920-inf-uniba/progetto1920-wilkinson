@@ -46,8 +46,7 @@ public final class AppMain {
 		System.out.println("\n**BENVENUTO NEL GIOCO DEGLI SCACCHI**\n");
 		System.out.println(" COMANDI ");
 		System.out.println(">play     :: inizia una nuova partita");
-		System.out.println(">help     :: stainizia una nuova partita");
-
+		System.out.println(">help     :: mostra i comandi disponibili");
 		System.out.println(">quit     :: chiudi il gioco\n");
 		Scanner scanner = new Scanner(System.in);
 
@@ -61,6 +60,13 @@ public final class AppMain {
 			System.out.print("Inserire il comando che si intende eseguire => ");
 			userChoiceMenu = scanner.nextLine().toLowerCase(); //gestisce la possibile immissione di caratteri maiuscoli
 			switch (userChoiceMenu) {
+			case "help":
+				System.out.println("\nCOMANDI ");
+				System.out.println(">play     :: inizia una nuova partita");
+				System.out.println(">help     :: mostra i comandi disponibili");
+				System.out.println(">quit     :: chiudi il gioco\n");
+				break;
+
 			case "quit":
 				do {
 					System.out.println("Sei sicuro di voler chiudere il gioco?\n");
