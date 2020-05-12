@@ -5,20 +5,20 @@ import java.util.Scanner;
 /**
  * DESCRIZIONE
  * main dell'applicazione scacchi
- * 
- * RESPONSABILITA' DI CLASSE 
+ *
+ * RESPONSABILITA' DI CLASSE
  * avvia l'applicazione per giocare a scacchi non va
  * rinominato in quanto l'innesco di diversi processi automatici e'
- * associato in maniera specifica al nome "AppMain.java". 
- * 
+ * associato in maniera specifica al nome "AppMain.java".
+ *
  * CLASSIFICAZIONE ECB
  * <<Boundary>>
  * poiché è la classe che comunica con gli attori esterni: cioè i giocatori.
- * Questa classe è il punto di accesso al programma e quella che permette 
- * ai giocatori di introdurre i comandi i notazione algebrica per muovere 
+ * Questa classe è il punto di accesso al programma e quella che permette
+ * ai giocatori di introdurre i comandi i notazione algebrica per muovere
  * i pezzi, e di utilizzare i comandi ausiliari messi a disposizione
  * dal gioco.
- * 
+ *
  * - I M P O R T A N T E: -
  * NON RINOMINARE
  * <h>DO NOT RENAME</h>
@@ -27,7 +27,7 @@ public final class AppMain {
 
 	/**
 	 * Costruttore private
-	 * 
+	 *
 	 */
 	private AppMain() {
 
@@ -42,7 +42,7 @@ public final class AppMain {
 		Game game;
 		String userChoiceGame; // memorizza le scelte dell'utente durante il gioco, ossia i comandi per il movimento dei pezzi
 		String userChoiceMenu; // Memorizza le scelte che vengono effettuate dall'utente nel menu'
-		boolean quitFlag = false; // Flag per gestire l'uscita dal programma
+		//boolean quitFlag = false; // Flag per gestire l'uscita dal programma
 		boolean quitGame = false; // Flag per gestire l'uscita dal programma
 		System.out.println("\n**BENVENUTO NEL GIOCO DEGLI SCACCHI**\n");
 		System.out.println(" COMANDI ");
@@ -56,11 +56,11 @@ public final class AppMain {
 		 * giocatore sceglie il comando "play" dopo aver gia' avviato una partita, il
 		 * programma fara' partire una nuova partita previa conferma del giocatore.
 		 */
-		while (quitFlag == false) {
+		while (quitGame == false) {
 			System.out.print("Inserire il comando che si intende eseguire => ");
 			userChoiceMenu = scanner.nextLine().toLowerCase(); //gestisce la possibile immissione di caratteri maiuscoli
 			switch (userChoiceMenu) {
-			case "exit":
+			case "quit":
 				do {
 					System.out.println("Sei sicuro di voler chiudere il gioco?\n");
 					System.out.println(" COMANDI ");
@@ -70,9 +70,9 @@ public final class AppMain {
 					userChoiceMenu = scanner.nextLine().toLowerCase();
 					if (userChoiceMenu.compareTo("si") == 0) {
 						System.out.println("...uscita dal gioco");
-						quitFlag = true;
+						quitGame = true;
 					} else if (userChoiceMenu.compareTo("no") == 0) {
-						quitFlag = false;
+						quitGame = false;
 					} else {
 						System.out.println("COMANDO NON VALIDO\n");
 					}
@@ -149,7 +149,7 @@ public final class AppMain {
 							userChoiceMenu = scanner.nextLine().toLowerCase();
 
 							if (userChoiceMenu.compareTo("si") == 0) {
-								System.out.println("...ritorno al menu principale");
+								System.out.println("...uscita dal gioco");
 								quitGame = true;
 							} else if (userChoiceMenu.compareTo("no") == 0) {
 								quitGame = false;
@@ -161,14 +161,14 @@ public final class AppMain {
 						while ((!(userChoiceMenu.compareTo("si") == 0)&& !(userChoiceMenu.compareTo("no")==0)));
 						break;
 					default:
-						if (!userChoiceMenu.matches("")) { 
+						if (!userChoiceMenu.matches("")) {
 							game.currentGame(userChoiceGame); //uso la stringa non convertita in minuscolo per proseguire con l'interpretazione della mossa
 						}
 					}
 				}
 				break;
 			default:
-				quitFlag = false;
+				quitGame = false;
 			}
 		}
 		scanner.close();
