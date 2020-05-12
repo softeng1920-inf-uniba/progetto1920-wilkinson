@@ -42,7 +42,6 @@ public final class AppMain {
 		Game game;
 		String userChoiceGame; // memorizza le scelte dell'utente durante il gioco, ossia i comandi per il movimento dei pezzi
 		String userChoiceMenu; // Memorizza le scelte che vengono effettuate dall'utente nel menu'
-		//boolean quitFlag = false; // Flag per gestire l'uscita dal programma
 		boolean quitGame = false; // Flag per gestire l'uscita dal programma
 		System.out.println("\n**BENVENUTO NEL GIOCO DEGLI SCACCHI**\n");
 		System.out.println(" COMANDI ");
