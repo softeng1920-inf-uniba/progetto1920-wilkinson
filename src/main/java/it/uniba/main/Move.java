@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * DESCRIZIONE
  * rappresenta un movimento di un pezzo degli scacchi
  * da una casa di partenza ad una di arrivo
- * 
+ *
  * RESPONSABILITA' DI CLASSE
  * La classe effettua operazioni a partire da un input interpretato
  * - controllare quale pezzo si vuol muovere
@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * - stabilire se e' possibile una cattura (classica o en-passant)
  * - controllare casi di ambiguita' nel movimento
  * - rigettare l'input nel caso di irregolarita'
- * 
+ *
  * CLASSIFICAZIONE ECB
  * <<Control>>
  * essendo responsabile della logica che interessa il movimento
@@ -30,22 +30,24 @@ public final class Move {
 	private Spot end; // casa di arrivo
 	private Piece pieceMoved; // pezzo che deve eseguire il movimento
 	private boolean isAmbiguity = false; // caso in cui ci sia ambiguita' di movimento
-	private String ambiguity; // primo carattere di un'ambiguitÃ 
+	private String ambiguity; // primo carattere di un'ambiguitÃ
 
 	/**
 	 * costruttore dell'oggetto Move
-	 * 
+	 *
 	 * @param command comando da interpretare in mossa
 	 * @param game    partita in corso
 	 */
 	public Move(final String command, final Game game) {
 		this.interpreter = new AlgebraicNotation(command); // Istanzio l'oggetto interpreter
-
+		final int kingCol = 4;
+		final int whiteKingRaw = 7;
+		final int blackKingRaw = 0;
 		if (this.isCastle()) { // se e' un arrocco setta le coordinate di partenza del re
 			if (game.isWhiteTurn()) {
-				this.start = new Spot(7, 4);
+				this.start = new Spot(whiteKingRaw, kingCol);
 			} else {
-				this.start = new Spot(0, 4);
+				this.start = new Spot(blackKingRaw, kingCol);
 			}
 		}
 
@@ -64,7 +66,7 @@ public final class Move {
 				// avvalora il pezzo da muovere prendendolo da start
 				this.pieceMoved = start.getPiece();
 				// capisce se e' una cattura en passant
-				if (isEnPassantMove(pieceMoved, start, end, game.getBoard())) {
+				if (isEnPassantMove(game.getBoard())) {
 					((Pawn) start.getPiece()).setCapturingEnPassant(true);
 				}
 			}
@@ -74,36 +76,39 @@ public final class Move {
 	/**
 	 * costruttore secondario di un oggetto Move semplice (solo spot di
 	 * partenza/arrivo)
-	 * 
+	 *
 	 * @param start
 	 * @param end
 	 */
-	public Move(Spot start, Spot end) {
-		this.start = start;
-		this.end = end;
+	public Move(final Spot inStart, final Spot inEnd) {
+		this.start = inStart;
+		this.end = inEnd;
 	}
 
-	static final int EXPECTED_COMMAND_LENGTH = 2;
-	static final int EXPECTED_AMBIGUOUS_COMMAND_LENGTH = 3;
-	static final int BOARD_LENGTH = 8;
-	static final int BOARD_HEIGHT = 8;
+	private static final int EXPECTED_COMMAND_LENGTH = 2;
+	private static final int EXPECTED_AMBIGUOUS_COMMAND_LENGTH = 3;
+	private static final int BOARD_LENGTH = 8;
+	private static final int BOARD_HEIGHT = 8;
+	private static final int LETTER_INDEX = 2;
+	private static final int NUMBER_INDEX = 3;
 
 	/**
 	 * estrae le coordinate della casa di arrivo
-	 * 
+	 *
 	 * @param algebraicFinalSpot stringa di coordinate
 	 * @return spot di arrivo instanziato come elemento di classe Spot
 	 */
 	private Spot extractCoordinates(final String algebraicFinalSpot) {
 		Spot endSpot;
-		if (algebraicFinalSpot.length() == EXPECTED_COMMAND_LENGTH) { // caso in cui la stringa sia lunga 2
+		if (algebraicFinalSpot.length() == EXPECTED_COMMAND_LENGTH) {
+			// caso in cui la stringa sia lunga 2
 			endSpot = new Spot(convertCoordinate(algebraicFinalSpot.substring(1, 2)),
 					convertCoordinate(algebraicFinalSpot.substring(0, 1)), null);
 			return endSpot;
-		} else if (algebraicFinalSpot.length() == EXPECTED_AMBIGUOUS_COMMAND_LENGTH) { // caso in cui la stringa sia
-			// lunga 3 (ambiguita')
-			endSpot = new Spot(convertCoordinate(algebraicFinalSpot.substring(2, 3)),
-					convertCoordinate(algebraicFinalSpot.substring(1, 2)), null);
+		} else if (algebraicFinalSpot.length() == EXPECTED_AMBIGUOUS_COMMAND_LENGTH) {
+			// caso in cui la stringa sia lunga 3 (ambiguita')
+			endSpot = new Spot(convertCoordinate(algebraicFinalSpot.substring(LETTER_INDEX, NUMBER_INDEX)),
+					convertCoordinate(algebraicFinalSpot.substring(1, LETTER_INDEX)), null);
 			ambiguity = algebraicFinalSpot.substring(0, 1);
 
 			setAmbiguity(true);
@@ -115,23 +120,25 @@ public final class Move {
 	/**
 	 * trova lo spot di partenza cercando il pezzo con: 1) casa di arrivo
 	 * corrispodente a quella inserita 2) controlla solo i pezzi della classe
-	 * inserita dall'utente 3) controlla eventuali ambiguita' 
-	 * 
+	 * inserita dall'utente 3) controlla eventuali ambiguita'
+	 *
 	 * @param board
 	 * @param piece
 	 * @return
 	 */
-	boolean findStartSpot(Board board, Piece piece, boolean turn) {
+	boolean findStartSpot(final Board board, final Piece piece, final boolean turn) {
 		ArrayList<Piece> piecesMovable = new ArrayList<Piece>();
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
+		for (int i = 0; i < BOARD_LENGTH; i++) {
+			for (int j = 0; j < BOARD_HEIGHT; j++) {
 				Spot currentSpot = board.getSpot(i, j);
-				if (currentSpot.getPiece() != null
-						&& currentSpot.getPiece().getClass().getName() == piece.getClass().getName()
+				if (!currentSpot.isEmpty()
+						&& currentSpot.getPiece().getClass().getName().equals(
+							piece.getClass().getName())
 						&& currentSpot.getPiece().isWhite() == turn) {
 					for (Move currentMove : currentSpot.getPiece().getLegalMoves()) {
 						if (isAmbiguity) {
-							if (sameEnd(currentMove) && samePartialStart(currentMove, ambiguity)) {
+							if (sameEnd(currentMove)
+									&& samePartialStart(currentMove, ambiguity)) {
 								piecesMovable.add(currentSpot.getPiece());
 								this.setStart(currentMove.getStart());
 							}
@@ -151,9 +158,19 @@ public final class Move {
 		return false;
 	}
 
+	static final int COLA_RAW1 = 0;
+	static final int COLB_RAW2 = 1;
+	static final int COLC_RAW3 = 2;
+	static final int COLD_RAW4 = 3;
+	static final int COLE_RAW5 = 4;
+	static final int COLF_RAW6 = 5;
+	static final int COLG_RAW7 = 6;
+	static final int COLH_RAW8 = 7;
+	static final int NOT_ON_BOARD = 8;
+
 	/**
 	 * converte la coordinata in notazione matriciale
-	 * 
+	 *
 	 * @param coordinate stringa di coordinate
 	 * @return indice di riga-colonna
 	 */
@@ -161,37 +178,36 @@ public final class Move {
 		switch (coordinate) {
 		case "a":
 		case "8":
-			return 0;
+			return COLA_RAW1;
 		case "b":
 		case "7":
-			return 1;
+			return COLB_RAW2;
 		case "c":
 		case "6":
-			return 2;
+			return COLC_RAW3;
 		case "d":
 		case "5":
-			return 3;
+			return COLD_RAW4;
 		case "e":
 		case "4":
-			return 4;
+			return COLE_RAW5;
 		case "f":
 		case "3":
-			return 5;
+			return COLF_RAW6;
 		case "g":
 		case "2":
-			return 6;
+			return COLG_RAW7;
 		case "h":
 		case "1":
-			return 7;
+			return COLH_RAW8;
 		default:
-			return 8;
+			return NOT_ON_BOARD;
 		}
-
 	}
 
 	/**
 	 * Intepreta la lettera inserita dall'utente e la converte nel pezzo mosso
-	 * 
+	 *
 	 * @param algebraicPiece pezzo mosso in notazione algebrica
 	 * @return ritorna il pezzo che si deve muovere
 	 */
@@ -223,7 +239,7 @@ public final class Move {
 	/**
 	 * enumerazione dello stato di gioco (per verificare se la partita e' ancora in
 	 * corso)
-	 * 
+	 *
 	 * @author wilkinson
 	 *
 	 */
@@ -233,17 +249,20 @@ public final class Move {
 
 	/**
 	 * capisce se il pezzo che sta muovendo sta catturando en passant
-	 * 
+	 *
 	 * @param piece pezzo mosso
 	 * @param start casa di partenza
 	 * @param end   casa di arrivo
 	 * @param board scacchiera
 	 * @return true se cattura en passant, false altrimenti
 	 */
-	boolean isEnPassantMove(Piece piece, Spot start, Spot end, Board board) {
-		if (piece instanceof Pawn && board.isFrontDiagonal(start, end) && end.getPiece() == null
+	boolean isEnPassantMove(final Board board) {
+		if (pieceMoved instanceof Pawn
+				&& board.isFrontDiagonal(start, end)
+				&& board.getSpot(end.getX(), end.getY()).isEmpty()
 				&& board.getSpot(start.getX(), end.getY()).getPiece() instanceof Pawn
-				&& ((Pawn) board.getSpot(start.getX(), end.getY()).getPiece()).isPossibleEnPassantCapture()) {
+				&& ((Pawn) board.getSpot(start.getX(), end.getY())
+						.getPiece()).isPossibleEnPassantCapture()) {
 			return true;
 		}
 		return false;
@@ -251,7 +270,7 @@ public final class Move {
 
 	/**
 	 * controlla se l'input e' un arrocco
-	 * 
+	 *
 	 * @return
 	 */
 	boolean isCastle() {
@@ -261,15 +280,26 @@ public final class Move {
 		return false;
 	}
 
+	private static final int RAW_1 = 7;
+	private static final int RAW_8 = 0;
+	private static final int COL_H = 7;
+	private static final int COL_G = 6;
+	private static final int COL_F = 5;
+	private static final int COL_E = 4;
+	private static final int COL_D = 3;
+	private static final int COL_C = 2;
+	private static final int COL_B = 1;
+	private static final int COL_A = 0;
+
 	/**
 	 * controlla se e' possibile arroccare ed effettua l'arrocco
-	 * 
+	 *
 	 * @param game
 	 * @return
 	 */
-	boolean makeCastling(Game game) {
+	boolean makeCastling(final Game game) {
 		if (game.isWhiteTurn()) {
-			Spot whiteKingSpot = game.getBoard().getSpot(7, 4);
+			Spot whiteKingSpot = game.getBoard().getSpot(7,4);
 			if (this.getInterpreter().isCastleShort()) { // arrocco corto bianco
 				Spot whiteDxRookSpot = game.getBoard().getSpot(7, 7);
 				Spot whiteNewKingSpot = game.getBoard().getSpot(7, 6);
@@ -301,7 +331,7 @@ public final class Move {
 			if (this.getInterpreter().isCastleShort()) { // arrocco corto nero
 				Spot blackDxRookSpot = game.getBoard().getSpot(0, 7);
 				Spot blackNewKingSpot = game.getBoard().getSpot(0, 6);
-				Spot blackNewRookSpot = game.getBoard().getSpot(0, 5);
+				Spot blackNewRookSpot = game.getBoard().getSpot(0,5);
 				if (isCastlePossible(game.getBoard(), blackNewKingSpot, blackNewRookSpot, blackKingSpot,
 						blackDxRookSpot, null)) {
 					blackNewKingSpot.setPiece(blackKingSpot.getPiece());
@@ -330,14 +360,15 @@ public final class Move {
 
 	/**
 	 * controlla se le case fra re e torre sono sotto attacco
-	 * 
+	 *
 	 * @param board
 	 * @param kingSpot
 	 * @param rookSpot
 	 * @param king
 	 * @return
 	 */
-	private boolean isPathCastleNotAttacked(Board board, Spot kingSpot, Spot rookSpot, Spot king) {
+	private boolean isPathCastleNotAttacked(final Board board, final Spot kingSpot,
+			final Spot rookSpot, final Spot king) {
 		if (king.isUnderAttack(board, king.getPiece().isWhite())
 				|| kingSpot.isUnderAttack(board, king.getPiece().isWhite())
 				|| rookSpot.isUnderAttack(board, king.getPiece().isWhite())) {
@@ -348,13 +379,14 @@ public final class Move {
 
 	/**
 	 * controlla se le case fra re e torre sono libere da pezzi
-	 * 
+	 *
 	 * @param board
 	 * @param kingSpot
 	 * @param rookSpot
 	 * @return
 	 */
-	private boolean isPathCastleFree(Board board, Spot kingSpot, Spot rookSpot, Spot knightPos) {
+	private boolean isPathCastleFree(final Board board, final Spot kingSpot,
+			final Spot rookSpot, final Spot knightPos) {
 		if (this.getInterpreter().isCastleShort()) {
 			if (kingSpot.isEmpty() && rookSpot.isEmpty()) {
 				return true;
@@ -369,12 +401,12 @@ public final class Move {
 
 	/**
 	 * controlla se re e torre non sono stati mossi
-	 * 
+	 *
 	 * @param king
 	 * @param rook
 	 * @return
 	 */
-	private boolean areCastlePiecesNotMoved(King king, Rook rook) {
+	private boolean areCastlePiecesNotMoved(final King king, final Rook rook) {
 		if (king.isMoved() || rook.isMoved()) {
 			return false;
 		}
@@ -383,12 +415,12 @@ public final class Move {
 
 	/**
 	 * controlla che i pezzi nelle case di partenza di re e torre siano giusti
-	 * 
+	 *
 	 * @param king
 	 * @param rook
 	 * @return
 	 */
-	private boolean areCastlePiecesThere(Spot king, Spot rook) {
+	private boolean areCastlePiecesThere(final Spot king, final Spot rook) {
 		if (!king.isEmpty() && !rook.isEmpty()) {
 			if (king.getPiece() instanceof King && rook.getPiece() instanceof Rook) {
 				return true;
@@ -396,9 +428,10 @@ public final class Move {
 		}
 		return false;
 	}
+
 	/**
 	 * applica una serie di controlli per stabilire se l'arrocco è possibile
-	 * 
+	 *
 	 * @param board
 	 * @param king
 	 * @param rook
@@ -407,8 +440,8 @@ public final class Move {
 	 * @param kingOrigin
 	 * @return
 	 */
-	private boolean isCastlePossible(Board board, Spot kingSpot, Spot rookSpot, Spot kingOrigin, Spot rookOrigin,
-			Spot knightSpot) {
+	private boolean isCastlePossible(final Board board, final Spot kingSpot, final Spot rookSpot,
+			final Spot kingOrigin, final Spot rookOrigin, final Spot knightSpot) {
 		if (areCastlePiecesThere(kingOrigin, rookOrigin)) {
 			if (areCastlePiecesNotMoved((King) kingOrigin.getPiece(), (Rook) rookOrigin.getPiece())) {
 				if (isPathCastleFree(board, kingSpot, rookSpot, knightSpot)) {
@@ -423,55 +456,69 @@ public final class Move {
 
 	/**
 	 * confronta due oggetti di tipo Move e controlla se hanno le stesse coordinate
-	 * 
+	 *
 	 * @param move
 	 * @return true se hanno le stesse coordinate, false altrimenti
 	 */
-	public boolean equals(Move move) {
-		if (this.getEnd().getX() == move.getEnd().getX() && this.getEnd().getY() == move.getEnd().getY()
-				&& this.getStart().getX() == move.getStart().getX()
-				&& this.getStart().getY() == move.getStart().getY()) {
+	@Override
+	public boolean equals(final Object move) {
+		if (!(move instanceof Move)) {
+			return false;
+		}
+		Move inMove = (Move) move;
+		if (this.getEnd().getX() == inMove.getEnd().getX()
+				&& this.getEnd().getY() == inMove.getEnd().getY()
+				&& this.getStart().getX() == inMove.getStart().getX()
+				&& this.getStart().getY() == inMove.getStart().getY()) {
+			return true;
+		}
+		return false;
+	}
+
+	private static final int HASH = 42;
+
+	/**
+	 * default hashcode (di nessuna utilita', poiche' non c'e' un Set implementato)
+	 */
+	@Override
+	public int hashCode() {
+	    assert false : "hashCode not designed";
+	    return HASH; // any arbitrary constant will do
+	}
+
+	/**
+	 * controlla se due oggetti di tipo move hanno la stessa casa di arrivo
+	 *
+	 * @param move
+	 * @return
+	 */
+	public boolean sameEnd(final Move move) {
+		if (this.getEnd().getX() == move.getEnd().getX()
+				&& this.getEnd().getY() == move.getEnd().getY()) {
 			return true;
 		}
 		return false;
 	}
 
 	/**
-	 * controlla se due oggetti di tipo move hanno la stessa casa di arrivo
-	 * 
-	 * @param move
-	 * @return
-	 */
-	public boolean sameEnd(Move move) {
-		if (this.getEnd().getX() == move.getEnd().getX() && this.getEnd().getY() == move.getEnd().getY()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	/**
 	 * controlla se la casa di start della mossa corrisponde parzialmente
 	 * all'ambiguita'
-	 * 
+	 *
 	 * @param move
 	 * @param coord
 	 * @return
 	 */
-	public boolean samePartialStart(Move move, String coord) {
+	public boolean samePartialStart(final Move move, final String coord) {
 		if (Character.isDigit(coord.charAt(0))) {
 			if (move.getStart().getX() == convertCoordinate(coord)) {
 				return true;
-			} else {
-				return false;
 			}
 		} else {
 			if (move.getStart().getY() == convertCoordinate(coord)) {
 				return true;
-			} else {
-				return false;
 			}
 		}
+		return false;
 	}
 
 	// Getters & Setters
@@ -495,24 +542,19 @@ public final class Move {
 		return isAmbiguity;
 	}
 
-	public void setAmbiguity(final boolean isAmbiguity) {
-		this.isAmbiguity = isAmbiguity;
+	public void setAmbiguity(final boolean inIsAmbiguity) {
+		this.isAmbiguity = inIsAmbiguity;
 	}
 
-	public void setStart(final Spot start) {
-		this.start = start;
+	public void setStart(final Spot inStart) {
+		this.start = inStart;
 	}
 
-	public void setEnd(final Spot end) {
-		this.end = end;
+	public void setEnd(final Spot inEnd) {
+		this.end = inEnd;
 	}
 
-	public void setPieceMoved(final Piece pieceMoved) {
-		this.pieceMoved = pieceMoved;
-	}
-
-	public String toString() {
-		String output = "";
-		return output += "[start: " + start + " end: " + end + "]";
+	public void setPieceMoved(final Piece inPieceMoved) {
+		this.pieceMoved = inPieceMoved;
 	}
 }

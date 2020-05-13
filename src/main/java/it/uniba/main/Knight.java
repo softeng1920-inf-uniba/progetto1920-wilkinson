@@ -5,28 +5,29 @@ package it.uniba.main;
  * rappresenta un pezzo cavallo
  *
  * RESPONSABILITA' DI CLASSE
- * calcola le mosse legali di un cavallo seguendo le regole ufficiale degli scacchi
+ * calcola le mosse legali di un cavallo seguendo le
+ * regole ufficiale degli scacchi
  *
  * CLASSIFICAZIONE ECB
- * <<Entity>>
- * poiche' eredita dalla classe Piece.java
- * 
+ * <<Entity>> poiche' eredita dalla classe Piece.java
+ *
  * @author wilkinson
  */
 public class Knight extends Piece {
 
 	/**
 	 * Costruttore
-	 * 
+	 *
 	 * @param white
 	 */
-	public Knight(boolean white) {
+	public Knight(final boolean white) {
 		super(white);
 	}
 
 	/**
-	 * Metodo per ottenere l'unicode del cavallo nero e di quello bianco
-	 * 
+	 * Metodo per ottenere l'unicode del cavallo in base al suo colore (bianco o
+	 * nero)
+	 *
 	 */
 	@Override
 	public String draw() {
@@ -49,7 +50,7 @@ public class Knight extends Piece {
 	 * @return True se e' una mossa legale altrimenti False
 	 */
 	@Override
-	boolean canMove(Board board, Spot start, Spot end) {
+	boolean canMove(final Board board, final Spot start, final Spot end) {
 		Knight startPiece = (Knight) start.getPiece();
 		Piece endPiece = end.getPiece();
 
