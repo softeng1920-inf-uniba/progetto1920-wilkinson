@@ -98,9 +98,7 @@ public final class AppMain {
 							+ "o mossa che si intende eseguire => ");
 					userChoiceMenu = scanner.nextLine();
 					userChoiceGame=userChoiceMenu; //assegno la stringa digitata dall'utente alla variabile userChoigeGame prima di convertire la stringa in miuscolo
-					if (userChoiceMenu.compareTo("exit") == 0) {
-						userChoiceMenu = "quit";
-					}
+
 					switch (userChoiceMenu.toLowerCase()) { // converto in miniscolo per gestire i casi del menu'
 					case "help":
 						System.out.println("\n COMANDI ");
