@@ -41,7 +41,8 @@ public class Queen extends Piece {
 	 * @return true se movimento possibile, false se mossa illegale
 	 */
 	@Override
-	boolean canMove(final Board board, final Spot start, final Spot end) {
+  public boolean canMove(final Board board, final Spot start, final Spot end) {
+
 		if (board.isFreePath(start, end)) {
 			return true;
 		}

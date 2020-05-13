@@ -50,7 +50,7 @@ public class Knight extends Piece {
 	 * @return True se e' una mossa legale altrimenti False
 	 */
 	@Override
-	boolean canMove(final Board board, final Spot start, final Spot end) {
+	public boolean canMove(final Board board, final Spot start, final Spot end) {
 		Knight startPiece = (Knight) start.getPiece();
 		Piece endPiece = end.getPiece();
 
