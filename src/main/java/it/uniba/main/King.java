@@ -4,24 +4,27 @@ import java.util.ArrayList;
 
 /**
  * DESCRIZIONE
- * rappresenta un pezzo re 
+ * rappresenta un pezzo re
  *
  * RESPONSABILITA' DI CLASSE
- * calcola le mosse legali di un re seguendo le regole ufficiale degli scacchi
- * e le ricalcola limitando il movimento del re tenendo conto delle minacce avversarie
+ * calcola le mosse legali di un re seguendo le regole
+ * ufficiale degli scacchi e le ricalcola limitando il movimento del re tenendo
+ * conto delle minacce avversarie
  *
  * CLASSIFICAZIONE ECB
- * <<Entity>>
- * poiche' eredita dalla classe Piece.java
- * 
+ * <<Entity>> poiche' eredita dalla classe Piece.java
+ *
  * @author wilkinson
  */
 public class King extends Piece {
 
-	public King(boolean white) {
+	public King(final boolean white) {
 		super(white);
 	}
 
+	/**
+	 * Metodo per ottenere l'unicode del re in base al suo colore (bianco o nero)
+	 */
 	@Override
 	public String draw() {
 		if (isWhite()) {
@@ -31,8 +34,16 @@ public class King extends Piece {
 		}
 	}
 
+	/**
+	 * metodo che stabilisce se il pezzo puo' muoversi (la mossa e' legale)
+	 *
+	 * @param board scacchiera attuale
+	 * @param start casa di partenza
+	 * @param end   casa di arrivo
+	 * @return true se movimento possibile, false se mossa illegale
+	 */
 	@Override
-	public boolean canMove(Board board, Spot start, Spot end) {
+	public boolean canMove(final Board board, final Spot start, final Spot end) {
 		if (board.isSpotAround(start, end)) {
 			if (end.isEmpty()) {
 				return true;
@@ -45,7 +56,7 @@ public class King extends Piece {
 
 	/**
 	 * ricalcola le mosse del re tenendo conto delle minacce future
-	 * 
+	 *
 	 * @param board
 	 */
 	void recalculateMoves(final Board board) {

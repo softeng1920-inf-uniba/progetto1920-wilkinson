@@ -2,19 +2,19 @@ package it.uniba.main;
 
 /**
  * DESCRIZIONE
- * rappresenta una scacchiera (matrice 8x8) 
+ * rappresenta una scacchiera (matrice 8x8)
  * ogni casella e' un elemento di classe Spot
- * 
+ *
  * RESPONSABILITA' DI CLASSE
  * si occupa di ricalcolare le mosse legali di ogni pezzo
  * ed effettua controlli sulla posizione reciproca di due Spot
  * permette la stampa a video della scacchiera nella configurazione attuale
- * 
+ *
  * CLASSIFICAZIONE ECB
- * <<Entity>> 
- * perchÃ¨ deriva dal concetto concreto di "Scacchiera"
+ * <<Entity>>
+ * perchè deriva dal concetto concreto di "Scacchiera"
  * e tiene traccia dei dati sottoforma di configurazione attuale della scacchiera
- * 
+ *
  * @author wilkinson
  */
 public class Board {
@@ -36,10 +36,9 @@ public class Board {
 	private static final int COL_C = 2;
 	private static final int COL_B = 1;
 	private static final int COL_A = 0;
-	
+	// costanti corrispondenti al colore del pezzo (da passare al costruttore)
 	private static final boolean WHITE = true;
 	private static final boolean BLACK = false;
-
 	// costanti ANSI per background o colore font
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
@@ -59,10 +58,10 @@ public class Board {
 
 	/**
 	 * costruttore di una board vuota
-	 * 
+	 *
 	 * @param empty
 	 */
-	public Board(boolean empty) {
+	public Board(final boolean empty) {
 		boxes = new Spot[BOARDDIM][BOARDDIM];
 		for (int i = RAW_8; i < BOARDDIM; i++) {
 			for (int j = COL_A; j < BOARDDIM; j++) {
@@ -73,12 +72,12 @@ public class Board {
 
 	/**
 	 * metodo che ritorna una casa della scacchiera identificato con (riga, colonna)
-	 * 
+	 *
 	 * @param x riga
 	 * @param y colonna
 	 * @return elemento di classe Spot
 	 */
-	public Spot getSpot(int x, int y) {
+	public Spot getSpot(final int x, final int y) {
 		return boxes[x][y];
 	}
 
@@ -94,7 +93,7 @@ public class Board {
 		for (int j = COL_A; j < BOARDDIM; j++) {
 			boxes[RAW_2][j] = new Spot(RAW_2, j, new Pawn(WHITE));
 		}
-		
+		// inizializzo i pezzi pesanti
 		boxes[RAW_8][COL_A] = new Spot(RAW_8, COL_A, new Rook(BLACK));
 		boxes[RAW_8][COL_H] = new Spot(RAW_8, COL_H, new Rook(BLACK));
 		boxes[RAW_1][COL_A] = new Spot(RAW_1, COL_A, new Rook(WHITE));
@@ -111,7 +110,6 @@ public class Board {
 		boxes[RAW_1][COL_D] = new Spot(RAW_1, COL_D, new Queen(WHITE));
 		boxes[RAW_8][COL_E] = new Spot(RAW_8, COL_E, new King(BLACK));
 		boxes[RAW_1][COL_E] = new Spot(RAW_1, COL_E, new King(WHITE));
-
 		// riempio gli spot vuoti
 		for (int i = RAW_6; i < RAW_2; i++) {
 			for (int j = COL_A; j < BOARDDIM; j++) {
@@ -122,13 +120,13 @@ public class Board {
 
 	/**
 	 * ricalcola le mosse legali di tutti i pezzi sulla scacchiera
-	 * 
+	 *
 	 */
 	void recalLegalMoves() {
 		for (int i = RAW_8; i < BOARDDIM; i++) {
 			for (int j = COL_A; j < BOARDDIM; j++) {
 				Spot currentSpot = this.getSpot(i, j);
-				if (currentSpot.getPiece() != null) {
+				if (!currentSpot.isEmpty()) {
 					currentSpot.getPiece().findLegalMoves(this, currentSpot);
 				}
 			}
@@ -150,11 +148,11 @@ public class Board {
 	}
 
 	/**
-	 * controlla se il re Ã¨ sotto attacco dopo aver effettuato la mossa
-	 * 
+	 * controlla se il re è sotto attacco dopo aver effettuato la mossa
+	 *
 	 * @return
 	 */
-	boolean kingUnderAttackNext(Spot start, Spot end) {
+	boolean kingUnderAttackNext(final Spot start, final Spot end) {
 		// creo una nuova scacchiera
 		Board newBoard = new Board(true);
 		// copio la configurazione della scacchiera attuale
@@ -177,72 +175,73 @@ public class Board {
 				}
 			}
 		}
-		// ricalcolo le mosse legali
+		// ricalcolo le mosse legali della nuova scacchiera
 		newBoard.recalLegalMoves();
 		// analizzo la mossa corrente del re
 		Spot newEnd = newBoard.getSpot(end.getX(), end.getY());
 		Spot newStart = newBoard.getSpot(start.getX(), start.getY());
-		// se c'Ã¨ un pezzo nemico lo setto null per vedere se la casa
+		// se c'è un pezzo nemico lo setto null per vedere se la casa
 		// sarebbe sotto attacco dopo il movimento
 		newEnd.setPiece(newStart.getPiece());
 		newStart.setPiece(null);
 		// ricalcolo le mosse legali dei pezzi
 		newBoard.recalLegalMoves();
-		// controllo se la casa di movimento Ã¨ sotto attacco o meno
+		// controllo se la casa di movimento è sotto attacco o meno
 		if (newEnd.isUnderAttack(newBoard, newEnd.getPiece().isWhite())) {
 			return true;
 		}
 		// se il movimento non mette il re sotto scacco, ritorno false
 		return false;
 	}
-	
+
 	/**
 	 * ritorna lo spot immediatamente di fronte alla casa corrente
-	 * [ ][x][ ]... casa restituita per i bianchi 
+	 * [ ][x][ ]... casa restituita per i bianchi
 	 * [ ][S][ ]... casa di partenza
-	 * [ ][x][ ]... casa restituita per i neri 
-	 * 
+	 * [ ][x][ ]... casa restituita per i neri
+	 *
 	 * @param start
 	 * @param end
 	 * @return
 	 */
-	Spot frontSpot(Spot spot) {
+	Spot frontSpot(final Spot spot) {
+		final int oneDiffPosX = 1; // differenza di 1 sulle coordinate X
+		final int oneDiffNegX = -1; // differenza di -1 sulle coordinate X
 		if (!spot.isEmpty()) {
 			if (spot.getPiece().isWhite()) {
-				return this.getSpot(spot.getX() - 1, spot.getY());
+				return this.getSpot(spot.getX() + oneDiffNegX, spot.getY());
 			} else {
-				return this.getSpot(spot.getX() + 1, spot.getY());
+				return this.getSpot(spot.getX() + oneDiffPosX, spot.getY());
 			}
 		}
 		return null;
 	}
 
 	/**
-	 * stabilisce se i due spot in input sono diagonali 
-	 * rispetto alla direzione del pezzo 
-	 * [E][ ][E]... direzione giusta per i bianchi 
-	 * [ ][S][ ]... 
-	 * [E][ ][E]... direzione giusta per i neri 
-	 * 
+	 * stabilisce se i due spot in input sono diagonali
+	 * rispetto alla direzione del pezzo
+	 * [E][ ][E]... direzione giusta per i bianchi
+	 * [ ][S][ ]...
+	 * [E][ ][E]... direzione giusta per i neri
+	 *
 	 * @param start
 	 * @param end
 	 * @return
 	 */
-	boolean isFrontDiagonal(Spot start, Spot end) {
+	boolean isFrontDiagonal(final Spot start, final Spot end) {
+		final int oneDiffPosX = 1; // differenza di 1 sulle coordinate X
+		final int oneDiffNegX = -1; // differenza di -1 sulle coordinate X
+		final int oneDiffY = 1; // differenza di 1 sulle coordinate Y
 		int diffX = (start.getX() - end.getX());
 		int diffY = (start.getY() - end.getY());
 		if (!start.isEmpty()) {
 			if (start.getPiece().isWhite()) {
-				if (diffX == 1 && Math.abs(diffY) == 1) {
+				if (diffX == oneDiffPosX && Math.abs(diffY) == oneDiffY) {
 					return true;
-				} else {
-					return false;
 				}
 			} else {
-				if (diffX == -1 && Math.abs(diffY) == 1) {
+				if (diffX == oneDiffNegX && Math.abs(diffY) == oneDiffY) {
 					return true;
-				} else {
-					return false;
 				}
 			}
 		}
@@ -250,30 +249,29 @@ public class Board {
 	}
 
 	/**
-	 * stabilisce se lo spot di arrivo Ã¨ una casella avanti allo spot di partenza
+	 * stabilisce se lo spot di arrivo è una casella avanti allo spot di partenza
 	 * [ ][E][ ]... direzione giusta per i bianchi
 	 * [ ][S][ ]...
 	 * [ ][E][ ]... direzione giusta per i neri
-	 * 
+	 *
 	 * @param start
 	 * @param end
 	 * @return
 	 */
-	boolean isFrontSpot(Spot start, Spot end) {
+	boolean isFrontSpot(final Spot start, final Spot end) {
+		final int oneDiffPosX = 1; // differenza di 1 sulle coordinate X
+		final int oneDiffNegX = -1; // differenza di -1 sulle coordinate X
+		final int zeroDiffY = 0; // differenza di 0 sulle coordinate Y
 		int diffX = (start.getX() - end.getX());
 		int diffY = (start.getY() - end.getY());
 		if (!start.isEmpty()) {
 			if (start.getPiece().isWhite()) {
-				if (diffX == 1 && diffY == 0) {
+				if (diffX == oneDiffPosX && diffY == zeroDiffY) {
 					return true;
-				} else {
-					return false;
 				}
 			} else {
-				if (diffX == -1 && diffY == 0) {
+				if (diffX == oneDiffNegX && diffY == zeroDiffY) {
 					return true;
-				} else {
-					return false;
 				}
 			}
 		}
@@ -281,73 +279,75 @@ public class Board {
 	}
 
 	/**
-	 *stabilisce se lo spot di arrivo Ã¨ due caselle avanti allo spot di partenza
+	 *stabilisce se lo spot di arrivo è due caselle avanti allo spot di partenza
 	 * [ ][E][ ]... direzione giusta per i bianchi
 	 * [ ][ ][ ]...
 	 * [ ][S][ ]...
 	 * [ ][ ][ ]...
 	 * [ ][E][ ]... direzione giusta per i neri
-	 * 
+	 *
 	 * @param start
 	 * @param end
 	 * @return
 	 */
-	boolean isTwoSpotsAhead(Spot start, Spot end) {
+	boolean isTwoSpotsAhead(final Spot start, final Spot end) {
+		final int twoDiffPosX = 2; // differenza di 2 sulle coordinate X
+		final int twoDiffNegX = -2; // differenza di -2 sulle coordinate X
+		final int zeroDiffY = 0; // differenza di 0 sulle coordinate Y
 		int diffX = (start.getX() - end.getX());
 		int diffY = (start.getY() - end.getY());
 		if (!start.isEmpty()) {
 			if (start.getPiece().isWhite()) {
-				if (diffX == 2 && diffY == 0) {
+				if (diffX == twoDiffPosX && diffY == zeroDiffY) {
 					return true;
-				} else {
-					return false;
 				}
 			} else {
-				if (diffX == -2 && diffY == 0) {
+				if (diffX == twoDiffNegX && diffY == zeroDiffY) {
 					return true;
-				} else {
-					return false;
 				}
 			}
 		}
 		return false;
 	}
 
-
 	/**
-	 * stabilisce se lo spot di arrivo Ã¨ una casella valida per il cavallo 
+	 * stabilisce se lo spot di arrivo è una casella valida per il cavallo
 	 * rispetto allo spot di partenza
-	 * [E][ ][E][ ]... 
+	 * [E][ ][E][ ]...
 	 * [ ][ ][ ][E]...
 	 * [ ][S][ ][ ]...
 	 * [ ][ ][ ][E]...
-	 * [E][ ][E][ ]... 
-	 * 
+	 * [E][ ][E][ ]...
+	 *
 	 * @param start
 	 * @param end
 	 * @return
 	 */
-	boolean isLMove(Spot start, Spot end) {
+	boolean isLMove(final Spot start, final Spot end) {
+		final int twoDiff = 2; // differenza di 2 sulle coordinate
 		int diffX = Math.abs(start.getX() - end.getX());
 		int diffY = Math.abs(start.getY() - end.getY());
-		return diffX * diffY == 2;
+		return diffX * diffY == twoDiff;
 	}
 
 	/**
-	 * stabilisce se lo spot di arrivo Ã¨ una casella intorno allo spot di partenza
-	 * [E][E][E]... 
+	 * stabilisce se lo spot di arrivo è una casella intorno allo spot di partenza
+	 * [E][E][E]...
 	 * [E][S][E]...
-	 * [E][E][E]... 
-	 * 
+	 * [E][E][E]...
+	 *
 	 * @param start
 	 * @param end
 	 * @return
 	 */
-	public boolean isSpotAround(Spot start, Spot end) {
+	public boolean isSpotAround(final Spot start, final Spot end) {
+		final int oneDiff = 1; // differenza di 1 sulle coordinate
+		final int zeroDiff = 0; // differenza di 0 sulle coordinate
 		int diffX = Math.abs(start.getX() - end.getX());
 		int diffY = Math.abs(start.getY() - end.getY());
 		if (!start.isEmpty()) {
-			if ((diffX == 0 || diffX == 1) && (diffY == 0 || diffY == 1)) {
+			if ((diffX == zeroDiff || diffX == oneDiff)
+					&& (diffY == zeroDiff || diffY == oneDiff)) {
 				return true;
 			}
 		}
@@ -355,18 +355,18 @@ public class Board {
 	}
 
 	/**
-	 * stabilisce se lo spot di arrivo Ã¨ in diagonale rispetto allo spot di partenza
-	 * [ ][ ][ ][E]... 
+	 * stabilisce se lo spot di arrivo è in diagonale rispetto allo spot di partenza
+	 * [ ][ ][ ][E]...
 	 * [E][ ][E][ ]...
 	 * [ ][S][ ][ ]...
 	 * [E][ ][E][ ]...
-	 * [ ][ ][ ][E]... 
-	 * 
+	 * [ ][ ][ ][E]...
+	 *
 	 * @param start
 	 * @param end
 	 * @return
 	 */
-	boolean isDiagonal(Spot start, Spot end) {
+	boolean isDiagonal(final Spot start, final Spot end) {
 		int diffX = (start.getX() - end.getX());
 		int diffY = (start.getY() - end.getY());
 		if (!start.isEmpty()) {
@@ -378,18 +378,18 @@ public class Board {
 	}
 
 	/**
-	 * stabilisce se lo spot di arrivo Ã¨ sulla stessa colonna o riga rispetto allo spot di partenza
-	 * [ ][E][ ][ ]... 
+	 * stabilisce se lo spot di arrivo è sulla stessa colonna o riga rispetto allo spot di partenza
+	 * [ ][E][ ][ ]...
 	 * [ ][E][ ][ ]...
 	 * [E][S][E][E]...
 	 * [ ][E][ ][ ]...
-	 * [ ][E][ ][ ]... 
-	 * 
+	 * [ ][E][ ][ ]...
+	 *
 	 * @param start
 	 * @param end
 	 * @return
 	 */
-	boolean isStraight(Spot start, Spot end) {
+	boolean isStraight(final Spot start, final Spot end) {
 		if (!start.isEmpty()) {
 			if (start.getX() == end.getX() || start.getY() == end.getY()) {
 				return true;
@@ -399,17 +399,17 @@ public class Board {
 	}
 
 	/**
-	 * controlla se il percorso dal punto di partenza a quello di arrivo Ã¨ libero
-     * [S][x][x][E]... controllo su riga 
-     * [x][x][ ][ ]... 
-     * [x][ ][x][ ]...
-     * [x][ ][ ][E]... controllo su diagonale
-     * [E][ ][ ][ ]... controllo su colonna
-     * 
-     * @param start
-     * @param end
-     * @return
-     */
+	 * controlla se il percorso dal punto di partenza a quello di arrivo è libero
+	 * [S][x][x][E]... controllo su riga
+	 * [x][x][ ][ ]...
+	 * [x][ ][x][ ]...
+	 * [x][ ][ ][E]... controllo su diagonale
+	 * [E][ ][ ][ ]... controllo su colonna
+	 *
+	 * @param start
+	 * @param end
+	 * @return
+	 */
 	boolean isFreePath(Spot start, Spot end) {
 		int startX = start.getX();
 		int startY = start.getY();
@@ -597,7 +597,6 @@ public class Board {
 		}
 		return false;
 	}// end metodo isFreePath
-
 	/**
 	 * metodo che permette la stampa a video della scacchiera nella configurazione
 	 * attuale
@@ -631,13 +630,15 @@ public class Board {
 
 				if ((i + j) % 2 != 0) {
 					if (piece != null) {
-						System.out.print(ANSI_BACKGROUND + ANSI_BLACK + " " + piece.draw() + " " + ANSI_RESET);
+						System.out.print(ANSI_BACKGROUND + ANSI_BLACK + " "
+								+ piece.draw() + " " + ANSI_RESET);
 					} else {
 						System.out.print(ANSI_BACKGROUND + "   " + ANSI_RESET);
 					}
 				} else {
 					if (piece != null) {
-						System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + " " + piece.draw() + " " + ANSI_RESET);
+						System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + " "
+								+ piece.draw() + " " + ANSI_RESET);
 					} else {
 						System.out.print(ANSI_WHITE_BACKGROUND + "   " + ANSI_RESET);
 					}
@@ -659,22 +660,5 @@ public class Board {
 			System.out.println("\t");
 		}
 		System.out.print("      a   b   c   d   e   f   g   h\n");
-	}
-
-	/**
-	 * mostra tutte le possibili mosse di ogni pezzo sulla scacchiera
-	 * 
-	 */
-	public String toString() {
-		String output = "";
-		for (int i = 0; i < BOARDDIM; i++) {
-			for (int j = 0; j < BOARDDIM; j++) {
-				Spot currentSpot = getSpot(i, j);
-				if (!currentSpot.isEmpty() && currentSpot.getPiece() instanceof King) {
-					output += currentSpot.getPiece() + "\n";
-				}
-			}
-		}
-		return output;
 	}
 }
