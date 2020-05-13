@@ -1,4 +1,4 @@
-package it.uniba.example.utils.test;
+package it.uniba.example;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,11 +12,6 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-
-/**
- * This class is for demo purpose only and must be deleted. It is meant to show
- * you how to create your own JUnit 5 test cases for your code.
- */
-public class StringUtilsTest {
-
+public class TestBoard {
+	//TODO
 }
