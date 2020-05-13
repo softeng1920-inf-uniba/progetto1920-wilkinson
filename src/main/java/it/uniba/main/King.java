@@ -32,7 +32,7 @@ public class King extends Piece {
 	}
 
 	@Override
-	boolean canMove(Board board, Spot start, Spot end) {
+	public boolean canMove(Board board, Spot start, Spot end) {
 		if (board.isSpotAround(start, end)) {
 			if (end.isEmpty()) {
 				return true;

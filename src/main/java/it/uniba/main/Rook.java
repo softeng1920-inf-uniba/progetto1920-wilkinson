@@ -29,7 +29,7 @@ public class Rook extends Piece {
 	}
 
 	@Override
-	boolean canMove(Board board, Spot start, Spot end) {
+	public boolean canMove(Board board, Spot start, Spot end) {
 		if (board.isFreePath(start, end)) {
 			return true;
 		}

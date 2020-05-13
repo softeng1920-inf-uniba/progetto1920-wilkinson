@@ -67,7 +67,7 @@ public abstract class Piece {
 	 * @param end   casa di arrivo
 	 * @return true se movimento possibile, false se mossa illegale
 	 */
-	abstract boolean canMove(Board board, Spot start, Spot end);
+	public abstract boolean canMove(Board board, Spot start, Spot end);
 
 	/**stampa di un pezzo e le sue mosse legali
 	 * 
