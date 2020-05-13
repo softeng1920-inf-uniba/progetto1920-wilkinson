@@ -2,16 +2,16 @@ package it.uniba.main;
 
 /**
  * DESCRIZIONE
- * rappresenta un pezzo pedone 
- * ha associati degli stati per permettere la cattura en passant
+ * rappresenta un pezzo pedone ha associati degli stati per
+ * permettere la cattura en passant
  *
  * RESPONSABILITA' DI CLASSE
- * calcola le mosse legali di un pedone seguendo le regole ufficiale degli scacchi
+ * calcola le mosse legali di un pedone seguendo le
+ * regole ufficiale degli scacchi
  *
  * CLASSIFICAZIONE ECB
- * <<Entity>>
- * poiche' eredita dalla classe Piece.java
- * 
+ * <<Entity>> poiche' eredita dalla classe Piece.java
+ *
  * @author wilkinson
  */
 public class Pawn extends Piece {
@@ -20,12 +20,16 @@ public class Pawn extends Piece {
 	private static final int ENPASSANT_WHITE_X = 3;
 	private static final int ENPASSANT_BLACK_X = 4;
 
-	public Pawn(boolean white) {
+	public Pawn(final boolean white) {
 		super(white); // chiamo il costruttore della classe astratta Piece
 		possibleEnPassantCapture = false; // settato a true quando il pezzo potra' essere catturato en-passant
 		isCapturingEnPassant = false; // settato a true quando il pezzo stara' catturando en-passant
 	}
 
+	/**
+	 * Metodo per ottenere l'unicode del pedone in base al suo colore (bianco o
+	 * nero)
+	 */
 	@Override
 	public String draw() {
 		if (isWhite()) {
@@ -51,12 +55,11 @@ public class Pawn extends Piece {
 			if (board.isFrontSpot(start, end)) {
 				return true;
 				// movimento in avanti di due caselle (se prima mossa)
-			} else if (board.isTwoSpotsAhead(start, end) 
-					&& !startPiece.isMoved() 
+			} else if (board.isTwoSpotsAhead(start, end) && !startPiece.isMoved()
 					&& board.frontSpot(start).isEmpty()) {
 				return true;
 			}
-			// stabilisce se il movimento Ã¨ una cattura en passant
+			// stabilisce se il movimento è una cattura en passant
 			if (startPiece.isWhite()) {
 				if (start.getX() == ENPASSANT_WHITE_X) { // per il bianco
 					if (board.isFrontDiagonal(start, end)) {
@@ -82,24 +85,21 @@ public class Pawn extends Piece {
 				// cattura del pezzo se in diagonale
 				if (board.isFrontDiagonal(start, end)) {
 					return true;
-				} else {
-					return false;
 				}
 			}
 		}
-
 		return false;
 	}
 
 	/**
-	 * stabilisce se il pedone in start puÃ² catturare en passant finendo in end
-	 * 
+	 * stabilisce se il pedone in start può catturare en passant finendo in end
+	 *
 	 * @param board
 	 * @param start
 	 * @param end
 	 * @return
 	 */
-	boolean isCapturingEnPassant(Board board, Spot start, Spot end) {
+	boolean isCapturingEnPassant(final Board board, final Spot start, final Spot end) {
 
 		if (!board.getSpot(start.getX(), end.getY()).isEmpty()
 				&& board.getSpot(start.getX(), end.getY()).getPiece() instanceof Pawn) {
@@ -113,19 +113,43 @@ public class Pawn extends Piece {
 	}
 
 	// Getters & Setters
+	/**
+	 * Metodo che restituisce un booleano che segnala se è possibile la cattura En
+	 * Passant.
+	 *
+	 * @return possibleEnPassantCapture
+	 */
 	public boolean isPossibleEnPassantCapture() {
 		return possibleEnPassantCapture;
 	}
 
-	public void setPossibleEnPassantCapture(boolean possibleEnPassantCapture) {
-		this.possibleEnPassantCapture = possibleEnPassantCapture;
+	/**
+	 * Metodo che imposta sull'istanza di pedone corrente la possibilità di
+	 * catturare en passant.
+	 *
+	 * @param possibleEnPassantCaptureIo
+	 */
+	public void setPossibleEnPassantCapture(final boolean possibleEnPassantCaptureIo) {
+
+		this.possibleEnPassantCapture = possibleEnPassantCaptureIo;
 	}
 
+	/**
+	 * Metodo che restituisce un booleano se il pedone sta catturando en passant.
+	 *
+	 * @return isCapturingEnPassant
+	 */
 	public boolean isCapturingEnPassant() {
 		return isCapturingEnPassant;
 	}
 
-	public void setCapturingEnPassant(boolean isCapturingEnPassant) {
-		this.isCapturingEnPassant = isCapturingEnPassant;
+	/**
+	 * Metodo che imposta il booleano isCapturingEnPassant se il pedone sta
+	 * catturando en passant.
+	 *
+	 * @param isCapturingEnPassant
+	 */
+	public void setCapturingEnPassant(final boolean isCapturingEnPassantIo) {
+		this.isCapturingEnPassant = isCapturingEnPassantIo;
 	}
 }
