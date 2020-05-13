@@ -3,52 +3,62 @@ package it.uniba.main;
 /**
  * DESCRIZIONE
  * Rappresenta una casella della scacchiera.
- * Essa Ã¨ composta da una coordinata X e una Y.
- * Tali coordinate corrispondono ai numeri da 1 a 8 (per la X) 
+ * Essa è composta da una coordinata X e una Y.
+ * Tali coordinate corrispondono ai numeri da 1 a 8 (per la X)
  * e lettere da 'a' ad 'h' (per la Y).
- * 
+ *
  * RESPONSABILITA' DI CLASSE
- * Si occupa di verificare se su di una casella Ã¨ presente o meno un pezzo
+ * Si occupa di verificare se su di una casella è presente o meno un pezzo
  * e controlla se la casa corrente e' sotto attacco da pezzi avversari
- * 
+ *
  * CLASSIFICAZIONE ECB
  * <<Entity>>
  * E' un componente formante della tavola da gioco
  * e dunque deriva dal concetto concreto di "Scacchiera"
- * 
+ *
  * @author wilkinson
  */
 public class Spot {
-	Piece piece; // pezzo che la occupa
-	int x; // coordinata riga
-	int y; // coordinata colonna
+	private Piece piece; // pezzo che la occupa
+	private int x; // coordinata riga
+	private int y; // coordinata colonna
 
 	/**
 	 * costruttore di Spot (che rappresenta una casella della scacchiera)
-	 * 
+	 *
 	 * @param x coordinata della riga (corrispondente ad un numero)
 	 * @param y coordinata della colonna (corrispondente ad una lettera)
 	 */
-	public Spot(int x, int y, Piece piece) {
-		this.x = x;
-		this.y = y;
-		this.piece = piece;
+	public Spot(final int abscissa, final int ordinate, final Piece chessman) {
+		this.x = abscissa;
+		this.y = ordinate;
+		this.piece = chessman;
 	}
 
 	/**
 	 * costruttore di uno spot generico (per confronti tra spot)
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 */
-	public Spot(int x, int y) {
-		this.x = x;
-		this.y = y;
+	public Spot(final int abscissa, final int ordinate) {
+		this.x = abscissa;
+		this.y = ordinate;
 	}
 
+	static final int BOARDDIM = 8;
+	static final int CASE_0 = 0;
+	static final int CASE_1 = 1;
+	static final int CASE_2 = 2;
+	static final int CASE_3 = 3;
+	static final int CASE_4 = 4;
+	static final int CASE_5 = 5;
+	static final int CASE_6 = 6;
+	static final int CASE_7 = 7;
+
 	/**
-	 * controlla se lo spot corrente Ã¨ vuoto
-	 * 
+	 * controlla se lo spot corrente è vuoto
+	 *
 	 * @return
 	 */
 	public boolean isEmpty() {
@@ -60,21 +70,22 @@ public class Spot {
 
 	/**
 	 * controllo se la casa examined e' sotto attacco da pezzi avversari
-	 * 
+	 *
 	 * @param board    scacchiera attuale
 	 * @param examined mossa che ha come end lo spot corrente
 	 * @param color    colore del pezzo amico
 	 * @return true se lo Spot corrente e' sotto attacco, false altrimenti
 	 */
-	boolean isUnderAttack(Board board, boolean color) {
+	boolean isUnderAttack(final Board board, final boolean color) {
 		Move examinedMove = new Move(null, this);
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
+		for (int i = 0; i < BOARDDIM; i++) {
+			for (int j = 0; j < BOARDDIM; j++) {
 				Spot currentSpot = board.getSpot(i, j);
 				if (!currentSpot.isEmpty() && currentSpot.getPiece().isWhite() != color) {
 					for (Move currentMove : currentSpot.getPiece().getLegalMoves()) {
 						if (currentSpot.getPiece() instanceof Pawn) {
-							// caso in cui ci sia un pedone di fronte che catturerebbe in diagonale
+							// caso speciale:
+							// un pedone di fronte che catturerebbe in diagonale
 							if (board.isFrontDiagonal(currentSpot, examinedMove.getEnd())) {
 								return true;
 							}
@@ -91,59 +102,84 @@ public class Spot {
 
 	/**
 	 * converte la coordinata Y di uno spot in lettera
-	 * 
+	 *
 	 * @param coordinate
 	 * @return
 	 */
 	private String convertCoordinate(final int coordinate) {
 		switch (coordinate) {
-		case 0:
+		case CASE_0:
 			return "a";
-		case 1:
+		case CASE_1:
 			return "b";
-		case 2:
+		case CASE_2:
 			return "c";
-		case 3:
+		case CASE_3:
 			return "d";
-		case 4:
+		case CASE_4:
 			return "e";
-		case 5:
+		case CASE_5:
 			return "f";
-		case 6:
+		case CASE_6:
 			return "g";
-		case 7:
+		case CASE_7:
 			return "h";
+		default:
+			return null;
 		}
-		return null;
 	}
 
 	// Getters & Setters
+
+	/**
+	 * @return piece pezzo corrente
+	 */
 	public Piece getPiece() {
 		return this.piece;
 	}
 
+	/**
+	 * @return x ascissa di Spot
+	 */
 	public int getX() {
 		return x;
 	}
 
-	public void setX(int x) {
-		this.x = x;
+	/**
+	 * @param abscissa ascissa di Spot da settare
+	 */
+	public void setX(final int abscissa) {
+		this.x = abscissa;
 	}
 
+	/**
+	 * @return y ordinata di Spot
+	 */
 	public int getY() {
 		return y;
 	}
 
-	public void setY(int y) {
-		this.y = y;
+	/**
+	 * @param ordinate ordinata di Spot da settare
+	 */
+	public void setY(final int ordinate) {
+		this.y = ordinate;
 	}
 
-	public void setPiece(Piece piece) {
-		this.piece = piece;
+	/**
+	 * @param chessman modifica il pezzo corrente
+	 */
+	public void setPiece(final Piece chessman) {
+		this.piece = chessman;
 	}
 
+	/**
+	 * rappresenta la stringa "Riga + Colonna"
+	 */
+	@Override
 	public String toString() {
 		String output = "";
-		return output += convertCoordinate(y) + (8 - x);
+		output += convertCoordinate(y) + (BOARDDIM - x);
+		return output;
 	}
 }
