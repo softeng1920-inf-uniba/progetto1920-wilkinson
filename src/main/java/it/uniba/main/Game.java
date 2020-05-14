@@ -93,8 +93,9 @@ public class Game {
 			}
 
 			// ricalcolo le mosse legali per ogni pezzo
+			board.searchForKings();
 			board.recalLegalMoves();
-			board.recalKingMoves();
+			board.refineLegalMoves();
 
 			// setto false i booleani dei pedoni che regolano l'en passant
 			setAllPawnNotEP(getBoard());
