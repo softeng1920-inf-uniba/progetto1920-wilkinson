@@ -12,7 +12,7 @@ buildscript {
   }
   dependencies {
     classpath 'org.junit.platform:junit-platform-gradle-plugin:1.1.0'
-  }
+    }
 }
 
 plugins {
@@ -64,10 +64,10 @@ dependencies {
     implementation('com.google.guava:guava:21.0')
     
     // JUnit Jupiter API and TestEngine implementation
-    testImplementation('org.junit.jupiter:junit-jupiter-api:5.5.1')
-    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.5.1')
+    testImplementation('org.junit.jupiter:junit-jupiter-api:5.6.0')
+    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.6.0')
     testImplementation('junit:junit:4.13')
-    testRuntimeOnly('org.junit.vintage:junit-vintage-engine:5.5.1')
+    testRuntimeOnly('org.junit.vintage:junit-vintage-engine:5.6.0')
 
 }
 
