@@ -1,7 +1,5 @@
 package it.uniba.main;
 
-import java.util.ArrayList;
-
 /**
  * DESCRIZIONE
  * rappresenta un pezzo re
@@ -52,29 +50,5 @@ public class King extends Piece {
 			}
 		}
 		return false;
-	}
-
-	/**
-	 * ricalcola le mosse del re tenendo conto delle minacce future
-	 *
-	 * @param board
-	 */
-	void recalculateMoves(final Board board) {
-		ArrayList<Move> movesCopy = new ArrayList<Move>();
-		ArrayList<Move> movesToRemove = new ArrayList<Move>();
-
-		if (!this.getLegalMoves().isEmpty()) {
-			for (Move currentMove : this.getLegalMoves()) {
-				movesCopy.add(currentMove);
-			}
-
-			for (Move currentMove : movesCopy) {
-				if (board.kingUnderAttackNext(currentMove.getStart(), currentMove.getEnd())) {
-					movesToRemove.add(currentMove);
-				}
-			}
-
-			this.getLegalMoves().removeAll(movesToRemove);
-		}
 	}
 }

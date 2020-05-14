@@ -12,22 +12,24 @@ package it.uniba.main;
  *
  * CLASSIFICAZIONE ECB
  * <<Entity>>
- * perchè deriva dal concetto concreto di "Scacchiera"
+ * perchï¿½ deriva dal concetto concreto di "Scacchiera"
  * e tiene traccia dei dati sottoforma di configurazione attuale della scacchiera
  *
  * @author wilkinson
  */
 public class Board {
 	private Spot[][] boxes; // matrice scacchiera formata da caselle (elementi di classe Spot)
+	private Spot whiteKingSpot;
+	private Spot blackKingSpot;
 	private static final int BOARDDIM = 8; // dimensioni della scacchiera
-	private static final int RAW_1 = 7;
-	private static final int RAW_2 = 6;
-//	private static final int RAW_3 = 5;
-//	private static final int RAW_4 = 4;
-//	private static final int RAW_5 = 3;
-	private static final int RAW_6 = 2;
-	private static final int RAW_7 = 1;
-	private static final int RAW_8 = 0;
+	private static final int ROW_1 = 7;
+	private static final int ROW_2 = 6;
+//	private static final int ROW_3 = 5;
+//	private static final int ROW_4 = 4;
+//	private static final int ROW_5 = 3;
+	private static final int ROW_6 = 2;
+	private static final int ROW_7 = 1;
+	private static final int ROW_8 = 0;
 	private static final int COL_H = 7;
 	private static final int COL_G = 6;
 	private static final int COL_F = 5;
@@ -63,7 +65,7 @@ public class Board {
 	 */
 	public Board(final boolean empty) {
 		boxes = new Spot[BOARDDIM][BOARDDIM];
-		for (int i = RAW_8; i < BOARDDIM; i++) {
+		for (int i = ROW_8; i < BOARDDIM; i++) {
 			for (int j = COL_A; j < BOARDDIM; j++) {
 				boxes[i][j] = new Spot(i, j, null);
 			}
@@ -87,33 +89,53 @@ public class Board {
 	private void resetBoard() {
 		// inizializzo pedoni neri
 		for (int j = COL_A; j < BOARDDIM; j++) {
-			boxes[RAW_7][j] = new Spot(RAW_7, j, new Pawn(BLACK));
+			boxes[ROW_7][j] = new Spot(ROW_7, j, new Pawn(BLACK));
 		}
 		// inizializzo pedoni bianchi
 		for (int j = COL_A; j < BOARDDIM; j++) {
-			boxes[RAW_2][j] = new Spot(RAW_2, j, new Pawn(WHITE));
+			boxes[ROW_2][j] = new Spot(ROW_2, j, new Pawn(WHITE));
 		}
 		// inizializzo i pezzi pesanti
-		boxes[RAW_8][COL_A] = new Spot(RAW_8, COL_A, new Rook(BLACK));
-		boxes[RAW_8][COL_H] = new Spot(RAW_8, COL_H, new Rook(BLACK));
-		boxes[RAW_1][COL_A] = new Spot(RAW_1, COL_A, new Rook(WHITE));
-		boxes[RAW_1][COL_H] = new Spot(RAW_1, COL_H, new Rook(WHITE));
-		boxes[RAW_8][COL_B] = new Spot(RAW_8, COL_B, new Knight(BLACK));
-		boxes[RAW_8][COL_G] = new Spot(RAW_8, COL_G, new Knight(BLACK));
-		boxes[RAW_1][COL_B] = new Spot(RAW_1, COL_B, new Knight(WHITE));
-		boxes[RAW_1][COL_G] = new Spot(RAW_1, COL_G, new Knight(WHITE));
-		boxes[RAW_8][COL_C] = new Spot(RAW_8, COL_C, new Bishop(BLACK));
-		boxes[RAW_8][COL_F] = new Spot(RAW_8, COL_F, new Bishop(BLACK));
-		boxes[RAW_1][COL_C] = new Spot(RAW_1, COL_C, new Bishop(WHITE));
-		boxes[RAW_1][COL_F] = new Spot(RAW_1, COL_F, new Bishop(WHITE));
-		boxes[RAW_8][COL_D] = new Spot(RAW_8, COL_D, new Queen(BLACK));
-		boxes[RAW_1][COL_D] = new Spot(RAW_1, COL_D, new Queen(WHITE));
-		boxes[RAW_8][COL_E] = new Spot(RAW_8, COL_E, new King(BLACK));
-		boxes[RAW_1][COL_E] = new Spot(RAW_1, COL_E, new King(WHITE));
+		boxes[ROW_8][COL_A] = new Spot(ROW_8, COL_A, new Rook(BLACK));
+		boxes[ROW_8][COL_H] = new Spot(ROW_8, COL_H, new Rook(BLACK));
+		boxes[ROW_1][COL_A] = new Spot(ROW_1, COL_A, new Rook(WHITE));
+		boxes[ROW_1][COL_H] = new Spot(ROW_1, COL_H, new Rook(WHITE));
+		boxes[ROW_8][COL_B] = new Spot(ROW_8, COL_B, new Knight(BLACK));
+		boxes[ROW_8][COL_G] = new Spot(ROW_8, COL_G, new Knight(BLACK));
+		boxes[ROW_1][COL_B] = new Spot(ROW_1, COL_B, new Knight(WHITE));
+		boxes[ROW_1][COL_G] = new Spot(ROW_1, COL_G, new Knight(WHITE));
+		boxes[ROW_8][COL_C] = new Spot(ROW_8, COL_C, new Bishop(BLACK));
+		boxes[ROW_8][COL_F] = new Spot(ROW_8, COL_F, new Bishop(BLACK));
+		boxes[ROW_1][COL_C] = new Spot(ROW_1, COL_C, new Bishop(WHITE));
+		boxes[ROW_1][COL_F] = new Spot(ROW_1, COL_F, new Bishop(WHITE));
+		boxes[ROW_8][COL_D] = new Spot(ROW_8, COL_D, new Queen(BLACK));
+		boxes[ROW_1][COL_D] = new Spot(ROW_1, COL_D, new Queen(WHITE));
+		boxes[ROW_8][COL_E] = new Spot(ROW_8, COL_E, new King(BLACK));
+		blackKingSpot = boxes[ROW_8][COL_E];
+		boxes[ROW_1][COL_E] = new Spot(ROW_1, COL_E, new King(WHITE));
+		whiteKingSpot = boxes[ROW_1][COL_E];
 		// riempio gli spot vuoti
-		for (int i = RAW_6; i < RAW_2; i++) {
+		for (int i = ROW_6; i < ROW_2; i++) {
 			for (int j = COL_A; j < BOARDDIM; j++) {
 				boxes[i][j] = new Spot(i, j, null);
+			}
+		}
+	}
+
+	/**
+	 * ricerca i due re sulla scacchiera e ne aggiorna la posizione attuale
+	 */
+	void searchForKings() {
+		for (int i = ROW_8; i < BOARDDIM; i++) {
+			for (int j = COL_A; j < BOARDDIM; j++) {
+				Spot currentSpot = this.getSpot(i, j);
+				if (currentSpot.getPiece() != null && currentSpot.getPiece() instanceof King) {
+					if (currentSpot.getPiece().isWhite()) {
+						whiteKingSpot = boxes[currentSpot.getX()][currentSpot.getY()];
+					} else {
+						blackKingSpot = boxes[currentSpot.getX()][currentSpot.getY()];
+					}
+				}
 			}
 		}
 	}
@@ -123,7 +145,7 @@ public class Board {
 	 *
 	 */
 	void recalLegalMoves() {
-		for (int i = RAW_8; i < BOARDDIM; i++) {
+		for (int i = ROW_8; i < BOARDDIM; i++) {
 			for (int j = COL_A; j < BOARDDIM; j++) {
 				Spot currentSpot = this.getSpot(i, j);
 				if (!currentSpot.isEmpty()) {
@@ -134,21 +156,21 @@ public class Board {
 	}
 
 	/**
-	 * ricalcola le mosse legali dei due re sulla scacchiera
+	 * ricalcola le mosse di ogni pezzo controllando se espongono il re a pericolo
 	 */
-	void recalKingMoves() {
-		for (int i = RAW_8; i < BOARDDIM; i++) {
+	void refineLegalMoves() {
+		for (int i = ROW_8; i < BOARDDIM; i++) {
 			for (int j = COL_A; j < BOARDDIM; j++) {
 				Spot currentSpot = this.getSpot(i, j);
-				if (!currentSpot.isEmpty() && currentSpot.getPiece() instanceof King) {
-					((King) currentSpot.getPiece()).recalculateMoves(this);
+				if (!currentSpot.isEmpty()) {
+					currentSpot.getPiece().recalculateMoves(this);
 				}
 			}
 		}
 	}
 
 	/**
-	 * controlla se il re è sotto attacco dopo aver effettuato la mossa
+	 * controlla se il re ï¿½ sotto attacco dopo aver effettuato la mossa
 	 *
 	 * @return
 	 */
@@ -156,7 +178,7 @@ public class Board {
 		// creo una nuova scacchiera
 		Board newBoard = new Board(true);
 		// copio la configurazione della scacchiera attuale
-		for (int i = RAW_8; i < BOARDDIM; i++) {
+		for (int i = ROW_8; i < BOARDDIM; i++) {
 			for (int j = COL_A; j < BOARDDIM; j++) {
 				Spot currentSpot = newBoard.getSpot(i, j);
 				Piece currentPiece = this.getSpot(i, j).getPiece();
@@ -177,19 +199,27 @@ public class Board {
 		}
 		// ricalcolo le mosse legali della nuova scacchiera
 		newBoard.recalLegalMoves();
-		// analizzo la mossa corrente del re
+		// analizzo la mossa corrente
 		Spot newEnd = newBoard.getSpot(end.getX(), end.getY());
 		Spot newStart = newBoard.getSpot(start.getX(), start.getY());
-		// se c'è un pezzo nemico lo setto null per vedere se la casa
-		// sarebbe sotto attacco dopo il movimento
+		Boolean color = newStart.getPiece().isWhite();
+		// effettuo il movimento
 		newEnd.setPiece(newStart.getPiece());
 		newStart.setPiece(null);
 		// ricalcolo le mosse legali dei pezzi
 		newBoard.recalLegalMoves();
-		// controllo se la casa di movimento è sotto attacco o meno
-		if (newEnd.isUnderAttack(newBoard, newEnd.getPiece().isWhite())) {
-			return true;
-		}
+		// ricerco la nuova posizione del re
+				newBoard.searchForKings();
+				// controllo se la casa corrente del re Ã¨ sotto attacco o meno
+				if (newEnd.getPiece().isWhite()) {
+					if (newBoard.getWhiteKingSpot().isUnderAttack(newBoard, color)) {
+						return true;
+					}
+				} else {
+					if (newBoard.getBlackKingSpot().isUnderAttack(newBoard, color)) {
+						return true;
+					}
+				}
 		// se il movimento non mette il re sotto scacco, ritorno false
 		return false;
 	}
@@ -249,7 +279,7 @@ public class Board {
 	}
 
 	/**
-	 * stabilisce se lo spot di arrivo è una casella avanti allo spot di partenza
+	 * stabilisce se lo spot di arrivo ï¿½ una casella avanti allo spot di partenza
 	 * [ ][E][ ]... direzione giusta per i bianchi
 	 * [ ][S][ ]...
 	 * [ ][E][ ]... direzione giusta per i neri
@@ -279,7 +309,7 @@ public class Board {
 	}
 
 	/**
-	 *stabilisce se lo spot di arrivo è due caselle avanti allo spot di partenza
+	 *stabilisce se lo spot di arrivo ï¿½ due caselle avanti allo spot di partenza
 	 * [ ][E][ ]... direzione giusta per i bianchi
 	 * [ ][ ][ ]...
 	 * [ ][S][ ]...
@@ -311,7 +341,7 @@ public class Board {
 	}
 
 	/**
-	 * stabilisce se lo spot di arrivo è una casella valida per il cavallo
+	 * stabilisce se lo spot di arrivo ï¿½ una casella valida per il cavallo
 	 * rispetto allo spot di partenza
 	 * [E][ ][E][ ]...
 	 * [ ][ ][ ][E]...
@@ -331,7 +361,7 @@ public class Board {
 	}
 
 	/**
-	 * stabilisce se lo spot di arrivo è una casella intorno allo spot di partenza
+	 * stabilisce se lo spot di arrivo ï¿½ una casella intorno allo spot di partenza
 	 * [E][E][E]...
 	 * [E][S][E]...
 	 * [E][E][E]...
@@ -355,7 +385,7 @@ public class Board {
 	}
 
 	/**
-	 * stabilisce se lo spot di arrivo è in diagonale rispetto allo spot di partenza
+	 * stabilisce se lo spot di arrivo ï¿½ in diagonale rispetto allo spot di partenza
 	 * [ ][ ][ ][E]...
 	 * [E][ ][E][ ]...
 	 * [ ][S][ ][ ]...
@@ -378,7 +408,7 @@ public class Board {
 	}
 
 	/**
-	 * stabilisce se lo spot di arrivo è sulla stessa colonna o riga rispetto allo spot di partenza
+	 * stabilisce se lo spot di arrivo ï¿½ sulla stessa colonna o riga rispetto allo spot di partenza
 	 * [ ][E][ ][ ]...
 	 * [ ][E][ ][ ]...
 	 * [E][S][E][E]...
@@ -399,7 +429,7 @@ public class Board {
 	}
 
 	/**
-	 * controlla se il percorso dal punto di partenza a quello di arrivo è libero
+	 * controlla se il percorso dal punto di partenza a quello di arrivo ï¿½ libero
 	 * [S][x][x][E]... controllo su riga
 	 * [x][x][ ][ ]...
 	 * [x][ ][x][ ]...
@@ -622,7 +652,7 @@ public class Board {
 		System.out.println("");
 		// stampa delle coordinate sulle colonne
 
-		for (int i = RAW_8; i < BOARDDIM; i++) {
+		for (int i = ROW_8; i < BOARDDIM; i++) {
 			System.out.print("  " + (BOARDDIM - i) + " ");
 			System.out.print(vertline);
 			for (int j = COL_A; j < BOARDDIM; j++) {
@@ -660,5 +690,21 @@ public class Board {
 			System.out.println("\t");
 		}
 		System.out.print("      a   b   c   d   e   f   g   h\n");
+	}
+
+	public Spot getWhiteKingSpot() {
+		return whiteKingSpot;
+	}
+
+	public void setWhiteKingSpot(Spot whiteKingSpot) {
+		this.whiteKingSpot = whiteKingSpot;
+	}
+
+	public Spot getBlackKingSpot() {
+		return blackKingSpot;
+	}
+
+	public void setBlackKingSpot(Spot blackKingSpot) {
+		this.blackKingSpot = blackKingSpot;
 	}
 }

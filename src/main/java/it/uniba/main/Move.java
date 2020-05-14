@@ -30,7 +30,7 @@ public final class Move {
 	private Spot end; // casa di arrivo
 	private Piece pieceMoved; // pezzo che deve eseguire il movimento
 	private boolean isAmbiguity = false; // caso in cui ci sia ambiguita' di movimento
-	private String ambiguity; // primo carattere di un'ambiguitÃ
+	private String ambiguity; // primo carattere di un'ambiguitÃ 
 
 	/**
 	 * costruttore dell'oggetto Move
@@ -41,13 +41,13 @@ public final class Move {
 	public Move(final String command, final Game game) {
 		this.interpreter = new AlgebraicNotation(command); // Istanzio l'oggetto interpreter
 		final int kingCol = 4;
-		final int whiteKingRaw = 7;
-		final int blackKingRaw = 0;
+		final int whiteKingROW = 7;
+		final int blackKingROW = 0;
 		if (this.isCastle()) { // se e' un arrocco setta le coordinate di partenza del re
 			if (game.isWhiteTurn()) {
-				this.start = new Spot(whiteKingRaw, kingCol);
+				this.start = new Spot(whiteKingROW, kingCol);
 			} else {
-				this.start = new Spot(blackKingRaw, kingCol);
+				this.start = new Spot(blackKingROW, kingCol);
 			}
 		}
 
@@ -120,7 +120,7 @@ public final class Move {
 	/**
 	 * trova lo spot di partenza cercando il pezzo con: 1) casa di arrivo
 	 * corrispodente a quella inserita 2) controlla solo i pezzi della classe
-	 * inserita dall'utente 3) controlla eventuali ambiguita'
+	 * inserita dall'utente 3) controlla eventuali ambiguita' 
 	 *
 	 * @param board
 	 * @param piece
@@ -158,14 +158,14 @@ public final class Move {
 		return false;
 	}
 
-	static final int COLA_RAW1 = 0;
-	static final int COLB_RAW2 = 1;
-	static final int COLC_RAW3 = 2;
-	static final int COLD_RAW4 = 3;
-	static final int COLE_RAW5 = 4;
-	static final int COLF_RAW6 = 5;
-	static final int COLG_RAW7 = 6;
-	static final int COLH_RAW8 = 7;
+	static final int COLA_ROW1 = 0;
+	static final int COLB_ROW2 = 1;
+	static final int COLC_ROW3 = 2;
+	static final int COLD_ROW4 = 3;
+	static final int COLE_ROW5 = 4;
+	static final int COLF_ROW6 = 5;
+	static final int COLG_ROW7 = 6;
+	static final int COLH_ROW8 = 7;
 	static final int NOT_ON_BOARD = 8;
 
 	/**
@@ -178,28 +178,28 @@ public final class Move {
 		switch (coordinate) {
 		case "a":
 		case "8":
-			return COLA_RAW1;
+			return COLA_ROW1;
 		case "b":
 		case "7":
-			return COLB_RAW2;
+			return COLB_ROW2;
 		case "c":
 		case "6":
-			return COLC_RAW3;
+			return COLC_ROW3;
 		case "d":
 		case "5":
-			return COLD_RAW4;
+			return COLD_ROW4;
 		case "e":
 		case "4":
-			return COLE_RAW5;
+			return COLE_ROW5;
 		case "f":
 		case "3":
-			return COLF_RAW6;
+			return COLF_ROW6;
 		case "g":
 		case "2":
-			return COLG_RAW7;
+			return COLG_ROW7;
 		case "h":
 		case "1":
-			return COLH_RAW8;
+			return COLH_ROW8;
 		default:
 			return NOT_ON_BOARD;
 		}
@@ -244,7 +244,7 @@ public final class Move {
 	 *
 	 */
 	enum GameStatus {
-		ACTIVE, BLACK_WIN, WHITE_WIN, DRAW, FORCED_END
+		ACTIVE, BLACK_WIN, WHITE_WIN, DROW, FORCED_END
 	}
 
 	/**
@@ -280,8 +280,8 @@ public final class Move {
 		return false;
 	}
 
-	private static final int RAW_1 = 7;
-	private static final int RAW_8 = 0;
+	private static final int ROW_1 = 7;
+	private static final int ROW_8 = 0;
 	private static final int COL_H = 7;
 	private static final int COL_G = 6;
 	private static final int COL_F = 5;
@@ -299,11 +299,11 @@ public final class Move {
 	 */
 	boolean makeCastling(final Game game) {
 		if (game.isWhiteTurn()) {
-			Spot whiteKingSpot = game.getBoard().getSpot(7,4);
+			Spot whiteKingSpot = game.getBoard().getSpot(ROW_1, COL_E);
 			if (this.getInterpreter().isCastleShort()) { // arrocco corto bianco
-				Spot whiteDxRookSpot = game.getBoard().getSpot(7, 7);
-				Spot whiteNewKingSpot = game.getBoard().getSpot(7, 6);
-				Spot whiteNewRookSpot = game.getBoard().getSpot(7, 5);
+				Spot whiteDxRookSpot = game.getBoard().getSpot(ROW_1, COL_H);
+				Spot whiteNewKingSpot = game.getBoard().getSpot(ROW_1, COL_G);
+				Spot whiteNewRookSpot = game.getBoard().getSpot(ROW_1, COL_F);
 				if (isCastlePossible(game.getBoard(), whiteNewKingSpot, whiteNewRookSpot, whiteKingSpot,
 						whiteDxRookSpot, null)) {
 					whiteNewKingSpot.setPiece(whiteKingSpot.getPiece());
@@ -313,10 +313,10 @@ public final class Move {
 					return true;
 				}
 			} else if (this.getInterpreter().isCastleLong()) { // arrocco lungo bianco
-				Spot whiteSxRookSpot = game.getBoard().getSpot(7, 0);
-				Spot whiteNewKingSpot = game.getBoard().getSpot(7, 2);
-				Spot whiteNewRookSpot = game.getBoard().getSpot(7, 3);
-				Spot knightSpot = game.getBoard().getSpot(7, 1);
+				Spot whiteSxRookSpot = game.getBoard().getSpot(ROW_1, COL_A);
+				Spot whiteNewKingSpot = game.getBoard().getSpot(ROW_1, COL_C);
+				Spot whiteNewRookSpot = game.getBoard().getSpot(ROW_1, COL_D);
+				Spot knightSpot = game.getBoard().getSpot(ROW_1, COL_B);
 				if (isCastlePossible(game.getBoard(), whiteNewKingSpot, whiteNewRookSpot, whiteKingSpot,
 						whiteSxRookSpot, knightSpot)) {
 					whiteNewKingSpot.setPiece(whiteKingSpot.getPiece());
@@ -327,11 +327,11 @@ public final class Move {
 				}
 			}
 		} else {
-			Spot blackKingSpot = game.getBoard().getSpot(0, 4);
+			Spot blackKingSpot = game.getBoard().getSpot(ROW_8, COL_E);
 			if (this.getInterpreter().isCastleShort()) { // arrocco corto nero
-				Spot blackDxRookSpot = game.getBoard().getSpot(0, 7);
-				Spot blackNewKingSpot = game.getBoard().getSpot(0, 6);
-				Spot blackNewRookSpot = game.getBoard().getSpot(0,5);
+				Spot blackDxRookSpot = game.getBoard().getSpot(ROW_8, COL_H);
+				Spot blackNewKingSpot = game.getBoard().getSpot(ROW_8, COL_G);
+				Spot blackNewRookSpot = game.getBoard().getSpot(ROW_8, COL_F);
 				if (isCastlePossible(game.getBoard(), blackNewKingSpot, blackNewRookSpot, blackKingSpot,
 						blackDxRookSpot, null)) {
 					blackNewKingSpot.setPiece(blackKingSpot.getPiece());
@@ -341,10 +341,10 @@ public final class Move {
 					return true;
 				}
 			} else if (this.getInterpreter().isCastleLong()) { // arrocco lungo nero
-				Spot blackSxRookSpot = game.getBoard().getSpot(0, 0);
-				Spot blackNewKingSpot = game.getBoard().getSpot(0, 2);
-				Spot blackNewRookSpot = game.getBoard().getSpot(0, 3);
-				Spot knightSpot = game.getBoard().getSpot(0, 1);
+				Spot blackSxRookSpot = game.getBoard().getSpot(ROW_8, COL_A);
+				Spot blackNewKingSpot = game.getBoard().getSpot(ROW_8, COL_C);
+				Spot blackNewRookSpot = game.getBoard().getSpot(ROW_8, COL_D);
+				Spot knightSpot = game.getBoard().getSpot(ROW_8, COL_B);
 				if (isCastlePossible(game.getBoard(), blackNewKingSpot, blackNewRookSpot, blackKingSpot,
 						blackSxRookSpot, knightSpot)) {
 					blackNewKingSpot.setPiece(blackKingSpot.getPiece());
