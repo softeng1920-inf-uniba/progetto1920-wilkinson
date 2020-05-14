@@ -62,6 +62,30 @@ public abstract class Piece {
 	}
 
 	/**
+	 * ricalcola le mosse del pezzo tenendo conto delle minacce future
+	 *
+	 * @param board
+	 */
+	void recalculateMoves(final Board board) {
+		ArrayList<Move> movesCopy = new ArrayList<Move>();
+		ArrayList<Move> movesToRemove = new ArrayList<Move>();
+
+		if (!this.getLegalMoves().isEmpty()) {
+			for (Move currentMove : this.getLegalMoves()) {
+				movesCopy.add(currentMove);
+			}
+
+			for (Move currentMove : movesCopy) {
+				if (board.kingUnderAttackNext(currentMove.getStart(), currentMove.getEnd())) {
+					movesToRemove.add(currentMove);
+				}
+			}
+
+			this.getLegalMoves().removeAll(movesToRemove);
+		}
+	}
+
+	/**
 	 * metodo che stabilisce se il pezzo puo' muoversi (la mossa e' legale)
 	 *
 	 * @param board scacchiera attuale
