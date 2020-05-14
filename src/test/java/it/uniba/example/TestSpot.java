@@ -68,6 +68,9 @@ public class TestSpot {
 		spot = new Spot(2,2);
 		assertEquals(spot.getX(), 2);
 		assertNotEquals(spot.getX(), 3);
+		spot.setX(5);
+		assertEquals(spot.getX(), 5);
+		assertNotEquals(spot.getX(),3);
 
 	}
 
@@ -76,6 +79,9 @@ public class TestSpot {
 		spot = new Spot(2,2);
 		assertEquals(spot.getY(), 2);
 		assertNotEquals(spot.getY(), 3);
+		spot.setY(5);
+		assertEquals(spot.getY(), 5);
+		assertNotEquals(spot.getY(),3);
 	}
 
 }
