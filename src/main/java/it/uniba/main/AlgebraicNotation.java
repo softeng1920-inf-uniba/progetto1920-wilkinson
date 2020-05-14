@@ -15,7 +15,7 @@ import java.util.ArrayList;
  *
  * CLASSIFICAZIONE ECB
  * <<Control>>
- * poich� gestisce l'interpretazione dell'input utente
+ * poiche' gestisce l'interpretazione dell'input utente
  * alla base della logica dell'applicazione
  *
  * @author wilkinson
@@ -128,7 +128,7 @@ public final class AlgebraicNotation {
 	 * @return
 	 */
 	private boolean isPawn(final String inCommand) {
-		// controllo se la mossa � di un pedone (nessuna lettera iniziale)
+		// controllo se la mossa e' di un pedone (nessuna lettera iniziale)
 		char firstLetter = inCommand.charAt(FIRST);
 		if (Character.isUpperCase(firstLetter)) {
 			return false;
@@ -189,7 +189,7 @@ public final class AlgebraicNotation {
 		// riduce la stringa di comando eliminando i
 		// caratteri gia' estratti
 
-		// controllo se la stringa da sottrarre � vuota o se contiene un simbolo da
+		// controllo se la stringa da sottrarre e' vuota o se contiene un simbolo da
 		// trattare diversamente*/
 		if (!extracted.isEmpty()
 				&& !(extracted.equals("ep"))
