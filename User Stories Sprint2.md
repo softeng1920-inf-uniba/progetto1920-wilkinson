@@ -95,7 +95,7 @@ _______________
  >>>    - combina dunque le mosse della torre e dell'alfiere
 _______________
 ### 5) MUOVERE IL RE
- - permettere il movimento del pezzo *donna* sulla scacchiera
+ - permettere il movimento del pezzo *re* sulla scacchiera
   > #### CRITERI DI ACCETTAZIONE
   >> scrivendo il comando in notazione algebrica abbreviata degli scacchi in italiano  
   >>> - la mossa deve essere legale
