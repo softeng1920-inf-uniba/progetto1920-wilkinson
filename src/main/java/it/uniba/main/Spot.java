@@ -3,12 +3,12 @@ package it.uniba.main;
 /**
  * DESCRIZIONE
  * Rappresenta una casella della scacchiera.
- * Essa è composta da una coordinata X e una Y.
+ * Essa e' composta da una coordinata X e una Y.
  * Tali coordinate corrispondono ai numeri da 1 a 8 (per la X)
  * e lettere da 'a' ad 'h' (per la Y).
  *
  * RESPONSABILITA' DI CLASSE
- * Si occupa di verificare se su di una casella è presente o meno un pezzo
+ * Si occupa di verificare se su di una casella e' presente o meno un pezzo
  * e controlla se la casa corrente e' sotto attacco da pezzi avversari
  *
  * CLASSIFICAZIONE ECB
@@ -57,7 +57,7 @@ public class Spot {
 	static final int CASE_7 = 7;
 
 	/**
-	 * controlla se lo spot corrente è vuoto
+	 * controlla se lo spot corrente ï¿½ vuoto
 	 *
 	 * @return
 	 */
