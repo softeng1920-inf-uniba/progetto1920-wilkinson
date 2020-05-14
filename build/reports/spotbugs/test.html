@@ -73,18 +73,16 @@
       <p>SpotBugs version: 4.0.0-RC3</p>
       <p>Code analyzed:</p>
       <ul>
-         <li>/home/pierpaolo/Documents/GitHub/IDS1920/progetto1920-wilkinson/build/classes/java/test/it/uniba/example/utils/test/StringUtilsTest.class</li>
-         <li>/home/pierpaolo/Documents/GitHub/IDS1920/progetto1920-wilkinson/build/classes/java/test/it/uniba/example/utils/test/MathUtilsTest.class</li>
-         <li>/home/pierpaolo/Documents/GitHub/IDS1920/progetto1920-wilkinson/build/classes/java/test/it/uniba/example/db/test/LocalDatabaseConnectionTest.class</li>
+         <li>C:\scacchi\progetto1920-wilkinson\build\classes\java\test\it\uniba\example\ChessTest.class</li>
       </ul>
       <p>
          <br/>
          <br/>
       </p>
       <h2>Metrics</h2>
-      <p>127 lines of code analyzed,
-	in 3 classes, 
-	in 2 packages.</p>
+      <p>109 lines of code analyzed,
+	in 1 classes, 
+	in 1 packages.</p>
       <table width="500" cellpadding="5" cellspacing="2">
          <tr class="tableheader">
             <th align="left">Metric</th>
@@ -93,23 +91,23 @@
          </tr>
          <tr class="tablerow0">
             <td>High Priority Warnings</td>
-            <td align="right"/>
-            <td align="right">0.00</td>
+            <td align="right">5</td>
+            <td align="right">45.87</td>
          </tr>
          <tr class="tablerow1">
             <td>Medium Priority Warnings</td>
-            <td align="right">2</td>
-            <td align="right">15.75</td>
+            <td align="right">5</td>
+            <td align="right">45.87</td>
          </tr>
          <tr class="$totalClass">
             <td>
                <b>Total Warnings</b>
             </td>
             <td align="right">
-               <b>2</b>
+               <b>10</b>
             </td>
             <td align="right">
-               <b>15.75</b>
+               <b>91.74</b>
             </td>
          </tr>
       </table>
@@ -122,9 +120,6 @@
       </p>
       <h2>Contents</h2>
       <ul>
-         <li>
-            <a href="#Warnings_PERFORMANCE">Performance Warnings</a>
-         </li>
          <li>
             <a href="#Warnings_STYLE">Dodgy code Warnings</a>
          </li>
@@ -140,50 +135,21 @@
          </tr>
          <tr class="tablerow0">
             <td>
-               <a href="#Warnings_PERFORMANCE">Performance Warnings</a>
-            </td>
-            <td align="right">1</td>
-         </tr>
-         <tr class="tablerow1">
-            <td>
                <a href="#Warnings_STYLE">Dodgy code Warnings</a>
             </td>
-            <td align="right">1</td>
+            <td align="right">10</td>
          </tr>
-         <tr class="tablerow0">
+         <tr class="tablerow1">
             <td>
                <b>Total</b>
             </td>
             <td align="right">
-               <b>2</b>
+               <b>10</b>
             </td>
          </tr>
       </table>
       <h1>Warnings</h1>
       <p>Click on a warning row to see full context information.</p>
-      <h2>
-         <a name="Warnings_PERFORMANCE">Performance Warnings</a>
-      </h2>
-      <table class="warningtable" width="100%" cellspacing="0">
-         <tr class="tableheader">
-            <th align="left">Code</th>
-            <th align="left">Warning</th>
-         </tr>
-         <tr class="tablerow1" onclick="toggleRow('d1e42');">
-            <td>
-               <span class="priority-2">Bx</span>
-            </td>
-            <td>it.uniba.example.utils.test.MathUtilsTest.testAddition() invokes inefficient new Integer(int) constructor; use Integer.valueOf(int) instead</td>
-         </tr>
-         <tr class="detailrow1">
-            <td/>
-            <td>
-               <p id="d1e42" style="display: none;">
-                  <a href="#DM_NUMBER_CTOR">Bug type DM_NUMBER_CTOR (click for details)</a>
-                  <br/>In class it.uniba.example.utils.test.MathUtilsTest<br/>In method it.uniba.example.utils.test.MathUtilsTest.testAddition()<br/>Called method new Integer(int)<br/>Should call Integer.valueOf(int) instead<br/>At MathUtilsTest.java:[line 59]</p>
-            </td>
-         </tr>
-      </table>
       <h2>
          <a name="Warnings_STYLE">Dodgy code Warnings</a>
       </h2>
@@ -192,18 +158,144 @@
             <th align="left">Code</th>
             <th align="left">Warning</th>
          </tr>
-         <tr class="tablerow1" onclick="toggleRow('d1e60');">
+         <tr class="tablerow1" onclick="toggleRow('d1e37');">
             <td>
-               <span class="priority-2">RV</span>
+               <span class="priority-1">ST</span>
             </td>
-            <td>Return value of it.uniba.example.utils.math.MathUtils.divide(int, int) ignored, but method has no side effect</td>
+            <td>Write to static field it.uniba.example.ChessTest.board from instance method it.uniba.example.ChessTest.testBishopMovements()</td>
          </tr>
          <tr class="detailrow1">
             <td/>
             <td>
-               <p id="d1e60" style="display: none;">
-                  <a href="#RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT">Bug type RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT (click for details)</a>
-                  <br/>In class it.uniba.example.utils.test.MathUtilsTest<br/>In method it.uniba.example.utils.test.MathUtilsTest.lambda$testDivision$0()<br/>Called method it.uniba.example.utils.math.MathUtils.divide(int, int)<br/>At MathUtilsTest.java:[line 72]</p>
+               <p id="d1e37" style="display: none;">
+                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
+                  <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testBishopMovements()<br/>Field it.uniba.example.ChessTest.board<br/>At ChessTest.java:[line 154]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e53');">
+            <td>
+               <span class="priority-1">ST</span>
+            </td>
+            <td>Write to static field it.uniba.example.ChessTest.board from instance method it.uniba.example.ChessTest.testKingMovements()</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e53" style="display: none;">
+                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
+                  <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testKingMovements()<br/>Field it.uniba.example.ChessTest.board<br/>At ChessTest.java:[line 193]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e69');">
+            <td>
+               <span class="priority-1">ST</span>
+            </td>
+            <td>Write to static field it.uniba.example.ChessTest.board from instance method it.uniba.example.ChessTest.testKnightMovements()</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e69" style="display: none;">
+                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
+                  <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testKnightMovements()<br/>Field it.uniba.example.ChessTest.board<br/>At ChessTest.java:[line 89]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e85');">
+            <td>
+               <span class="priority-1">ST</span>
+            </td>
+            <td>Write to static field it.uniba.example.ChessTest.board from instance method it.uniba.example.ChessTest.testPawnMovements()</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e85" style="display: none;">
+                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
+                  <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testPawnMovements()<br/>Field it.uniba.example.ChessTest.board<br/>At ChessTest.java:[line 48]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e101');">
+            <td>
+               <span class="priority-1">ST</span>
+            </td>
+            <td>Write to static field it.uniba.example.ChessTest.board from instance method it.uniba.example.ChessTest.testRookMovements()</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e101" style="display: none;">
+                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
+                  <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testRookMovements()<br/>Field it.uniba.example.ChessTest.board<br/>At ChessTest.java:[line 123]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e117');">
+            <td>
+               <span class="priority-2">ST</span>
+            </td>
+            <td>Write to static field it.uniba.example.ChessTest.genericPiece from instance method it.uniba.example.ChessTest.testBishopMovements()</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e117" style="display: none;">
+                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
+                  <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testBishopMovements()<br/>Field it.uniba.example.ChessTest.genericPiece<br/>At ChessTest.java:[line 158]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e133');">
+            <td>
+               <span class="priority-2">ST</span>
+            </td>
+            <td>Write to static field it.uniba.example.ChessTest.genericPiece from instance method it.uniba.example.ChessTest.testKingMovements()</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e133" style="display: none;">
+                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
+                  <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testKingMovements()<br/>Field it.uniba.example.ChessTest.genericPiece<br/>At ChessTest.java:[line 197]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e149');">
+            <td>
+               <span class="priority-2">ST</span>
+            </td>
+            <td>Write to static field it.uniba.example.ChessTest.genericPiece from instance method it.uniba.example.ChessTest.testKnightMovements()</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e149" style="display: none;">
+                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
+                  <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testKnightMovements()<br/>Field it.uniba.example.ChessTest.genericPiece<br/>At ChessTest.java:[line 93]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e165');">
+            <td>
+               <span class="priority-2">ST</span>
+            </td>
+            <td>Write to static field it.uniba.example.ChessTest.genericPiece from instance method it.uniba.example.ChessTest.testPawnMovements()</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e165" style="display: none;">
+                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
+                  <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testPawnMovements()<br/>Field it.uniba.example.ChessTest.genericPiece<br/>At ChessTest.java:[line 52]<br/>Another occurrence at ChessTest.java:[line 70]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e183');">
+            <td>
+               <span class="priority-2">ST</span>
+            </td>
+            <td>Write to static field it.uniba.example.ChessTest.genericPiece from instance method it.uniba.example.ChessTest.testRookMovements()</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e183" style="display: none;">
+                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
+                  <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testRookMovements()<br/>Field it.uniba.example.ChessTest.genericPiece<br/>At ChessTest.java:[line 127]</p>
             </td>
          </tr>
       </table>
@@ -211,40 +303,12 @@
          <a name="Details">Details</a>
       </h1>
       <h2>
-         <a name="DM_NUMBER_CTOR">DM_NUMBER_CTOR: Method invokes inefficient Number constructor; use static valueOf instead</a>
-      </h2>
-      
-      <p>
-      Using <code>new Integer(int)</code> is guaranteed to always result in a new object whereas
-      <code>Integer.valueOf(int)</code> allows caching of values to be done by the compiler, class library, or JVM.
-      Using of cached values avoids object allocation and the code will be faster.
-      </p>
-      <p>
-      Values between -128 and 127 are guaranteed to have corresponding cached instances
-      and using <code>valueOf</code> is approximately 3.5 times faster than using constructor.
-      For values outside the constant range the performance of both styles is the same.
-      </p>
-      <p>
-      Unless the class must be compatible with JVMs predating Java 1.5,
-      use either autoboxing or the <code>valueOf()</code> method when creating instances of
-      <code>Long</code>, <code>Integer</code>, <code>Short</code>, <code>Character</code>, and <code>Byte</code>.
-      </p>
-      
-    <h2>
-         <a name="RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT">RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT: Return value of method without side effect is ignored</a>
+         <a name="ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD: Write to static field from instance method</a>
       </h2>
 
-<p>This code calls a method and ignores the return value. However our analysis shows that
-the method (including its implementations in subclasses if any) does not produce any effect
-other than return value. Thus this call can be removed.
-</p>
-<p>We are trying to reduce the false positives as much as possible, but in some cases this warning might be wrong.
-Common false-positive cases include:</p>
-<p>- The method is designed to be overridden and produce a side effect in other projects which are out of the scope of the analysis.</p>
-<p>- The method is called to trigger the class loading which may have a side effect.</p>
-<p>- The method is called just to get some exception.</p>
-<p>If you feel that our assumption is incorrect, you can use a @CheckReturnValue annotation
-to instruct SpotBugs that ignoring the return value of this method is acceptable.
+  <p> This instance method writes to a static field. This is tricky to get
+correct if multiple instances are being manipulated,
+and generally bad practice.
 </p>
 
     </body>
