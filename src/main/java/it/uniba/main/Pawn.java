@@ -59,7 +59,7 @@ public class Pawn extends Piece {
 					&& board.frontSpot(start).isEmpty()) {
 				return true;
 			}
-			// stabilisce se il movimento è una cattura en passant
+			// stabilisce se il movimento e' una cattura en passant
 			if (startPiece.isWhite()) {
 				if (start.getX() == ENPASSANT_WHITE_X) { // per il bianco
 					if (board.isFrontDiagonal(start, end)) {
@@ -92,7 +92,7 @@ public class Pawn extends Piece {
 	}
 
 	/**
-	 * stabilisce se il pedone in start può catturare en passant finendo in end
+	 * stabilisce se il pedone in start puo' catturare en passant finendo in end
 	 *
 	 * @param board
 	 * @param start
@@ -114,7 +114,7 @@ public class Pawn extends Piece {
 
 	// Getters & Setters
 	/**
-	 * Metodo che restituisce un booleano che segnala se è possibile la cattura En
+	 * Metodo che restituisce un booleano che segnala se e' possibile la cattura En
 	 * Passant.
 	 *
 	 * @return possibleEnPassantCapture
@@ -124,7 +124,7 @@ public class Pawn extends Piece {
 	}
 
 	/**
-	 * Metodo che imposta sull'istanza di pedone corrente la possibilità di
+	 * Metodo che imposta sull'istanza di pedone corrente la possibilita' di
 	 * catturare en passant.
 	 *
 	 * @param possibleEnPassantCaptureIo
