@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import org.junit.jupiter.api.Test;
 
 import it.uniba.main.Board;
-import it.uniba.main.Game;
 import it.uniba.main.Pawn;
 import it.uniba.main.Piece;
 import it.uniba.main.Spot;
@@ -31,8 +30,11 @@ public class TestSpot {
 
 	@Test
 	void testIsEmpty() {
+		Pawn pawn = new Pawn(false);
 		spot = new Spot(1, 1);
+		spot2 = new Spot(2, 2, pawn);
 		assertTrue(spot.isEmpty());
+		assertFalse(spot2.isEmpty());
 	}
 
 	@Test
@@ -66,7 +68,7 @@ public class TestSpot {
 	}
 
 	@Test
-	void testGetX() {
+	void testSetGetX() {
 		spot = new Spot(2,2);
 		assertEquals(spot.getX(), 2);
 		assertNotEquals(spot.getX(), 3);
@@ -77,7 +79,7 @@ public class TestSpot {
 	}
 
 	@Test
-	void testGetY() {
+	void testSetGetY() {
 		spot = new Spot(2,2);
 		assertEquals(spot.getY(), 2);
 		assertNotEquals(spot.getY(), 3);
@@ -97,7 +99,7 @@ public class TestSpot {
 	@Test
 	void testIsUnderAttack() {
 		board = new Board();
-		Game game = new Game();
+	//	Game game = new Game();
 		Pawn pawn = new Pawn(true);
 		Pawn pawn2 = new Pawn(false);
 
