@@ -77,8 +77,8 @@ public final class Move {
 	 * costruttore secondario di un oggetto Move semplice (solo spot di
 	 * partenza/arrivo)
 	 *
-	 * @param start
-	 * @param end
+	 * @param inStart
+	 * @param inEnd
 	 */
 	public Move(final Spot inStart, final Spot inEnd) {
 		this.start = inStart;
@@ -250,9 +250,6 @@ public final class Move {
 	/**
 	 * capisce se il pezzo che sta muovendo sta catturando en passant
 	 *
-	 * @param piece pezzo mosso
-	 * @param start casa di partenza
-	 * @param end   casa di arrivo
 	 * @param board scacchiera
 	 * @return true se cattura en passant, false altrimenti
 	 */
@@ -429,15 +426,14 @@ public final class Move {
 		return false;
 	}
 
-	/**
-	 * applica una serie di controlli per stabilire se l'arrocco è possibile
+	/**applica una serie di controlli per stabilire se l'arrocco è possibile
 	 *
 	 * @param board
-	 * @param king
-	 * @param rook
 	 * @param kingSpot
 	 * @param rookSpot
 	 * @param kingOrigin
+	 * @param rookOrigin
+	 * @param knightSpot
 	 * @return
 	 */
 	private boolean isCastlePossible(final Board board, final Spot kingSpot, final Spot rookSpot,

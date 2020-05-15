@@ -33,7 +33,7 @@ public abstract class Piece {
 	/**
 	 * costruttore della classe Pezzo
 	 *
-	 * @param white true se pezzo bianco, false se pezzo nero
+	 * @param whiteIo true se pezzo bianco, false se pezzo nero
 	 */
 	public Piece(final boolean whiteIo) {
 		this.legalMoves = new ArrayList<Move>();
@@ -111,7 +111,7 @@ public abstract class Piece {
 	/**
 	 * setta il colore del pezzo
 	 *
-	 * @param white true se pezzo bianco, false se pezzo nero
+	 * @param whiteIo true se pezzo bianco, false se pezzo nero
 	 */
 	public void setWhite(final boolean whiteIo) {
 		this.white = whiteIo;
@@ -163,7 +163,7 @@ public abstract class Piece {
 	/**
 	 * Metodo che salva le mosse legali in un ArrayList
 	 *
-	 * @param legalMoves
+	 * @param legalMovesIo
 	 */
 	public void setLegalMoves(final ArrayList<Move> legalMovesIo) {
 		this.legalMoves = legalMovesIo;

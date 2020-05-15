@@ -232,8 +232,7 @@ public class Board {
 	 * [ ][S][ ]... casa di partenza
 	 * [ ][x][ ]... casa restituita per i neri
 	 *
-	 * @param start
-	 * @param end
+	 * @param spot
 	 * @return
 	 */
 	Spot frontSpot(final Spot spot) {
@@ -670,7 +669,7 @@ public class Board {
 
 	/**setta lo spot dove si trova il re bianco
 	 *
-	 * @param whiteKingSpot
+	 * @param newWhiteKingSpot
 	 */
 	public void setWhiteKingSpot(final Spot newWhiteKingSpot) {
 		this.whiteKingSpot = newWhiteKingSpot;
@@ -686,7 +685,7 @@ public class Board {
 
 	/**setta lo spot dove si trova il re bianco
 	 *
-	 * @param whiteKingSpot
+	 * @param newWhiteKingSpot
 	 */
 	public void setBlackKingSpot(final Spot newBlackKingSpot) {
 		this.blackKingSpot = newBlackKingSpot;

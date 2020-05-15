@@ -59,7 +59,7 @@ public final class AlgebraicNotation {
 	 * costruttore, inizializza i membri, l'arraylist dei simboli, interpreta la
 	 * stringa in input e decide se e' una stringa valida
 	 *
-	 * @param command stringa da interpretare
+	 * @param inCommand stringa da interpretare
 	 */
 	public AlgebraicNotation(final String inCommand) {
 		pieceLetter = "";
@@ -89,7 +89,7 @@ public final class AlgebraicNotation {
 	/**
 	 * interpreta la stringa in input avvalorando gli attributi di classe
 	 *
-	 * @param command stringa in input da interpretare
+	 * @param inCommand stringa in input da interpretare
 	 */
 	private void divideCommand(final String inCommand) {
 		String commandInterpreted = inCommand.replace('O', '0');
@@ -126,7 +126,7 @@ public final class AlgebraicNotation {
 	/**
 	 * controllo se il comando riguarda un pedone
 	 *
-	 * @param command stringa in input da interpretare
+	 * @param inCommand stringa in input da interpretare
 	 * @return
 	 */
 	private boolean isPawn(final String inCommand) {
@@ -141,7 +141,7 @@ public final class AlgebraicNotation {
 	/**
 	 * estrae i simboli contenuti nel comando
 	 *
-	 * @param command stringa in input
+	 * @param inCommand stringa in input
 	 */
 	private void extractSymbol(final String inCommand) { // estrae l'eventuale simbolo speciale
 		int pos = 0;
@@ -183,7 +183,7 @@ public final class AlgebraicNotation {
 	/**
 	 * riduce la prima stringa togliendo il contenuto della seconda
 	 *
-	 * @param command   prima stringa contenente il comando da ridurre
+	 * @param inCommand   prima stringa contenente il comando da ridurre
 	 * @param extracted seconda stringa da sottrarre a command
 	 * @return stringa ridotta
 	 */

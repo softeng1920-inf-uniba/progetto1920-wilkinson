@@ -48,7 +48,6 @@ public class Knight extends Piece {
 	 * @param board       scacchiera attuale
 	 * @param start       posizione di partenza del pezzo
 	 * @param end         posizione di arrivo del pezzo
-	 * @param isWhiteTurn turno del giocatore
 	 *
 	 * @return True se e' una mossa legale altrimenti False
 	 */

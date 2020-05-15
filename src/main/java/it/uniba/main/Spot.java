@@ -28,8 +28,9 @@ public class Spot {
 	/**
 	 * costruttore di Spot (che rappresenta una casella della scacchiera)
 	 *
-	 * @param x coordinata della riga (corrispondente ad un numero)
-	 * @param y coordinata della colonna (corrispondente ad una lettera)
+	 * @param abscissa coordinata della riga (corrispondente ad un numero)
+	 * @param ordinate coordinata della colonna (corrispondente ad una lettera)
+	 * @param chessman pezzo nello spot
 	 */
 	public Spot(final int abscissa, final int ordinate, final Piece chessman) {
 		this.x = abscissa;
@@ -40,8 +41,8 @@ public class Spot {
 	/**
 	 * costruttore di uno spot generico (per confronti tra spot)
 	 *
-	 * @param x
-	 * @param y
+	 * @param abscissa
+	 * @param ordinate
 	 */
 	public Spot(final int abscissa, final int ordinate) {
 		this.x = abscissa;
@@ -74,7 +75,6 @@ public class Spot {
 	 * controllo se la casa examined e' sotto attacco da pezzi avversari
 	 *
 	 * @param board    scacchiera attuale
-	 * @param examined mossa che ha come end lo spot corrente
 	 * @param color    colore del pezzo amico
 	 * @return true se lo Spot corrente e' sotto attacco, false altrimenti
 	 */

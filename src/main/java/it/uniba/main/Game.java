@@ -104,7 +104,7 @@ public class Game {
 			board.refineLegalMoves();
 
 			// setto false i booleani dei pedoni che regolano l'en passant
-			setAllPawnNotEP(getBoard());
+			setAllPawnNotEP();
 
 			whiteTurn = (!whiteTurn);
 		} else {
@@ -288,10 +288,8 @@ public class Game {
 	/**
 	 * Il metodo setAllPawnNotEP setta false la possibile cattura en-passant di
 	 * tutti i pedoni ogni turno
-	 *
-	 * @param board
 	 */
-	private void setAllPawnNotEP(final Board inBoard) {
+	private void setAllPawnNotEP() {
 		for (int i = 0; i < BOARDDIM; i++) {
 			for (int j = 0; j < BOARDDIM; j++) {
 				Spot currentSpot = getBoard().getSpot(i, j);

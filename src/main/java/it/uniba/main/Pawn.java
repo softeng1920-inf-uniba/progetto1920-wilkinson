@@ -150,7 +150,7 @@ public class Pawn extends Piece {
 	 * Metodo che imposta il booleano isCapturingEnPassant se il pedone sta
 	 * catturando en passant.
 	 *
-	 * @param isCapturingEnPassant
+	 * @param isCapturingEnPassantIo
 	 */
 	public void setCapturingEnPassant(final boolean isCapturingEnPassantIo) {
 		this.isCapturingEnPassant = isCapturingEnPassantIo;
