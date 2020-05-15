@@ -181,7 +181,7 @@ public final class AppMain {
 	private static void confirmPrint() {
 		System.out.println(">si        ::  conferma");
 		System.out.println(">no        ::  annulla");
-		System.out.println("> ");
+		System.out.print("> ");
 	}
 
 	private static void helpPrint() {
