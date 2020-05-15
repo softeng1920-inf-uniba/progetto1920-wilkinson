@@ -685,7 +685,7 @@ public class Board {
 
 	/**setta lo spot dove si trova il re bianco
 	 *
-	 * @param newWhiteKingSpot
+	 * @param newBlackKingSpot
 	 */
 	public void setBlackKingSpot(final Spot newBlackKingSpot) {
 		this.blackKingSpot = newBlackKingSpot;
