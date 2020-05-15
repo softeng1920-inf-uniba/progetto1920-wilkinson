@@ -3,20 +3,23 @@ package it.uniba.main;
 import java.util.ArrayList;
 
 /**
- * DESCRIZIONE
- * La classe rappresenta un pezzo degli scacchi generico. ogni pezzo
- * ha associato un colore, uno stato associato alla cattura, uno stato riferito
- * a se e' stato mosso o meno e una lista di mosse legali
+ * <body>
+ * <h2>DESCRIZIONE</h2>
+ * La classe rappresenta un pezzo degli scacchi generico. ogni pezzo <br>
+ * ha associato un colore, uno stato associato alla cattura, uno stato riferito <br>
+ * a se e' stato mosso o meno e una lista di mosse legali <br>
  *
- * RESPONSABILITA' DI CLASSE
- * la classe e' astratta in quanto generica, si occupa
- * di restituire l'unicode del pezzo e stabilisce se un pezzo puo' muoversi,
- * quindi se la mossa passata dall'utente e' legale inoltre ricerca tutte le
- * possibili mosse legali del pezzo corrente
+ * <h2>RESPONSABILITA' DI CLASSE<h2>
+ * la classe e' astratta in quanto generica, si occupa <br>
+ * di restituire l'unicode del pezzo e stabilisce se un pezzo puo' muoversi, <br>
+ * quindi se la mossa passata dall'utente e' legale inoltre ricerca tutte le <br>
+ * possibili mosse legali del pezzo corrente <br>
  *
- * CLASSIFICAZIONE ECB <<Entity>>
- * Componente formante il gioco degli scacchi,
+ * <h2>CLASSIFICAZIONE ECB</h2>
+ * <strong>Entity</strong><br>
+ * Componente formante il gioco degli scacchi, <br>
  * che deriva dal concetto concreto di "pezzo"
+ * </body>
  *
  * @author wilkinson
  */

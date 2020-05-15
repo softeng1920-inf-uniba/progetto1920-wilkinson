@@ -4,18 +4,26 @@ import java.util.Scanner;
 
 /**
  * <body>
- * <h2>DESCRIZIONE</h2>main dell'applicazione scacchi <br>
- * <h2>RESPONSABILITA' DI CLASSE</h2>avvia l'applicazione per giocare a scacchi
+ * <h2>DESCRIZIONE</h2>
+ * main dell'applicazione scacchi <br>
+ *
+ * <h2>RESPONSABILITA' DI CLASSE</h2>
+ * avvia l'applicazione per giocare a scacchi
  * non va rinominato in quanto l'innesco di diversi processi automatici e'
  * associato in maniera specifica al nome "AppMain.java". <br>
- * <h2>CLASSIFICAZIONE ECB</h2> <strong>Boundary</strong> <br>
- * poiché è la classe che comunica con gli attori esterni: cioè i giocatori.
- * <br>
+ *
+ * <h2>CLASSIFICAZIONE ECB</h2>
+ * <strong>Boundary</strong> <br>
+ * poiché è la classe che comunica con gli attori esterni: cioè i giocatori. <br>
  * Questa classe è il punto di accesso al programma e quella che permette ai
  * giocatori di introdurre i comandi i notazione <br>
  * algebrica per muovere i pezzi, e di utilizzare i comandi ausiliari messi a
  * disposizione dal gioco.
- * <h4>- I M P O R T A N T E: - NON RINOMINARE <h>DO NOT RENAME</h></h4> </body>
+ *
+ * <h4>- I M P O R T A N T E: - NON RINOMINARE <h>DO NOT RENAME</h></h4>
+ * </body>
+ *
+ * @author wilkinson
  */
 public final class AppMain {
 
@@ -48,7 +56,7 @@ public final class AppMain {
 		 * programma fara' partire una nuova partita previa conferma del giocatore.
 		 */
 		while (!quitGame) {
-			System.out.print("Inserire il comando che si intende eseguire => ");
+			System.out.print("Inserire il comando che si intende eseguire\n > ");
 			// gestisce la possibile immissione di caratteri maiuscoli
 			userChoiceMenu = scanner().nextLine().toLowerCase();
 			switch (userChoiceMenu) {
@@ -77,7 +85,7 @@ public final class AppMain {
 				game = new Game();
 				while (!game.isEnd() && !quitGame) {
 					System.out.print("\n" + game);
-					System.out.println(" \nInserire comando o mossa che si intende eseguire => ");
+					System.out.print(" \nInserire comando o mossa che si intende eseguire\n > ");
 					userChoiceMenu = scanner().nextLine();
 					// assegno la stringa digitata dall'utente alla variabile
 					 // userChoiceGame prima di convertire la stringa in miuscolo

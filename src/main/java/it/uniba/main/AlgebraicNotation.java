@@ -3,20 +3,22 @@ package it.uniba.main;
 import java.util.ArrayList;
 
 /**
- * DESCRIZIONE
- * interprete di notazione algebrica abbreviata
+ * <body>
+ * <h2>DESCRIZIONE</h2>
+ * interprete di notazione algebrica abbreviata <br>
  *
- * RESPONSABILITA' DI CLASSE
- * interpreta un comando scritto in notazione algebrica abbreviata,
- * capendo che pezzo muovere, la casa finale di movimento sulla scacchiera
- * e i gli eventuali simboli associati ad eventi specifici
- * controlla inoltre se il comando inserito dall'utente e' scritto
- * con una sintassi corretta
+ * <h2>RESPONSABILITA' DI CLASSE</h2>
+ * interpreta un comando scritto in notazione algebrica abbreviata, <br>
+ * capendo che pezzo muovere, la casa finale di movimento sulla scacchiera <br>
+ * e i gli eventuali simboli associati ad eventi specifici <br>
+ * controlla inoltre se il comando inserito dall'utente e' scritto <br>
+ * con una sintassi corretta <br>
  *
- * CLASSIFICAZIONE ECB
- * <<Control>>
- * poiche' gestisce l'interpretazione dell'input utente
+ * <h2>CLASSIFICAZIONE ECB</h2>
+ * <strong>Control</strong><br>
+ * poiche' gestisce l'interpretazione dell'input utente <br>
  * alla base della logica dell'applicazione
+ * </body>
  *
  * @author wilkinson
  */

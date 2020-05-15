@@ -1,16 +1,19 @@
 package it.uniba.main;
 
 /**
- * DESCRIZIONE
- * rappresenta un pezzo pedone ha associati degli stati per
- * permettere la cattura en passant
+ * <body>
+ * <h2>DESCRIZIONE</h2>
+ * rappresenta un pezzo pedone ha associati degli stati per <br>
+ * permettere la cattura en passant <br>
  *
- * RESPONSABILITA' DI CLASSE
- * calcola le mosse legali di un pedone seguendo le
- * regole ufficiale degli scacchi
+ * <h2>RESPONSABILITA' DI CLASSE</h2>
+ * calcola le mosse legali di un pedone seguendo le <br>
+ * regole ufficiale degli scacchi <br>
  *
- * CLASSIFICAZIONE ECB
- * <<Entity>> poiche' eredita dalla classe Piece.java
+ * <h2>CLASSIFICAZIONE ECB</h2>
+ * <strong>Entity</strong><br>
+ * poiche' eredita dalla classe Piece.java
+ * </body>
  *
  * @author wilkinson
  */

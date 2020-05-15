@@ -1,20 +1,22 @@
 package it.uniba.main;
 
 /**
- * DESCRIZIONE
- * Rappresenta una casella della scacchiera.
- * Essa e' composta da una coordinata X e una Y.
- * Tali coordinate corrispondono ai numeri da 1 a 8 (per la X)
- * e lettere da 'a' ad 'h' (per la Y).
+ * <body>
+ * <h2>DESCRIZIONE</h2>
+ * Rappresenta una casella della scacchiera. <br>
+ * Essa e' composta da una coordinata X e una Y. <br>
+ * Tali coordinate corrispondono ai numeri da 1 a 8 (per la X) <br>
+ * e lettere da 'a' ad 'h' (per la Y). <br>
  *
- * RESPONSABILITA' DI CLASSE
- * Si occupa di verificare se su di una casella e' presente o meno un pezzo
- * e controlla se la casa corrente e' sotto attacco da pezzi avversari
+ * <h2>RESPONSABILITA' DI CLASSE</h2>
+ * Si occupa di verificare se su di una casella e' presente o meno un pezzo <br>
+ * e controlla se la casa corrente e' sotto attacco da pezzi avversari <br>
  *
- * CLASSIFICAZIONE ECB
- * <<Entity>>
- * E' un componente formante della tavola da gioco
- * e dunque deriva dal concetto concreto di "Scacchiera"
+ * <h2>CLASSIFICAZIONE ECB</h2>
+ * <strong>Entity</strong><br>
+ * E' un componente formante della tavola da gioco <br>
+ * e dunque deriva dal concetto concreto di "Scacchiera" <br>
+ * </body>
  *
  * @author wilkinson
  */
