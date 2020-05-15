@@ -55,7 +55,7 @@ public class TestPiece {
 		genericPiece = board.getSpot(ROW_7, COL_B).getPiece();
 		
 		//pawnlegalMoves.add(e);
-		genericPiece.findLegalMoves(board, board.getSpot(ROW_7, COL_B) );
+		//genericPiece.findLegalMoves(board, board.getSpot(ROW_7, COL_B) );
 		genericPiece.setLegalMoves(pawnLegalMoves);
 
 		System.out.println(genericPiece.getLegalMoves().toString());
