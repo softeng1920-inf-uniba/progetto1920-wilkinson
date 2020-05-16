@@ -47,7 +47,7 @@ public class TestPiece {
 	
 	
 	
-	//@Test
+	@Test
 	public void testPawnLegalMovements(){
 		board = new Board(true);
 		ArrayList<Move> pawnLegalMoves = new ArrayList<Move>();
@@ -90,7 +90,7 @@ public class TestPiece {
 	
 	
 	
-//	@Test
+	@Test
 	public void testKingLegalMovements(){
 		//MOVIMENTI DEL RE
 		
