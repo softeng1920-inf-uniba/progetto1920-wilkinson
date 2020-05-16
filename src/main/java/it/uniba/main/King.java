@@ -1,16 +1,19 @@
 package it.uniba.main;
 
 /**
- * DESCRIZIONE
- * rappresenta un pezzo re
+ * <body>
+ * <h2>DESCRIZIONE</h2>
+ * rappresenta un pezzo re <br>
  *
- * RESPONSABILITA' DI CLASSE
- * calcola le mosse legali di un re seguendo le regole
- * ufficiale degli scacchi e le ricalcola limitando il movimento del re tenendo
- * conto delle minacce avversarie
+ * <h2>RESPONSABILITA' DI CLASSE</h2>
+ * calcola le mosse legali di un re seguendo le <br>
+ * regole ufficiale degli scacchi, impedendone il movimento <br>
+ * in case minacciate da pezzi avversari <br>
  *
- * CLASSIFICAZIONE ECB
- * <<Entity>> poiche' eredita dalla classe Piece.java
+ * <h2>CLASSIFICAZIONE ECB</h2>
+ * <strong>Entity</strong><br>
+ * poiche' eredita dalla classe Piece.java
+ * </body>
  *
  * @author wilkinson
  */

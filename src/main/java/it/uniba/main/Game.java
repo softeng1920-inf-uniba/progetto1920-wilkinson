@@ -5,15 +5,21 @@ import java.util.ArrayList;
 import it.uniba.main.Move.GameStatus;
 
 /**
- * DESCRIZIONE rappresenta una partita di scacchi in corso ha associato uno
- * stato e una scacchiera
+ * <body>
+ * <h2>DESCRIZIONE</h2>
+ * rappresenta una partita di scacchi in corso ha associato uno <br>
+ * stato e una scacchiera <br>
  *
- * RESPONSABILITA' DI CLASSE crea e gestisce la partita in corso, ed esegue una
- * mossa a partire dal comando in input dell'utente, si occupa dello store delle
- * mosse e delle catture eseguite e relativa stampa
+ * <h2>RESPONSABILITA' DI CLASSE</h2>
+ * crea e gestisce la partita in corso, ed esegue una <br>
+ * mossa a partire dal comando in input dell'utente, si occupa dello store delle <br>
+ * mosse e delle catture eseguite e relativa stampa <br>
  *
- * CLASSIFICAZIONE ECB <<Control>> contiene tutta la logica di gioco e fa vari
+ * <h2>CLASSIFICAZIONE ECB</h2>
+ * <strong>Control</strong><br>
+ * poiche' contiene tutta la logica di gioco e fa vari <br>
  * controlli sui tipi di mosse da eseguire
+ * </body>
  *
  * @author wilkinson
  */
@@ -98,7 +104,7 @@ public class Game {
 			board.refineLegalMoves();
 
 			// setto false i booleani dei pedoni che regolano l'en passant
-			setAllPawnNotEP(getBoard());
+			setAllPawnNotEP();
 
 			whiteTurn = (!whiteTurn);
 		} else {
@@ -282,10 +288,8 @@ public class Game {
 	/**
 	 * Il metodo setAllPawnNotEP setta false la possibile cattura en-passant di
 	 * tutti i pedoni ogni turno
-	 *
-	 * @param board
 	 */
-	private void setAllPawnNotEP(final Board inBoard) {
+	private void setAllPawnNotEP() {
 		for (int i = 0; i < BOARDDIM; i++) {
 			for (int j = 0; j < BOARDDIM; j++) {
 				Spot currentSpot = getBoard().getSpot(i, j);

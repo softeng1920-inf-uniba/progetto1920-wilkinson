@@ -1,20 +1,22 @@
 package it.uniba.main;
 
 /**
- * DESCRIZIONE
- * Rappresenta una casella della scacchiera.
- * Essa e' composta da una coordinata X e una Y.
- * Tali coordinate corrispondono ai numeri da 1 a 8 (per la X)
- * e lettere da 'a' ad 'h' (per la Y).
+ * <body>
+ * <h2>DESCRIZIONE</h2>
+ * Rappresenta una casella della scacchiera. <br>
+ * Essa e' composta da una coordinata X e una Y. <br>
+ * Tali coordinate corrispondono ai numeri da 1 a 8 (per la X) <br>
+ * e lettere da 'a' ad 'h' (per la Y). <br>
  *
- * RESPONSABILITA' DI CLASSE
- * Si occupa di verificare se su di una casella e' presente o meno un pezzo
- * e controlla se la casa corrente e' sotto attacco da pezzi avversari
+ * <h2>RESPONSABILITA' DI CLASSE</h2>
+ * Si occupa di verificare se su di una casella e' presente o meno un pezzo <br>
+ * e controlla se la casa corrente e' sotto attacco da pezzi avversari <br>
  *
- * CLASSIFICAZIONE ECB
- * <<Entity>>
- * E' un componente formante della tavola da gioco
- * e dunque deriva dal concetto concreto di "Scacchiera"
+ * <h2>CLASSIFICAZIONE ECB</h2>
+ * <strong>Entity</strong><br>
+ * E' un componente formante della tavola da gioco <br>
+ * e dunque deriva dal concetto concreto di "Scacchiera" <br>
+ * </body>
  *
  * @author wilkinson
  */
@@ -26,8 +28,9 @@ public class Spot {
 	/**
 	 * costruttore di Spot (che rappresenta una casella della scacchiera)
 	 *
-	 * @param x coordinata della riga (corrispondente ad un numero)
-	 * @param y coordinata della colonna (corrispondente ad una lettera)
+	 * @param abscissa coordinata della riga (corrispondente ad un numero)
+	 * @param ordinate coordinata della colonna (corrispondente ad una lettera)
+	 * @param chessman pezzo nello spot
 	 */
 	public Spot(final int abscissa, final int ordinate, final Piece chessman) {
 		this.x = abscissa;
@@ -38,8 +41,8 @@ public class Spot {
 	/**
 	 * costruttore di uno spot generico (per confronti tra spot)
 	 *
-	 * @param x
-	 * @param y
+	 * @param abscissa
+	 * @param ordinate
 	 */
 	public Spot(final int abscissa, final int ordinate) {
 		this.x = abscissa;
@@ -72,7 +75,6 @@ public class Spot {
 	 * controllo se la casa examined e' sotto attacco da pezzi avversari
 	 *
 	 * @param board    scacchiera attuale
-	 * @param examined mossa che ha come end lo spot corrente
 	 * @param color    colore del pezzo amico
 	 * @return true se lo Spot corrente e' sotto attacco, false altrimenti
 	 */

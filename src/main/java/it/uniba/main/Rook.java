@@ -1,15 +1,18 @@
 package it.uniba.main;
 
 /**
- * DESCRIZIONE
- * rappresenta un pezzo torre
+ * <body>
+ * <h2>DESCRIZIONE</h2>
+ * rappresenta un pezzo torre <br>
  *
- * RESPONSABILITA' DI CLASSE
- * calcola le mosse legali di una torre seguendo le
- * regole ufficiale degli scacchi
+ * <h2>RESPONSABILITA' DI CLASSE</h2>
+ * calcola le mosse legali di una torre seguendo le <br>
+ * regole ufficiale degli scacchi <br>
  *
- * CLASSIFICAZIONE ECB
- * <<Entity>> poiche' eredita dalla classe Piece.java
+ * <h2>CLASSIFICAZIONE ECB</h2>
+ * <strong>Entity</strong><br>
+ * poiche' eredita dalla classe Piece.java
+ * </body>
  *
  * @author wilkinson
  */
