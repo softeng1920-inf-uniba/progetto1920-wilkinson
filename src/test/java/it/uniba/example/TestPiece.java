@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import it.uniba.main.Bishop;
 import it.uniba.main.Board;
 import it.uniba.main.King;
+import it.uniba.main.Queen;
 import it.uniba.main.Knight;
 import it.uniba.main.Move;
 import it.uniba.main.Pawn;
@@ -46,7 +47,7 @@ public class TestPiece {
 	
 	
 	
-	@Test
+	//@Test
 	public void testPawnLegalMovements(){
 		board = new Board(true);
 		ArrayList<Move> pawnLegalMoves = new ArrayList<Move>();
@@ -83,11 +84,13 @@ public class TestPiece {
 		// test sulle mosse presenti all'interno dell'arrayList di mosse
 		assertTrue(currentPiece.getLegalMoves().contains(new Move(currentSpot, new Spot(ROW_6, COL_B))));
 		assertTrue(currentPiece.getLegalMoves().contains(new Move(currentSpot, new Spot(ROW_5, COL_B))));
-
 		
 	}
 	
-	@Test
+	
+	
+	
+//	@Test
 	public void testKingLegalMovements(){
 		//MOVIMENTI DEL RE
 		
@@ -104,9 +107,48 @@ public class TestPiece {
 		assertTrue(currentPiece.getLegalMoves().contains(new Move(currentSpot, new Spot(ROW_6, COL_B))));
 		assertTrue(currentPiece.getLegalMoves().contains(new Move(currentSpot, new Spot(ROW_8, COL_B))));
 		assertTrue(currentPiece.getLegalMoves().contains(new Move(currentSpot, new Spot(ROW_6, COL_A))));
+		assertTrue(currentPiece.getLegalMoves().contains(new Move(currentSpot, new Spot(ROW_7, COL_A))));
 		assertTrue(currentPiece.getLegalMoves().contains(new Move(currentSpot, new Spot(ROW_8, COL_A))));
 		assertTrue(currentPiece.getLegalMoves().contains(new Move(currentSpot, new Spot(ROW_6, COL_C))));
+		assertTrue(currentPiece.getLegalMoves().contains(new Move(currentSpot, new Spot(ROW_7, COL_C))));
 		assertTrue(currentPiece.getLegalMoves().contains(new Move(currentSpot, new Spot(ROW_8, COL_C))));
+	
+	}
+	
+	@Test
+	public void testKingRecalculateMovements(){
+		//MOVIMENTI DEL RE
+		Board board2 = new Board(true);
+		Spot kingSpot = board2.getSpot(ROW_7, COL_B);
+		kingSpot.setPiece(new King(WHITE));
+		Piece kingPiece = kingSpot.getPiece();
+		kingSpot.setPiece(new King(WHITE));
+		kingPiece.findLegalMoves(board2, kingSpot);
+		
+		// test sulla lunghezza dell'arraylist di mosse (in questo caso 8 -> b6, b5)
+		//board2.showBoard();
+		assertEquals(kingPiece.getLegalMoves().size(), 8);
+		// test sulle mosse presenti all'interno dell'arrayList di mosse
+		assertTrue(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_6, COL_B))));
+		assertTrue(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_8, COL_B))));
+		assertTrue(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_6, COL_A))));
+		assertTrue(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_7, COL_A))));
+		assertTrue(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_8, COL_A))));
+		assertTrue(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_6, COL_C))));
+		assertTrue(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_7, COL_C))));
+		assertTrue(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_8, COL_C))));
+		
+		Spot rookSpot = board2.getSpot(ROW_7, COL_C);
+		rookSpot.setPiece(new Rook(BLACK));
+		Piece rookPiece = rookSpot.getPiece();
+		rookSpot.setPiece(new Rook(BLACK));
+		rookPiece.findLegalMoves(board2, rookSpot);
+		
+		// test sulla lunghezza dell'arraylist di mosse (in questo caso 8 -> b6, b5)
+		board2.showBoard();
+		kingPiece.recalculateMoves(board2);
+		assertEquals(kingPiece.getLegalMoves().size(), 5);
+		
 	
 	}
 	

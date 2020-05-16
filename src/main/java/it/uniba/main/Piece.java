@@ -69,7 +69,7 @@ public abstract class Piece {
 	 *
 	 * @param board
 	 */
-	void recalculateMoves(final Board board) {
+	public void recalculateMoves(final Board board) {
 		ArrayList<Move> movesCopy = new ArrayList<Move>();
 		ArrayList<Move> movesToRemove = new ArrayList<Move>();
 
