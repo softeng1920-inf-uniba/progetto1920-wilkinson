@@ -57,6 +57,10 @@ public class TestPiece {
 		Piece blackPawn = blackPawnSpot.getPiece();
 		blackPawnSpot.setPiece(new Pawn(BLACK));
 		blackPawn.findLegalMoves(board, blackPawnSpot);
+		
+		
+		//test moved
+		assertFalse(blackPawn.isMoved());
 		// test sulla lunghezza dell'arraylist di mosse (in questo caso 2 -> b6, b5)
 		assertEquals(blackPawn.getLegalMoves().size(), 2);
 		// test sulle mosse presenti all'interno dell'arrayList di mosse
@@ -68,6 +72,7 @@ public class TestPiece {
 		Piece whitePawn = whitePawnSpot.getPiece();
 		whitePawnSpot.setPiece(new Pawn(WHITE));
 		whitePawn.findLegalMoves(board, whitePawnSpot);
+		
 		
 		board.showBoard();
 
