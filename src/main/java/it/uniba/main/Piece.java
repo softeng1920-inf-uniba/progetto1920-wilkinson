@@ -50,7 +50,7 @@ public abstract class Piece {
 	 * trova tutte le possibili mosse legali del pezzo corrente
 	 *
 	 */
-	void findLegalMoves(final Board board, final Spot currentSpot) {
+	public void findLegalMoves(final Board board, final Spot currentSpot) {
 		this.legalMoves.clear();
 		for (int i = 0; i < BOARDDIM; i++) {
 			for (int j = 0; j < BOARDDIM; j++) {
