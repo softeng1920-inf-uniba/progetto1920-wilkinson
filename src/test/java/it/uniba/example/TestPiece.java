@@ -61,5 +61,30 @@ public class TestPiece {
 		System.out.println(genericPiece.getLegalMoves().toString());
 		board.showBoard();
 
+		/* io farei in questo modo:
+		 * - scacchiera vuota
+		 * - genero un pezzo
+		 * - calcolo le sue mosse legali
+		 * - confronto la size dell'arraylist (deve essere pari al numero di mosse legali)
+		 * - contronto le mosse dell'arraylist con quelle legali che so a priori
+		 */
+
+		// esempio
+		Board board2 = new Board(true);
+		Spot currentSpot = board2.getSpot(ROW_7, COL_B);
+		currentSpot.setPiece(new Pawn(BLACK));
+		Piece currentPiece = currentSpot.getPiece();
+		currentSpot.setPiece(new Pawn(BLACK));
+		currentPiece.findLegalMoves(board2, currentSpot);
+		// test sulla lunghezza dell'arraylist di mosse (in questo caso 2 -> b6, b5)
+		assertEquals(currentPiece.getLegalMoves().size(), 2);
+		// test sulle mosse presenti all'interno dell'arrayList di mosse
+		assertTrue(currentPiece.getLegalMoves().contains(new Move(currentSpot, new Spot(ROW_6, COL_B))));
+		assertTrue(currentPiece.getLegalMoves().contains(new Move(currentSpot, new Spot(ROW_5, COL_B))));
+
+		/* P.S. mi sono reso conto che in questo modo non si fa altro che testare anche i canMove() dei vari pezzi
+		 * quindi io sentirei Andrea per mettermi d'accordo e magari uno testa findLegalMoves() e l'altro
+		 * refineLegalMoves()
+		 */
 	}
 }
