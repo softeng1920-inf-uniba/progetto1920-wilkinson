@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="8.8">
+<<<<<<< HEAD
 <file name="C:\scacchi\progetto1920-wilkinson\src\main\java\it\uniba\main\AlgebraicNotation.java">
 </file>
 <file name="C:\scacchi\progetto1920-wilkinson\src\main\java\it\uniba\main\AppMain.java">
@@ -82,5 +83,32 @@
 <file name="C:\scacchi\progetto1920-wilkinson\src\main\java\it\uniba\main\Rook.java">
 </file>
 <file name="C:\scacchi\progetto1920-wilkinson\src\main\java\it\uniba\main\Spot.java">
+=======
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/AlgebraicNotation.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/AppMain.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Bishop.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Board.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Game.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/King.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Knight.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Move.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Pawn.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Piece.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Queen.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Rook.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Spot.java">
+>>>>>>> bf963e466bf278f2bcd881dd1aa30d0183923601
 </file>
 </checkstyle>

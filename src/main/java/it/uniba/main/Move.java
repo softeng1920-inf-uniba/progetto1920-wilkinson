@@ -4,23 +4,23 @@ package it.uniba.main;
 import java.util.ArrayList;
 
 /**
- * DESCRIZIONE
- * rappresenta un movimento di un pezzo degli scacchi
- * da una casa di partenza ad una di arrivo
+ * <body>
+ * <h2>DESCRIZIONE</h2>
+ * rappresenta un movimento di un pezzo degli scacchi <br>
+ * da una casa di partenza ad una di arrivo <br>
  *
- * RESPONSABILITA' DI CLASSE
- * La classe effettua operazioni a partire da un input interpretato
- * - controllare quale pezzo si vuol muovere
- * - controllare la casa di arrivo e stabilire quella di partenza
- * - stabilire se la mossa e' legale
- * - stabilire se e' possibile una cattura (classica o en-passant)
- * - controllare casi di ambiguita' nel movimento
- * - rigettare l'input nel caso di irregolarita'
+ * <h2>RESPONSABILITA' DI CLASSE</h2>
+ * La classe effettua operazioni a partire da un input interpretato <br>
+ * - controlla quale pezzo si vuol muovere <br>
+ * - controlla la casa di arrivo e stabilisce quella di partenza <br>
+ * - stabilisce se e' possibile una cattura (classica o en-passant) <br>
+ * - controlla casi di ambiguita' nel movimento <br>
  *
- * CLASSIFICAZIONE ECB
- * <<Control>>
- * essendo responsabile della logica che interessa il movimento
+ * <h2>CLASSIFICAZIONE ECB</h2>
+ * <strong>Control</strong><br>
+ * essendo responsabile della logica che interessa il movimento <br>
  * di un pezzo sulla scacchiera, alla base del concetto di "movimento"
+ * </body>
  *
  * @author wilkinson
  */
@@ -77,8 +77,8 @@ public final class Move {
 	 * costruttore secondario di un oggetto Move semplice (solo spot di
 	 * partenza/arrivo)
 	 *
-	 * @param start
-	 * @param end
+	 * @param inStart
+	 * @param inEnd
 	 */
 	public Move(final Spot inStart, final Spot inEnd) {
 		this.start = inStart;
@@ -250,9 +250,6 @@ public final class Move {
 	/**
 	 * capisce se il pezzo che sta muovendo sta catturando en passant
 	 *
-	 * @param piece pezzo mosso
-	 * @param start casa di partenza
-	 * @param end   casa di arrivo
 	 * @param board scacchiera
 	 * @return true se cattura en passant, false altrimenti
 	 */
@@ -429,15 +426,14 @@ public final class Move {
 		return false;
 	}
 
-	/**
-	 * applica una serie di controlli per stabilire se l'arrocco è possibile
+	/**applica una serie di controlli per stabilire se l'arrocco è possibile
 	 *
 	 * @param board
-	 * @param king
-	 * @param rook
 	 * @param kingSpot
 	 * @param rookSpot
 	 * @param kingOrigin
+	 * @param rookOrigin
+	 * @param knightSpot
 	 * @return
 	 */
 	private boolean isCastlePossible(final Board board, final Spot kingSpot, final Spot rookSpot,

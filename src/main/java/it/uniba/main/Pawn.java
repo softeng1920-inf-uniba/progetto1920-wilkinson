@@ -1,16 +1,19 @@
 package it.uniba.main;
 
 /**
- * DESCRIZIONE
- * rappresenta un pezzo pedone ha associati degli stati per
- * permettere la cattura en passant
+ * <body>
+ * <h2>DESCRIZIONE</h2>
+ * rappresenta un pezzo pedone ha associati degli stati per <br>
+ * permettere la cattura en passant <br>
  *
- * RESPONSABILITA' DI CLASSE
- * calcola le mosse legali di un pedone seguendo le
- * regole ufficiale degli scacchi
+ * <h2>RESPONSABILITA' DI CLASSE</h2>
+ * calcola le mosse legali di un pedone seguendo le <br>
+ * regole ufficiale degli scacchi <br>
  *
- * CLASSIFICAZIONE ECB
- * <<Entity>> poiche' eredita dalla classe Piece.java
+ * <h2>CLASSIFICAZIONE ECB</h2>
+ * <strong>Entity</strong><br>
+ * poiche' eredita dalla classe Piece.java
+ * </body>
  *
  * @author wilkinson
  */
@@ -59,7 +62,7 @@ public class Pawn extends Piece {
 					&& board.frontSpot(start).isEmpty()) {
 				return true;
 			}
-			// stabilisce se il movimento è una cattura en passant
+			// stabilisce se il movimento e' una cattura en passant
 			if (startPiece.isWhite()) {
 				if (start.getX() == ENPASSANT_WHITE_X) { // per il bianco
 					if (board.isFrontDiagonal(start, end)) {
@@ -92,7 +95,7 @@ public class Pawn extends Piece {
 	}
 
 	/**
-	 * stabilisce se il pedone in start può catturare en passant finendo in end
+	 * stabilisce se il pedone in start puo' catturare en passant finendo in end
 	 *
 	 * @param board
 	 * @param start
@@ -114,7 +117,7 @@ public class Pawn extends Piece {
 
 	// Getters & Setters
 	/**
-	 * Metodo che restituisce un booleano che segnala se è possibile la cattura En
+	 * Metodo che restituisce un booleano che segnala se e' possibile la cattura En
 	 * Passant.
 	 *
 	 * @return possibleEnPassantCapture
@@ -124,7 +127,7 @@ public class Pawn extends Piece {
 	}
 
 	/**
-	 * Metodo che imposta sull'istanza di pedone corrente la possibilità di
+	 * Metodo che imposta sull'istanza di pedone corrente la possibilita' di
 	 * catturare en passant.
 	 *
 	 * @param possibleEnPassantCaptureIo
@@ -147,7 +150,7 @@ public class Pawn extends Piece {
 	 * Metodo che imposta il booleano isCapturingEnPassant se il pedone sta
 	 * catturando en passant.
 	 *
-	 * @param isCapturingEnPassant
+	 * @param isCapturingEnPassantIo
 	 */
 	public void setCapturingEnPassant(final boolean isCapturingEnPassantIo) {
 		this.isCapturingEnPassant = isCapturingEnPassantIo;
