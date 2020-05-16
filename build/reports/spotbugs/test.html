@@ -73,27 +73,17 @@
       <p>SpotBugs version: 4.0.1</p>
       <p>Code analyzed:</p>
       <ul>
-<<<<<<< HEAD
          <li>C:\scacchi\progetto1920-wilkinson\build\classes\java\test\it\uniba\example\AlgebraicNotationTest.class</li>
          <li>C:\scacchi\progetto1920-wilkinson\build\classes\java\test\it\uniba\example\ChessTest.class</li>
-         <li>C:\scacchi\progetto1920-wilkinson\build\classes\java\test\it\uniba\example\TestSpot.class</li>
-=======
-         <li>/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/build/classes/java/test/it/uniba/example/ChessTest.class</li>
-         <li>/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/build/classes/java/test/it/uniba/example/AlgebraicNotationTest.class</li>
->>>>>>> bf963e466bf278f2bcd881dd1aa30d0183923601
+         <li>C:\scacchi\progetto1920-wilkinson\build\classes\java\test\it\uniba\example\TestPiece.class</li>
       </ul>
       <p>
          <br/>
          <br/>
       </p>
       <h2>Metrics</h2>
-<<<<<<< HEAD
-      <p>331 lines of code analyzed,
+      <p>340 lines of code analyzed,
 	in 3 classes, 
-=======
-      <p>256 lines of code analyzed,
-	in 2 classes, 
->>>>>>> bf963e466bf278f2bcd881dd1aa30d0183923601
 	in 1 packages.</p>
       <table width="500" cellpadding="5" cellspacing="2">
          <tr class="tableheader">
@@ -104,38 +94,22 @@
          <tr class="tablerow0">
             <td>High Priority Warnings</td>
             <td align="right">5</td>
-<<<<<<< HEAD
-            <td align="right">15.11</td>
+            <td align="right">14.71</td>
          </tr>
          <tr class="tablerow1">
             <td>Medium Priority Warnings</td>
-            <td align="right">23</td>
-            <td align="right">69.49</td>
-=======
-            <td align="right">19.53</td>
-         </tr>
-         <tr class="tablerow1">
-            <td>Medium Priority Warnings</td>
-            <td align="right">5</td>
-            <td align="right">19.53</td>
->>>>>>> bf963e466bf278f2bcd881dd1aa30d0183923601
+            <td align="right">7</td>
+            <td align="right">20.59</td>
          </tr>
          <tr class="$totalClass">
             <td>
                <b>Total Warnings</b>
             </td>
             <td align="right">
-<<<<<<< HEAD
-               <b>28</b>
+               <b>12</b>
             </td>
             <td align="right">
-               <b>84.59</b>
-=======
-               <b>10</b>
-            </td>
-            <td align="right">
-               <b>39.06</b>
->>>>>>> bf963e466bf278f2bcd881dd1aa30d0183923601
+               <b>35.29</b>
             </td>
          </tr>
       </table>
@@ -148,6 +122,9 @@
       </p>
       <h2>Contents</h2>
       <ul>
+         <li>
+            <a href="#Warnings_PERFORMANCE">Performance Warnings</a>
+         </li>
          <li>
             <a href="#Warnings_STYLE">Dodgy code Warnings</a>
          </li>
@@ -163,29 +140,64 @@
          </tr>
          <tr class="tablerow0">
             <td>
-               <a href="#Warnings_STYLE">Dodgy code Warnings</a>
+               <a href="#Warnings_PERFORMANCE">Performance Warnings</a>
             </td>
-<<<<<<< HEAD
-            <td align="right">28</td>
-=======
-            <td align="right">10</td>
->>>>>>> bf963e466bf278f2bcd881dd1aa30d0183923601
+            <td align="right">2</td>
          </tr>
          <tr class="tablerow1">
+            <td>
+               <a href="#Warnings_STYLE">Dodgy code Warnings</a>
+            </td>
+            <td align="right">10</td>
+         </tr>
+         <tr class="tablerow0">
             <td>
                <b>Total</b>
             </td>
             <td align="right">
-<<<<<<< HEAD
-               <b>28</b>
-=======
-               <b>10</b>
->>>>>>> bf963e466bf278f2bcd881dd1aa30d0183923601
+               <b>12</b>
             </td>
          </tr>
       </table>
       <h1>Warnings</h1>
       <p>Click on a warning row to see full context information.</p>
+      <h2>
+         <a name="Warnings_PERFORMANCE">Performance Warnings</a>
+      </h2>
+      <table class="warningtable" width="100%" cellspacing="0">
+         <tr class="tableheader">
+            <th align="left">Code</th>
+            <th align="left">Warning</th>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e205');">
+            <td>
+               <span class="priority-2">UuF</span>
+            </td>
+            <td>Unused field: it.uniba.example.TestPiece.board</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e205" style="display: none;">
+                  <a href="#UUF_UNUSED_FIELD">Bug type UUF_UNUSED_FIELD (click for details)</a>
+                  <br/>In class it.uniba.example.TestPiece<br/>Field it.uniba.example.TestPiece.board<br/>In TestPiece.java</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e218');">
+            <td>
+               <span class="priority-2">UuF</span>
+            </td>
+            <td>Unused field: it.uniba.example.TestPiece.genericPiece</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e218" style="display: none;">
+                  <a href="#UUF_UNUSED_FIELD">Bug type UUF_UNUSED_FIELD (click for details)</a>
+                  <br/>In class it.uniba.example.TestPiece<br/>Field it.uniba.example.TestPiece.genericPiece<br/>In TestPiece.java</p>
+            </td>
+         </tr>
+      </table>
       <h2>
          <a name="Warnings_STYLE">Dodgy code Warnings</a>
       </h2>
@@ -194,7 +206,7 @@
             <th align="left">Code</th>
             <th align="left">Warning</th>
          </tr>
-         <tr class="tablerow1" onclick="toggleRow('d1e40');">
+         <tr class="tablerow1" onclick="toggleRow('d1e42');">
             <td>
                <span class="priority-1">ST</span>
             </td>
@@ -203,21 +215,12 @@
          <tr class="detailrow1">
             <td/>
             <td>
-<<<<<<< HEAD
                <p id="d1e42" style="display: none;">
                   <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
                   <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testBishopMovements()<br/>Field it.uniba.example.ChessTest.board<br/>At ChessTest.java:[line 155]</p>
             </td>
          </tr>
          <tr class="tablerow0" onclick="toggleRow('d1e58');">
-=======
-               <p id="d1e40" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testBishopMovements()<br/>Field it.uniba.example.ChessTest.board<br/>At ChessTest.java:[line 154]</p>
-            </td>
-         </tr>
-         <tr class="tablerow0" onclick="toggleRow('d1e56');">
->>>>>>> bf963e466bf278f2bcd881dd1aa30d0183923601
             <td>
                <span class="priority-1">ST</span>
             </td>
@@ -226,7 +229,6 @@
          <tr class="detailrow0">
             <td/>
             <td>
-<<<<<<< HEAD
                <p id="d1e58" style="display: none;">
                   <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
                   <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testKingMovements()<br/>Field it.uniba.example.ChessTest.board<br/>At ChessTest.java:[line 194]</p>
@@ -344,367 +346,6 @@
                   <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testRookMovements()<br/>Field it.uniba.example.ChessTest.genericPiece<br/>At ChessTest.java:[line 128]</p>
             </td>
          </tr>
-         <tr class="tablerow1" onclick="toggleRow('d1e205');">
-            <td>
-               <span class="priority-2">ST</span>
-            </td>
-            <td>Write to static field it.uniba.example.TestSpot.spot from instance method it.uniba.example.TestSpot.testIsEmpty()</td>
-         </tr>
-         <tr class="detailrow1">
-            <td/>
-            <td>
-               <p id="d1e205" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.TestSpot<br/>In method it.uniba.example.TestSpot.testIsEmpty()<br/>Field it.uniba.example.TestSpot.spot<br/>At TestSpot.java:[line 34]</p>
-            </td>
-         </tr>
-         <tr class="tablerow0" onclick="toggleRow('d1e221');">
-            <td>
-               <span class="priority-2">ST</span>
-            </td>
-            <td>Write to static field it.uniba.example.TestSpot.spot2 from instance method it.uniba.example.TestSpot.testIsEmpty()</td>
-         </tr>
-         <tr class="detailrow0">
-            <td/>
-            <td>
-               <p id="d1e221" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.TestSpot<br/>In method it.uniba.example.TestSpot.testIsEmpty()<br/>Field it.uniba.example.TestSpot.spot2<br/>At TestSpot.java:[line 35]</p>
-            </td>
-         </tr>
-         <tr class="tablerow1" onclick="toggleRow('d1e237');">
-            <td>
-               <span class="priority-2">ST</span>
-            </td>
-            <td>Write to static field it.uniba.example.TestSpot.piece from instance method it.uniba.example.TestSpot.testIsNotEmpty()</td>
-         </tr>
-         <tr class="detailrow1">
-            <td/>
-            <td>
-               <p id="d1e237" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.TestSpot<br/>In method it.uniba.example.TestSpot.testIsNotEmpty()<br/>Field it.uniba.example.TestSpot.piece<br/>At TestSpot.java:[line 42]</p>
-            </td>
-         </tr>
-         <tr class="tablerow0" onclick="toggleRow('d1e253');">
-            <td>
-               <span class="priority-2">ST</span>
-            </td>
-            <td>Write to static field it.uniba.example.TestSpot.board from instance method it.uniba.example.TestSpot.testIsUnderAttack()</td>
-         </tr>
-         <tr class="detailrow0">
-            <td/>
-            <td>
-               <p id="d1e253" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.TestSpot<br/>In method it.uniba.example.TestSpot.testIsUnderAttack()<br/>Field it.uniba.example.TestSpot.board<br/>At TestSpot.java:[line 101]</p>
-            </td>
-         </tr>
-         <tr class="tablerow1" onclick="toggleRow('d1e269');">
-            <td>
-               <span class="priority-2">ST</span>
-            </td>
-            <td>Write to static field it.uniba.example.TestSpot.spot from instance method it.uniba.example.TestSpot.testIsUnderAttack()</td>
-         </tr>
-         <tr class="detailrow1">
-            <td/>
-            <td>
-               <p id="d1e269" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.TestSpot<br/>In method it.uniba.example.TestSpot.testIsUnderAttack()<br/>Field it.uniba.example.TestSpot.spot<br/>At TestSpot.java:[line 107]</p>
-            </td>
-         </tr>
-         <tr class="tablerow0" onclick="toggleRow('d1e285');">
-            <td>
-               <span class="priority-2">ST</span>
-            </td>
-            <td>Write to static field it.uniba.example.TestSpot.spot2 from instance method it.uniba.example.TestSpot.testIsUnderAttack()</td>
-         </tr>
-         <tr class="detailrow0">
-            <td/>
-            <td>
-               <p id="d1e285" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.TestSpot<br/>In method it.uniba.example.TestSpot.testIsUnderAttack()<br/>Field it.uniba.example.TestSpot.spot2<br/>At TestSpot.java:[line 108]</p>
-            </td>
-         </tr>
-         <tr class="tablerow1" onclick="toggleRow('d1e301');">
-            <td>
-               <span class="priority-2">ST</span>
-            </td>
-            <td>Write to static field it.uniba.example.TestSpot.spot from instance method it.uniba.example.TestSpot.testSetGetPiece()</td>
-=======
-               <p id="d1e56" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testKingMovements()<br/>Field it.uniba.example.ChessTest.board<br/>At ChessTest.java:[line 193]</p>
-            </td>
-         </tr>
-         <tr class="tablerow1" onclick="toggleRow('d1e72');">
-            <td>
-               <span class="priority-1">ST</span>
-            </td>
-            <td>Write to static field it.uniba.example.ChessTest.board from instance method it.uniba.example.ChessTest.testKnightMovements()</td>
->>>>>>> bf963e466bf278f2bcd881dd1aa30d0183923601
-         </tr>
-         <tr class="detailrow1">
-            <td/>
-            <td>
-<<<<<<< HEAD
-               <p id="d1e301" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.TestSpot<br/>In method it.uniba.example.TestSpot.testSetGetPiece()<br/>Field it.uniba.example.TestSpot.spot<br/>At TestSpot.java:[line 93]</p>
-            </td>
-         </tr>
-         <tr class="tablerow0" onclick="toggleRow('d1e317');">
-            <td>
-               <span class="priority-2">ST</span>
-            </td>
-            <td>Write to static field it.uniba.example.TestSpot.spot from instance method it.uniba.example.TestSpot.testSetGetX()</td>
-         </tr>
-         <tr class="detailrow0">
-            <td/>
-            <td>
-               <p id="d1e317" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.TestSpot<br/>In method it.uniba.example.TestSpot.testSetGetX()<br/>Field it.uniba.example.TestSpot.spot<br/>At TestSpot.java:[line 72]</p>
-            </td>
-         </tr>
-         <tr class="tablerow1" onclick="toggleRow('d1e333');">
-            <td>
-               <span class="priority-2">ST</span>
-            </td>
-            <td>Write to static field it.uniba.example.TestSpot.spot from instance method it.uniba.example.TestSpot.testSetGetY()</td>
-         </tr>
-         <tr class="detailrow1">
-            <td/>
-            <td>
-               <p id="d1e333" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.TestSpot<br/>In method it.uniba.example.TestSpot.testSetGetY()<br/>Field it.uniba.example.TestSpot.spot<br/>At TestSpot.java:[line 83]</p>
-            </td>
-         </tr>
-         <tr class="tablerow0" onclick="toggleRow('d1e349');">
-            <td>
-               <span class="priority-2">ST</span>
-            </td>
-            <td>Write to static field it.uniba.example.TestSpot.spot from instance method it.uniba.example.TestSpot.testToString()</td>
-=======
-               <p id="d1e72" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testKnightMovements()<br/>Field it.uniba.example.ChessTest.board<br/>At ChessTest.java:[line 89]</p>
-            </td>
-         </tr>
-         <tr class="tablerow0" onclick="toggleRow('d1e88');">
-            <td>
-               <span class="priority-1">ST</span>
-            </td>
-            <td>Write to static field it.uniba.example.ChessTest.board from instance method it.uniba.example.ChessTest.testPawnMovements()</td>
->>>>>>> bf963e466bf278f2bcd881dd1aa30d0183923601
-         </tr>
-         <tr class="detailrow0">
-            <td/>
-            <td>
-<<<<<<< HEAD
-               <p id="d1e349" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.TestSpot<br/>In method it.uniba.example.TestSpot.testToString()<br/>Field it.uniba.example.TestSpot.spot<br/>At TestSpot.java:[line 49]</p>
-            </td>
-         </tr>
-         <tr class="tablerow1" onclick="toggleRow('d1e365');">
-            <td>
-               <span class="priority-2">ST</span>
-            </td>
-            <td>Write to static field it.uniba.example.TestSpot.spot2 from instance method it.uniba.example.TestSpot.testToString()</td>
-         </tr>
-         <tr class="detailrow1">
-            <td/>
-            <td>
-               <p id="d1e365" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.TestSpot<br/>In method it.uniba.example.TestSpot.testToString()<br/>Field it.uniba.example.TestSpot.spot2<br/>At TestSpot.java:[line 50]</p>
-            </td>
-         </tr>
-         <tr class="tablerow0" onclick="toggleRow('d1e382');">
-            <td>
-               <span class="priority-2">ST</span>
-            </td>
-            <td>Write to static field it.uniba.example.TestSpot.spot3 from instance method it.uniba.example.TestSpot.testToString()</td>
-         </tr>
-         <tr class="detailrow0">
-            <td/>
-            <td>
-               <p id="d1e382" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.TestSpot<br/>In method it.uniba.example.TestSpot.testToString()<br/>Field it.uniba.example.TestSpot.spot3<br/>At TestSpot.java:[line 51]</p>
-            </td>
-         </tr>
-         <tr class="tablerow1" onclick="toggleRow('d1e398');">
-            <td>
-               <span class="priority-2">ST</span>
-            </td>
-            <td>Write to static field it.uniba.example.TestSpot.spot4 from instance method it.uniba.example.TestSpot.testToString()</td>
-=======
-               <p id="d1e88" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testPawnMovements()<br/>Field it.uniba.example.ChessTest.board<br/>At ChessTest.java:[line 48]</p>
-            </td>
-         </tr>
-         <tr class="tablerow1" onclick="toggleRow('d1e104');">
-            <td>
-               <span class="priority-1">ST</span>
-            </td>
-            <td>Write to static field it.uniba.example.ChessTest.board from instance method it.uniba.example.ChessTest.testRookMovements()</td>
->>>>>>> bf963e466bf278f2bcd881dd1aa30d0183923601
-         </tr>
-         <tr class="detailrow1">
-            <td/>
-            <td>
-<<<<<<< HEAD
-               <p id="d1e398" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.TestSpot<br/>In method it.uniba.example.TestSpot.testToString()<br/>Field it.uniba.example.TestSpot.spot4<br/>At TestSpot.java:[line 52]</p>
-            </td>
-         </tr>
-         <tr class="tablerow0" onclick="toggleRow('d1e414');">
-            <td>
-               <span class="priority-2">ST</span>
-            </td>
-            <td>Write to static field it.uniba.example.TestSpot.spot5 from instance method it.uniba.example.TestSpot.testToString()</td>
-=======
-               <p id="d1e104" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testRookMovements()<br/>Field it.uniba.example.ChessTest.board<br/>At ChessTest.java:[line 123]</p>
-            </td>
-         </tr>
-         <tr class="tablerow0" onclick="toggleRow('d1e120');">
-            <td>
-               <span class="priority-2">ST</span>
-            </td>
-            <td>Write to static field it.uniba.example.ChessTest.genericPiece from instance method it.uniba.example.ChessTest.testBishopMovements()</td>
->>>>>>> bf963e466bf278f2bcd881dd1aa30d0183923601
-         </tr>
-         <tr class="detailrow0">
-            <td/>
-            <td>
-<<<<<<< HEAD
-               <p id="d1e414" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.TestSpot<br/>In method it.uniba.example.TestSpot.testToString()<br/>Field it.uniba.example.TestSpot.spot5<br/>At TestSpot.java:[line 53]</p>
-            </td>
-         </tr>
-         <tr class="tablerow1" onclick="toggleRow('d1e430');">
-            <td>
-               <span class="priority-2">ST</span>
-            </td>
-            <td>Write to static field it.uniba.example.TestSpot.spot6 from instance method it.uniba.example.TestSpot.testToString()</td>
-=======
-               <p id="d1e120" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testBishopMovements()<br/>Field it.uniba.example.ChessTest.genericPiece<br/>At ChessTest.java:[line 158]</p>
-            </td>
-         </tr>
-         <tr class="tablerow1" onclick="toggleRow('d1e136');">
-            <td>
-               <span class="priority-2">ST</span>
-            </td>
-            <td>Write to static field it.uniba.example.ChessTest.genericPiece from instance method it.uniba.example.ChessTest.testKingMovements()</td>
->>>>>>> bf963e466bf278f2bcd881dd1aa30d0183923601
-         </tr>
-         <tr class="detailrow1">
-            <td/>
-            <td>
-<<<<<<< HEAD
-               <p id="d1e430" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.TestSpot<br/>In method it.uniba.example.TestSpot.testToString()<br/>Field it.uniba.example.TestSpot.spot6<br/>At TestSpot.java:[line 54]</p>
-            </td>
-         </tr>
-         <tr class="tablerow0" onclick="toggleRow('d1e446');">
-            <td>
-               <span class="priority-2">ST</span>
-            </td>
-            <td>Write to static field it.uniba.example.TestSpot.spot7 from instance method it.uniba.example.TestSpot.testToString()</td>
-=======
-               <p id="d1e136" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testKingMovements()<br/>Field it.uniba.example.ChessTest.genericPiece<br/>At ChessTest.java:[line 197]</p>
-            </td>
-         </tr>
-         <tr class="tablerow0" onclick="toggleRow('d1e152');">
-            <td>
-               <span class="priority-2">ST</span>
-            </td>
-            <td>Write to static field it.uniba.example.ChessTest.genericPiece from instance method it.uniba.example.ChessTest.testKnightMovements()</td>
->>>>>>> bf963e466bf278f2bcd881dd1aa30d0183923601
-         </tr>
-         <tr class="detailrow0">
-            <td/>
-            <td>
-<<<<<<< HEAD
-               <p id="d1e446" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.TestSpot<br/>In method it.uniba.example.TestSpot.testToString()<br/>Field it.uniba.example.TestSpot.spot7<br/>At TestSpot.java:[line 55]</p>
-            </td>
-         </tr>
-         <tr class="tablerow1" onclick="toggleRow('d1e462');">
-            <td>
-               <span class="priority-2">ST</span>
-            </td>
-            <td>Write to static field it.uniba.example.TestSpot.spot8 from instance method it.uniba.example.TestSpot.testToString()</td>
-=======
-               <p id="d1e152" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testKnightMovements()<br/>Field it.uniba.example.ChessTest.genericPiece<br/>At ChessTest.java:[line 93]</p>
-            </td>
-         </tr>
-         <tr class="tablerow1" onclick="toggleRow('d1e168');">
-            <td>
-               <span class="priority-2">ST</span>
-            </td>
-            <td>Write to static field it.uniba.example.ChessTest.genericPiece from instance method it.uniba.example.ChessTest.testPawnMovements()</td>
->>>>>>> bf963e466bf278f2bcd881dd1aa30d0183923601
-         </tr>
-         <tr class="detailrow1">
-            <td/>
-            <td>
-<<<<<<< HEAD
-               <p id="d1e462" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.TestSpot<br/>In method it.uniba.example.TestSpot.testToString()<br/>Field it.uniba.example.TestSpot.spot8<br/>At TestSpot.java:[line 56]</p>
-            </td>
-         </tr>
-         <tr class="tablerow0" onclick="toggleRow('d1e478');">
-            <td>
-               <span class="priority-2">ST</span>
-            </td>
-            <td>Write to static field it.uniba.example.TestSpot.spot9 from instance method it.uniba.example.TestSpot.testToString()</td>
-=======
-               <p id="d1e168" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testPawnMovements()<br/>Field it.uniba.example.ChessTest.genericPiece<br/>At ChessTest.java:[line 52]<br/>Another occurrence at ChessTest.java:[line 70]</p>
-            </td>
-         </tr>
-         <tr class="tablerow0" onclick="toggleRow('d1e186');">
-            <td>
-               <span class="priority-2">ST</span>
-            </td>
-            <td>Write to static field it.uniba.example.ChessTest.genericPiece from instance method it.uniba.example.ChessTest.testRookMovements()</td>
->>>>>>> bf963e466bf278f2bcd881dd1aa30d0183923601
-         </tr>
-         <tr class="detailrow0">
-            <td/>
-            <td>
-<<<<<<< HEAD
-               <p id="d1e478" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.TestSpot<br/>In method it.uniba.example.TestSpot.testToString()<br/>Field it.uniba.example.TestSpot.spot9<br/>At TestSpot.java:[line 57]</p>
-=======
-               <p id="d1e186" style="display: none;">
-                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testRookMovements()<br/>Field it.uniba.example.ChessTest.genericPiece<br/>At ChessTest.java:[line 127]</p>
->>>>>>> bf963e466bf278f2bcd881dd1aa30d0183923601
-            </td>
-         </tr>
       </table>
       <h1>
          <a name="Details">Details</a>
@@ -717,6 +358,12 @@
 correct if multiple instances are being manipulated,
 and generally bad practice.
 </p>
+
+    <h2>
+         <a name="UUF_UNUSED_FIELD">UUF_UNUSED_FIELD: Unused field</a>
+      </h2>
+
+  <p> This field is never used.&nbsp; Consider removing it from the class.</p>
 
     </body>
 </html>

@@ -1,70 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="8.8">
-<<<<<<< HEAD
 <file name="C:\scacchi\progetto1920-wilkinson\src\main\java\it\uniba\main\AlgebraicNotation.java">
 </file>
 <file name="C:\scacchi\progetto1920-wilkinson\src\main\java\it\uniba\main\AppMain.java">
-<error line="43" severity="error" message="Line is longer than 120 characters (found 134)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="59" column="33" severity="error" message="Expression can be simplified." source="com.puppycrawl.tools.checkstyle.checks.coding.SimplifyBooleanExpressionCheck"/>
-<error line="61" severity="error" message="Line is longer than 120 characters (found 132)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="87" severity="error" message="Line is longer than 120 characters (found 121)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="87" column="80" severity="error" message="&apos;&amp;&amp;&apos; is not preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
-<error line="87" column="115" severity="error" message="&apos;==&apos; is not preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
-<error line="87" column="117" severity="error" message="&apos;==&apos; is not followed by whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
-<error line="100" severity="error" message="Line is longer than 120 characters (found 185)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="100" column="55" severity="error" message="&apos;=&apos; is not preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
-<error line="100" column="56" severity="error" message="&apos;=&apos; is not followed by whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
-<error line="102" severity="error" message="Line is longer than 120 characters (found 133)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="107" severity="error" message="Line is longer than 120 characters (found 122)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="119" severity="error" message="Line is longer than 120 characters (found 121)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="131" severity="error" message="Line is longer than 120 characters (found 135)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="131" column="54" severity="error" message="&apos;while&apos; is not followed by whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
-<error line="131" column="94" severity="error" message="&apos;&amp;&amp;&apos; is not preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
-<error line="131" column="129" severity="error" message="&apos;==&apos; is not preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
-<error line="131" column="131" severity="error" message="&apos;==&apos; is not followed by whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
-<error line="149" severity="error" message="Line is longer than 120 characters (found 121)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="153" severity="error" message="Line is longer than 120 characters (found 121)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="167" severity="error" message="Line is longer than 120 characters (found 136)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="167" column="95" severity="error" message="&apos;&amp;&amp;&apos; is not preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
-<error line="167" column="130" severity="error" message="&apos;==&apos; is not preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
-<error line="167" column="132" severity="error" message="&apos;==&apos; is not followed by whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
-<error line="171" severity="error" message="Line is longer than 120 characters (found 183)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
 </file>
 <file name="C:\scacchi\progetto1920-wilkinson\src\main\java\it\uniba\main\Bishop.java">
 </file>
 <file name="C:\scacchi\progetto1920-wilkinson\src\main\java\it\uniba\main\Board.java">
-<error line="443" column="9" severity="error" message="Method length is 187 lines (max allowed is 150)." source="com.puppycrawl.tools.checkstyle.checks.sizes.MethodLengthCheck"/>
-<error line="443" column="28" severity="error" message="Parameter start should be final." source="com.puppycrawl.tools.checkstyle.checks.FinalParametersCheck"/>
-<error line="443" column="40" severity="error" message="Parameter end should be final." source="com.puppycrawl.tools.checkstyle.checks.FinalParametersCheck"/>
-<error line="455" severity="error" message="Line is longer than 120 characters (found 159)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="458" severity="error" message="Line is longer than 120 characters (found 146)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="459" column="89" severity="error" message="Conditional logic can be removed." source="com.puppycrawl.tools.checkstyle.checks.coding.SimplifyBooleanReturnCheck"/>
-<error line="475" severity="error" message="Line is longer than 120 characters (found 159)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="478" severity="error" message="Line is longer than 120 characters (found 146)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="479" column="89" severity="error" message="Conditional logic can be removed." source="com.puppycrawl.tools.checkstyle.checks.coding.SimplifyBooleanReturnCheck"/>
-<error line="497" severity="error" message="Line is longer than 120 characters (found 159)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="500" severity="error" message="Line is longer than 120 characters (found 146)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="501" column="89" severity="error" message="Conditional logic can be removed." source="com.puppycrawl.tools.checkstyle.checks.coding.SimplifyBooleanReturnCheck"/>
-<error line="517" severity="error" message="Line is longer than 120 characters (found 159)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="520" severity="error" message="Line is longer than 120 characters (found 146)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="521" column="89" severity="error" message="Conditional logic can be removed." source="com.puppycrawl.tools.checkstyle.checks.coding.SimplifyBooleanReturnCheck"/>
-<error line="546" severity="error" message="Line is longer than 120 characters (found 146)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="547" column="89" severity="error" message="Conditional logic can be removed." source="com.puppycrawl.tools.checkstyle.checks.coding.SimplifyBooleanReturnCheck"/>
-<error line="566" severity="error" message="Line is longer than 120 characters (found 146)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="567" column="89" severity="error" message="Conditional logic can be removed." source="com.puppycrawl.tools.checkstyle.checks.coding.SimplifyBooleanReturnCheck"/>
-<error line="588" severity="error" message="Line is longer than 120 characters (found 146)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="589" column="89" severity="error" message="Conditional logic can be removed." source="com.puppycrawl.tools.checkstyle.checks.coding.SimplifyBooleanReturnCheck"/>
-<error line="608" severity="error" message="Line is longer than 120 characters (found 146)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="609" column="89" severity="error" message="Conditional logic can be removed." source="com.puppycrawl.tools.checkstyle.checks.coding.SimplifyBooleanReturnCheck"/>
-<error line="629" column="10" severity="error" message="&apos;}&apos; is not followed by whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
-<error line="695" column="9" severity="error" message="Class &apos;Board&apos; looks like designed for extension (can be subclassed), but the method &apos;getWhiteKingSpot&apos; does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class &apos;Board&apos; final or making the method &apos;getWhiteKingSpot&apos; static/final/abstract/empty, or adding allowed annotation for the method." source="com.puppycrawl.tools.checkstyle.checks.design.DesignForExtensionCheck"/>
-<error line="699" column="9" severity="error" message="Class &apos;Board&apos; looks like designed for extension (can be subclassed), but the method &apos;setWhiteKingSpot&apos; does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class &apos;Board&apos; final or making the method &apos;setWhiteKingSpot&apos; static/final/abstract/empty, or adding allowed annotation for the method." source="com.puppycrawl.tools.checkstyle.checks.design.DesignForExtensionCheck"/>
-<error line="699" column="38" severity="error" message="Parameter whiteKingSpot should be final." source="com.puppycrawl.tools.checkstyle.checks.FinalParametersCheck"/>
-<error line="699" column="43" severity="error" message="&apos;whiteKingSpot&apos; hides a field." source="com.puppycrawl.tools.checkstyle.checks.coding.HiddenFieldCheck"/>
-<error line="703" column="9" severity="error" message="Class &apos;Board&apos; looks like designed for extension (can be subclassed), but the method &apos;getBlackKingSpot&apos; does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class &apos;Board&apos; final or making the method &apos;getBlackKingSpot&apos; static/final/abstract/empty, or adding allowed annotation for the method." source="com.puppycrawl.tools.checkstyle.checks.design.DesignForExtensionCheck"/>
-<error line="707" column="9" severity="error" message="Class &apos;Board&apos; looks like designed for extension (can be subclassed), but the method &apos;setBlackKingSpot&apos; does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class &apos;Board&apos; final or making the method &apos;setBlackKingSpot&apos; static/final/abstract/empty, or adding allowed annotation for the method." source="com.puppycrawl.tools.checkstyle.checks.design.DesignForExtensionCheck"/>
-<error line="707" column="38" severity="error" message="Parameter blackKingSpot should be final." source="com.puppycrawl.tools.checkstyle.checks.FinalParametersCheck"/>
-<error line="707" column="43" severity="error" message="&apos;blackKingSpot&apos; hides a field." source="com.puppycrawl.tools.checkstyle.checks.coding.HiddenFieldCheck"/>
 </file>
 <file name="C:\scacchi\progetto1920-wilkinson\src\main\java\it\uniba\main\Game.java">
 </file>
@@ -83,32 +25,5 @@
 <file name="C:\scacchi\progetto1920-wilkinson\src\main\java\it\uniba\main\Rook.java">
 </file>
 <file name="C:\scacchi\progetto1920-wilkinson\src\main\java\it\uniba\main\Spot.java">
-=======
-<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/AlgebraicNotation.java">
-</file>
-<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/AppMain.java">
-</file>
-<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Bishop.java">
-</file>
-<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Board.java">
-</file>
-<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Game.java">
-</file>
-<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/King.java">
-</file>
-<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Knight.java">
-</file>
-<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Move.java">
-</file>
-<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Pawn.java">
-</file>
-<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Piece.java">
-</file>
-<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Queen.java">
-</file>
-<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Rook.java">
-</file>
-<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Spot.java">
->>>>>>> bf963e466bf278f2bcd881dd1aa30d0183923601
 </file>
 </checkstyle>
