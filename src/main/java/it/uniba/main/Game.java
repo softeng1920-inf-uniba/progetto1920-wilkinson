@@ -185,7 +185,7 @@ public class Game {
 
 			// se e' un pedone mai mosso setto che e' possibile catturarlo en passant il
 			// prossimo turno
-			if (start.getPiece() instanceof Pawn) {
+			if ((start.getPiece() instanceof Pawn) && board.isTwoSpotsAhead(start, end)) {
 				((Pawn) start.getPiece()).setPossibleEnPassantCapture(true);
 			}
 		}
