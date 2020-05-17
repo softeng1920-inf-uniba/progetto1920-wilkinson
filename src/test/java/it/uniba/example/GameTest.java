@@ -8,7 +8,11 @@ import java.util.StringTokenizer;
 import org.junit.jupiter.api.Test;
 
 import it.uniba.main.Game;
+import it.uniba.main.King;
 import it.uniba.main.Pawn;
+import it.uniba.main.Rook;
+
+
 
 
 class GameTest {
@@ -30,7 +34,7 @@ class GameTest {
 			examinedPawn= (Pawn) (game.getBoard().getSpot(3, 1).getPiece());
 			game.getBoard().showBoard();
 		}
-	
+
 		//controllo che il pezzo  mosso di due e' catturabile en passant
 		assertTrue(examinedPawn.isPossibleEnPassantCapture()); 
 		//controllo che altri pedoni non catturabili en passant abbiano il booleano settato a a false
@@ -108,5 +112,52 @@ class GameTest {
 			examinedPawn= (Pawn) (game.getBoard().getSpot(5, 1).getPiece());
 		}
 		assertFalse (examinedPawn.isPossibleEnPassantCapture());
+		/**
+		 * Testo situazuoni particolari per il re
+		 */
+		game=new Game();
+		//serie di mosse per non dare possibilita' di movimento al re bianco
+		King examinedKing=null;
+		command=("e4 h5 g4 hxg4 Re2 a5 b4 axb4 Re3 Ta5 c3 Thh5 a3 Tad5 f3 Th3 c4 Td4 e5 Tg3 e6 Tg2 c5 Tf2 a4 b3 a5 b6 a6 bxc5 a7 g3"); //serie di mosse
+		move= new StringTokenizer(command);
+		while(move.hasMoreTokens()) {
+			game.currentGame(move.nextToken());
+		}
+		examinedKing= (King) (game.getBoard().getSpot(5, 4).getPiece());
+		assertTrue(examinedKing.getLegalMoves().isEmpty());
+		//serie di mosse che permette una sola mossa legale
+		game=new Game();
+		examinedKing=null;
+		command=("e4 h5 g4 hxg4 Re2 a5 b4 axb4 Re3 Ta5 c3 Thh5 a3 Tad5 f3 Th3 c4 Td4 e5 Tg3 e6 Tg2 c5 Tf2 a4 b3 a5 b2 a6 b6 a7 bxc5"); //serie di mosse
+		move= new StringTokenizer(command);
+		while(move.hasMoreTokens()) {
+			game.currentGame(move.nextToken());
+		}
+		examinedKing= (King) (game.getBoard().getSpot(5, 4).getPiece());
+		assertTrue(game.getBoard().getSpot(6, 5).getPiece() instanceof Rook);
+		command=("Rxf2");
+		game.currentGame(command);
+		assertTrue(game.getBoard().getSpot(6, 5).getPiece() instanceof King);
+
+		game=new Game();
+		//serie di mosse per non dare possibilita' di movimento al re nero
+		command=("a4 b5 axb5 e5 Txa7 Re7 h4 g5 hxg5 Re6 Th5 h6 gxh6 Cc6 Txc7 Cb4 Txd7 Cf6 Tf5 Ta7 g4 Ca6 Cc3 Cb4 Ca2 Ca6 c4 Ta8 c5 Ta7 c6"); //serie di mosse
+		move= new StringTokenizer(command);
+		while(move.hasMoreTokens()) {
+			game.currentGame(move.nextToken());
+		}
+		examinedKing= (King) (game.getBoard().getSpot(2, 4).getPiece());
+		assertTrue(examinedKing.getLegalMoves().isEmpty());
+		//serie di mosse che permette una sola mossa legale
+		game=new Game();
+		command=("a4 b5 h4 g5 hxg5 e5 axb5 Re7 Ta6 e4 f3 exf3 b6 Re6 b7+ Re5 Td6 a6 Th4 De7 Tf4 a5 g3"); //serie di mosse
+		move= new StringTokenizer(command);
+		while(move.hasMoreTokens()) {
+			game.currentGame(move.nextToken());
+		}
+		examinedKing= (King) (game.getBoard().getSpot(3, 4).getPiece());
+		assertTrue(game.getBoard().getSpot(2, 3).getPiece() instanceof Rook);
+		game.currentGame("Rxd6");
+		assertTrue(game.getBoard().getSpot(2, 3).getPiece() instanceof King);
 	}
 }
