@@ -15,7 +15,7 @@ import it.uniba.main.Rook;
 class GameTest {
 	
 //  RIGHE
-//	private static final int ROW_1 = 7;
+	private static final int ROW_1 = 7;
 	private static final int ROW_2 = 6;
 	private static final int ROW_3 = 5;
 	private static final int ROW_4 = 4;
@@ -41,16 +41,19 @@ class GameTest {
 		//test isMoved pedone
 		game.currentGame("d4");
 		assertTrue(game.getBoard().getSpot(ROW_4, COL_D).getPiece().isMoved());
+		assertTrue(game.getBoard().getSpot(ROW_2, COL_D).isEmpty());
 
 		//test cattura pedone
 		game.currentGame("e5");
 		game.currentGame("dxe5");
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_E).getPiece() instanceof Pawn);
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_D).isEmpty());
 
 		//test isMoved Regina
 		game.currentGame("d5");
 		game.currentGame("Dxd5");
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_D).getPiece().isMoved());
+		assertTrue(game.getBoard().getSpot(ROW_1, COL_D).isEmpty());
 
 		//test cattura Regina
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_D).getPiece() instanceof Queen);
@@ -59,26 +62,30 @@ class GameTest {
 		game.currentGame("h5");
 		game.currentGame("Ca3");
 		assertTrue(game.getBoard().getSpot(ROW_3, COL_A).getPiece().isMoved());
-
+		assertTrue(game.getBoard().getSpot(ROW_1, COL_B).isEmpty());
+		
 		//test cattura Cavallo
 		game.currentGame("b5");
 		game.currentGame("Cxb5");
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_B).getPiece() instanceof Knight);
+		assertTrue(game.getBoard().getSpot(ROW_3, COL_A).isEmpty());
 
 		//test isMoved Alfiere
 		game.currentGame("g5");
 		game.currentGame("Axg5");
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_G).getPiece().isMoved());
+		assertTrue(game.getBoard().getSpot(ROW_1, COL_C).isEmpty());
 
 		//test cattura Alfiere
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_G).getPiece() instanceof Bishop);
-
+		
 		//test isMoved Torre
 		game.currentGame("Ch6");
 		game.currentGame("h4");
 		game.currentGame("Ag7");
 		game.currentGame("Th3");
 		assertTrue(game.getBoard().getSpot(ROW_3, COL_H).getPiece().isMoved());
+		assertTrue(game.getBoard().getSpot(ROW_1, COL_H).isEmpty());
 		
 		//test cattura Torre
 		game.currentGame("f5");
@@ -88,11 +95,13 @@ class GameTest {
 		game.currentGame("f3");
 		game.currentGame("Txf3");
 		assertTrue(game.getBoard().getSpot(ROW_3, COL_F).getPiece() instanceof Rook);
+		assertTrue(game.getBoard().getSpot(ROW_3, COL_H).isEmpty());
 		
 		//test isMoved Re
 		game.currentGame("c5");
 		game.currentGame("Rd2");
 		assertTrue(game.getBoard().getSpot(ROW_2, COL_D).getPiece().isMoved());
+		assertTrue(game.getBoard().getSpot(ROW_1, COL_E).isEmpty());
 		
 		//test cattura Re
 		game.currentGame("c4");
@@ -100,5 +109,6 @@ class GameTest {
 		game.currentGame("Th7");
 		game.currentGame("Rxc4");
 		assertTrue(game.getBoard().getSpot(ROW_4, COL_C).getPiece() instanceof King);
+		assertTrue(game.getBoard().getSpot(ROW_3, COL_C).isEmpty());
 	}
 }
