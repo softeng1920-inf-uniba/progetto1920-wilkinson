@@ -3,6 +3,9 @@ package it.uniba.example;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.After;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
@@ -41,6 +44,14 @@ public class TestPiece {
 	private static final int COL_B = 1;
 	private static final int COL_A = 0;
 
+	
+	
+	@BeforeEach
+	void setup() {
+		board = new Board(true);
+		//board.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
+	}
+
 	@Test
 	public void testPawnLegalMovements() {
 		/*
@@ -50,8 +61,6 @@ public class TestPiece {
 		 * che so a priori
 		 */
 
-		Board board = new Board(true);
-		
 		Spot blackPawnSpot = board.getSpot(ROW_7, COL_B);
 		blackPawnSpot.setPiece(new Pawn(BLACK));
 		Piece blackPawn = blackPawnSpot.getPiece();
@@ -89,7 +98,6 @@ public class TestPiece {
 	@Test
 	public void testKingLegalMovements() {
 		// MOVIMENTI DEL RE
-		Board board = new Board(true);
 		Spot currentSpot = board.getSpot(ROW_7, COL_B);
 		currentSpot.setPiece(new King(WHITE));
 		Piece currentPiece = currentSpot.getPiece();
@@ -112,7 +120,6 @@ public class TestPiece {
 
 	@Test
 	public void testKingRecalculateMovements() {
-		Board board = new Board(true);
 		Spot kingSpot = board.getSpot(ROW_7, COL_B);
 		kingSpot.setPiece(new King(WHITE));
 		Piece kingPiece = kingSpot.getPiece();
