@@ -8,7 +8,6 @@ import it.uniba.main.Bishop;
 import it.uniba.main.Game;
 import it.uniba.main.Knight;
 import it.uniba.main.Pawn;
-import it.uniba.main.Piece;
 import it.uniba.main.Queen;
 
 class GameTest {
@@ -35,46 +34,35 @@ class GameTest {
 		Game game = new Game();
 		
 		//test isMoved pedone
-		String command = "d4";
-		game.currentGame(command);
+		game.currentGame("d4");
 		assertTrue(game.getBoard().getSpot(ROW_4, COL_D).getPiece().isMoved());
 		
 		//test cattura pedone
-		command = "e5";
-		game.currentGame(command);
-		command = "dxe5";
-		game.currentGame(command);
+		game.currentGame("e5");
+		game.currentGame("dxe5");
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_E).getPiece() instanceof Pawn);
 		
 		//test isMoved Regina
-		command = "d5";
-		game.currentGame(command);
-		command = "Dxd5";
-		game.currentGame(command);
+		game.currentGame("d5");
+		game.currentGame("Dxd5");
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_D).getPiece().isMoved());
 
 		//test cattura Regina
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_D).getPiece() instanceof Queen);
 		
 		//test  isMoved Cavallo
-		command = "h5";
-		game.currentGame(command);
-		command = "Ca3";
-		game.currentGame(command);
+		game.currentGame("h5");
+		game.currentGame("Ca3");
 		assertTrue(game.getBoard().getSpot(ROW_3, COL_A).getPiece().isMoved());
 		
 		//test cattura Cavallo
-		command = "b5";
-		game.currentGame(command);
-		command = "Cxb5";
-		game.currentGame(command);
+		game.currentGame("b5");
+		game.currentGame("Cxb5");
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_B).getPiece() instanceof Knight);
 		
 		//test isMoved Alfiere
-		command = "g5";
-		game.currentGame(command);
-		command = "Axg5";
-		game.currentGame(command);
+		game.currentGame("g5");
+		game.currentGame("Axg5");
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_G).getPiece().isMoved());
 		
 		//test cattura Alfiere
