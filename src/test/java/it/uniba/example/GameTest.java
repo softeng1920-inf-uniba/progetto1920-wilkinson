@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 
 import it.uniba.main.Game;
+import it.uniba.main.Knight;
 import it.uniba.main.Pawn;
 import it.uniba.main.Piece;
 import it.uniba.main.Queen;
@@ -25,7 +26,7 @@ class GameTest {
 	private static final int COL_E = 4;
 	private static final int COL_D = 3;
 //	private static final int COL_C = 2;
-//	private static final int COL_B = 1;
+	private static final int COL_B = 1;
 	private static final int COL_A = 0;
 	
 	@Test
@@ -52,6 +53,20 @@ class GameTest {
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_D).getPiece().isMoved());
 
 		//test cattura Regina
-		assertTrue(game.getBoard().getSpot(ROW_5, COL_E).getPiece() instanceof Queen);	
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_D).getPiece() instanceof Queen);
+		
+		//test  isMoved Cavallo
+		command = "h5";
+		game.currentGame(command);
+		command = "Ca3";
+		game.currentGame(command);
+		assertTrue(game.getBoard().getSpot(ROW_3, COL_A).getPiece().isMoved());
+		
+		//test cattura Cavallo
+		command = "b5";
+		game.currentGame(command);
+		command = "Cxb5";
+		game.currentGame(command);
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_B).getPiece() instanceof Knight);
 	}
 }
