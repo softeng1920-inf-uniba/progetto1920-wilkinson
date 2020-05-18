@@ -214,4 +214,25 @@ class PieceTest {
 		board.getSpot(ROW_3, COL_C).setPiece(new Pawn(BLACK)); // pezzo nemico
 		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_3, COL_C))); // NW
 	}
+
+	@Test
+	void testQueenMovement() {
+		board = new Board(true);
+		// caso di test per il movimento della regina (tutte le 8 direzioni possibili)
+		board.getSpot(ROW_3, COL_D).setPiece(new Queen(WHITE));
+		assertTrue(board.getSpot(ROW_3, COL_D).getPiece().canMove(board, board.getSpot(ROW_3, COL_D), board.getSpot(ROW_1, COL_F))); // NE
+		assertTrue(board.getSpot(ROW_3, COL_D).getPiece().canMove(board, board.getSpot(ROW_3, COL_D), board.getSpot(ROW_3, COL_G))); // E
+		assertTrue(board.getSpot(ROW_3, COL_D).getPiece().canMove(board, board.getSpot(ROW_3, COL_D), board.getSpot(ROW_4, COL_E))); // SE
+		assertTrue(board.getSpot(ROW_3, COL_D).getPiece().canMove(board, board.getSpot(ROW_3, COL_D), board.getSpot(ROW_8, COL_D))); // S
+		assertTrue(board.getSpot(ROW_3, COL_D).getPiece().canMove(board, board.getSpot(ROW_3, COL_D), board.getSpot(ROW_6, COL_A))); // SW
+		assertTrue(board.getSpot(ROW_3, COL_D).getPiece().canMove(board, board.getSpot(ROW_3, COL_D), board.getSpot(ROW_3, COL_B))); // W
+		assertTrue(board.getSpot(ROW_3, COL_D).getPiece().canMove(board, board.getSpot(ROW_3, COL_D), board.getSpot(ROW_1, COL_B))); // NW
+		assertTrue(board.getSpot(ROW_3, COL_D).getPiece().canMove(board, board.getSpot(ROW_3, COL_D), board.getSpot(ROW_2, COL_D))); // N
+
+		// movimento con pezzi lungo il percorso
+		board.getSpot(ROW_3, COL_E).setPiece(new Pawn(WHITE)); // pezzo amico
+		assertFalse(board.getSpot(ROW_3, COL_D).getPiece().canMove(board, board.getSpot(ROW_3, COL_D), board.getSpot(ROW_3, COL_G)));
+		board.getSpot(ROW_5, COL_D).setPiece(new Pawn(BLACK)); // pezzo nemico
+		assertFalse(board.getSpot(ROW_3, COL_D).getPiece().canMove(board, board.getSpot(ROW_3, COL_D), board.getSpot(ROW_8, COL_D)));
+	}
 }
