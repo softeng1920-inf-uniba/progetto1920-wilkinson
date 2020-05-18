@@ -159,5 +159,37 @@ class GameTest {
 		assertTrue(game.getBoard().getSpot(2, 3).getPiece() instanceof Rook);
 		game.currentGame("Rxd6");
 		assertTrue(game.getBoard().getSpot(2, 3).getPiece() instanceof King);
+
+		/**
+		 * Controllo eventuali situazioni in cui il movimento di un pezzo
+		 * espongono il re alla cattura
+		 */
+		game=new Game();
+		//serie di mosse per controllare che non sia possibile scoprire il re bianco
+		command=("e4 a5 b4 axb4 Re2 Ta5 a3 Te5 a4 f5"); //serie di mosse
+		move= new StringTokenizer(command);
+		while(move.hasMoreTokens()) {
+			game.currentGame(move.nextToken());
+		}
+		examinedKing= (King) (game.getBoard().getSpot(6, 4).getPiece());
+		//provo ad eseguire la mossa che esporrebbe il re allo scacco
+		command=("exf5");
+		game.currentGame(command);
+		// verifico che il pezzo che proteggeva il re non si sia spostato
+		assertTrue(game.getBoard().getSpot(4, 4).getPiece() instanceof Pawn);
+
+		//serie di mosse per controllare che non sia possibile scoprire il re nero
+		game=new Game();
+		command=("a4 b5 axb5 e5 Ta4 Re7 Te4 Re6 f4"); //serie di mosse
+		move= new StringTokenizer(command);
+		while(move.hasMoreTokens()) {
+			game.currentGame(move.nextToken());
+		}
+		examinedKing= (King) (game.getBoard().getSpot(2, 4).getPiece());
+		//provo ad eseguire la mossa che esporrebbe il re allo scacco
+		command=("exf4");
+		game.currentGame(command);
+		// verifico che il pezzo che proteggeva il re non si sia spostato
+		assertTrue(game.getBoard().getSpot(3, 4).getPiece() instanceof Pawn);
 	}
 }
