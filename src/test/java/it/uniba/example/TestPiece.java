@@ -44,6 +44,15 @@ public class TestPiece {
 	private static final int COL_B = 1;
 	private static final int COL_A = 0;
 
+	
+	
+	@BeforeEach
+	void setup() {
+		board = new Board(true);
+		//board.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
+	}
+
+	
 	@Test
 	void testPawnMovement() {
 		board = new Board(true);
@@ -103,13 +112,33 @@ public class TestPiece {
 		assertFalse(board.getSpot(ROW_5, COL_D).getPiece().canMove(board, board.getSpot(ROW_5, COL_D), board.getSpot(ROW_5, COL_E)));
 	}
 
-	
-	
-	@BeforeEach
-	void setup() {
+	@Test
+	void testKnightMovement() {
 		board = new Board(true);
-		//board.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
+		// caso di test per il movimento del cavallo (tutte le 8 mosse possibili)
+		board.getSpot(ROW_4, COL_D).setPiece(new Knight(BLACK));
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_2, COL_E)));
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_3, COL_F)));
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_5, COL_F)));
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_6, COL_E)));
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_6, COL_C)));
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_5, COL_B)));
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_3, COL_B)));
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_2, COL_C)));
+
+		// movimento illegale in una casella vuota
+		assertFalse(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_4, COL_C)));
+
+		// cattura di un pezzo amico
+		board.getSpot(ROW_3, COL_B).setPiece(new Pawn(BLACK)); // pezzo amico
+		assertFalse(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_3, COL_B)));
+		// cattura di un pezzo nemico
+		board.getSpot(ROW_5, COL_F).setPiece(new Pawn(WHITE));
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_5, COL_F)));
 	}
+
+	
+
 
 	
 	@Test
