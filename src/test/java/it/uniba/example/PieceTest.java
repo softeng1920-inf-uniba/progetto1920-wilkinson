@@ -55,5 +55,12 @@ class PieceTest {
 		// movimento in avanti di due caselle di un pedone gia' mosso
 		board.getSpot(ROW_3, COL_A).getPiece().setAsMoved();
 		assertFalse(board.getSpot(ROW_3, COL_A).getPiece().canMove(board, board.getSpot(ROW_3, COL_A), board.getSpot(ROW_5, COL_A)));
+
+		// cattura di un pezzo nemico
+		board.getSpot(ROW_3, COL_B).setPiece(new Pawn(BLACK)); // pezzo nemico
+		assertTrue(board.getSpot(ROW_2, COL_A).getPiece().canMove(board, board.getSpot(ROW_2, COL_A), board.getSpot(ROW_3, COL_B)));
+		// cattura di un pezzo amico
+		board.getSpot(ROW_3, COL_B).setPiece(new Pawn(WHITE)); // pezzo amico
+		assertFalse(board.getSpot(ROW_2, COL_A).getPiece().canMove(board, board.getSpot(ROW_2, COL_A), board.getSpot(ROW_3, COL_B)));
 	}
 }
