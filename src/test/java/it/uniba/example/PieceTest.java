@@ -340,10 +340,6 @@ public class PieceTest {
 		assertTrue(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_7, COL_C))));
 		assertTrue(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_8, COL_C))));
 		
-	
-
-		assertTrue(board.getSpot(ROW_7, COL_B).getPiece().canMove(board, board.getSpot(ROW_7, COL_B),
-				board.getSpot(ROW_6, COL_B))); 
 		
 		Spot rookSpot = board.getSpot(ROW_7, COL_C);
 		rookSpot.setPiece(new Rook(BLACK));
