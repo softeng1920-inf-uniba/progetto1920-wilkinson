@@ -210,7 +210,45 @@ public class TestPiece {
 		assertTrue(board.getSpot(ROW_3, COL_D).getPiece().canMove(board, board.getSpot(ROW_3, COL_D), board.getSpot(ROW_2, COL_D))); // N
 	}
 
-	
+	@Test
+	void testKingMovement() {
+		board = new Board(true);
+		// caso di test per il movimento del re (tutte le 8 mosse possibili)
+		board.getSpot(ROW_4, COL_D).setPiece(new King(BLACK));
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_3, COL_D))); // N
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_3, COL_E))); // NE
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_4, COL_E))); // E
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_5, COL_E))); // SE
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_5, COL_D))); // S
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_5, COL_C))); // SW
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_4, COL_C))); // W
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_3, COL_C))); // NW
+
+		// movimento in avanti di due caselle
+		assertFalse(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_2, COL_D)));
+
+		// cattura di un pezzo amico
+		board.getSpot(ROW_5, COL_C).setPiece(new Pawn(BLACK)); // pezzo amico
+		assertFalse(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_5, COL_C)));
+		// cattura di un pezzo nemico (tutte le 8 catture possibili)
+		board.getSpot(ROW_3, COL_D).setPiece(new Pawn(WHITE)); // pezzo nemico
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_3, COL_D))); // N
+		board.getSpot(ROW_3, COL_E).setPiece(new Pawn(WHITE)); // pezzo nemico
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_3, COL_E))); // NE
+		board.getSpot(ROW_4, COL_E).setPiece(new Pawn(WHITE)); // pezzo nemico
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_4, COL_E))); // E
+		board.getSpot(ROW_5, COL_E).setPiece(new Pawn(WHITE)); // pezzo nemico
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_5, COL_E))); // SE
+		board.getSpot(ROW_5, COL_D).setPiece(new Pawn(WHITE)); // pezzo nemico
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_5, COL_D))); // S
+		board.getSpot(ROW_5, COL_C).setPiece(new Pawn(WHITE)); // pezzo nemico
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_5, COL_C))); // SW
+		board.getSpot(ROW_4, COL_C).setPiece(new Pawn(WHITE)); // pezzo nemico
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_4, COL_C))); // W
+		board.getSpot(ROW_3, COL_C).setPiece(new Pawn(WHITE)); // pezzo nemico
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_3, COL_C))); // NW
+	}
+
 	@Test
 	public void testKingRecalculateMovements() {
 		Spot kingSpot = board.getSpot(ROW_7, COL_B);
