@@ -442,8 +442,7 @@ public class PieceTest {
 
 		queenPiece.recalculateMoves(board);
 
-		// test sulla lunghezza dell'arraylist di mosse della Torre (in questo caso 2 ->
-		// c3, b4)
+		// test sulla lunghezza dell'arraylist di mosse della Torre (c3, c4)
 		assertEquals(queenPiece.getLegalMoves().size(), 2);
 
 		// test sulle mosse presenti all'interno dell'arrayList di mosse
@@ -458,8 +457,7 @@ public class PieceTest {
 
 		queenPiece.recalculateMoves(board);
 
-		// test sulla lunghezza dell'arraylist di mosse della Torre (in questo caso 1 ->
-		// c3)
+		// test sulla lunghezza dell'arraylist di mosse della Torre (in questo caso 1))
 		assertEquals(queenPiece.getLegalMoves().size(), 1);
 
 		// test sulle mosse presenti all'interno dell'arrayList di mosse
