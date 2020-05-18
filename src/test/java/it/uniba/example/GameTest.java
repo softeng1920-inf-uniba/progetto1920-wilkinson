@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.*;
 
+import it.uniba.main.Bishop;
 import it.uniba.main.Game;
 import it.uniba.main.Knight;
 import it.uniba.main.Pawn;
@@ -20,7 +21,7 @@ class GameTest {
 //	private static final int ROW_8 = 0;
 
 //	private static final int COL_H = 7;
-//	private static final int COL_G = 6;
+	private static final int COL_G = 6;
 //	private static final int COL_F = 5;
 	private static final int COL_E = 4;
 	private static final int COL_D = 3;
@@ -67,5 +68,15 @@ class GameTest {
 		command = "Cxb5";
 		game.currentGame(command);
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_B).getPiece() instanceof Knight);
+
+		//test isMoved Alfiere
+		command = "g5";
+		game.currentGame(command);
+		command = "Axg5";
+		game.currentGame(command);
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_G).getPiece().isMoved());
+
+		//test cattura Alfiere
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_G).getPiece() instanceof Bishop);
 	}
 } 
