@@ -42,6 +42,15 @@ class MoveTest {
 		assertNull(board.getSpot(ROW_1, COL_H).getPiece());
 	}
 
+	@Test
+	void testCastleLong() {
+		move = new Move("0-0-0", board, WHITE);
+		board.getSpot(ROW_1, COL_A).setPiece(new Rook(WHITE));
+		assertTrue(move.makeCastling(board, WHITE));
+		assertNull(board.getSpot(ROW_1, COL_E).getPiece());
+		assertNull(board.getSpot(ROW_1, COL_A).getPiece());
+	}
+
 	@After
 	void tearDown() {
 
