@@ -145,6 +145,14 @@ class MoveTest {
 		assertFalse(move.makeCastling(board, WHITE));
 	}
 
+	@Test
+	void testCastleFriendPieceBetween() {
+		move = new Move("0-0", board, WHITE);
+		board.getSpot(ROW_1, COL_H).setPiece(new Rook (WHITE));
+		board.getSpot(ROW_1, COL_F).setPiece(new Queen(WHITE));
+		assertFalse(move.makeCastling(board, WHITE));
+	}
+
 	@After
 	void tearDown() {
 
