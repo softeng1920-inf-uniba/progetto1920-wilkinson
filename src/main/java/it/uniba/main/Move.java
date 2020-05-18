@@ -294,7 +294,7 @@ public final class Move {
 	 * @param game
 	 * @return
 	 */
-	boolean makeCastling(final Board board, final boolean color) {
+	public boolean makeCastling(final Board board, final boolean color) {
 		if (color) {
 			Spot whiteKingSpot = board.getSpot(ROW_1, COL_E);
 			if (this.getInterpreter().isCastleShort()) { // arrocco corto bianco
