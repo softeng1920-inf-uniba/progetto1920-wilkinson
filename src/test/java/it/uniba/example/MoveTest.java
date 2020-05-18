@@ -34,7 +34,7 @@ class MoveTest {
 		private static final int COL_A = 0;
 
 		@BeforeEach
-		void setup() {
+		void setup(){
 			board = new Board(true);
 		}
 		
