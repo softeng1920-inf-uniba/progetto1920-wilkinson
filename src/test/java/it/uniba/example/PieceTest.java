@@ -339,7 +339,12 @@ public class PieceTest {
 		assertTrue(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_6, COL_C))));
 		assertTrue(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_7, COL_C))));
 		assertTrue(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_8, COL_C))));
+		
+	
 
+		assertTrue(board.getSpot(ROW_7, COL_B).getPiece().canMove(board, board.getSpot(ROW_7, COL_B),
+				board.getSpot(ROW_6, COL_B))); 
+		
 		Spot rookSpot = board.getSpot(ROW_7, COL_C);
 		rookSpot.setPiece(new Rook(BLACK));
 		Piece rookPiece = rookSpot.getPiece();
@@ -363,6 +368,52 @@ public class PieceTest {
 		assertFalse(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_6, COL_C))));
 		assertFalse(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_8, COL_C))));
 
+		//cattura della torre
+		assertTrue(board.getSpot(ROW_7, COL_B).getPiece().canMove(board, board.getSpot(ROW_7, COL_B),
+				board.getSpot(ROW_7, COL_C))); 
+		
+		Spot queenSpot = board.getSpot(ROW_8, COL_C);
+		queenSpot.setPiece(new Queen(BLACK));
+		Piece queenPiece = queenSpot.getPiece();
+		queenSpot.setPiece(new Queen(BLACK));
+		queenPiece.findLegalMoves(board, queenSpot);
+		kingPiece.recalculateMoves(board);
+		
+		//unica mossa possibile per il re in b6
+		assertEquals(kingPiece.getLegalMoves().size(), 1);
+		
+		//movimenti validi rimasti
+		assertTrue(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_6, COL_B))));
+		
+		//movimenti non piu' validi
+		assertFalse(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_7, COL_A))));
+		assertFalse(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_6, COL_C))));
+		assertFalse(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_8, COL_C))));
+		assertFalse(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_8, COL_B))));
+		assertFalse(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_6, COL_A))));
+		assertFalse(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_8, COL_A))));
+		assertFalse(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_7, COL_C))));
+		
+		Spot rookSpot2 = board.getSpot(ROW_6, COL_C);
+		rookSpot2.setPiece(new Rook(BLACK));
+		Piece rookPiece2 = rookSpot2.getPiece();
+		rookSpot2.setPiece(new Rook(BLACK));
+		rookPiece2.findLegalMoves(board, rookSpot);
+		
+		kingPiece.recalculateMoves(board);
+
+		//nessuna mossa possibile per il re
+		assertEquals(kingPiece.getLegalMoves().size(), 0);
+		
+		//movimenti non piu' validi
+		assertFalse(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_7, COL_A))));
+		assertFalse(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_6, COL_C))));
+		assertFalse(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_8, COL_C))));
+		assertFalse(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_8, COL_B))));
+		assertFalse(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_6, COL_A))));
+		assertFalse(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_8, COL_A))));
+		assertFalse(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_7, COL_C))));
+		assertFalse(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_6, COL_B))));
 
 	}
 

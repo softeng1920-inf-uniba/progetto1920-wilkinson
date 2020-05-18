@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="JUnit Jupiter" tests="8" skipped="0" failures="0" errors="0" time="0.102" hostname="DESKTOP-5SM2VTD" timestamp="2020-05-18T00:39:56">
+<testsuite name="JUnit Jupiter" tests="17" skipped="0" failures="0" errors="0" time="0.635" hostname="DESKTOP-5SM2VTD" timestamp="2020-05-18T19:40:14">
 <properties>
 <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
 <property name="file.encoding" value="windows-1252"/>
@@ -13,7 +13,7 @@
 <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.8.0_251\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext"/>
 <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_251\jre"/>
 <property name="java.io.tmpdir" value="C:\Users\Vincenzo\AppData\Local\Temp\"/>
-<property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_251\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jre1.8.0_251/bin/server;C:/Program Files/Java/jre1.8.0_251/bin;C:/Program Files/Java/jre1.8.0_251/lib/amd64;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Android;C:\Windows\System32;C:\Program Files\Git\cmd;C:\Program Files\Calibre2\;C:\MinGW\bin;;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\Vincenzo\AppData\Local\Microsoft\WindowsApps;C:\Users\Vincenzo\AppData\Local\atom\bin;C:\Users\Vincenzo\AppData\Local\GitHubDesktop\bin;C:\MinGW\bin;;C:\WINDOWS\system32;;."/>
+<property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_251\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jre1.8.0_251/bin/server;C:/Program Files/Java/jre1.8.0_251/bin;C:/Program Files/Java/jre1.8.0_251/lib/amd64;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Android;C:\Windows\System32;C:\Program Files\Git\cmd;C:\Program Files\Calibre2\;C:\MinGW\bin;;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\Vincenzo\AppData\Local\Microsoft\WindowsApps;C:\Users\Vincenzo\AppData\Local\atom\bin;C:\Users\Vincenzo\AppData\Local\GitHubDesktop\bin;C:\MinGW\bin;;C:\Users\Vincenzo\Desktop;;."/>
 <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
 <property name="java.runtime.version" value="1.8.0_251-b08"/>
 <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -57,13 +57,13 @@
 <property name="user.timezone" value="Europe/Berlin"/>
 <property name="user.variant" value=""/>
 </properties>
-<testcase name="testValidAlgebraicNotation()" classname="it.uniba.example.AlgebraicNotationTest" time="0.031">
+<testcase name="testValidAlgebraicNotation()" classname="it.uniba.example.AlgebraicNotationTest" time="0.035">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:it.uniba.example.AlgebraicNotationTest]/[method:testValidAlgebraicNotation()]
 display-name: testValidAlgebraicNotation()
 ]]></system-out>
 </testcase>
-<testcase name="testInvalidAlgebraicNotation()" classname="it.uniba.example.AlgebraicNotationTest" time="0.004">
+<testcase name="testInvalidAlgebraicNotation()" classname="it.uniba.example.AlgebraicNotationTest" time="0.003">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:it.uniba.example.AlgebraicNotationTest]/[method:testInvalidAlgebraicNotation()]
 display-name: testInvalidAlgebraicNotation()
@@ -75,13 +75,13 @@ unique-id: [engine:junit-jupiter]/[class:it.uniba.example.ChessTest]/[method:tes
 display-name: testPawnMovements()
 ]]></system-out>
 </testcase>
-<testcase name="testQueenMovements()" classname="it.uniba.example.ChessTest" time="0.001">
+<testcase name="testQueenMovements()" classname="it.uniba.example.ChessTest" time="0">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:it.uniba.example.ChessTest]/[method:testQueenMovements()]
 display-name: testQueenMovements()
 ]]></system-out>
 </testcase>
-<testcase name="testKingMovements()" classname="it.uniba.example.ChessTest" time="0">
+<testcase name="testKingMovements()" classname="it.uniba.example.ChessTest" time="0.001">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:it.uniba.example.ChessTest]/[method:testKingMovements()]
 display-name: testKingMovements()
@@ -103,6 +103,60 @@ display-name: testKnightMovements()
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:it.uniba.example.ChessTest]/[method:testBishopMovements()]
 display-name: testBishopMovements()
+]]></system-out>
+</testcase>
+<testcase name="testIsAmbiguity()" classname="it.uniba.example.GameTest" time="0.253">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:it.uniba.example.GameTest]/[method:testIsAmbiguity()]
+display-name: testIsAmbiguity()
+]]></system-out>
+</testcase>
+<testcase name="testCurrentGame()" classname="it.uniba.example.GameTest" time="0.269">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:it.uniba.example.GameTest]/[method:testCurrentGame()]
+display-name: testCurrentGame()
+]]></system-out>
+</testcase>
+<testcase name="testBishopMovement()" classname="it.uniba.example.PieceTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:it.uniba.example.PieceTest]/[method:testBishopMovement()]
+display-name: testBishopMovement()
+]]></system-out>
+</testcase>
+<testcase name="testKingRecalculateMovements()" classname="it.uniba.example.PieceTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:it.uniba.example.PieceTest]/[method:testKingRecalculateMovements()]
+display-name: testKingRecalculateMovements()
+]]></system-out>
+</testcase>
+<testcase name="testQueenMovement()" classname="it.uniba.example.PieceTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:it.uniba.example.PieceTest]/[method:testQueenMovement()]
+display-name: testQueenMovement()
+]]></system-out>
+</testcase>
+<testcase name="testKnightMovement()" classname="it.uniba.example.PieceTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:it.uniba.example.PieceTest]/[method:testKnightMovement()]
+display-name: testKnightMovement()
+]]></system-out>
+</testcase>
+<testcase name="testRookMovement()" classname="it.uniba.example.PieceTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:it.uniba.example.PieceTest]/[method:testRookMovement()]
+display-name: testRookMovement()
+]]></system-out>
+</testcase>
+<testcase name="testKingMovement()" classname="it.uniba.example.PieceTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:it.uniba.example.PieceTest]/[method:testKingMovement()]
+display-name: testKingMovement()
+]]></system-out>
+</testcase>
+<testcase name="testPawnMovement()" classname="it.uniba.example.PieceTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:it.uniba.example.PieceTest]/[method:testPawnMovement()]
+display-name: testPawnMovement()
 ]]></system-out>
 </testcase>
 <system-out><![CDATA[
