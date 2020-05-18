@@ -6,6 +6,7 @@ import org.junit.jupiter.api.*;
 
 import it.uniba.main.Bishop;
 import it.uniba.main.Game;
+import it.uniba.main.King;
 import it.uniba.main.Knight;
 import it.uniba.main.Pawn;
 
@@ -16,7 +17,7 @@ class GameTest {
 
 //  RIGHE
 //	private static final int ROW_1 = 7;
-//	private static final int ROW_2 = 6;
+	private static final int ROW_2 = 6;
 	private static final int ROW_3 = 5;
 	private static final int ROW_4 = 4;
 	private static final int ROW_5 = 3;
@@ -30,7 +31,7 @@ class GameTest {
 	private static final int COL_F = 5;
 	private static final int COL_E = 4;
 	private static final int COL_D = 3;
-//	private static final int COL_C = 2;
+	private static final int COL_C = 2;
 	private static final int COL_B = 1;
 	private static final int COL_A = 0;
 
@@ -88,5 +89,17 @@ class GameTest {
 		game.currentGame("f3");
 		game.currentGame("Txf3");
 		assertTrue(game.getBoard().getSpot(ROW_3, COL_F).getPiece() instanceof Rook);
+		
+		//test isMoved Re
+		game.currentGame("c5");
+		game.currentGame("Rd2");
+		assertTrue(game.getBoard().getSpot(ROW_2, COL_D).getPiece().isMoved());
+
+		//test cattura Re
+		game.currentGame("c4");
+		game.currentGame("Rc3");
+		game.currentGame("Th7");
+		game.currentGame("Rxc4");
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_C).getPiece() instanceof King);
 	}
 }
