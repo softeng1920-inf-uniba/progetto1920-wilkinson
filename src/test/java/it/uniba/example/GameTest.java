@@ -38,7 +38,7 @@ class GameTest {
 	private static final int COL_A = 0;
 
 	@Test
-	void testCurrentGame() {
+	void testIsMovedAndCapture() {
 		Game game = new Game();
 
 		//test isMoved pedone
@@ -91,12 +91,10 @@ class GameTest {
 		assertTrue(game.getBoard().getSpot(ROW_1, COL_H).isEmpty());
 
 		//test cattura Torre
-		game.currentGame("f5");
-		game.currentGame("a4");
-		game.currentGame("f4");
-		game.currentGame("a5");
-		game.currentGame("f3");
-		game.currentGame("Txf3");
+		StringTokenizer move= new StringTokenizer("f5 a4 f4 a5 f3 Txf3");
+		while(move.hasMoreTokens()) {
+			game.currentGame(move.nextToken());
+		}
 		assertTrue(game.getBoard().getSpot(ROW_3, COL_F).getPiece() instanceof Rook);
 		assertTrue(game.getBoard().getSpot(ROW_3, COL_H).isEmpty());
 		
@@ -120,8 +118,7 @@ class GameTest {
 		Game game = new Game();
 
 		//test ambiguita' movimento torre
-		String command = ("a4 a5 Ta3 b5 axb5 Ta6 h4 h5 Tah3");
-		StringTokenizer move= new StringTokenizer(command);
+		StringTokenizer move= new StringTokenizer("a4 a5 Ta3 b5 axb5 Ta6 h4 h5 Tah3");
 		while(move.hasMoreTokens()) {
 			game.currentGame(move.nextToken());
 		}
@@ -131,8 +128,7 @@ class GameTest {
 
 		//test ambiguita' cattura torre
 		game = new Game();
-		command = ("g4 h5 gxh5 Txh5 h4 g5 a4 gxh4 a5 f6 Ta4 f5 Taxh4");
-		move= new StringTokenizer(command);
+		move= new StringTokenizer("g4 h5 gxh5 Txh5 h4 g5 a4 gxh4 a5 f6 Ta4 f5 Taxh4");
 		while(move.hasMoreTokens()) {
 			game.currentGame(move.nextToken());
 		}
