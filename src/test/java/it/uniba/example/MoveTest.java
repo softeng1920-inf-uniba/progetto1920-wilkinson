@@ -4,7 +4,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.After;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -171,11 +170,4 @@ class MoveTest {
 		board.getSpot(ROW_1, COL_H).setPiece(new Queen(WHITE));
 		assertFalse(move.makeCastling(board, WHITE));
 	}
-
-	@After
-	void tearDown() {
-
-
-	}
-
 }
