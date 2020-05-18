@@ -61,6 +61,9 @@ class PieceTest {
 		assertFalse(board.getSpot(ROW_2, COL_A).getPiece().canMove(board, board.getSpot(ROW_2, COL_A), board.getSpot(ROW_4, COL_A)));
 		board.getSpot(ROW_4, COL_A).setPiece(new Pawn(WHITE)); // pezzo amico
 		assertFalse(board.getSpot(ROW_2, COL_A).getPiece().canMove(board, board.getSpot(ROW_2, COL_A), board.getSpot(ROW_4, COL_A)));
+		// movimento di un pedone con un pezzo lungo il percorso
+		board.getSpot(ROW_3, COL_A).setPiece(new Pawn(BLACK)); // pezzo che ostacola la mossa
+		assertFalse(board.getSpot(ROW_2, COL_A).getPiece().canMove(board, board.getSpot(ROW_2, COL_A), board.getSpot(ROW_4, COL_A)));
 
 		// cattura di un pezzo nemico
 		board.getSpot(ROW_3, COL_B).setPiece(new Pawn(BLACK)); // pezzo nemico
