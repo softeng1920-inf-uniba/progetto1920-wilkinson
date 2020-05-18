@@ -315,6 +315,31 @@ public class PieceTest {
 	}
 
 
+	@Test
+	public void testPawnRecalculateMovements() {
+		Spot kingSpot = board.getSpot(ROW_1, COL_E);
+		kingSpot.setPiece(new King(WHITE));
+		Piece kingPiece = kingSpot.getPiece();
+		kingSpot.setPiece(new King(WHITE));
+		kingPiece.findLegalMoves(board, kingSpot);
+
+		Spot pawnSpot = board.getSpot(ROW_2, COL_D);
+		pawnSpot.setPiece(new Pawn(WHITE));
+		Piece pawnPiece = pawnSpot.getPiece();
+		pawnSpot.setPiece(new Pawn(WHITE));
+		pawnPiece.findLegalMoves(board, pawnSpot);
+
+		Spot bishopSpot = board.getSpot(ROW_4, COL_B);
+		bishopSpot.setPiece(new Bishop(BLACK));
+		Piece bishopPiece = bishopSpot.getPiece();
+		bishopSpot.setPiece(new Bishop(BLACK));
+		bishopPiece.findLegalMoves(board, bishopSpot);
+
+		pawnPiece.recalculateMoves(board);
+
+		// test sulla lunghezza dell'arraylist di mosse del pedone (in questo caso 0)
+		assertEquals(pawnPiece.getLegalMoves().size(), 0);
+	}
 	
 	@Test
 	public void testRookRecalculateMovements() {
@@ -340,7 +365,6 @@ public class PieceTest {
 
 		// test sulla lunghezza dell'arraylist di mosse della Torre (in questo caso 0)
 		assertEquals(rookPiece.getLegalMoves().size(), 0);
-
 	}
 	
 	@Test
