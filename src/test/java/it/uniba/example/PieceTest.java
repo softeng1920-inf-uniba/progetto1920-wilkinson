@@ -192,5 +192,26 @@ class PieceTest {
 
 		// movimento in avanti di due caselle
 		assertFalse(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_2, COL_D)));
+
+		// cattura di un pezzo amico
+		board.getSpot(ROW_5, COL_C).setPiece(new Pawn(WHITE)); // pezzo amico
+		assertFalse(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_5, COL_C)));
+		// cattura di un pezzo nemico (tutte le 8 catture possibili)
+		board.getSpot(ROW_3, COL_D).setPiece(new Pawn(BLACK)); // pezzo nemico
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_3, COL_D))); // N
+		board.getSpot(ROW_3, COL_E).setPiece(new Pawn(BLACK)); // pezzo nemico
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_3, COL_E))); // NE
+		board.getSpot(ROW_4, COL_E).setPiece(new Pawn(BLACK)); // pezzo nemico
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_4, COL_E))); // E
+		board.getSpot(ROW_5, COL_E).setPiece(new Pawn(BLACK)); // pezzo nemico
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_5, COL_E))); // SE
+		board.getSpot(ROW_5, COL_D).setPiece(new Pawn(BLACK)); // pezzo nemico
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_5, COL_D))); // S
+		board.getSpot(ROW_5, COL_C).setPiece(new Pawn(BLACK)); // pezzo nemico
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_5, COL_C))); // SW
+		board.getSpot(ROW_4, COL_C).setPiece(new Pawn(BLACK)); // pezzo nemico
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_4, COL_C))); // W
+		board.getSpot(ROW_3, COL_C).setPiece(new Pawn(BLACK)); // pezzo nemico
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_3, COL_C))); // NW
 	}
 }
