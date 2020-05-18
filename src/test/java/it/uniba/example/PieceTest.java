@@ -102,4 +102,21 @@ class PieceTest {
 		board.getSpot(ROW_5, COL_E).setPiece(new Pawn(BLACK)); // pezzo nemico
 		assertTrue(board.getSpot(ROW_5, COL_D).getPiece().canMove(board, board.getSpot(ROW_5, COL_D), board.getSpot(ROW_5, COL_E))); // orizzontale
 	}
+	@Test
+	void testKnightMovement() {
+		board = new Board(true);
+		// caso di test per il movimento del cavallo (tutte le 8 mosse possibili)
+		board.getSpot(ROW_4, COL_D).setPiece(new Knight(WHITE));
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_2, COL_E)));
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_3, COL_F)));
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_5, COL_F)));
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_6, COL_E)));
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_6, COL_C)));
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_5, COL_B)));
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_3, COL_B)));
+		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_2, COL_C)));
+
+		// movimento illegale in una casella vuota
+		assertFalse(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_4, COL_C)));
+	}
 }
