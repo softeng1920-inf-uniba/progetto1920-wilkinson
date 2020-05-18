@@ -72,4 +72,26 @@ class PieceTest {
 		((Pawn)board.getSpot(ROW_4, COL_D).getPiece()).setPossibleEnPassantCapture(false);
 		assertFalse(board.getSpot(ROW_4, COL_E).getPiece().canMove(board, board.getSpot(ROW_4, COL_E), board.getSpot(ROW_3, COL_D)));
 	}
+
+	@Test
+	void testRookMovement() {
+		board = new Board(true);
+		// caso di test per il movimento della torre
+		board.getSpot(ROW_5, COL_D).setPiece(new Rook(WHITE));
+		// movimento in verticale (Nord e Sud)
+		assertTrue(board.getSpot(ROW_5, COL_D).getPiece().canMove(board, board.getSpot(ROW_5, COL_D), board.getSpot(ROW_1, COL_D))); // N
+		assertTrue(board.getSpot(ROW_5, COL_D).getPiece().canMove(board, board.getSpot(ROW_5, COL_D), board.getSpot(ROW_8, COL_D))); // S
+		// movimento in orizzontale (Est e Ovest)
+		assertTrue(board.getSpot(ROW_5, COL_D).getPiece().canMove(board, board.getSpot(ROW_5, COL_D), board.getSpot(ROW_5, COL_H))); // E
+		assertTrue(board.getSpot(ROW_5, COL_D).getPiece().canMove(board, board.getSpot(ROW_5, COL_D), board.getSpot(ROW_5, COL_A))); // W
+		// movimento in diagonale
+		assertFalse(board.getSpot(ROW_5, COL_D).getPiece().canMove(board, board.getSpot(ROW_5, COL_D), board.getSpot(ROW_3, COL_F))); // NE
+		assertFalse(board.getSpot(ROW_5, COL_D).getPiece().canMove(board, board.getSpot(ROW_5, COL_D), board.getSpot(ROW_7, COL_B))); // SW
+
+		// movimento con pezzi lungo il percorso
+		board.getSpot(ROW_5, COL_E).setPiece(new Pawn(WHITE)); // pezzo amico
+		assertFalse(board.getSpot(ROW_5, COL_D).getPiece().canMove(board, board.getSpot(ROW_5, COL_D), board.getSpot(ROW_5, COL_F)));
+		board.getSpot(ROW_4, COL_D).setPiece(new Pawn(BLACK)); // pezzo nemico
+		assertFalse(board.getSpot(ROW_5, COL_D).getPiece().canMove(board, board.getSpot(ROW_5, COL_D), board.getSpot(ROW_3, COL_D)));
+	}
 }
