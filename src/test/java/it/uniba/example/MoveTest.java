@@ -86,6 +86,14 @@ class MoveTest {
 		assertFalse(move.makeCastling(board, WHITE));
 	}
 
+	@Test
+	void testCastleRookMoved() {
+		move = new Move("0-0", board, WHITE);
+		board.getSpot(ROW_1, COL_H).setPiece(new Rook (WHITE));
+		board.getSpot(ROW_1, COL_H).getPiece().setAsMoved();
+		assertFalse(move.makeCastling(board, WHITE));
+	}
+
 	@After
 	void tearDown() {
 
