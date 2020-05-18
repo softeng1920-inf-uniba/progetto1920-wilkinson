@@ -75,7 +75,41 @@ public class TestPiece {
 		assertFalse(board.getSpot(ROW_3, COL_A).getPiece().canMove(board, board.getSpot(ROW_3, COL_A), board.getSpot(ROW_5, COL_A)));
 	}
 
+	@Test
+	void testRookMovement() {
+		board = new Board(true);
+		// caso di test per il movimento della torre
+		board.getSpot(ROW_5, COL_D).setPiece(new Rook(BLACK));
+		// movimento in verticale (Nord e Sud)
+		assertTrue(board.getSpot(ROW_5, COL_D).getPiece().canMove(board, board.getSpot(ROW_5, COL_D), board.getSpot(ROW_1, COL_D))); // N
+		assertTrue(board.getSpot(ROW_5, COL_D).getPiece().canMove(board, board.getSpot(ROW_5, COL_D), board.getSpot(ROW_8, COL_D))); // S
+		// movimento in orizzontale (Est e Ovest)
+		assertTrue(board.getSpot(ROW_5, COL_D).getPiece().canMove(board, board.getSpot(ROW_5, COL_D), board.getSpot(ROW_5, COL_H))); // E
+		assertTrue(board.getSpot(ROW_5, COL_D).getPiece().canMove(board, board.getSpot(ROW_5, COL_D), board.getSpot(ROW_5, COL_A))); // W
+		// movimento in diagonale
+		assertFalse(board.getSpot(ROW_5, COL_D).getPiece().canMove(board, board.getSpot(ROW_5, COL_D), board.getSpot(ROW_3, COL_F))); // NE
+		assertFalse(board.getSpot(ROW_5, COL_D).getPiece().canMove(board, board.getSpot(ROW_5, COL_D), board.getSpot(ROW_7, COL_B))); // SW
+
+		// movimento con pezzi lungo il percorso
+		board.getSpot(ROW_5, COL_E).setPiece(new Rook(BLACK)); // pezzo amico
+		assertFalse(board.getSpot(ROW_5, COL_D).getPiece().canMove(board, board.getSpot(ROW_5, COL_D), board.getSpot(ROW_5, COL_F)));
+		board.getSpot(ROW_4, COL_D).setPiece(new Bishop(WHITE)); // pezzo nemico
+		assertFalse(board.getSpot(ROW_5, COL_D).getPiece().canMove(board, board.getSpot(ROW_5, COL_D), board.getSpot(ROW_3, COL_D)));
+
+		// cattura di un pezzo nemico
+		assertTrue(board.getSpot(ROW_5, COL_D).getPiece().canMove(board, board.getSpot(ROW_5, COL_D), board.getSpot(ROW_4, COL_D)));
+		// cattura di un pezzo amico
+		board.getSpot(ROW_5, COL_E).setPiece(new Pawn(BLACK)); // pezzo amico
+		assertFalse(board.getSpot(ROW_5, COL_D).getPiece().canMove(board, board.getSpot(ROW_5, COL_D), board.getSpot(ROW_5, COL_E)));
+	}
+
 	
+	
+	@BeforeEach
+	void setup() {
+		board = new Board(true);
+		//board.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
+	}
 
 	
 	@Test
