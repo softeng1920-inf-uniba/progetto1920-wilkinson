@@ -38,13 +38,13 @@ public final class Move {
 	 * @param command comando da interpretare in mossa
 	 * @param game    partita in corso
 	 */
-	public Move(final String command, final Game game) {
+	public Move(final String command, final Board board, final boolean color) {
 		this.interpreter = new AlgebraicNotation(command); // Istanzio l'oggetto interpreter
 		final int kingCol = 4;
 		final int whiteKingROW = 7;
 		final int blackKingROW = 0;
 		if (this.isCastle()) { // se e' un arrocco setta le coordinate di partenza del re
-			if (game.isWhiteTurn()) {
+			if (color) {
 				this.start = new Spot(whiteKingROW, kingCol);
 			} else {
 				this.start = new Spot(blackKingROW, kingCol);
@@ -57,7 +57,7 @@ public final class Move {
 
 			// individua che tipo di pezzo muovere e cerca lo spot di partenza giusto
 			Piece classPiece = classPieceMoved(interpreter.getPieceLetter());
-			if (!findStartSpot(game.getBoard(), classPiece, game.isWhiteTurn())) {
+			if (!findStartSpot(board, classPiece, color)) {
 				this.start = null;
 			}
 
@@ -66,7 +66,7 @@ public final class Move {
 				// avvalora il pezzo da muovere prendendolo da start
 				this.pieceMoved = start.getPiece();
 				// capisce se e' una cattura en passant
-				if (isEnPassantMove(game.getBoard())) {
+				if (isEnPassantMove(board)) {
 					((Pawn) start.getPiece()).setCapturingEnPassant(true);
 				}
 			}
@@ -294,14 +294,14 @@ public final class Move {
 	 * @param game
 	 * @return
 	 */
-	boolean makeCastling(final Game game) {
-		if (game.isWhiteTurn()) {
-			Spot whiteKingSpot = game.getBoard().getSpot(ROW_1, COL_E);
+	boolean makeCastling(final Board board, final boolean color) {
+		if (color) {
+			Spot whiteKingSpot = board.getSpot(ROW_1, COL_E);
 			if (this.getInterpreter().isCastleShort()) { // arrocco corto bianco
-				Spot whiteDxRookSpot = game.getBoard().getSpot(ROW_1, COL_H);
-				Spot whiteNewKingSpot = game.getBoard().getSpot(ROW_1, COL_G);
-				Spot whiteNewRookSpot = game.getBoard().getSpot(ROW_1, COL_F);
-				if (isCastlePossible(game.getBoard(), whiteNewKingSpot, whiteNewRookSpot, whiteKingSpot,
+				Spot whiteDxRookSpot = board.getSpot(ROW_1, COL_H);
+				Spot whiteNewKingSpot = board.getSpot(ROW_1, COL_G);
+				Spot whiteNewRookSpot = board.getSpot(ROW_1, COL_F);
+				if (isCastlePossible(board, whiteNewKingSpot, whiteNewRookSpot, whiteKingSpot,
 						whiteDxRookSpot, null)) {
 					whiteNewKingSpot.setPiece(whiteKingSpot.getPiece());
 					whiteNewRookSpot.setPiece(whiteDxRookSpot.getPiece());
@@ -310,11 +310,11 @@ public final class Move {
 					return true;
 				}
 			} else if (this.getInterpreter().isCastleLong()) { // arrocco lungo bianco
-				Spot whiteSxRookSpot = game.getBoard().getSpot(ROW_1, COL_A);
-				Spot whiteNewKingSpot = game.getBoard().getSpot(ROW_1, COL_C);
-				Spot whiteNewRookSpot = game.getBoard().getSpot(ROW_1, COL_D);
-				Spot knightSpot = game.getBoard().getSpot(ROW_1, COL_B);
-				if (isCastlePossible(game.getBoard(), whiteNewKingSpot, whiteNewRookSpot, whiteKingSpot,
+				Spot whiteSxRookSpot = board.getSpot(ROW_1, COL_A);
+				Spot whiteNewKingSpot = board.getSpot(ROW_1, COL_C);
+				Spot whiteNewRookSpot = board.getSpot(ROW_1, COL_D);
+				Spot knightSpot = board.getSpot(ROW_1, COL_B);
+				if (isCastlePossible(board, whiteNewKingSpot, whiteNewRookSpot, whiteKingSpot,
 						whiteSxRookSpot, knightSpot)) {
 					whiteNewKingSpot.setPiece(whiteKingSpot.getPiece());
 					whiteNewRookSpot.setPiece(whiteSxRookSpot.getPiece());
@@ -324,12 +324,12 @@ public final class Move {
 				}
 			}
 		} else {
-			Spot blackKingSpot = game.getBoard().getSpot(ROW_8, COL_E);
+			Spot blackKingSpot = board.getSpot(ROW_8, COL_E);
 			if (this.getInterpreter().isCastleShort()) { // arrocco corto nero
-				Spot blackDxRookSpot = game.getBoard().getSpot(ROW_8, COL_H);
-				Spot blackNewKingSpot = game.getBoard().getSpot(ROW_8, COL_G);
-				Spot blackNewRookSpot = game.getBoard().getSpot(ROW_8, COL_F);
-				if (isCastlePossible(game.getBoard(), blackNewKingSpot, blackNewRookSpot, blackKingSpot,
+				Spot blackDxRookSpot = board.getSpot(ROW_8, COL_H);
+				Spot blackNewKingSpot = board.getSpot(ROW_8, COL_G);
+				Spot blackNewRookSpot = board.getSpot(ROW_8, COL_F);
+				if (isCastlePossible(board, blackNewKingSpot, blackNewRookSpot, blackKingSpot,
 						blackDxRookSpot, null)) {
 					blackNewKingSpot.setPiece(blackKingSpot.getPiece());
 					blackNewRookSpot.setPiece(blackDxRookSpot.getPiece());
@@ -338,11 +338,11 @@ public final class Move {
 					return true;
 				}
 			} else if (this.getInterpreter().isCastleLong()) { // arrocco lungo nero
-				Spot blackSxRookSpot = game.getBoard().getSpot(ROW_8, COL_A);
-				Spot blackNewKingSpot = game.getBoard().getSpot(ROW_8, COL_C);
-				Spot blackNewRookSpot = game.getBoard().getSpot(ROW_8, COL_D);
-				Spot knightSpot = game.getBoard().getSpot(ROW_8, COL_B);
-				if (isCastlePossible(game.getBoard(), blackNewKingSpot, blackNewRookSpot, blackKingSpot,
+				Spot blackSxRookSpot = board.getSpot(ROW_8, COL_A);
+				Spot blackNewKingSpot = board.getSpot(ROW_8, COL_C);
+				Spot blackNewRookSpot = board.getSpot(ROW_8, COL_D);
+				Spot knightSpot = board.getSpot(ROW_8, COL_B);
+				if (isCastlePossible(board, blackNewKingSpot, blackNewRookSpot, blackKingSpot,
 						blackSxRookSpot, knightSpot)) {
 					blackNewKingSpot.setPiece(blackKingSpot.getPiece());
 					blackNewRookSpot.setPiece(blackSxRookSpot.getPiece());
