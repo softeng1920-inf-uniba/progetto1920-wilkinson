@@ -161,5 +161,18 @@ class PieceTest {
 		assertFalse(board.getSpot(ROW_5, COL_E).getPiece().canMove(board, board.getSpot(ROW_5, COL_E), board.getSpot(ROW_2, COL_B)));
 		board.getSpot(ROW_6, COL_F).setPiece(new Pawn(BLACK)); // pezzo nemico
 		assertFalse(board.getSpot(ROW_5, COL_E).getPiece().canMove(board, board.getSpot(ROW_5, COL_E), board.getSpot(ROW_8, COL_H)));
+
+		// cattura di un pezzo amico
+		board.getSpot(ROW_2, COL_B).setPiece(new Pawn(WHITE)); // pezzo amico
+		assertFalse(board.getSpot(ROW_5, COL_E).getPiece().canMove(board, board.getSpot(ROW_5, COL_E), board.getSpot(ROW_2, COL_B)));
+		// cattura di un pezzo nemico (tutte e 4 le catture possibili)
+		board.getSpot(ROW_6, COL_F).setPiece(new Pawn(BLACK)); // pezzo nemico
+		assertTrue(board.getSpot(ROW_5, COL_E).getPiece().canMove(board, board.getSpot(ROW_5, COL_E), board.getSpot(ROW_6, COL_F))); // SE
+		board.getSpot(ROW_6, COL_D).setPiece(new Pawn(BLACK)); // pezzo nemico
+		assertTrue(board.getSpot(ROW_5, COL_E).getPiece().canMove(board, board.getSpot(ROW_5, COL_E), board.getSpot(ROW_6, COL_D))); // SW
+		board.getSpot(ROW_4, COL_D).setPiece(new Pawn(BLACK)); // pezzo nemico
+		assertTrue(board.getSpot(ROW_5, COL_E).getPiece().canMove(board, board.getSpot(ROW_5, COL_E), board.getSpot(ROW_4, COL_D))); // NW
+		board.getSpot(ROW_4, COL_F).setPiece(new Pawn(BLACK)); // pezzo nemico
+		assertTrue(board.getSpot(ROW_5, COL_E).getPiece().canMove(board, board.getSpot(ROW_5, COL_E), board.getSpot(ROW_4, COL_F))); // NE
 	}
 }
