@@ -82,7 +82,7 @@
          <br/>
       </p>
       <h2>Metrics</h2>
-      <p>340 lines of code analyzed,
+      <p>341 lines of code analyzed,
 	in 3 classes, 
 	in 1 packages.</p>
       <table width="500" cellpadding="5" cellspacing="2">
@@ -94,12 +94,12 @@
          <tr class="tablerow0">
             <td>High Priority Warnings</td>
             <td align="right">5</td>
-            <td align="right">14.71</td>
+            <td align="right">14.66</td>
          </tr>
          <tr class="tablerow1">
             <td>Medium Priority Warnings</td>
             <td align="right">7</td>
-            <td align="right">20.59</td>
+            <td align="right">20.53</td>
          </tr>
          <tr class="$totalClass">
             <td>
@@ -109,7 +109,7 @@
                <b>12</b>
             </td>
             <td align="right">
-               <b>35.29</b>
+               <b>35.19</b>
             </td>
          </tr>
       </table>
@@ -142,13 +142,13 @@
             <td>
                <a href="#Warnings_PERFORMANCE">Performance Warnings</a>
             </td>
-            <td align="right">2</td>
+            <td align="right">1</td>
          </tr>
          <tr class="tablerow1">
             <td>
                <a href="#Warnings_STYLE">Dodgy code Warnings</a>
             </td>
-            <td align="right">10</td>
+            <td align="right">11</td>
          </tr>
          <tr class="tablerow0">
             <td>
@@ -169,30 +169,16 @@
             <th align="left">Code</th>
             <th align="left">Warning</th>
          </tr>
-         <tr class="tablerow1" onclick="toggleRow('d1e205');">
-            <td>
-               <span class="priority-2">UuF</span>
-            </td>
-            <td>Unused field: it.uniba.example.TestPiece.board</td>
-         </tr>
-         <tr class="detailrow1">
-            <td/>
-            <td>
-               <p id="d1e205" style="display: none;">
-                  <a href="#UUF_UNUSED_FIELD">Bug type UUF_UNUSED_FIELD (click for details)</a>
-                  <br/>In class it.uniba.example.TestPiece<br/>Field it.uniba.example.TestPiece.board<br/>In TestPiece.java</p>
-            </td>
-         </tr>
-         <tr class="tablerow0" onclick="toggleRow('d1e218');">
+         <tr class="tablerow1" onclick="toggleRow('d1e221');">
             <td>
                <span class="priority-2">UuF</span>
             </td>
             <td>Unused field: it.uniba.example.TestPiece.genericPiece</td>
          </tr>
-         <tr class="detailrow0">
+         <tr class="detailrow1">
             <td/>
             <td>
-               <p id="d1e218" style="display: none;">
+               <p id="d1e221" style="display: none;">
                   <a href="#UUF_UNUSED_FIELD">Bug type UUF_UNUSED_FIELD (click for details)</a>
                   <br/>In class it.uniba.example.TestPiece<br/>Field it.uniba.example.TestPiece.genericPiece<br/>In TestPiece.java</p>
             </td>
@@ -344,6 +330,20 @@
                <p id="d1e188" style="display: none;">
                   <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
                   <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testRookMovements()<br/>Field it.uniba.example.ChessTest.genericPiece<br/>At ChessTest.java:[line 128]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e205');">
+            <td>
+               <span class="priority-2">ST</span>
+            </td>
+            <td>Write to static field it.uniba.example.TestPiece.board from instance method it.uniba.example.TestPiece.setup()</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e205" style="display: none;">
+                  <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
+                  <br/>In class it.uniba.example.TestPiece<br/>In method it.uniba.example.TestPiece.setup()<br/>Field it.uniba.example.TestPiece.board<br/>At TestPiece.java:[line 51]</p>
             </td>
          </tr>
       </table>
