@@ -1,5 +1,6 @@
 package it.uniba.example;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -67,6 +68,13 @@ class MoveTest {
 		assertTrue(move.makeCastling(board, BLACK));
 		assertNull(board.getSpot(ROW_8, COL_E).getPiece());
 		assertNull(board.getSpot(ROW_8, COL_A).getPiece());
+	}
+
+	@Test
+	void testIncorrectCastleCmd() {
+		move = new Move("o-o", board, WHITE);
+		board.getSpot(ROW_1, COL_H).setPiece(new Rook (WHITE));
+		assertFalse(move.makeCastling(board, WHITE));
 	}
 
 	@After
