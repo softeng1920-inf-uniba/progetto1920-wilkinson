@@ -62,5 +62,14 @@ class PieceTest {
 		// cattura di un pezzo amico
 		board.getSpot(ROW_3, COL_B).setPiece(new Pawn(WHITE)); // pezzo amico
 		assertFalse(board.getSpot(ROW_2, COL_A).getPiece().canMove(board, board.getSpot(ROW_2, COL_A), board.getSpot(ROW_3, COL_B)));
+
+		// cattura en passant
+		board.getSpot(ROW_4, COL_E).setPiece(new Pawn(BLACK));
+		board.getSpot(ROW_4, COL_D).setPiece(new Pawn(WHITE));
+		board.getSpot(ROW_4, COL_D).getPiece().setAsMoved();
+		((Pawn)board.getSpot(ROW_4, COL_D).getPiece()).setPossibleEnPassantCapture(true);
+		assertTrue(board.getSpot(ROW_4, COL_E).getPiece().canMove(board, board.getSpot(ROW_4, COL_E), board.getSpot(ROW_3, COL_D)));
+		((Pawn)board.getSpot(ROW_4, COL_D).getPiece()).setPossibleEnPassantCapture(false);
+		assertFalse(board.getSpot(ROW_4, COL_E).getPiece().canMove(board, board.getSpot(ROW_4, COL_E), board.getSpot(ROW_3, COL_D)));
 	}
 }
