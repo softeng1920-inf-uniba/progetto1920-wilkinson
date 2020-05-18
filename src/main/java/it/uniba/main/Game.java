@@ -80,7 +80,7 @@ public class Game {
 	 * @param command e' il comando/mossa inserita dall'utente
 	 */
 	public void currentGame(final String command) {
-		Move move = new Move(command, this);
+		Move move = new Move(command, board, whiteTurn);
 		if (move.getStart() != null && makeMove(move)) {
 			if (move.getPieceMoved() instanceof Pawn && ((Pawn)
 					move.getPieceMoved()).isCapturingEnPassant()) {
@@ -124,7 +124,7 @@ public class Game {
 
 		// controllo se la mossa e' un arrocco
 		if (move.isCastle()) {
-			if (move.makeCastling(this)) {
+			if (move.makeCastling(board, whiteTurn)) {
 				return true;
 			}
 			return false;
