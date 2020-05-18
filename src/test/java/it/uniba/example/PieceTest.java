@@ -93,5 +93,13 @@ class PieceTest {
 		assertFalse(board.getSpot(ROW_5, COL_D).getPiece().canMove(board, board.getSpot(ROW_5, COL_D), board.getSpot(ROW_5, COL_F)));
 		board.getSpot(ROW_4, COL_D).setPiece(new Pawn(BLACK)); // pezzo nemico
 		assertFalse(board.getSpot(ROW_5, COL_D).getPiece().canMove(board, board.getSpot(ROW_5, COL_D), board.getSpot(ROW_3, COL_D)));
+
+		// cattura di un pezzo amico
+		board.getSpot(ROW_5, COL_E).setPiece(new Pawn(WHITE)); // pezzo amico
+		assertFalse(board.getSpot(ROW_5, COL_D).getPiece().canMove(board, board.getSpot(ROW_5, COL_D), board.getSpot(ROW_5, COL_E)));
+		// cattura di un pezzo nemico
+		assertTrue(board.getSpot(ROW_5, COL_D).getPiece().canMove(board, board.getSpot(ROW_5, COL_D), board.getSpot(ROW_4, COL_D))); // verticale
+		board.getSpot(ROW_5, COL_E).setPiece(new Pawn(BLACK)); // pezzo nemico
+		assertTrue(board.getSpot(ROW_5, COL_D).getPiece().canMove(board, board.getSpot(ROW_5, COL_D), board.getSpot(ROW_5, COL_E))); // orizzontale
 	}
 }
