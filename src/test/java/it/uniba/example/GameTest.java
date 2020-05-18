@@ -50,7 +50,9 @@ class GameTest {
 		game.currentGame("e5");
 		game.currentGame("dxe5");
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_E).getPiece() instanceof Pawn);
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_E).getPiece().isWhite());
 		assertTrue(game.getBoard().getSpot(ROW_4, COL_D).isEmpty());
+		
 
 		//test isMoved Regina
 		game.currentGame("d5");
@@ -60,6 +62,7 @@ class GameTest {
 
 		//test cattura Regina
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_D).getPiece() instanceof Queen);
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_D).getPiece().isWhite());
 
 		//test  isMoved Cavallo
 		game.currentGame("h5");
@@ -71,6 +74,7 @@ class GameTest {
 		game.currentGame("b5");
 		game.currentGame("Cxb5");
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_B).getPiece() instanceof Knight);
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_B).getPiece().isWhite());
 		assertTrue(game.getBoard().getSpot(ROW_3, COL_A).isEmpty());
 
 		//test isMoved Alfiere
@@ -81,6 +85,7 @@ class GameTest {
 
 		//test cattura Alfiere
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_G).getPiece() instanceof Bishop);
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_G).getPiece().isWhite());
 
 		//test isMoved Torre
 		game.currentGame("Ch6");
@@ -96,6 +101,7 @@ class GameTest {
 			game.currentGame(move.nextToken());
 		}
 		assertTrue(game.getBoard().getSpot(ROW_3, COL_F).getPiece() instanceof Rook);
+		assertTrue(game.getBoard().getSpot(ROW_3, COL_F).getPiece().isWhite());
 		assertTrue(game.getBoard().getSpot(ROW_3, COL_H).isEmpty());
 		
 		//test isMoved Re
@@ -110,6 +116,7 @@ class GameTest {
 		game.currentGame("Th7");
 		game.currentGame("Rxc4");
 		assertTrue(game.getBoard().getSpot(ROW_4, COL_C).getPiece() instanceof King);
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_C).getPiece().isWhite());
 		assertTrue(game.getBoard().getSpot(ROW_3, COL_C).isEmpty());
 	}
 	
@@ -133,6 +140,7 @@ class GameTest {
 			game.currentGame(move.nextToken());
 		}
 		assertTrue(game.getBoard().getSpot(ROW_4, COL_H).getPiece() instanceof Rook);
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_H).getPiece().isWhite());
 		assertTrue(game.getBoard().getSpot(ROW_4, COL_A).isEmpty());
 		assertTrue(game.getBoard().getSpot(ROW_1, COL_H).getPiece() instanceof Rook);
 	}
