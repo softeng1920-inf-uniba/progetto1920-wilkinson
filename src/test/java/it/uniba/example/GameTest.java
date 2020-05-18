@@ -128,15 +128,5 @@ class GameTest {
 		assertTrue(game.getBoard().getSpot(ROW_3, COL_A).isEmpty());
 		assertTrue(game.getBoard().getSpot(ROW_1, COL_H).getPiece() instanceof Rook);
 		
-		//test ambiguita' cattura torre
-		game = new Game();
-		command = ("g4 h5 gxh5 Txh5 h4 g5 a4 gxh4 a5 f6 Ta4 f5 Taxh4");
-		move= new StringTokenizer(command);
-		while(move.hasMoreTokens()) {
-			game.currentGame(move.nextToken());
-		}
-		assertTrue(game.getBoard().getSpot(ROW_4, COL_H).getPiece() instanceof Rook);
-		assertTrue(game.getBoard().getSpot(ROW_4, COL_A).isEmpty());
-		assertTrue(game.getBoard().getSpot(ROW_1, COL_H).getPiece() instanceof Rook);
 	}
 }
