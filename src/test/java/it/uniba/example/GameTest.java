@@ -2,6 +2,8 @@ package it.uniba.example;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.StringTokenizer;
+
 import org.junit.jupiter.api.*;
 
 import it.uniba.main.Bishop;
@@ -111,5 +113,22 @@ class GameTest {
 		game.currentGame("Rxc4");
 		assertTrue(game.getBoard().getSpot(ROW_4, COL_C).getPiece() instanceof King);
 		assertTrue(game.getBoard().getSpot(ROW_3, COL_C).isEmpty());
+	}
+	
+	@Test
+	void testIsAmbiguity() {
+		Game game = new Game();
+
+		//test ambiguita' movimento torre
+		String command = ("a4 a5 Ta3 b5 axb5 Ta6 h4 h5 Tah3");
+		StringTokenizer move= new StringTokenizer(command);
+		while(move.hasMoreTokens()) {
+			game.currentGame(move.nextToken());
+		}
+		assertTrue(game.getBoard().getSpot(ROW_3, COL_H).getPiece() instanceof Rook);
+		assertTrue(game.getBoard().getSpot(ROW_3, COL_A).isEmpty());
+		assertTrue(game.getBoard().getSpot(ROW_1, COL_H).getPiece() instanceof Rook);
+
+		
 	}
 }
