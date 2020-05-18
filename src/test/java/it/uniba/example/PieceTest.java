@@ -24,7 +24,6 @@ import it.uniba.main.Spot;
 
 public class PieceTest {
 	private static Board board;
-	private static Piece genericPiece;
 	private static final boolean BLACK = false;
 	private static final boolean WHITE = true;
 	private static final int ROW_1 = 7;
@@ -314,7 +313,6 @@ public class PieceTest {
 				board.getSpot(ROW_3, COL_C))); // NW
 	}
 
-
 	@Test
 	public void testPawnRecalculateMovements() {
 		Spot kingSpot = board.getSpot(ROW_1, COL_E);
@@ -340,7 +338,7 @@ public class PieceTest {
 		// test sulla lunghezza dell'arraylist di mosse del pedone (in questo caso 0)
 		assertEquals(pawnPiece.getLegalMoves().size(), 0);
 	}
-	
+
 	@Test
 	public void testRookRecalculateMovements() {
 		Spot kingSpot = board.getSpot(ROW_1, COL_E);
@@ -366,7 +364,7 @@ public class PieceTest {
 		// test sulla lunghezza dell'arraylist di mosse della Torre (in questo caso 0)
 		assertEquals(rookPiece.getLegalMoves().size(), 0);
 	}
-	
+
 	@Test
 	public void testBishopRecalculateMovements() {
 		Spot kingSpot = board.getSpot(ROW_1, COL_E);
@@ -393,7 +391,7 @@ public class PieceTest {
 		assertEquals(bishopPieceW.getLegalMoves().size(), 0);
 
 	}
-	
+
 	@Test
 	public void testQueenRecalculateMovements() {
 		Spot kingSpot = board.getSpot(ROW_1, COL_E);
@@ -416,7 +414,8 @@ public class PieceTest {
 
 		queenPiece.recalculateMoves(board);
 
-		// test sulla lunghezza dell'arraylist di mosse della Torre (in questo caso 2 -> c3, b4)
+		// test sulla lunghezza dell'arraylist di mosse della Torre (in questo caso 2 ->
+		// c3, b4)
 		assertEquals(queenPiece.getLegalMoves().size(), 2);
 
 		// test sulle mosse presenti all'interno dell'arrayList di mosse
@@ -428,16 +427,16 @@ public class PieceTest {
 		Piece queenPieceB = queenSpot2.getPiece();
 		queenSpot2.setPiece(new Queen(BLACK));
 		queenPieceB.findLegalMoves(board, queenSpot2);
-		
+
 		queenPiece.recalculateMoves(board);
 
-		// test sulla lunghezza dell'arraylist di mosse della Torre (in questo caso 1 -> c3)
+		// test sulla lunghezza dell'arraylist di mosse della Torre (in questo caso 1 ->
+		// c3)
 		assertEquals(queenPiece.getLegalMoves().size(), 1);
 
 		// test sulle mosse presenti all'interno dell'arrayList di mosse
 		assertTrue(queenPiece.getLegalMoves().contains(new Move(queenSpot, new Spot(ROW_3, COL_C))));
 
-		
 	}
 
 	@Test
