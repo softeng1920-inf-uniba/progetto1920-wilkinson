@@ -127,6 +127,16 @@ class MoveTest {
 
 	}
 
+	@Test
+	void testCastleRookEndUnderAttack() {
+		move = new Move("0-0", board, WHITE);
+		board.getSpot(ROW_1, COL_H).setPiece(new Rook (WHITE));
+		board.getSpot(ROW_4, COL_F).setPiece(new Queen(BLACK));
+		board.recalLegalMoves();
+		assertTrue(board.getSpot(ROW_1, COL_F).isUnderAttack(board, WHITE));
+		assertFalse(move.makeCastling(board, WHITE));
+	}
+
 	@After
 	void tearDown() {
 
