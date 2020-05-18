@@ -10,8 +10,11 @@ import it.uniba.main.Knight;
 import it.uniba.main.Pawn;
 
 import it.uniba.main.Queen;
+import it.uniba.main.Rook;
 
 class GameTest {
+
+//  RIGHE
 //	private static final int ROW_1 = 7;
 //	private static final int ROW_2 = 6;
 	private static final int ROW_3 = 5;
@@ -20,16 +23,17 @@ class GameTest {
 //	private static final int ROW_6 = 2;
 //	private static final int ROW_7 = 1;
 //	private static final int ROW_8 = 0;
-	
-//	private static final int COL_H = 7;
+
+	//  COLONNE
+	private static final int COL_H = 7;
 	private static final int COL_G = 6;
-//	private static final int COL_F = 5;
+	private static final int COL_F = 5;
 	private static final int COL_E = 4;
 	private static final int COL_D = 3;
 //	private static final int COL_C = 2;
 	private static final int COL_B = 1;
 	private static final int COL_A = 0;
-	
+
 	@Test
 	void testCurrentGame() {
 		Game game = new Game();
@@ -68,5 +72,21 @@ class GameTest {
 
 		//test cattura Alfiere
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_G).getPiece() instanceof Bishop);
+
+		//test isMoved Torre
+		game.currentGame("Ch6");
+		game.currentGame("h4");
+		game.currentGame("Ag7");
+		game.currentGame("Th3");
+		assertTrue(game.getBoard().getSpot(ROW_3, COL_H).getPiece().isMoved());
+
+		//test cattura Torre
+		game.currentGame("f5");
+		game.currentGame("a4");
+		game.currentGame("f4");
+		game.currentGame("a5");
+		game.currentGame("f3");
+		game.currentGame("Txf3");
+		assertTrue(game.getBoard().getSpot(ROW_3, COL_F).getPiece() instanceof Rook);
 	}
 }
