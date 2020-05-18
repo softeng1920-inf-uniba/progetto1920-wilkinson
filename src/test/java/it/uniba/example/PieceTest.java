@@ -51,7 +51,6 @@ public class PieceTest {
 
 	@Test
 	void testPawnMovement() {
-		board = new Board(true);
 		// caso di test per il movimento del pedone
 		board.getSpot(ROW_2, COL_A).setPiece(new Pawn(WHITE));
 		// movimento in avanti di una casella
@@ -91,7 +90,6 @@ public class PieceTest {
 
 	@Test
 	void testRookMovement() {
-		board = new Board(true);
 		// caso di test per il movimento della torre
 		board.getSpot(ROW_5, COL_D).setPiece(new Rook(BLACK));
 		// movimento in verticale (Nord e Sud)
@@ -129,7 +127,6 @@ public class PieceTest {
 
 	@Test
 	void testKnightMovement() {
-		board = new Board(true);
 		// caso di test per il movimento del cavallo (tutte le 8 mosse possibili)
 		board.getSpot(ROW_4, COL_D).setPiece(new Knight(BLACK));
 		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D),
@@ -165,7 +162,6 @@ public class PieceTest {
 
 	@Test
 	void testBishopMovement() {
-		board = new Board(true);
 		// caso di test per il movimento dell'alfiere
 		board.getSpot(ROW_5, COL_E).setPiece(new Bishop(BLACK));
 		assertTrue(board.getSpot(ROW_5, COL_E).getPiece().canMove(board, board.getSpot(ROW_5, COL_E),
@@ -204,7 +200,6 @@ public class PieceTest {
 
 	@Test
 	void testQueenMovement() {
-		board = new Board(true);
 		// caso di test per il movimento della regina (tutte le 8 direzioni possibili)
 		board.getSpot(ROW_3, COL_D).setPiece(new Queen(BLACK));
 		assertTrue(board.getSpot(ROW_3, COL_D).getPiece().canMove(board, board.getSpot(ROW_3, COL_D),
@@ -265,7 +260,6 @@ public class PieceTest {
 
 	@Test
 	void testKingMovement() {
-		board = new Board(true);
 		// caso di test per il movimento del re (tutte le 8 mosse possibili)
 		board.getSpot(ROW_4, COL_D).setPiece(new King(BLACK));
 		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D),
@@ -320,6 +314,8 @@ public class PieceTest {
 				board.getSpot(ROW_3, COL_C))); // NW
 	}
 
+
+	
 	@Test
 	public void testRookRecalculateMovements() {
 		Spot kingSpot = board.getSpot(ROW_1, COL_E);
@@ -348,29 +344,29 @@ public class PieceTest {
 	}
 	
 	@Test
-	public void testPawnRecalculateMovements() {
+	public void testBishopRecalculateMovements() {
 		Spot kingSpot = board.getSpot(ROW_1, COL_E);
 		kingSpot.setPiece(new King(WHITE));
 		Piece kingPiece = kingSpot.getPiece();
 		kingSpot.setPiece(new King(WHITE));
 		kingPiece.findLegalMoves(board, kingSpot);
 
-		Spot pawnSpot = board.getSpot(ROW_2, COL_D);
-		pawnSpot.setPiece(new Pawn(WHITE));
-		Piece pawnPiece = pawnSpot.getPiece();
-		pawnSpot.setPiece(new Pawn(WHITE));
-		pawnPiece.findLegalMoves(board, pawnSpot);
+		Spot bishopSpotW = board.getSpot(ROW_2, COL_E);
+		bishopSpotW.setPiece(new Bishop(WHITE));
+		Piece bishopPieceW = bishopSpotW.getPiece();
+		bishopSpotW.setPiece(new Bishop(WHITE));
+		bishopPieceW.findLegalMoves(board, bishopSpotW);
 
-		Spot bishopSpot = board.getSpot(ROW_4, COL_B);
-		bishopSpot.setPiece(new Bishop(BLACK));
-		Piece bishopPiece = bishopSpot.getPiece();
-		bishopSpot.setPiece(new Bishop(BLACK));
-		bishopPiece.findLegalMoves(board, bishopSpot);
+		Spot rookSpot = board.getSpot(ROW_3, COL_E);
+		rookSpot.setPiece(new Rook(BLACK));
+		Piece rookPiece = rookSpot.getPiece();
+		rookSpot.setPiece(new Rook(BLACK));
+		rookPiece.findLegalMoves(board, rookSpot);
 
-		pawnPiece.recalculateMoves(board);
+		bishopPieceW.recalculateMoves(board);
 
 		// test sulla lunghezza dell'arraylist di mosse della Torre (in questo caso 0)
-		assertEquals(pawnPiece.getLegalMoves().size(), 0);
+		assertEquals(bishopPieceW.getLegalMoves().size(), 0);
 
 	}
 	
@@ -394,7 +390,6 @@ public class PieceTest {
 		bishopSpot.setPiece(new Bishop(BLACK));
 		bishopPiece.findLegalMoves(board, bishopSpot);
 
-		board.showBoard();
 		queenPiece.recalculateMoves(board);
 
 		// test sulla lunghezza dell'arraylist di mosse della Torre (in questo caso 2 -> c3, b4)
@@ -404,6 +399,21 @@ public class PieceTest {
 		assertTrue(queenPiece.getLegalMoves().contains(new Move(queenSpot, new Spot(ROW_4, COL_B))));
 		assertTrue(queenPiece.getLegalMoves().contains(new Move(queenSpot, new Spot(ROW_3, COL_C))));
 
+		Spot queenSpot2 = board.getSpot(ROW_3, COL_C);
+		queenSpot2.setPiece(new Queen(BLACK));
+		Piece queenPieceB = queenSpot2.getPiece();
+		queenSpot2.setPiece(new Queen(BLACK));
+		queenPieceB.findLegalMoves(board, queenSpot2);
+		
+		queenPiece.recalculateMoves(board);
+
+		// test sulla lunghezza dell'arraylist di mosse della Torre (in questo caso 1 -> c3)
+		assertEquals(queenPiece.getLegalMoves().size(), 1);
+
+		// test sulle mosse presenti all'interno dell'arrayList di mosse
+		assertTrue(queenPiece.getLegalMoves().contains(new Move(queenSpot, new Spot(ROW_3, COL_C))));
+
+		
 	}
 
 	@Test
