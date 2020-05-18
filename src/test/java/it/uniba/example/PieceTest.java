@@ -140,4 +140,26 @@ class PieceTest {
 		board.getSpot(ROW_2, COL_C).setPiece(new Pawn(BLACK)); // pezzo nemico
 		assertTrue(board.getSpot(ROW_4, COL_D).getPiece().canMove(board, board.getSpot(ROW_4, COL_D), board.getSpot(ROW_2, COL_C)));
 	}
+
+	@Test
+	void testBishopMovement() {
+		board = new Board(true);
+		//caso di test per il movimento dell'alfiere
+		board.getSpot(ROW_5, COL_E).setPiece(new Bishop(WHITE));
+		assertTrue(board.getSpot(ROW_5, COL_E).getPiece().canMove(board, board.getSpot(ROW_5, COL_E), board.getSpot(ROW_8, COL_H))); // SE
+		assertTrue(board.getSpot(ROW_5, COL_E).getPiece().canMove(board, board.getSpot(ROW_5, COL_E), board.getSpot(ROW_8, COL_B))); // SW
+		assertTrue(board.getSpot(ROW_5, COL_E).getPiece().canMove(board, board.getSpot(ROW_5, COL_E), board.getSpot(ROW_2, COL_B))); // NW
+		assertTrue(board.getSpot(ROW_5, COL_E).getPiece().canMove(board, board.getSpot(ROW_5, COL_E), board.getSpot(ROW_2, COL_H))); // NE
+
+		// movimento in orizzontale
+		assertFalse(board.getSpot(ROW_5, COL_E).getPiece().canMove(board, board.getSpot(ROW_5, COL_E), board.getSpot(ROW_5, COL_B)));
+		// movimento in verticale
+		assertFalse(board.getSpot(ROW_5, COL_E).getPiece().canMove(board, board.getSpot(ROW_5, COL_E), board.getSpot(ROW_2, COL_E)));
+
+		// movimento con pezzi lungo il percorso
+		board.getSpot(ROW_4, COL_D).setPiece(new Pawn(WHITE)); // pezzo amico
+		assertFalse(board.getSpot(ROW_5, COL_E).getPiece().canMove(board, board.getSpot(ROW_5, COL_E), board.getSpot(ROW_2, COL_B)));
+		board.getSpot(ROW_6, COL_F).setPiece(new Pawn(BLACK)); // pezzo nemico
+		assertFalse(board.getSpot(ROW_5, COL_E).getPiece().canMove(board, board.getSpot(ROW_5, COL_E), board.getSpot(ROW_8, COL_H)));
+	}
 }
