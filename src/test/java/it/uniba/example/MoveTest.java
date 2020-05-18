@@ -21,7 +21,9 @@ class MoveTest {
 	private static final boolean BLACK = false;
 	private static final int ROW_1 = 7;
 	private static final int ROW_4 = 4;
+	private static final int ROW_5 = 3;
 	private static final int ROW_8 = 0;
+	private static final int COL_B = 1;
 	private static final int COL_H = 7;
 	private static final int COL_G = 6;
 	private static final int COL_F = 5;
@@ -134,6 +136,16 @@ class MoveTest {
 		board.getSpot(ROW_4, COL_F).setPiece(new Queen(BLACK));
 		board.recalLegalMoves();
 		assertTrue(board.getSpot(ROW_1, COL_F).isUnderAttack(board, WHITE));
+		assertFalse(move.makeCastling(board, WHITE));
+	}
+
+	@Test
+	void testCastleLongSpotUnderAttack() {
+		move = new Move("0-0", board, WHITE);
+		board.getSpot(ROW_1, COL_H).setPiece(new Rook (WHITE));
+		board.getSpot(ROW_5, COL_B).setPiece(new Queen(BLACK));
+		board.recalLegalMoves();
+		assertTrue(board.getSpot(ROW_1, COL_B).isUnderAttack(board, WHITE));
 		assertFalse(move.makeCastling(board, WHITE));
 	}
 
