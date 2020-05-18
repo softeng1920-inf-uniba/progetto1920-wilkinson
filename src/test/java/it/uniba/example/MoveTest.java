@@ -116,6 +116,17 @@ class MoveTest {
 		assertFalse(move.makeCastling(board, WHITE));
 	}
 
+	@Test
+	void testCastleKingEndUnderAttack() {
+		move = new Move("0-0", board, WHITE);
+		board.getSpot(ROW_1, COL_H).setPiece(new Rook (WHITE));
+		board.getSpot(ROW_4, COL_G).setPiece(new Queen(BLACK));
+		board.recalLegalMoves();
+		assertTrue(board.getSpot(ROW_1, COL_G).isUnderAttack(board, WHITE));
+		assertFalse(move.makeCastling(board, WHITE));
+
+	}
+
 	@After
 	void tearDown() {
 
