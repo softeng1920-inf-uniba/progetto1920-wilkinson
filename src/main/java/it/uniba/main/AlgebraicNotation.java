@@ -44,6 +44,8 @@ public final class AlgebraicNotation {
 	private static final int MAXSYMBOLS = 2;
 	private static final int ENPASSANTLENGTH = 3;
 	private static final int AMBIGUITYLENGTH = 3;
+	private static final int EPSTRINGLENSHORT = 7;
+	private static final int EPSTRINGLENLONG = 9;
 	// costanti per le posizioni nell'arraylist di tutti i simboli possibili
 	private static final int CHECKINDEX = 0;
 	private static final int CAPTUREINDEX = 1;
@@ -171,7 +173,7 @@ public final class AlgebraicNotation {
 				}
 
 				if (!this.isEnPassant()
-						&& (inCommand.contains("e.p.") || inCommand.contains("e.p"))) {
+						&& inCommand.contains("e.p.")) {
 					this.isEnPassant = true;
 					getSymbol().add("ep");
 				}
@@ -302,7 +304,14 @@ public final class AlgebraicNotation {
 			if (!(command.equals("0-0-0") || command.equals("O-O-O"))) {
 				return false;
 			}
+		} else if (isEnPassant()) {
+			if (command.contains("ep") && command.length() != EPSTRINGLENSHORT) {
+				return false;
+			} else if (command.contains("e.p.") && command.length() != EPSTRINGLENLONG) {
+				return false;
+			}
 		}
+
 		// scompongo il comando in token
 		char[] tokens = this.command.toCharArray();
 		if (tokens.length > MAXCOMMANDLENGTH) {
