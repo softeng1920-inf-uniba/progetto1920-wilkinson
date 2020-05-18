@@ -153,6 +153,13 @@ class MoveTest {
 		assertFalse(move.makeCastling(board, WHITE));
 	}
 
+	@Test
+	void testCastleIncorrectPiece() {
+		move = new Move("0-0", board, WHITE);
+		board.getSpot(ROW_1, COL_H).setPiece(new Queen(WHITE));
+		assertFalse(move.makeCastling(board, WHITE));
+	}
+
 	@After
 	void tearDown() {
 
