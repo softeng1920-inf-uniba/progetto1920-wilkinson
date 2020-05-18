@@ -339,6 +339,37 @@ public class PieceTest {
 		assertEquals(pawnPiece.getLegalMoves().size(), 0);
 	}
 
+	
+	@Test
+	public void testKnightRecalculateMovements() {
+		Spot kingSpot = board.getSpot(ROW_1, COL_E);
+		kingSpot.setPiece(new King(WHITE));
+		Piece kingPiece = kingSpot.getPiece();
+		kingSpot.setPiece(new King(WHITE));
+		kingPiece.findLegalMoves(board, kingSpot);
+
+		Spot knightSpot = board.getSpot(ROW_2, COL_C);
+		knightSpot.setPiece(new Knight(WHITE));
+		Piece knightPiece = knightSpot.getPiece();
+		knightSpot.setPiece(new Knight(WHITE));
+		knightPiece.findLegalMoves(board, knightSpot);
+
+		Spot bishopSpot = board.getSpot(ROW_4, COL_B);
+		bishopSpot.setPiece(new Bishop(BLACK));
+		Piece bishopPiece = bishopSpot.getPiece();
+		bishopSpot.setPiece(new Bishop(BLACK));
+		bishopPiece.findLegalMoves(board, bishopSpot);
+
+		knightPiece.recalculateMoves(board);
+		board.showBoard();
+		// test sulla lunghezza dell'arraylist di mosse del pedone (1 mossa: catturare l'alfiere)
+		assertEquals(knightPiece.getLegalMoves().size(), 1);
+		
+		assertTrue(knightPiece.getLegalMoves().contains(new Move(knightSpot, new Spot(ROW_4, COL_B))));
+
+	}
+	
+	
 	@Test
 	public void testRookRecalculateMovements() {
 		Spot kingSpot = board.getSpot(ROW_1, COL_E);
@@ -482,10 +513,7 @@ public class PieceTest {
 		assertFalse(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_6, COL_C))));
 		assertFalse(kingPiece.getLegalMoves().contains(new Move(kingSpot, new Spot(ROW_8, COL_C))));
 
-		// cattura della torre
-		assertTrue(board.getSpot(ROW_7, COL_B).getPiece().canMove(board, board.getSpot(ROW_7, COL_B),
-				board.getSpot(ROW_7, COL_C)));
-
+	
 		Spot queenSpot = board.getSpot(ROW_8, COL_C);
 		queenSpot.setPiece(new Queen(BLACK));
 		Piece queenPiece = queenSpot.getPiece();
