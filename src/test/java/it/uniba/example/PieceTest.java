@@ -50,8 +50,11 @@ class PieceTest {
 		assertFalse(board.getSpot(ROW_2, COL_A).getPiece().canMove(board, board.getSpot(ROW_2, COL_A), board.getSpot(ROW_3, COL_B)));
 
 		// movimento in avanti con pedone di fronte
-		board.getSpot(ROW_3, COL_A).setPiece(new Pawn(WHITE));
+		board.getSpot(ROW_3, COL_A).setPiece(new Pawn(BLACK)); // pezzo che ostacola la mossa
 		assertFalse(board.getSpot(ROW_2, COL_A).getPiece().canMove(board, board.getSpot(ROW_2, COL_A), board.getSpot(ROW_3, COL_A)));
+		// movimento di un pedone con un pezzo lungo il percorso
+		board.getSpot(ROW_3, COL_A).setPiece(new Pawn(BLACK)); // pezzo che ostacola la mossa
+		assertFalse(board.getSpot(ROW_2, COL_A).getPiece().canMove(board, board.getSpot(ROW_2, COL_A), board.getSpot(ROW_4, COL_A)));
 		// movimento in avanti di due caselle di un pedone gia' mosso
 		board.getSpot(ROW_3, COL_A).getPiece().setAsMoved();
 		assertFalse(board.getSpot(ROW_3, COL_A).getPiece().canMove(board, board.getSpot(ROW_3, COL_A), board.getSpot(ROW_5, COL_A)));
@@ -60,9 +63,6 @@ class PieceTest {
 		board.getSpot(ROW_4, COL_A).setPiece(new Pawn(BLACK)); // pezzo nemico
 		assertFalse(board.getSpot(ROW_2, COL_A).getPiece().canMove(board, board.getSpot(ROW_2, COL_A), board.getSpot(ROW_4, COL_A)));
 		board.getSpot(ROW_4, COL_A).setPiece(new Pawn(WHITE)); // pezzo amico
-		assertFalse(board.getSpot(ROW_2, COL_A).getPiece().canMove(board, board.getSpot(ROW_2, COL_A), board.getSpot(ROW_4, COL_A)));
-		// movimento di un pedone con un pezzo lungo il percorso
-		board.getSpot(ROW_3, COL_A).setPiece(new Pawn(BLACK)); // pezzo che ostacola la mossa
 		assertFalse(board.getSpot(ROW_2, COL_A).getPiece().canMove(board, board.getSpot(ROW_2, COL_A), board.getSpot(ROW_4, COL_A)));
 
 		// cattura di un pezzo nemico
