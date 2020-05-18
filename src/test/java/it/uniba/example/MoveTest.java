@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import it.uniba.main.Board;
 import it.uniba.main.King;
 import it.uniba.main.Move;
+import it.uniba.main.Queen;
 import it.uniba.main.Rook;
 
 class MoveTest {
@@ -92,6 +93,17 @@ class MoveTest {
 		board.getSpot(ROW_1, COL_H).setPiece(new Rook (WHITE));
 		board.getSpot(ROW_1, COL_H).getPiece().setAsMoved();
 		assertFalse(move.makeCastling(board, WHITE));
+	}
+
+	@Test
+	void testCastleKingUnderAttack() {
+		move = new Move("0-0", board, WHITE);
+		board.getSpot(ROW_1, COL_H).setPiece(new Rook (WHITE));
+		board.getSpot(ROW_4, COL_E).setPiece(new Queen(BLACK));
+		board.recalLegalMoves();
+		assertTrue(board.getSpot(ROW_1, COL_E).isUnderAttack(board, WHITE));
+		assertFalse(move.makeCastling(board, WHITE));
+		board.showBoard();
 	}
 
 	@After
