@@ -6,6 +6,7 @@ import org.junit.jupiter.api.*;
 
 import it.uniba.main.Game;
 import it.uniba.main.Pawn;
+import it.uniba.main.Queen;
 
 class GameTest {
 //	private static final int ROW_1 = 7;
@@ -41,5 +42,15 @@ class GameTest {
 		command = "dxe5";
 		game.currentGame(command);
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_E).getPiece() instanceof Pawn);
+
+		//test isMoved Regina
+		command = "d5";
+		game.currentGame(command);
+		command = "Dxd5";
+		game.currentGame(command);
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_D).getPiece().isMoved());
+
+		//test cattura Regina
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_E).getPiece() instanceof Queen);	
 	}
 } 
