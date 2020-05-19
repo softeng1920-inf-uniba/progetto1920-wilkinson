@@ -581,36 +581,48 @@ public class PieceTest {
 	 */
 	@Test
 	public void testPinnedKingMovements() {
-		
-		board.getSpot(ROW_1, COL_F).setPiece(new King(WHITE));
-		Piece kingPiece = board.getSpot(ROW_1, COL_F).getPiece();
-		
-		board.getSpot(ROW_1, COL_E).setPiece(new Rook(WHITE));
-		Piece rookPieceW = board.getSpot(ROW_1, COL_E).getPiece();
-		
-		board.getSpot(ROW_2, COL_E).setPiece(new Rook(WHITE));
-		Piece rookPieceW2 = board.getSpot(ROW_2, COL_E).getPiece();
+		Spot kingSpot = board.getSpot(ROW_1, COL_F);
+		kingSpot.setPiece(new King(WHITE));
+		Piece kingPiece = kingSpot.getPiece();
+		kingPiece.findLegalMoves(board, kingSpot);
+	
+		Spot rookSpotW = board.getSpot(ROW_1, COL_E);
+		rookSpotW.setPiece(new Rook(WHITE));
+		Piece rookPieceW = rookSpotW.getPiece();
+		rookPieceW.findLegalMoves(board, rookSpotW);
 
-		board.getSpot(ROW_1, COL_A).setPiece(new Rook(BLACK));
-		Piece rookPieceB = board.getSpot(ROW_1, COL_A).getPiece();
 		
-		board.getSpot(ROW_2, COL_G).setPiece(new Rook(BLACK));
-		Piece rookPieceB2 = board.getSpot(ROW_2, COL_G).getPiece();
+		Spot rookSpotW2 = board.getSpot(ROW_2, COL_E);
+		rookSpotW2.setPiece(new Rook(WHITE));
+		Piece rookPieceW2 = rookSpotW2.getPiece();
+		rookPieceW2.findLegalMoves(board, rookSpotW2);
 		
-		board.getSpot(ROW_6, COL_A).setPiece(new Queen(BLACK));
-		Piece queenPiece = board.getSpot(ROW_6, COL_A).getPiece();
+		Spot rookSpotB = board.getSpot(ROW_1, COL_A);
+		rookSpotB.setPiece(new Rook(BLACK));
+		Piece rookPieceB = rookSpotB.getPiece();
 		
-		board.getSpot(ROW_6, COL_C).setPiece(new Bishop(BLACK));
-		Piece bishopPiece = board.getSpot(ROW_6, COL_C).getPiece();
+		Spot rookSpotB2 = board.getSpot(ROW_2, COL_G);
+		rookSpotB2.setPiece(new Rook(BLACK));
+		Piece rookPieceB2 = rookSpotB2.getPiece();
+		
+		Spot queenSpot = board.getSpot(ROW_6, COL_A);
+		queenSpot.setPiece(new Queen(BLACK));
+		Piece queenPiece = queenSpot.getPiece();
+		queenPiece.findLegalMoves(board, queenSpot);
+		
+		Spot bishopSpot = board.getSpot(ROW_6, COL_C);
+		bishopSpot.setPiece(new Bishop(BLACK));
+		Piece bishopPiece = bishopSpot.getPiece();
 		
 
 		kingPiece.recalculateMoves(board);
-		rookPieceW.recalculateMoves(board);
 		rookPieceW2.recalculateMoves(board);
-		queenPiece.recalculateMoves(board);
-		rookPieceB.recalculateMoves(board);
-		rookPieceB2.recalculateMoves(board);
-		bishopPiece.recalculateMoves(board);
+		//rookPieceB.recalculateMoves(board);
+		//queenPiece.recalculateMoves(board);
+		//rookPieceB.recalculateMoves(board);
+		//rookPieceB2.recalculateMoves(board);
+		//bishopPiece.recalculateMoves(board);
+		rookPieceW.recalculateMoves(board);
 
 		
 		// nessuna mossa possibile per il re
