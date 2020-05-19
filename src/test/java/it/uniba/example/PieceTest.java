@@ -600,28 +600,25 @@ public class PieceTest {
 		Spot rookSpotB = board.getSpot(ROW_1, COL_A);
 		rookSpotB.setPiece(new Rook(BLACK));
 		Piece rookPieceB = rookSpotB.getPiece();
+		rookPieceB.findLegalMoves(board, rookSpotB);
 		
 		Spot rookSpotB2 = board.getSpot(ROW_2, COL_G);
 		rookSpotB2.setPiece(new Rook(BLACK));
 		Piece rookPieceB2 = rookSpotB2.getPiece();
+		rookPieceB2.findLegalMoves(board, rookSpotB2);
 		
 		Spot queenSpot = board.getSpot(ROW_6, COL_A);
 		queenSpot.setPiece(new Queen(BLACK));
 		Piece queenPiece = queenSpot.getPiece();
 		queenPiece.findLegalMoves(board, queenSpot);
-		
+
 		Spot bishopSpot = board.getSpot(ROW_6, COL_C);
 		bishopSpot.setPiece(new Bishop(BLACK));
 		Piece bishopPiece = bishopSpot.getPiece();
-		
+		bishopPiece.findLegalMoves(board, bishopSpot);
 
 		kingPiece.recalculateMoves(board);
 		rookPieceW2.recalculateMoves(board);
-		//rookPieceB.recalculateMoves(board);
-		//queenPiece.recalculateMoves(board);
-		//rookPieceB.recalculateMoves(board);
-		//rookPieceB2.recalculateMoves(board);
-		//bishopPiece.recalculateMoves(board);
 		rookPieceW.recalculateMoves(board);
 
 		
@@ -632,7 +629,6 @@ public class PieceTest {
 		assertEquals(rookPieceW2.getLegalMoves().size(), 0);
 
 		//la torre in e1 si puo' muovere su tutta la prima riga a sinistra
-		//TODO
 		assertEquals(rookPieceW.getLegalMoves().size(), 4);
 					
 	}
