@@ -575,8 +575,8 @@ public class PieceTest {
 
 
 	/**
-	 * Test sui movimenti legali del Re e 
-	 * loro ricalcolo in base al fatto che
+	 * Test sui movimenti legali del Re bianco e
+	 * suoi alleati, con loro ricalcolo in base al fatto che
 	 * il re puo' finire sotto attacco.
 	 */
 	@Test
@@ -607,15 +607,15 @@ public class PieceTest {
 		Piece rookPieceB2 = rookSpotB2.getPiece();
 		rookPieceB2.findLegalMoves(board, rookSpotB2);
 		
-		Spot queenSpot = board.getSpot(ROW_6, COL_A);
-		queenSpot.setPiece(new Queen(BLACK));
-		Piece queenPiece = queenSpot.getPiece();
-		queenPiece.findLegalMoves(board, queenSpot);
-
 		Spot bishopSpot = board.getSpot(ROW_6, COL_C);
 		bishopSpot.setPiece(new Bishop(BLACK));
 		Piece bishopPiece = bishopSpot.getPiece();
 		bishopPiece.findLegalMoves(board, bishopSpot);
+		
+		Spot queenSpot = board.getSpot(ROW_6, COL_A);
+		queenSpot.setPiece(new Queen(BLACK));
+		Piece queenPiece = queenSpot.getPiece();
+		queenPiece.findLegalMoves(board, queenSpot);
 
 		kingPiece.recalculateMoves(board);
 		rookPieceW2.recalculateMoves(board);
@@ -630,6 +630,9 @@ public class PieceTest {
 
 		//la torre in e1 si puo' muovere su tutta la prima riga a sinistra
 		assertEquals(rookPieceW.getLegalMoves().size(), 4);
+		
+		System.out.println(queenPiece.getLegalMoves().size());
+	
 					
 	}
 }
