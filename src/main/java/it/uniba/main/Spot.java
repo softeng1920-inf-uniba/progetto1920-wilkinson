@@ -128,6 +128,29 @@ public class Spot {
 			return null;
 		}
 	}
+	
+	@Override
+	public boolean equals(Object examined) {
+		if (!(examined instanceof Spot)) {
+			return false;
+		}
+		Spot s = (Spot) examined;
+		if (this.getX() == s.getX() && this.getY() == s.getY()) {
+			return true;
+		}
+		return false;
+	}
+	
+	private static final int HASH = 42;
+
+	/**
+	 * default hashcode (di nessuna utilita', poiche' non c'e' un Set implementato)
+	 */
+	@Override
+	public int hashCode() {
+	    assert false : "hashCode not designed";
+	    return HASH; // any arbitrary constant will do
+	}
 
 	// Getters & Setters
 
