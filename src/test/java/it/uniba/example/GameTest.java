@@ -2,20 +2,21 @@ package it.uniba.example;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.StringTokenizer;
-
 import org.junit.jupiter.api.*;
+
+import java.util.StringTokenizer;
 
 import it.uniba.main.Bishop;
 import it.uniba.main.Game;
 import it.uniba.main.King;
 import it.uniba.main.Knight;
 import it.uniba.main.Pawn;
-
 import it.uniba.main.Queen;
 import it.uniba.main.Rook;
 
-class GameTest {
+public class GameTest {
+	private static Game game;
+	private static StringTokenizer move;
 
 //  RIGHE
 	private static final int ROW_1 = 7;
@@ -37,10 +38,14 @@ class GameTest {
 	private static final int COL_B = 1;
 	private static final int COL_A = 0;
 
+	@BeforeEach
+	void setUp() {
+		game = new Game();
+	}
+	
 	@Test
 	void testIsMovedAndCapture() {
-		Game game = new Game();
-
+		
 		//test isMoved pedone
 		game.currentGame("d4");
 		assertTrue(game.getBoard().getSpot(ROW_4, COL_D).getPiece().isMoved());
@@ -53,7 +58,6 @@ class GameTest {
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_E).getPiece().isWhite());
 		assertTrue(game.getBoard().getSpot(ROW_4, COL_D).isEmpty());
 		
-
 		//test isMoved Regina
 		game.currentGame("d5");
 		game.currentGame("Dxd5");
@@ -96,7 +100,7 @@ class GameTest {
 		assertTrue(game.getBoard().getSpot(ROW_1, COL_H).isEmpty());
 
 		//test cattura Torre
-		StringTokenizer move= new StringTokenizer("f5 a4 f4 a5 f3 Txf3");
+		move = new StringTokenizer("f5 a4 f4 a5 f3 Txf3");
 		while(move.hasMoreTokens()) {
 			game.currentGame(move.nextToken());
 		}
@@ -122,21 +126,20 @@ class GameTest {
 	
 	@Test
 	void testIsAmbiguity() {
-		Game game = new Game();
-
+		
 		//test ambiguita' movimento torre
-		StringTokenizer move= new StringTokenizer("a4 a5 Ta3 b5 axb5 Ta6 h4 h5 Tah3");
-		while(move.hasMoreTokens()) {
+		move = new StringTokenizer("a4 a5 Ta3 b5 axb5 Ta6 h4 h5 Tah3");
+		while (move.hasMoreTokens()) {
 			game.currentGame(move.nextToken());
 		}
 		assertTrue(game.getBoard().getSpot(ROW_3, COL_H).getPiece() instanceof Rook);
 		assertTrue(game.getBoard().getSpot(ROW_3, COL_A).isEmpty());
 		assertTrue(game.getBoard().getSpot(ROW_1, COL_H).getPiece() instanceof Rook);
-
+		
 		//test ambiguita' cattura torre
 		game = new Game();
 		move= new StringTokenizer("g4 h5 gxh5 Txh5 h4 g5 a4 gxh4 a5 f6 Ta4 f5 Taxh4");
-		while(move.hasMoreTokens()) {
+		while (move.hasMoreTokens()) {
 			game.currentGame(move.nextToken());
 		}
 		assertTrue(game.getBoard().getSpot(ROW_4, COL_H).getPiece() instanceof Rook);
