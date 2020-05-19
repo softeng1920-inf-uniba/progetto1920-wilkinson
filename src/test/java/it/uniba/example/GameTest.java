@@ -18,7 +18,22 @@ import it.uniba.main.Rook;
 
 
 class GameTest {
-
+	private static final int ROW_1= 7;
+	private static final int ROW_2 = 6;
+	private static final int ROW_3 = 5;
+	private static final int ROW_4 = 4;
+	private static final int ROW_5 = 3;
+	private static final int ROW_6 = 2;
+	private static final int ROW_7 = 1;
+	private static final int ROW_8 = 0;
+	private static final int COL_H = 7;
+	private static final int COL_G = 6;
+	private static final int COL_F = 5;
+	private static final int COL_E = 4;
+	private static final int COL_D = 3;
+	private static final int COL_C = 2;
+	private static final int COL_B = 1;
+	private static final int COL_A = 0;
 	private static Game game;
 
 	/**
@@ -33,31 +48,29 @@ class GameTest {
 		StringTokenizer move= new StringTokenizer(command);
 		while(move.hasMoreTokens()) {
 			game.currentGame(move.nextToken());
-			examinedPawn= (Pawn) (game.getBoard().getSpot(3, 1).getPiece());
+			examinedPawn= (Pawn) (game.getBoard().getSpot(ROW_5, COL_B).getPiece());
 			game.getBoard().showBoard();
 		}
 
 		//controllo che il pezzo  mosso di due e' catturabile en passant
 		assertTrue(examinedPawn.isPossibleEnPassantCapture()); 
 		//controllo che altri pedoni non catturabili en passant abbiano il booleano settato a a false
-		examinedPawn= (Pawn) (game.getBoard().getSpot(6, 1).getPiece());
+		examinedPawn= (Pawn) (game.getBoard().getSpot(ROW_2, COL_B).getPiece());
 		assertFalse(examinedPawn.isPossibleEnPassantCapture());
-		examinedPawn= (Pawn) (game.getBoard().getSpot(6, 2).getPiece());
+		examinedPawn= (Pawn) (game.getBoard().getSpot(ROW_2, COL_C).getPiece());
 		assertFalse(examinedPawn.isPossibleEnPassantCapture());
-		examinedPawn= (Pawn) (game.getBoard().getSpot(6, 5).getPiece());
+		examinedPawn= (Pawn) (game.getBoard().getSpot(ROW_2, COL_F).getPiece());
 		assertFalse(examinedPawn.isPossibleEnPassantCapture());
-		examinedPawn= (Pawn) (game.getBoard().getSpot(1, 2).getPiece());
+		examinedPawn= (Pawn) (game.getBoard().getSpot(ROW_7, COL_C).getPiece());
 		assertFalse(examinedPawn.isPossibleEnPassantCapture());
-		examinedPawn= (Pawn) (game.getBoard().getSpot(1, 0).getPiece());
+		examinedPawn= (Pawn) (game.getBoard().getSpot(ROW_7, COL_A).getPiece());
 		assertFalse(examinedPawn.isPossibleEnPassantCapture());
-		examinedPawn= (Pawn) (game.getBoard().getSpot(1, 6).getPiece());
+		examinedPawn= (Pawn) (game.getBoard().getSpot(ROW_7, COL_F).getPiece());
 		assertFalse(examinedPawn.isPossibleEnPassantCapture());
 		//controllo che finito il turno il booleano ritorna false
-		command="h4";
-		game.currentGame(command);
-		command="h6";
-		game.currentGame(command);
-		examinedPawn= (Pawn) (game.getBoard().getSpot(3, 1).getPiece());
+		game.currentGame("h4");
+		game.currentGame("h6");
+		examinedPawn= (Pawn) (game.getBoard().getSpot(ROW_5, COL_B).getPiece());
 		assertFalse(examinedPawn.isPossibleEnPassantCapture()); 
 
 		//Tentativo di cattura en passant nel caso in cui il pezzo avversario si muova di uno spot
@@ -66,43 +79,39 @@ class GameTest {
 		move= new StringTokenizer(command);
 		while(move.hasMoreTokens()) {
 			game.currentGame(move.nextToken());
-			examinedPawn= (Pawn) (game.getBoard().getSpot(2, 1).getPiece());
+			examinedPawn= (Pawn) (game.getBoard().getSpot(ROW_6, COL_B ).getPiece());
 		}
 		assertFalse (examinedPawn.isPossibleEnPassantCapture());
 
-
 		/**
 		 * Cattura en passant da parte del pedone nero in a7
-		 * 
 		 */
 		game=new Game();
 		command=("g3 e6 e3 Re7 Re2 a5 f3 a4 b4"); //serie di mosse
 		move= new StringTokenizer(command);
 		while(move.hasMoreTokens()) {
 			game.currentGame(move.nextToken());
-			examinedPawn= (Pawn) (game.getBoard().getSpot(4, 1).getPiece());
+			examinedPawn= (Pawn) (game.getBoard().getSpot(ROW_4, COL_B).getPiece());
 		}
 		//controllo che il pezzo  mosso di due e' catturabile en passant
 		assertTrue(examinedPawn.isPossibleEnPassantCapture()); 
 		//controllo che altri pedoni non catturabili en passant abbiano il booleano settato a a false
-		examinedPawn= (Pawn) (game.getBoard().getSpot(6, 0).getPiece());
+		examinedPawn= (Pawn) (game.getBoard().getSpot(ROW_2, COL_A).getPiece());
 		assertFalse(examinedPawn.isPossibleEnPassantCapture());
-		examinedPawn= (Pawn) (game.getBoard().getSpot(6, 2).getPiece());
+		examinedPawn= (Pawn) (game.getBoard().getSpot(ROW_2, COL_C).getPiece());
 		assertFalse(examinedPawn.isPossibleEnPassantCapture());
-		examinedPawn= (Pawn) (game.getBoard().getSpot(6, 7).getPiece());
+		examinedPawn= (Pawn) (game.getBoard().getSpot(ROW_2, COL_H).getPiece());
 		assertFalse(examinedPawn.isPossibleEnPassantCapture());
-		examinedPawn= (Pawn) (game.getBoard().getSpot(1, 7).getPiece());
+		examinedPawn= (Pawn) (game.getBoard().getSpot(ROW_7, COL_H).getPiece());
 		assertFalse(examinedPawn.isPossibleEnPassantCapture());
-		examinedPawn= (Pawn) (game.getBoard().getSpot(1, 1).getPiece());
+		examinedPawn= (Pawn) (game.getBoard().getSpot(ROW_7, COL_B).getPiece());
 		assertFalse(examinedPawn.isPossibleEnPassantCapture());
-		examinedPawn= (Pawn) (game.getBoard().getSpot(1, 6).getPiece());
+		examinedPawn= (Pawn) (game.getBoard().getSpot(ROW_7, COL_F).getPiece());
 		assertFalse(examinedPawn.isPossibleEnPassantCapture());
 		//controllo che finito il turno il booleano ritorna false
-		command="h6";
-		game.currentGame(command);
-		command="h4";
-		game.currentGame(command);
-		examinedPawn= (Pawn) (game.getBoard().getSpot(4, 1).getPiece());
+		game.currentGame("h6");
+		game.currentGame("h4");
+		examinedPawn= (Pawn) (game.getBoard().getSpot(ROW_4, COL_B).getPiece());
 		assertFalse(examinedPawn.isPossibleEnPassantCapture()); 
 
 		//Tentativo di cattura en passant nel caso in cui il pezzo avversario si muova di uno spot
@@ -111,7 +120,7 @@ class GameTest {
 		move= new StringTokenizer(command);
 		while(move.hasMoreTokens()) {
 			game.currentGame(move.nextToken());
-			examinedPawn= (Pawn) (game.getBoard().getSpot(5, 1).getPiece());
+			examinedPawn= (Pawn) (game.getBoard().getSpot(ROW_3, COL_B).getPiece());
 		}
 		assertFalse (examinedPawn.isPossibleEnPassantCapture());
 		/**
@@ -125,7 +134,7 @@ class GameTest {
 		while(move.hasMoreTokens()) {
 			game.currentGame(move.nextToken());
 		}
-		examinedKing= (King) (game.getBoard().getSpot(5, 4).getPiece());
+		examinedKing= (King) (game.getBoard().getSpot(ROW_3, COL_E).getPiece());
 		assertTrue(examinedKing.getLegalMoves().isEmpty());
 		//serie di mosse che permette una sola mossa legale
 		game=new Game();
@@ -135,11 +144,10 @@ class GameTest {
 		while(move.hasMoreTokens()) {
 			game.currentGame(move.nextToken());
 		}
-		examinedKing= (King) (game.getBoard().getSpot(5, 4).getPiece());
-		assertTrue(game.getBoard().getSpot(6, 5).getPiece() instanceof Rook);
-		command=("Rxf2");
-		game.currentGame(command);
-		assertTrue(game.getBoard().getSpot(6, 5).getPiece() instanceof King);
+		examinedKing= (King) (game.getBoard().getSpot(ROW_3, COL_E).getPiece());
+		assertTrue(game.getBoard().getSpot(ROW_2, COL_F).getPiece() instanceof Rook);
+		game.currentGame("Rxf2");
+		assertTrue(game.getBoard().getSpot(ROW_2, COL_F).getPiece() instanceof King);
 
 		game=new Game();
 		//serie di mosse per non dare possibilita' di movimento al re nero
@@ -148,7 +156,7 @@ class GameTest {
 		while(move.hasMoreTokens()) {
 			game.currentGame(move.nextToken());
 		}
-		examinedKing= (King) (game.getBoard().getSpot(2, 4).getPiece());
+		examinedKing= (King) (game.getBoard().getSpot(ROW_6, COL_E).getPiece());
 		assertTrue(examinedKing.getLegalMoves().isEmpty());
 		//serie di mosse che permette una sola mossa legale
 		game=new Game();
@@ -157,10 +165,10 @@ class GameTest {
 		while(move.hasMoreTokens()) {
 			game.currentGame(move.nextToken());
 		}
-		examinedKing= (King) (game.getBoard().getSpot(3, 4).getPiece());
-		assertTrue(game.getBoard().getSpot(2, 3).getPiece() instanceof Rook);
+		examinedKing= (King) (game.getBoard().getSpot(ROW_5, COL_E).getPiece());
+		assertTrue(game.getBoard().getSpot(ROW_6, COL_D).getPiece() instanceof Rook);
 		game.currentGame("Rxd6");
-		assertTrue(game.getBoard().getSpot(2, 3).getPiece() instanceof King);
+		assertTrue(game.getBoard().getSpot(ROW_6, COL_D).getPiece() instanceof King);
 
 		/**
 		 * Controllo eventuali situazioni in cui il movimento di un pezzo
@@ -173,12 +181,11 @@ class GameTest {
 		while(move.hasMoreTokens()) {
 			game.currentGame(move.nextToken());
 		}
-		examinedKing= (King) (game.getBoard().getSpot(6, 4).getPiece());
+		examinedKing= (King) (game.getBoard().getSpot(ROW_2, COL_E).getPiece());
 		//provo ad eseguire la mossa che esporrebbe il re allo scacco
-		command=("exf5");
-		game.currentGame(command);
+		game.currentGame("exf5");
 		// verifico che il pezzo che proteggeva il re non si sia spostato
-		assertTrue(game.getBoard().getSpot(4, 4).getPiece() instanceof Pawn);
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_E).getPiece() instanceof Pawn);
 
 		//serie di mosse per controllare che non sia possibile scoprire il re nero
 		game=new Game();
@@ -187,12 +194,11 @@ class GameTest {
 		while(move.hasMoreTokens()) {
 			game.currentGame(move.nextToken());
 		}
-		examinedKing= (King) (game.getBoard().getSpot(2, 4).getPiece());
+		examinedKing= (King) (game.getBoard().getSpot(ROW_6, COL_E).getPiece());
 		//provo ad eseguire la mossa che esporrebbe il re allo scacco
-		command=("exf4");
-		game.currentGame(command);
+		game.currentGame("exf4");
 		// verifico che il pezzo che proteggeva il re non si sia spostato
-		assertTrue(game.getBoard().getSpot(3, 4).getPiece() instanceof Pawn);
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_E).getPiece() instanceof Pawn);
 		
 		/**
 		 * test di situazioni di ambiguita: quando due pezzi possono
@@ -206,12 +212,11 @@ class GameTest {
 			game.currentGame(move.nextToken());
 		}
 		//provo ad eseguire la mossa ambigua 
-		command=("Cce4");
-		game.currentGame(command);
+		game.currentGame("Cce4");
 		// verifico che il pezzo che spostato sia quello giusto
-		assertTrue(game.getBoard().getSpot(4, 4).getPiece() instanceof Knight); 
-		assertNull(game.getBoard().getSpot(5, 2).getPiece());
-		assertTrue(game.getBoard().getSpot(3, 6).getPiece() instanceof Knight);
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_E).getPiece() instanceof Knight); 
+		assertNull(game.getBoard().getSpot(ROW_5, COL_C).getPiece());
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_G).getPiece() instanceof Knight);
 		//test ambiguita' cattura da parte del cavallo bianco
 		game=new Game();
 		command=("Cc3 d5 Cf3 a6 e4 dxe4 Cg5 a5"); //serie di mosse
@@ -220,12 +225,11 @@ class GameTest {
 			game.currentGame(move.nextToken());
 		}
 		//provo ad eseguire la mossa ambigua 
-		command=("Ccxe4");
-		game.currentGame(command);
+		game.currentGame("Ccxe4");
 		// verifico che il pezzo che spostato sia quello giusto
-		assertTrue(game.getBoard().getSpot(4, 4).getPiece() instanceof Knight); 
-		assertNull(game.getBoard().getSpot(5, 2).getPiece());
-		assertTrue(game.getBoard().getSpot(3, 6).getPiece() instanceof Knight);
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_E).getPiece() instanceof Knight); 
+		assertNull(game.getBoard().getSpot(ROW_5, COL_C).getPiece());
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_G).getPiece() instanceof Knight);
 		//test ambiguita' movimento cavallo nero
 		game=new Game();
 		command=("d4 Cc6 e4 Cf6 c3 Cg4 c4"); //serie di mosse
@@ -234,12 +238,11 @@ class GameTest {
 			game.currentGame(move.nextToken());
 		}
 		//provo ad eseguire la mossa ambigua 
-		command=("Cce5");
-		game.currentGame(command);
+		game.currentGame("Cce5");
 		// verifico che il pezzo che spostato sia quello giusto
-		assertTrue(game.getBoard().getSpot(3, 4).getPiece() instanceof Knight); 
-		assertNull(game.getBoard().getSpot(2, 2).getPiece());
-		assertTrue(game.getBoard().getSpot(4, 6).getPiece() instanceof Knight);
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_E).getPiece() instanceof Knight); 
+		assertNull(game.getBoard().getSpot(ROW_6, COL_C).getPiece());
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_G).getPiece() instanceof Knight);
 		//test ambiguita' cattura da parte del cavallo nero
 		game=new Game();
 		command=("e4 Cc6 e5 Cf6 b3 Cg4 b4"); //serie di mosse
@@ -248,12 +251,11 @@ class GameTest {
 			game.currentGame(move.nextToken());
 		}
 		//provo ad eseguire la mossa ambigua 
-		command=("Ccxe5");
-		game.currentGame(command);
+		game.currentGame("Ccxe5");
 		// verifico che il pezzo che spostato sia quello giusto
-		assertTrue(game.getBoard().getSpot(3, 4).getPiece() instanceof Knight); 
-		assertNull(game.getBoard().getSpot(2, 2).getPiece());
-		assertTrue(game.getBoard().getSpot(4, 6).getPiece() instanceof Knight); 
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_E).getPiece() instanceof Knight); 
+		assertNull(game.getBoard().getSpot(ROW_6, COL_C).getPiece());
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_G).getPiece() instanceof Knight); 
 		//test ambiguita' movimento pedone bianco, due pedoni nella stessa colonna
 		game=new Game();
 		command=("e4 f5 f3 d6 exf5 d5"); //serie di mosse
@@ -262,12 +264,11 @@ class GameTest {
 			game.currentGame(move.nextToken());
 		}
 		//provo ad eseguire la mossa ambigua 
-		command=("f6");
-		game.currentGame(command);
+		game.currentGame("f6");
 		// verifico che il pedone bianco spostato sia quello giusto
-		assertTrue(game.getBoard().getSpot(2, 5).getPiece() instanceof Pawn); 
-		assertNull(game.getBoard().getSpot(3, 5).getPiece());
-		assertTrue(game.getBoard().getSpot(5, 5).getPiece() instanceof Pawn);
+		assertTrue(game.getBoard().getSpot(ROW_6, COL_F).getPiece() instanceof Pawn); 
+		assertNull(game.getBoard().getSpot(ROW_5, COL_F).getPiece());
+		assertTrue(game.getBoard().getSpot(ROW_3, COL_F).getPiece() instanceof Pawn);
 		//test ambiguita' cattura da parte del pedone bianco
 		game=new Game();
 		command=("d4 e5 f4 a6"); //serie di mosse
@@ -276,12 +277,11 @@ class GameTest {
 			game.currentGame(move.nextToken());
 		}
 		//provo ad eseguire la mossa ambigua 
-		command=("dxe5");
-		game.currentGame(command);
+		game.currentGame("dxe5");
 		// verifico che il pedone bianco spostato sia quello giusto
-		assertTrue(game.getBoard().getSpot(3, 4).getPiece() instanceof Pawn); 
-		assertNull(game.getBoard().getSpot(4, 3).getPiece());
-		assertTrue(game.getBoard().getSpot(4, 5).getPiece() instanceof Pawn);
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_E).getPiece() instanceof Pawn); 
+		assertNull(game.getBoard().getSpot(ROW_4, COL_D).getPiece());
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_F).getPiece() instanceof Pawn);
 		//test ambiguita' movimento pedone nero, due pedoni nella stessa colonna
 		game=new Game();
 		command=("d4 e5 f3 d6 f4 exd4 f5"); //serie di mosse
@@ -290,12 +290,11 @@ class GameTest {
 			game.currentGame(move.nextToken());
 		}
 		//provo ad eseguire la mossa ambigua 
-		command=("d3");
-		game.currentGame(command);
+		game.currentGame("d3");
 		// verifico che il pedone nero spostato sia quello giusto
-		assertTrue(game.getBoard().getSpot(5, 3).getPiece() instanceof Pawn); 
-		assertNull(game.getBoard().getSpot(4, 3).getPiece());
-		assertTrue(game.getBoard().getSpot(2, 3).getPiece() instanceof Pawn);
+		assertTrue(game.getBoard().getSpot(ROW_3, COL_D).getPiece() instanceof Pawn); 
+		assertNull(game.getBoard().getSpot(ROW_4, COL_D).getPiece());
+		assertTrue(game.getBoard().getSpot(ROW_6, COL_D).getPiece() instanceof Pawn);
 		//test ambiguita' cattura da parte del pedone nero
 		game=new Game();
 		command=("d4 c5 a3 e5 a4"); //serie di mosse
@@ -304,11 +303,10 @@ class GameTest {
 			game.currentGame(move.nextToken());
 		}
 		//provo ad eseguire la mossa ambigua 
-		command=("cxd4");
-		game.currentGame(command);
+		game.currentGame("cxd4");
 		// verifico che il pedone nero spostato sia quello giusto
-		assertTrue(game.getBoard().getSpot(4, 3).getPiece() instanceof Pawn); 
-		assertNull(game.getBoard().getSpot(3, 2).getPiece());
-		assertTrue(game.getBoard().getSpot(3, 4).getPiece() instanceof Pawn);
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_D).getPiece() instanceof Pawn); 
+		assertNull(game.getBoard().getSpot(ROW_5, COL_C).getPiece());
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_E).getPiece() instanceof Pawn);
 	}	
 }
