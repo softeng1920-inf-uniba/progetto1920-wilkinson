@@ -612,7 +612,7 @@ public class PieceTest {
 		rookPieceB2.recalculateMoves(board);
 		bishopPiece.recalculateMoves(board);
 
-		board.showBoard();
+		
 		// nessuna mossa possibile per il re
 		assertEquals(kingPiece.getLegalMoves().size(), 0);
 		
@@ -622,6 +622,6 @@ public class PieceTest {
 		//la torre in e1 si puo' muovere su tutta la prima riga a sinistra
 		//TODO
 		assertEquals(rookPieceW.getLegalMoves().size(), 4);
-
+					
 	}
 }
