@@ -146,7 +146,7 @@ public class Board {
 	 * ricalcola le mosse legali di tutti i pezzi sulla scacchiera
 	 *
 	 */
-	void recalLegalMoves() {
+	public void recalLegalMoves() {
 		for (int i = ROW_8; i < BOARDDIM; i++) {
 			for (int j = COL_A; j < BOARDDIM; j++) {
 				Spot currentSpot = this.getSpot(i, j);
