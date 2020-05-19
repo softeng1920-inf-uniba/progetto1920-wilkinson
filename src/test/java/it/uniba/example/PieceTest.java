@@ -581,40 +581,38 @@ public class PieceTest {
 	 */
 	@Test
 	public void testPinnedKingMovements() {
-		Spot kingSpot = board.getSpot(ROW_1, COL_F);
+		/*Spot kingSpot = board.getSpot(ROW_1, COL_F);
 		kingSpot.setPiece(new King(WHITE));
 		Piece kingPiece = kingSpot.getPiece();
-		kingSpot.setPiece(new King(WHITE));
+		kingSpot.setPiece(new King(WHITE));*/
+		
+	//	Spot kingSpot = board.getSpot(ROW_1, COL_F);
+		board.getSpot(ROW_1, COL_F).setPiece(new King(WHITE));
+		Piece kingPiece = board.getSpot(ROW_1, COL_F).getPiece();
 		
 		Spot rookSpotW = board.getSpot(ROW_1, COL_E);
 		rookSpotW.setPiece(new Rook(WHITE));
 		Piece rookPieceW = rookSpotW.getPiece();
-		rookSpotW.setPiece(new Rook(WHITE));
 		
 		Spot rookSpotW2 = board.getSpot(ROW_2, COL_E);
 		rookSpotW2.setPiece(new Rook(WHITE));
 		Piece rookPieceW2 = rookSpotW2.getPiece();
-		rookSpotW2.setPiece(new Rook(WHITE));
 		
 		Spot rookSpotB = board.getSpot(ROW_1, COL_A);
 		rookSpotB.setPiece(new Rook(BLACK));
 		Piece rookPieceB = rookSpotB.getPiece();
-		rookSpotB.setPiece(new Rook(BLACK));
 		
 		Spot rookSpotB2 = board.getSpot(ROW_2, COL_G);
 		rookSpotB2.setPiece(new Rook(BLACK));
 		Piece rookPieceB2 = rookSpotB2.getPiece();
-		rookSpotB2.setPiece(new Rook(BLACK));
 		
 		Spot queenSpot = board.getSpot(ROW_6, COL_A);
 		queenSpot.setPiece(new Queen(BLACK));
 		Piece queenPiece = queenSpot.getPiece();
-		queenSpot.setPiece(new Queen(BLACK));
 		
 		Spot bishopSpot = board.getSpot(ROW_6, COL_C);
 		bishopSpot.setPiece(new Bishop(BLACK));
 		Piece bishopPiece = bishopSpot.getPiece();
-		bishopSpot.setPiece(new Bishop(BLACK));
 		
 		board.showBoard();
 
@@ -626,7 +624,8 @@ public class PieceTest {
 		rookPieceB.recalculateMoves(board);
 		rookPieceB2.recalculateMoves(board);
 		bishopPiece.recalculateMoves(board);
-
+		
+		board.showBoard();
 		// nessuna mossa possibile per il re
 		assertEquals(kingPiece.getLegalMoves().size(), 0);
 		
@@ -635,7 +634,7 @@ public class PieceTest {
 
 		//la torre in e2 si puo' muovere su tutta la prima riga a sinistra
 		//TODO
-		//assertEquals(rookPieceW.getLegalMoves().size(), 4);
+		assertEquals(rookPieceW.getLegalMoves().size(), 4);
 					
 	}
 }
