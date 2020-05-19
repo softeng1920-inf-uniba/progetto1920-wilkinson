@@ -590,7 +590,6 @@ public class PieceTest {
 		rookSpotW.setPiece(new Rook(WHITE));
 		Piece rookPieceW = rookSpotW.getPiece();
 		rookPieceW.findLegalMoves(board, rookSpotW);
-
 		
 		Spot rookSpotW2 = board.getSpot(ROW_2, COL_E);
 		rookSpotW2.setPiece(new Rook(WHITE));
@@ -631,8 +630,11 @@ public class PieceTest {
 		//la torre in e1 si puo' muovere su tutta la prima riga a sinistra
 		assertEquals(rookPieceW.getLegalMoves().size(), 4);
 		
-		System.out.println(queenPiece.getLegalMoves().size());
-	
+		//verifica dei movimenti legali della torre in e1.
+		assertTrue(rookPieceW.getLegalMoves().contains(new Move(rookSpotW, new Spot(ROW_1, COL_A))));
+		assertTrue(rookPieceW.getLegalMoves().contains(new Move(rookSpotW, new Spot(ROW_1, COL_B))));
+		assertTrue(rookPieceW.getLegalMoves().contains(new Move(rookSpotW, new Spot(ROW_1, COL_C))));
+		assertTrue(rookPieceW.getLegalMoves().contains(new Move(rookSpotW, new Spot(ROW_1, COL_D))));
 					
 	}
 }
