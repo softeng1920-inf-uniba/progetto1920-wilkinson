@@ -9,6 +9,7 @@ import it.uniba.main.Move;
 import it.uniba.main.Board;
 import it.uniba.main.Pawn;
 import it.uniba.main.Rook;
+import it.uniba.main.Spot;
 import it.uniba.main.Knight;
 
 class MoveTest {
@@ -39,18 +40,27 @@ class MoveTest {
 		}
 		
 		@Test
+		/**
+		 * Testa un comando senza arrocco per muovere un pezzo bianco
+		 */
 		void testCommandNoCastlingWhite() {
 			move = new Move("a3", board, WHITE);
 			assertFalse(move.isCastle());
 		}
 		
 		@Test
+		/**
+		 * Testa un comando senza arrocco per muovere un pezzo nero
+		 */
 		void testCommandNoCastlingBlack() {
 			move = new Move("a6", board, BLACK);
 			assertFalse(move.isCastle());
 		}
 		
 		@Test
+		/**
+		 * Testa un comando con arrocco corto per muovere un pezzo bianco
+		 */
 		void testCommandShortCastlingWhite() {
 			move = new Move("0-0", board, WHITE);
 			assertTrue(move.isCastle());
@@ -58,45 +68,74 @@ class MoveTest {
 		}
 		
 		@Test
+		/**
+		 * Testa un comando con arrocco corto per muovere un pezzo nero
+		 */
 		void testCommandShortCastlingBlack() {
 			move = new Move("0-0", board, BLACK);
 			assertTrue(move.isCastle());
 		}
 		
 		@Test
+		/**
+		 * Testa un comando con arrocco lungo per muovere un pezzo bianco
+		 */
 		void testCommandLongCastlingWhite() {
 			move = new Move("0-0-0", board, WHITE);
 			assertTrue(move.isCastle());
 		}
 		
 		@Test
+		/**
+		 * Testa un comando con arrocco lungo per muovere un pezzo nero
+		 */
 		void testCommandLongCastlingBlack() {
 			move = new Move("0-0-0", board, BLACK);
 			assertTrue(move.isCastle());
 		}
 		
 		@Test
-		void testNotGoodMove() {
+		/**
+		 * Testa un comando errato per muovere un pezzo bianco
+		 */
+		void testNotGoodMoveWhite() {
 			move = new Move(" ", board, WHITE);
 			assertFalse(move.getInterpreter().isGoodMove());
 			assertFalse(move.isCastle());
 		}
 		
 		@Test
-		void testCommandPawnWhite() {
-			move = new Move(" ", board, WHITE);
-			board.getSpot(ROW_2, COL_A).setPiece(new Pawn(WHITE));
-			assertFalse(move.findStartSpot(board, ((Pawn)board.getSpot(ROW_2, COL_A).getPiece()), WHITE));
+		/**
+		 * Testa un comando errato per muovere un pezzo nero
+		 */
+		void testNotGoodMoveBlack() {
+			move = new Move(" ", board, BLACK);
+			assertFalse(move.getInterpreter().isGoodMove());
+			assertFalse(move.isCastle());
 		}
 		
 		@Test
-		void testCommandPawnBlack() {
-			move = new Move(" ", board, BLACK);
-			board.getSpot(ROW_7, COL_A).setPiece(new Pawn(BLACK));
-			assertFalse(move.findStartSpot(board, ((Pawn)board.getSpot(ROW_7, COL_A).getPiece()), BLACK));
+		/**
+		 * Testa un comando per muovere un pedone bianco
+		 */
+		void testCommandPawnWhite() {
+			board.getSpot(ROW_2, COL_A).setPiece(new Pawn(WHITE));
+			board.recalLegalMoves();
+			move = new Move("a3", board, WHITE);
+			assertNotNull(move.getStart());
 		}
 		
-
+		@Test
+		/**
+		 * Testa un comando per muovere un pedone nero
+		 */
+		void testCommandPawnBlack() {
+			board.getSpot(ROW_7, COL_A).setPiece(new Pawn(BLACK));
+			board.recalLegalMoves();
+			move = new Move("a6", board, BLACK);
+			assertNotNull(move.getStart());
+		}
+		
 		@After
 		void tearDown() {
 
