@@ -310,6 +310,13 @@ public class PieceTest {
 				board.getSpot(ROW_3, COL_C))); // NW
 	}
 
+	
+	
+	/**Verifichiamo che il pedone posto
+	 * a difesa del Re, non può effettuare alcun movimento
+	 * in quanto lascerebbe il re indifeso ad un attacco
+	 * nel turno immediatamente successivo 
+	 */
 	@Test
 	public void testPawnRecalculateMovements() {
 		Spot kingSpot = board.getSpot(ROW_1, COL_E);
@@ -336,7 +343,10 @@ public class PieceTest {
 		assertEquals(pawnPiece.getLegalMoves().size(), 0);
 	}
 
-	
+	/**
+	 * Verifichiamo che il cavallo può solamente 
+	 * catturare l'alfiere che minaccia il Re.
+	 */
 	@Test
 	public void testKnightRecalculateMovements() {
 		Spot kingSpot = board.getSpot(ROW_1, COL_E);
