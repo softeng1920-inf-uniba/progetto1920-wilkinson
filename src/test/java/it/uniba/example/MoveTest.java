@@ -9,8 +9,10 @@ import it.uniba.main.Move;
 import it.uniba.main.Board;
 import it.uniba.main.Pawn;
 import it.uniba.main.Rook;
-import it.uniba.main.Spot;
 import it.uniba.main.Knight;
+import it.uniba.main.Bishop;
+import it.uniba.main.King;
+import it.uniba.main.Queen;
 
 class MoveTest {
 	    private Move move;
@@ -135,6 +137,119 @@ class MoveTest {
 			move = new Move("a6", board, BLACK);
 			assertNotNull(move.getStart());
 		}
+		
+		@Test
+		/**
+		 * Testa un comando per muovere una torre bianca
+		 */
+		void testCommandRookWhite() {
+			board.getSpot(ROW_1, COL_A).setPiece(new Rook(WHITE));
+			board.recalLegalMoves();
+			move = new Move("Ta4", board, WHITE);
+			assertNotNull(move.getStart());
+		}
+		
+		@Test
+		/**
+		 * Testa un comando per muovere una torre nera
+		 */
+		void testCommandRookBlack() {
+			board.getSpot(ROW_8, COL_A).setPiece(new Rook(BLACK));
+			board.recalLegalMoves();
+			move = new Move("Ta4", board, BLACK);
+			assertNotNull(move.getStart());
+		}
+		
+		@Test
+		/**
+		 * Testa un comando per muovere un cavallo bianco
+		 */
+		void testCommandKnightWhite() {
+			board.getSpot(ROW_1, COL_B).setPiece(new Knight(WHITE));
+			board.recalLegalMoves();
+			move = new Move("Cc3", board, WHITE);
+			assertNotNull(move.getStart());
+		}
+		
+		@Test
+		/**
+		 * Testa un comando per muovere un cavallo nero
+		 */
+		void testCommandKnightBlack() {
+			board.getSpot(ROW_8, COL_B).setPiece(new Knight(BLACK));
+			board.recalLegalMoves();
+			move = new Move("Cc6", board, BLACK);
+			assertNotNull(move.getStart());
+		}
+		
+		@Test
+		/**
+		 * Testa un comando per muovere un alfiere bianco
+		 */
+		void testCommandBishopWhite() {
+			board.getSpot(ROW_1, COL_C).setPiece(new Bishop(WHITE));
+			board.recalLegalMoves();
+			move = new Move("Ah6", board, WHITE);
+			assertNotNull(move.getStart());
+		}
+		
+		@Test
+		/**
+		 * Testa un comando per muovere un alfiere nero
+		 */
+		void testCommandBishopBlack() {
+			board.getSpot(ROW_8, COL_C).setPiece(new Bishop(BLACK));
+			board.recalLegalMoves();
+			move = new Move("Ah3", board, BLACK);
+			assertNotNull(move.getStart());
+		}
+		
+		@Test
+		/**
+		 * Testa un comando per muovere la regina bianca
+		 */
+		void testCommandQueenWhite() {
+			board.getSpot(ROW_1, COL_D).setPiece(new Queen(WHITE));
+			board.recalLegalMoves();
+			move = new Move("Dd5", board, WHITE);
+			assertNotNull(move.getStart());
+		}
+		
+		@Test
+		/**
+		 * Testa un comando per muovere la regina nera
+		 */
+		void testCommandQueenBlack() {
+			board.getSpot(ROW_8, COL_D).setPiece(new Queen(BLACK));
+			board.recalLegalMoves();
+			move = new Move("Dd5", board, BLACK);
+			assertNotNull(move.getStart());
+		}
+		
+		@Test
+		/**
+		 * Testa un comando per muovere il re bianco
+		 */
+		void testCommandKingWhite() {
+			board.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
+			board.recalLegalMoves();
+			move = new Move("Rd2", board, WHITE);
+			assertNotNull(move.getStart());
+		}
+		
+		@Test
+		/**
+		 * Testa un comando per muovere il re nero
+		 */
+		void testCommandKingBlack() {
+			board.getSpot(ROW_8, COL_E).setPiece(new King(BLACK));
+			board.recalLegalMoves();
+			move = new Move("Rd7", board, BLACK);
+			assertNotNull(move.getStart());
+		}
+		
+		
+		
 		
 		@After
 		void tearDown() {
