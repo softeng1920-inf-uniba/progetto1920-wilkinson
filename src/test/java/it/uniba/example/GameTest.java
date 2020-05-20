@@ -24,7 +24,7 @@ public class GameTest {
 	private static Board newBoard;
 	private static final boolean WHITE = true;
 	private static final boolean BLACK = false;
-//  RIGHE
+	//  RIGHE
 	private static final int ROW_1 = 7;
 	private static final int ROW_2 = 6;
 	private static final int ROW_3 = 5;
@@ -33,7 +33,7 @@ public class GameTest {
 	private static final int ROW_6 = 2;
 	private static final int ROW_7 = 1;
 	private static final int ROW_8 = 0;
-//  COLONNE
+	//  COLONNE
 	private static final int COL_H = 7;
 	private static final int COL_G = 6;
 	private static final int COL_F = 5;
@@ -49,31 +49,6 @@ public class GameTest {
 		newBoard = new Board(true);
 		newBoard.getSpot(ROW_1, COL_E).setPiece(new King (WHITE));
 		newBoard.getSpot(ROW_8, COL_E).setPiece(new King (BLACK));
-	}
-
-	/**Post-condizioni:
-	 * 	- non devono esserci pezzi killed sulla scacchiera
-	 * 	- i booleani di en passant devono essere resettati correttamente
-	 *  - il pezzo considerato deve essere settato come mosso
-	 *  -
-	 */
-	@AfterEach
-	void tearDown() {
-		for (int i = 0; i < DIM_BOARD; i++) {
-			for (int j = 0; j < DIM_BOARD; j++) {
-				Spot currentSpot = game.getBoard().getSpot(i, j);
-
-				if (!currentSpot.isEmpty()) {
-					// controllo che tutti i pezzi sulla scacchiera non siano contrassegnati come killed
-					assertFalse(currentSpot.getPiece().isKilled());
-					if (currentSpot.getPiece() instanceof Pawn
-							&& currentSpot.getPiece().isWhite() == game.isWhiteTurn()) {
-						// controllo i booleani di en passant della fazione del prossimo turno
-						assertFalse(((Pawn) game.getBoard().getSpot(i, j).getPiece()).isPossibleEnPassantCapture());
-					}
-				}
-			}
-		}
 	}
 
 	// Test situazioni en passant pedone bianco 
@@ -127,7 +102,7 @@ public class GameTest {
 			}
 		}
 	}
-    //controllo che lo spostamento di una casa di un pezzo nero 
+	//controllo che lo spostamento di una casa di un pezzo nero 
 	//alla prima mossa, non setti il booleano per la possibile
 	//cattura en passant
 	@Test
@@ -182,25 +157,25 @@ public class GameTest {
 		assertTrue(game.currentGame("bxc3"));
 	}
 
-	 //controllo che lo spostamento di una casa di un pezzo bianco
-		//alla prima mossa, non setti il booleano per la possibile
-		//cattura en passant
-		@Test
-		void testEnPassantOneSpotWhite() {
-			Piece piece;
-			// inizializzo pedoni 
-			for (int j = COL_A; j < DIM_BOARD; j++) {
-				newBoard.getSpot(ROW_7, j).setPiece(new Pawn(BLACK));
-				newBoard.getSpot(ROW_2, j).setPiece(new Pawn(WHITE));
-			}
-			newBoard.getSpot(ROW_4, COL_A).setPiece(new Pawn(BLACK));
-			newBoard.recalLegalMoves();
-			game.setBoard(newBoard);
-			game.currentGame("b3"); //Movimento di una sola casa 
-			piece= game.getBoard().getSpot(ROW_3, COL_B).getPiece();
-			// controllo che il booleano non sia stato settato a true
-			assertFalse(((Pawn) piece).isPossibleEnPassantCapture());
+	//controllo che lo spostamento di una casa di un pezzo bianco
+	//alla prima mossa, non setti il booleano per la possibile
+	//cattura en passant
+	@Test
+	void testEnPassantOneSpotWhite() {
+		Piece piece;
+		// inizializzo pedoni 
+		for (int j = COL_A; j < DIM_BOARD; j++) {
+			newBoard.getSpot(ROW_7, j).setPiece(new Pawn(BLACK));
+			newBoard.getSpot(ROW_2, j).setPiece(new Pawn(WHITE));
 		}
+		newBoard.getSpot(ROW_4, COL_A).setPiece(new Pawn(BLACK));
+		newBoard.recalLegalMoves();
+		game.setBoard(newBoard);
+		game.currentGame("b3"); //Movimento di una sola casa 
+		piece= game.getBoard().getSpot(ROW_3, COL_B).getPiece();
+		// controllo che il booleano non sia stato settato a true
+		assertFalse(((Pawn) piece).isPossibleEnPassantCapture());
+	}
 
 	//testo situazioni in cui il re bianco non ha possibilità di movimento
 	@Test
@@ -219,7 +194,7 @@ public class GameTest {
 		//controllo che il re non si sia mosso
 		assertTrue(game.getBoard().getSpot(ROW_1, COL_E).getPiece() instanceof King);
 	}
-	
+
 	@Test
 	void testWhiteKingOneLegalMoves() {
 		//inserisco i pezzi nella scacchiera per dare un solo movimento del re bianco
@@ -254,15 +229,15 @@ public class GameTest {
 	@Test
 	void testBlackKingOneLegalMoves() {
 		//inserisco i pezzi nella scacchiera per permettere un solo movimento al re nero
-				newBoard.getSpot(ROW_7, COL_D).setPiece(new Pawn(BLACK)); 
-				newBoard.getSpot(ROW_8, COL_D).setPiece(new Rook(BLACK));
-				newBoard.getSpot(ROW_7, COL_F).setPiece(new Rook(WHITE)); 
-				newBoard.recalLegalMoves();
-				newBoard.refineLegalMoves();
-				game.setBoard(newBoard);
-				game.currentGame("Re2");
-				assertTrue(game.currentGame("Rxf7")); //provo ad eseguire l'unica mossa
-				assertTrue(newBoard.getSpot(ROW_7, COL_F).getPiece() instanceof King);
+		newBoard.getSpot(ROW_7, COL_D).setPiece(new Pawn(BLACK)); 
+		newBoard.getSpot(ROW_8, COL_D).setPiece(new Rook(BLACK));
+		newBoard.getSpot(ROW_7, COL_F).setPiece(new Rook(WHITE)); 
+		newBoard.recalLegalMoves();
+		newBoard.refineLegalMoves();
+		game.setBoard(newBoard);
+		game.currentGame("Re2");
+		assertTrue(game.currentGame("Rxf7")); //provo ad eseguire l'unica mossa
+		assertTrue(newBoard.getSpot(ROW_7, COL_F).getPiece() instanceof King);
 	}
 
 	//test di eventuali situazioni in cui il movimento di un pezzo espongono il re bianco
@@ -276,7 +251,7 @@ public class GameTest {
 		game.setBoard(newBoard);
 		assertFalse(game.currentGame("Ta2")); //provo ad eseguire la mossa che esporrebbe il re bianco
 	}
-	
+
 	//test di eventuali situazioni in cui il movimento di un pezzo espongono il re nero
 	@Test
 	void testBlackKingUnderAttack() {
@@ -303,7 +278,7 @@ public class GameTest {
 		assertTrue(game.currentGame("Cac2"));//effettuo la mossa non ambigua
 		assertTrue(game.getBoard().getSpot(ROW_2, COL_C).getPiece() instanceof Knight);
 	}
-	
+
 	// test ambiguita' cattura da parte del cavallo bianco
 	@Test
 	void testIsAmbiguityWhiteKnightCapture() {
@@ -316,8 +291,8 @@ public class GameTest {
 		assertFalse(game.currentGame("Cxc2"));//provo ad effettuare la mossa ambigua
 		assertTrue(game.currentGame("Caxc2"));//effettuo la mossa non ambigua
 		assertTrue(game.getBoard().getSpot(ROW_2, COL_C).getPiece() instanceof Knight);
-		}
-	
+	}
+
 	// test ambiguita' movimento cavallo nero
 	@Test
 	void testIsAmbiguityBlackKnight() {
@@ -331,7 +306,7 @@ public class GameTest {
 		assertTrue(game.currentGame("Cac7"));//effettuo la mossa non ambigua
 		assertTrue(game.getBoard().getSpot(ROW_7, COL_C).getPiece() instanceof Knight);
 	}
-	
+
 	// test ambiguita' cattura da parte del cavallo nero
 	@Test
 	void testIsAmbiguityBlackKnightCapture() {
@@ -346,7 +321,7 @@ public class GameTest {
 		assertTrue(game.currentGame("Caxc7"));//effettuo la mossa non ambigua
 		assertTrue(game.getBoard().getSpot(ROW_7, COL_C).getPiece() instanceof Knight);
 	}
-	
+
 	// test ambiguita' movimento pedone bianco, due pedoni nella stessa colonna
 	@Test
 	void testIsAmbiguityWhitePawn() {
@@ -356,7 +331,7 @@ public class GameTest {
 		newBoard.refineLegalMoves();
 		game.setBoard(newBoard); 
 		game.currentGame("a4");
-	  //controllo che si e' spostato il pedone piu' avanazato
+		//controllo che si e' spostato il pedone piu' avanazato
 		assertTrue(game.getBoard().getSpot(ROW_4, COL_A).getPiece() instanceof Pawn);
 		assertTrue(game.getBoard().getSpot(ROW_3, COL_A).isEmpty());
 		assertFalse(game.getBoard().getSpot(ROW_2, COL_A).getPiece().isMoved());
@@ -373,13 +348,13 @@ public class GameTest {
 		//provo a spostarmi senza cattura
 		assertFalse(game.currentGame("b3"));
 		game.currentGame("axb3");
-	  //controllo che c'e' stata la cattura
+		//controllo che c'e' stata la cattura
 		assertTrue(game.getBoard().getSpot(ROW_3, COL_B).getPiece() instanceof Pawn);
 		//controllo che si e' spostato il pezzo giusto
 		assertTrue(game.getBoard().getSpot(ROW_2, COL_A).isEmpty());
 		assertFalse(game.getBoard().getSpot(ROW_2, COL_C).getPiece().isMoved());
 	}
-	
+
 	// test ambiguita' movimento pedone nero, due pedoni nella stessa colonna
 	@Test
 	void testIsAmbiguityBlackPawn() {
@@ -390,7 +365,7 @@ public class GameTest {
 		game.setBoard(newBoard); 
 		game.currentGame("Re2");
 		game.currentGame("a5");
-	  //controllo che si e' spostato il pedone piu' avanazato
+		//controllo che si e' spostato il pedone piu' avanazato
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_A).getPiece() instanceof Pawn);
 		assertTrue(game.getBoard().getSpot(ROW_6, COL_A).isEmpty());
 		assertFalse(game.getBoard().getSpot(ROW_7, COL_A).getPiece().isMoved());
@@ -409,7 +384,7 @@ public class GameTest {
 		assertFalse(game.currentGame("b6"));
 		game.currentGame("axb6");
 
-	  //controllo che c'e' stata la cattura
+		//controllo che c'e' stata la cattura
 		assertTrue(game.getBoard().getSpot(ROW_6, COL_B).getPiece() instanceof Pawn);
 		//controllo che si e' spostato il pezzo giusto
 		assertTrue(game.getBoard().getSpot(ROW_7, COL_A).isEmpty());
@@ -418,21 +393,21 @@ public class GameTest {
 		newBoard.getSpot(ROW_1, COL_A).setPiece(new King (WHITE));
 		newBoard.getSpot(ROW_8, COL_A).setPiece(new King (BLACK));
 	}
-	
+
 	@Test
 	void testIsMovedAndCapturePawn() {
-		
+
 		//(inizializzazione pezzi per test)
 		newBoard.getSpot(ROW_3, COL_B).setPiece(new Pawn(WHITE));
 		newBoard.getSpot(ROW_6, COL_C).setPiece(new Pawn(BLACK));
 		newBoard.recalLegalMoves();
 		game.setBoard(newBoard);
-		
+
 		//test isMoved Pedone
 		game.currentGame("b4");
 		assertTrue(game.getBoard().getSpot(ROW_4, COL_B).getPiece().isMoved());
 		assertTrue(game.getBoard().getSpot(ROW_3, COL_B).isEmpty());
-		
+
 		//test cattura Pedone
 		game.currentGame("c5");
 		game.currentGame("bxc5");
@@ -440,16 +415,16 @@ public class GameTest {
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_C).getPiece().isWhite());
 		assertTrue(game.getBoard().getSpot(ROW_4, COL_B).isEmpty());
 	}
-	
+
 	@Test
 	void testMoveAndCaptureQueen() {
-		
+
 		//(inizializzazione pezzi per test)
 		newBoard.getSpot(ROW_3, COL_D).setPiece(new Queen(WHITE));
 		newBoard.getSpot(ROW_6, COL_C).setPiece(new Pawn(BLACK));
 		newBoard.recalLegalMoves();
 		game.setBoard(newBoard);
-		
+
 		//test isMoved Regina
 		game.currentGame("Dd4");
 		assertTrue(game.getBoard().getSpot(ROW_4, COL_D).getPiece().isMoved());
@@ -462,16 +437,16 @@ public class GameTest {
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_C).getPiece().isWhite());
 		assertTrue(game.getBoard().getSpot(ROW_4, COL_D).isEmpty());
 	}
-	
+
 	@Test
 	void testMoveAndCaptureKnight() {
-	
+
 		//(inizializzazione pezzi per test)
 		newBoard.getSpot(ROW_2, COL_E).setPiece(new Knight(WHITE));
 		newBoard.getSpot(ROW_7, COL_C).setPiece(new Pawn(BLACK));
 		newBoard.recalLegalMoves();
 		game.setBoard(newBoard);
-		
+
 		//test isMoved Cavallo
 		game.currentGame("Cd4");
 		assertTrue(game.getBoard().getSpot(ROW_4, COL_D).getPiece().isMoved());
@@ -487,13 +462,13 @@ public class GameTest {
 
 	@Test
 	void testMoveAndCaptureBishop() {
-	
+
 		//(inizializzazione pezzi per test)
 		newBoard.getSpot(ROW_2, COL_G).setPiece(new Bishop(WHITE));
 		newBoard.getSpot(ROW_6, COL_C).setPiece(new Pawn(BLACK));
 		newBoard.recalLegalMoves();
 		game.setBoard(newBoard);
-	
+
 		//test isMoved Alfiere
 		game.currentGame("Ae4");
 		assertTrue(game.getBoard().getSpot(ROW_4, COL_E).getPiece().isMoved());
@@ -508,13 +483,13 @@ public class GameTest {
 
 	@Test
 	void testMoveAndCaptureRook() {
-		
+
 		//(inizializzazione pezzi per test)
 		newBoard.getSpot(ROW_3, COL_H).setPiece(new Rook(WHITE));
 		newBoard.getSpot(ROW_5, COL_C).setPiece(new Pawn(BLACK));
 		newBoard.recalLegalMoves();
 		game.setBoard(newBoard);
-	
+
 		//test isMoved Torre
 		game.currentGame("Th4");
 		assertTrue(game.getBoard().getSpot(ROW_4, COL_H).getPiece().isMoved());
@@ -527,15 +502,15 @@ public class GameTest {
 		assertTrue(game.getBoard().getSpot(ROW_4, COL_C).getPiece().isWhite());
 		assertTrue(game.getBoard().getSpot(ROW_4, COL_H).isEmpty());
 	}
-		
+
 	@Test
 	void testMoveAndCaptureKing() {
-		
+
 		//(inizializzazione pezzi per test)
 		newBoard.getSpot(ROW_3, COL_E).setPiece(new Pawn(BLACK));
 		newBoard.recalLegalMoves();
 		game.setBoard(newBoard);
-		
+
 		//test isMoved Re
 		game.currentGame("Rf1");
 		assertTrue(game.getBoard().getSpot(ROW_1, COL_F).getPiece().isMoved());
@@ -548,23 +523,23 @@ public class GameTest {
 		assertTrue(game.getBoard().getSpot(ROW_2, COL_E).getPiece().isWhite());
 		assertTrue(game.getBoard().getSpot(ROW_1, COL_F).isEmpty());
 	}
-	
+
 	@Test
 	void testAmbiguityRook() {
-		
+
 		//(inizializzazione pezzi per test)
 		newBoard.getSpot(ROW_1, COL_D).setPiece(new Rook(WHITE));
 		newBoard.getSpot(ROW_5, COL_H).setPiece(new Rook(WHITE));
 		newBoard.getSpot(ROW_6, COL_F).setPiece(new Pawn(BLACK));
 		newBoard.recalLegalMoves();
 		game.setBoard(newBoard);
-		
+
 		//test ambiguita' movimento torre
 		game.currentGame("Tdd5");
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_D).getPiece() instanceof Rook);
 		assertTrue(game.getBoard().getSpot(ROW_1, COL_D).isEmpty());
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_H).getPiece() instanceof Rook);
-		
+
 		//test ambiguita' cattura torre
 		game.currentGame("f5");
 		game.currentGame("Tdxf5");
@@ -572,5 +547,30 @@ public class GameTest {
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_F).getPiece().isWhite());
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_D).isEmpty());
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_H).getPiece() instanceof Rook);
+	}
+
+	/**Post-condizioni:
+	 * 	- non devono esserci pezzi killed sulla scacchiera
+	 * 	- i booleani di en passant devono essere resettati correttamente
+	 *  - il pezzo considerato deve essere settato come mosso
+	 *  -
+	 */
+	@AfterEach
+	void tearDown() {
+		for (int i = 0; i < DIM_BOARD; i++) {
+			for (int j = 0; j < DIM_BOARD; j++) {
+				Spot currentSpot = game.getBoard().getSpot(i, j);
+
+				if (!currentSpot.isEmpty()) {
+					// controllo che tutti i pezzi sulla scacchiera non siano contrassegnati come killed
+					assertFalse(currentSpot.getPiece().isKilled());
+					if (currentSpot.getPiece() instanceof Pawn
+							&& currentSpot.getPiece().isWhite() == game.isWhiteTurn()) {
+						// controllo i booleani di en passant della fazione del prossimo turno
+						assertFalse(((Pawn) game.getBoard().getSpot(i, j).getPiece()).isPossibleEnPassantCapture());
+					}
+				}
+			}
+		}
 	}
 }
