@@ -146,7 +146,7 @@ public class Board {
 	 * ricalcola le mosse legali di tutti i pezzi sulla scacchiera
 	 *
 	 */
-	void recalLegalMoves() {
+	public void recalLegalMoves() {
 		for (int i = ROW_8; i < BOARDDIM; i++) {
 			for (int j = COL_A; j < BOARDDIM; j++) {
 				Spot currentSpot = this.getSpot(i, j);
@@ -160,7 +160,7 @@ public class Board {
 	/**
 	 * ricalcola le mosse di ogni pezzo controllando se espongono il re a pericolo
 	 */
-	void refineLegalMoves() {
+	public void refineLegalMoves() {
 		for (int i = ROW_8; i < BOARDDIM; i++) {
 			for (int j = COL_A; j < BOARDDIM; j++) {
 				Spot currentSpot = this.getSpot(i, j);
@@ -212,7 +212,7 @@ public class Board {
 		newBoard.recalLegalMoves();
 		// ricerco la nuova posizione del re
 		newBoard.searchForKings();
-		// controllo se la casa corrente del re Ã¨ sotto attacco o meno
+		// controllo se la casa corrente del re è sotto attacco o meno
 		if (newEnd.getPiece().isWhite()) {
 			if (newBoard.getWhiteKingSpot().isUnderAttack(newBoard, color)) {
 				return true;

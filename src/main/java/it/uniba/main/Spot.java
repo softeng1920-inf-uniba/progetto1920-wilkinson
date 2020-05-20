@@ -60,7 +60,7 @@ public class Spot {
 	static final int CASE_7 = 7;
 
 	/**
-	 * controlla se lo spot corrente � vuoto
+	 * controlla se lo spot corrente vuoto
 	 *
 	 * @return
 	 */
@@ -78,7 +78,7 @@ public class Spot {
 	 * @param color    colore del pezzo amico
 	 * @return true se lo Spot corrente e' sotto attacco, false altrimenti
 	 */
-	boolean isUnderAttack(final Board board, final boolean color) {
+	public boolean isUnderAttack(final Board board, final boolean color) {
 		Move examinedMove = new Move(null, this);
 		for (int i = 0; i < BOARDDIM; i++) {
 			for (int j = 0; j < BOARDDIM; j++) {
