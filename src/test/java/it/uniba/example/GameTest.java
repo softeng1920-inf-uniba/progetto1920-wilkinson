@@ -361,7 +361,6 @@ class GameTest {
 		newBoard.recalLegalMoves();
 		newBoard.refineLegalMoves();
 		game.setBoard(newBoard);
-		game.getBoard().showBoard();
 		game.currentGame("Re2");
 		assertFalse(game.currentGame("Cc7"));//provo ad effettuare la mossa ambigua
 		assertTrue(game.currentGame("Cac7"));//effettuo la mossa non ambigua
@@ -380,66 +379,90 @@ class GameTest {
 		newBoard.recalLegalMoves();
 		newBoard.refineLegalMoves();
 		game.setBoard(newBoard); 
-		game.getBoard().showBoard();
 		game.currentGame("Re2");
 		assertFalse(game.currentGame("Cxc7"));//provo ad effettuare la mossa ambigua
 		assertTrue(game.currentGame("Caxc7"));//effettuo la mossa non ambigua
 		assertTrue(game.getBoard().getSpot(ROW_7, COL_C).getPiece() instanceof Knight);
 	}
+	
 	// test ambiguita' movimento pedone bianco, due pedoni nella stessa colonna
 	@Test
 	void testIsAmbiguityWhitePawn() {
-		move = new StringTokenizer("e4 f5 f3 d6 exf5 d5"); // serie di mosse
-		while (move.hasMoreTokens()) {
-			game.currentGame(move.nextToken());
-		}
-		// provo ad eseguire la mossa ambigua
-		game.currentGame("f6");
-		// verifico che il pedone bianco spostato sia quello giusto
-		assertTrue(game.getBoard().getSpot(ROW_6, COL_F).getPiece() instanceof Pawn);
-		assertTrue(game.getBoard().getSpot(ROW_5, COL_F).isEmpty());
-		assertTrue(game.getBoard().getSpot(ROW_3, COL_F).getPiece() instanceof Pawn);
+		Board newBoard =new Board(true);
+		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
+		newBoard.getSpot(ROW_8, COL_E).setPiece(new King(BLACK));
+		newBoard.getSpot(ROW_2, COL_A).setPiece(new Pawn(WHITE)); 
+		newBoard.getSpot(ROW_3, COL_A).setPiece(new Pawn(WHITE)); 
+		newBoard.recalLegalMoves();
+		newBoard.refineLegalMoves();
+		game.setBoard(newBoard); 
+		game.currentGame("a4");
+	  //controllo che si e' spostato il pedone piu' avanazato
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_A).getPiece() instanceof Pawn);
+		assertTrue(game.getBoard().getSpot(ROW_3, COL_A).isEmpty());
+		assertFalse(game.getBoard().getSpot(ROW_2, COL_A).getPiece().isMoved());
 	}
 	// test ambiguita' cattura da parte del pedone bianco
 	@Test
 	void testIsAmbiguityWhitePawnCapture() {
-		move = new StringTokenizer("d4 e5 f4 a6"); // serie di mosse
-		while (move.hasMoreTokens()) {
-			game.currentGame(move.nextToken());
-		}
-		// provo ad eseguire la mossa ambigua
-		game.currentGame("dxe5");
-		// verifico che il pedone bianco spostato sia quello giusto
-		assertTrue(game.getBoard().getSpot(ROW_5, COL_E).getPiece() instanceof Pawn);
-		assertTrue(game.getBoard().getSpot(ROW_4, COL_D).isEmpty());
-		assertTrue(game.getBoard().getSpot(ROW_4, COL_F).getPiece() instanceof Pawn);
+		Board newBoard =new Board(true);
+		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
+		newBoard.getSpot(ROW_8, COL_E).setPiece(new King(BLACK));
+		newBoard.getSpot(ROW_2, COL_A).setPiece(new Pawn(WHITE)); 
+		newBoard.getSpot(ROW_2, COL_C).setPiece(new Pawn(WHITE)); 
+		newBoard.getSpot(ROW_3, COL_B).setPiece(new Knight(BLACK)); 
+		newBoard.recalLegalMoves();
+		newBoard.refineLegalMoves();
+		game.setBoard(newBoard); 
+		//provo a spostarmi senza cattura
+		assertFalse(game.currentGame("b3"));
+		game.currentGame("axb3");
+	  //controllo che c'e' stata la cattura
+		assertTrue(game.getBoard().getSpot(ROW_3, COL_B).getPiece() instanceof Pawn);
+		//controllo che si e' spostato il pezzo giusto
+		assertTrue(game.getBoard().getSpot(ROW_2, COL_A).isEmpty());
+		assertFalse(game.getBoard().getSpot(ROW_2, COL_C).getPiece().isMoved());
 	}
+	
 	// test ambiguita' movimento pedone nero, due pedoni nella stessa colonna
 	@Test
 	void testIsAmbiguityBlackPawn() {
-		move = new StringTokenizer("d4 e5 f3 d6 f4 exd4 f5"); // serie di mosse
-		while (move.hasMoreTokens()) {
-			game.currentGame(move.nextToken());
-		}
-		// provo ad eseguire la mossa ambigua
-		game.currentGame("d3");
-		// verifico che il pedone nero spostato sia quello giusto
-		assertTrue(game.getBoard().getSpot(ROW_3, COL_D).getPiece() instanceof Pawn);
-		assertTrue(game.getBoard().getSpot(ROW_4, COL_D).isEmpty());
-		assertTrue(game.getBoard().getSpot(ROW_6, COL_D).getPiece() instanceof Pawn);
+		Board newBoard =new Board(true);
+		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
+		newBoard.getSpot(ROW_8, COL_E).setPiece(new King(BLACK));
+		newBoard.getSpot(ROW_7, COL_A).setPiece(new Pawn(BLACK)); 
+		newBoard.getSpot(ROW_6, COL_A).setPiece(new Pawn(BLACK)); 
+		newBoard.recalLegalMoves();
+		newBoard.refineLegalMoves();
+		game.setBoard(newBoard); 
+		game.currentGame("Re2");
+		game.currentGame("a5");
+	  //controllo che si e' spostato il pedone piu' avanazato
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_A).getPiece() instanceof Pawn);
+		assertTrue(game.getBoard().getSpot(ROW_6, COL_A).isEmpty());
+		assertFalse(game.getBoard().getSpot(ROW_7, COL_A).getPiece().isMoved());
 	}
 	// test ambiguita' cattura da parte del pedone nero
 	@Test
 	void testIsAmbiguityBlackPawnCapture() {
-		move = new StringTokenizer("d4 c5 a3 e5 a4"); // serie di mosse
-		while (move.hasMoreTokens()) {
-			game.currentGame(move.nextToken());
-		}
-		// provo ad eseguire la mossa ambigua
-		game.currentGame("cxd4");
-		// verifico che il pedone nero spostato sia quello giusto
-		assertTrue(game.getBoard().getSpot(ROW_4, COL_D).getPiece() instanceof Pawn);
-		assertTrue(game.getBoard().getSpot(ROW_5, COL_C).isEmpty());
-		assertTrue(game.getBoard().getSpot(ROW_5, COL_E).getPiece() instanceof Pawn);
+		Board newBoard =new Board(true);
+		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
+		newBoard.getSpot(ROW_8, COL_E).setPiece(new King(BLACK));
+		newBoard.getSpot(ROW_7, COL_A).setPiece(new Pawn(BLACK)); 
+		newBoard.getSpot(ROW_7, COL_C).setPiece(new Pawn(BLACK)); 
+		newBoard.getSpot(ROW_6, COL_B).setPiece(new Knight(WHITE)); 
+		newBoard.recalLegalMoves();
+		newBoard.refineLegalMoves();
+		game.setBoard(newBoard); 
+		game.currentGame("Re2");
+		//provo a spostarmi senza cattura
+		assertFalse(game.currentGame("b6"));
+		game.currentGame("axb6");
+
+	  //controllo che c'e' stata la cattura
+		assertTrue(game.getBoard().getSpot(ROW_6, COL_B).getPiece() instanceof Pawn);
+		//controllo che si e' spostato il pezzo giusto
+		assertTrue(game.getBoard().getSpot(ROW_7, COL_A).isEmpty());
+		assertFalse(game.getBoard().getSpot(ROW_7, COL_C).getPiece().isMoved());
 	}
 }
