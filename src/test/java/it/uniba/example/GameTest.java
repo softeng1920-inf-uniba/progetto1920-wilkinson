@@ -4,9 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.*;
 
-import java.util.StringTokenizer;
-
 import it.uniba.main.Bishop;
+import it.uniba.main.Board;
 import it.uniba.main.Game;
 import it.uniba.main.King;
 import it.uniba.main.Knight;
@@ -16,7 +15,9 @@ import it.uniba.main.Rook;
 
 public class GameTest {
 	private static Game game;
-	private static StringTokenizer move;
+	private static Board newBoard;
+	private static final boolean WHITE = true;
+	private static final boolean BLACK = false;
 
 //  RIGHE
 	private static final int ROW_1 = 7;
@@ -24,11 +25,11 @@ public class GameTest {
 	private static final int ROW_3 = 5;
 	private static final int ROW_4 = 4;
 	private static final int ROW_5 = 3;
-//	private static final int ROW_6 = 2;
-//	private static final int ROW_7 = 1;
-//	private static final int ROW_8 = 0;
+	private static final int ROW_6 = 2;
+	private static final int ROW_7 = 1;
+	private static final int ROW_8 = 0;
 
-	//  COLONNE
+//  COLONNE
 	private static final int COL_H = 7;
 	private static final int COL_G = 6;
 	private static final int COL_F = 5;
@@ -41,110 +42,163 @@ public class GameTest {
 	@BeforeEach
 	void setUp() {
 		game = new Game();
+		newBoard = new Board(true);
+		newBoard.getSpot(ROW_1, COL_A).setPiece(new King (WHITE));
+		newBoard.getSpot(ROW_8, COL_A).setPiece(new King (BLACK));
 	}
 	
 	@Test
-	void testIsMovedAndCapture() {
+	void testIsMovedAndCapturePawn() {
+		
+		//(inizializzazione pezzi per test)
+		newBoard.getSpot(ROW_3, COL_B).setPiece(new Pawn(WHITE));
+		newBoard.getSpot(ROW_6, COL_C).setPiece(new Pawn(BLACK));
+		newBoard.recalLegalMoves();
+		game.setBoard(newBoard);
 		
 		//test isMoved pedone
-		game.currentGame("d4");
-		assertTrue(game.getBoard().getSpot(ROW_4, COL_D).getPiece().isMoved());
-		assertTrue(game.getBoard().getSpot(ROW_2, COL_D).isEmpty());
-
+		game.currentGame("b4");
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_B).getPiece().isMoved());
+		assertTrue(game.getBoard().getSpot(ROW_3, COL_B).isEmpty());
+		
 		//test cattura pedone
-		game.currentGame("e5");
-		game.currentGame("dxe5");
-		assertTrue(game.getBoard().getSpot(ROW_5, COL_E).getPiece() instanceof Pawn);
-		assertTrue(game.getBoard().getSpot(ROW_5, COL_E).getPiece().isWhite());
-		assertTrue(game.getBoard().getSpot(ROW_4, COL_D).isEmpty());
-		
-		//test isMoved Regina
-		game.currentGame("d5");
-		game.currentGame("Dxd5");
-		assertTrue(game.getBoard().getSpot(ROW_5, COL_D).getPiece().isMoved());
-		assertTrue(game.getBoard().getSpot(ROW_1, COL_D).isEmpty());
-
-		//test cattura Regina
-		assertTrue(game.getBoard().getSpot(ROW_5, COL_D).getPiece() instanceof Queen);
-		assertTrue(game.getBoard().getSpot(ROW_5, COL_D).getPiece().isWhite());
-
-		//test  isMoved Cavallo
-		game.currentGame("h5");
-		game.currentGame("Ca3");
-		assertTrue(game.getBoard().getSpot(ROW_3, COL_A).getPiece().isMoved());
-		assertTrue(game.getBoard().getSpot(ROW_1, COL_B).isEmpty());
-
-		//test cattura Cavallo
-		game.currentGame("b5");
-		game.currentGame("Cxb5");
-		assertTrue(game.getBoard().getSpot(ROW_5, COL_B).getPiece() instanceof Knight);
-		assertTrue(game.getBoard().getSpot(ROW_5, COL_B).getPiece().isWhite());
-		assertTrue(game.getBoard().getSpot(ROW_3, COL_A).isEmpty());
-
-		//test isMoved Alfiere
-		game.currentGame("g5");
-		game.currentGame("Axg5");
-		assertTrue(game.getBoard().getSpot(ROW_5, COL_G).getPiece().isMoved());
-		assertTrue(game.getBoard().getSpot(ROW_1, COL_C).isEmpty());
-
-		//test cattura Alfiere
-		assertTrue(game.getBoard().getSpot(ROW_5, COL_G).getPiece() instanceof Bishop);
-		assertTrue(game.getBoard().getSpot(ROW_5, COL_G).getPiece().isWhite());
-
-		//test isMoved Torre
-		game.currentGame("Ch6");
-		game.currentGame("h4");
-		game.currentGame("Ag7");
-		game.currentGame("Th3");
-		assertTrue(game.getBoard().getSpot(ROW_3, COL_H).getPiece().isMoved());
-		assertTrue(game.getBoard().getSpot(ROW_1, COL_H).isEmpty());
-
-		//test cattura Torre
-		move = new StringTokenizer("f5 a4 f4 a5 f3 Txf3");
-		while(move.hasMoreTokens()) {
-			game.currentGame(move.nextToken());
-		}
-		assertTrue(game.getBoard().getSpot(ROW_3, COL_F).getPiece() instanceof Rook);
-		assertTrue(game.getBoard().getSpot(ROW_3, COL_F).getPiece().isWhite());
-		assertTrue(game.getBoard().getSpot(ROW_3, COL_H).isEmpty());
-		
-		//test isMoved Re
 		game.currentGame("c5");
-		game.currentGame("Rd2");
-		assertTrue(game.getBoard().getSpot(ROW_2, COL_D).getPiece().isMoved());
-		assertTrue(game.getBoard().getSpot(ROW_1, COL_E).isEmpty());
-
-		//test cattura Re
-		game.currentGame("c4");
-		game.currentGame("Rc3");
-		game.currentGame("Th7");
-		game.currentGame("Rxc4");
-		assertTrue(game.getBoard().getSpot(ROW_4, COL_C).getPiece() instanceof King);
-		assertTrue(game.getBoard().getSpot(ROW_4, COL_C).getPiece().isWhite());
-		assertTrue(game.getBoard().getSpot(ROW_3, COL_C).isEmpty());
+		game.currentGame("bxc5");
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_C).getPiece() instanceof Pawn);
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_C).getPiece().isWhite());
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_B).isEmpty());
 	}
 	
 	@Test
-	void testIsAmbiguity() {
+	void testMoveAndCaptureQueen() {
+		
+		//(inizializzazione pezzi per test)
+		newBoard.getSpot(ROW_3, COL_D).setPiece(new Queen(WHITE));
+		newBoard.getSpot(ROW_6, COL_C).setPiece(new Pawn(BLACK));
+		newBoard.recalLegalMoves();
+		game.setBoard(newBoard);
+		
+		//test isMoved Regina
+		game.currentGame("Dd4");
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_D).getPiece().isMoved());
+		assertTrue(game.getBoard().getSpot(ROW_3, COL_D).isEmpty());
+
+		//test cattura Regina
+		game.currentGame("c5");
+		game.currentGame("Dxc5");
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_C).getPiece() instanceof Queen);
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_C).getPiece().isWhite());
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_D).isEmpty());
+	}
+	
+	@Test
+	void testMoveAndCaptureKnight() {
+	
+		//(inizializzazione pezzi per test)
+		newBoard.getSpot(ROW_2, COL_E).setPiece(new Knight(WHITE));
+		newBoard.getSpot(ROW_7, COL_C).setPiece(new Pawn(BLACK));
+		newBoard.recalLegalMoves();
+		game.setBoard(newBoard);
+		
+		//test isMoved Cavallo
+		game.currentGame("Cd4");
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_D).getPiece().isMoved());
+		assertTrue(game.getBoard().getSpot(ROW_2, COL_E).isEmpty());
+
+		//test cattura Cavallo
+		game.currentGame("c6");
+		game.currentGame("Cxc6");
+		assertTrue(game.getBoard().getSpot(ROW_6, COL_C).getPiece() instanceof Knight);
+		assertTrue(game.getBoard().getSpot(ROW_6, COL_C).getPiece().isWhite());
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_D).isEmpty());
+	}
+
+	@Test
+	void testMoveAndCaptureBishop() {
+	
+		//(inizializzazione pezzi per test)
+		newBoard.getSpot(ROW_2, COL_G).setPiece(new Bishop(WHITE));
+		newBoard.getSpot(ROW_6, COL_C).setPiece(new Pawn(BLACK));
+		newBoard.recalLegalMoves();
+		game.setBoard(newBoard);
+		
+		//test isMoved Alfiere
+		game.currentGame("Ae4");
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_E).getPiece().isMoved());
+		assertTrue(game.getBoard().getSpot(ROW_2, COL_G).isEmpty());
+
+		//test cattura Alfiere
+		game.currentGame("Rb8");
+		game.currentGame("Axc6");
+		assertTrue(game.getBoard().getSpot(ROW_6, COL_C).getPiece() instanceof Bishop);
+		assertTrue(game.getBoard().getSpot(ROW_6, COL_C).getPiece().isWhite());
+	}
+
+	@Test
+	void testMoveAndCaptureRook() {
+		
+		//(inizializzazione pezzi per test)
+		newBoard.getSpot(ROW_3, COL_H).setPiece(new Rook(WHITE));
+		newBoard.getSpot(ROW_5, COL_C).setPiece(new Pawn(BLACK));
+		newBoard.recalLegalMoves();
+		game.setBoard(newBoard);
+	
+		//test isMoved Torre
+		game.currentGame("Th4");
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_H).getPiece().isMoved());
+		assertTrue(game.getBoard().getSpot(ROW_3, COL_H).isEmpty());
+
+		//test cattura Torre
+		game.currentGame("c4");
+		game.currentGame("Txc4");
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_C).getPiece() instanceof Rook);
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_C).getPiece().isWhite());
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_H).isEmpty());
+	}
+		
+	@Test
+	void testMoveAndCaptureKing() {
+		
+		//(inizializzazione pezzi per test)
+		newBoard.getSpot(ROW_3, COL_C).setPiece(new Pawn(BLACK));
+		newBoard.recalLegalMoves();
+		game.setBoard(newBoard);
+		
+		//test isMoved Re
+		game.currentGame("Rb1");
+		assertTrue(game.getBoard().getSpot(ROW_1, COL_B).getPiece().isMoved());
+		assertTrue(game.getBoard().getSpot(ROW_1, COL_A).isEmpty());
+
+		//test cattura Re
+		game.currentGame("c2");
+		game.currentGame("Rxc2");
+		assertTrue(game.getBoard().getSpot(ROW_2, COL_C).getPiece() instanceof King);
+		assertTrue(game.getBoard().getSpot(ROW_2, COL_C).getPiece().isWhite());
+		assertTrue(game.getBoard().getSpot(ROW_1, COL_B).isEmpty());
+	}
+	
+	@Test
+	void testAmbiguityRook() {
+		
+		//(inizializzazione pezzi per test)
+		newBoard.getSpot(ROW_1, COL_D).setPiece(new Rook(WHITE));
+		newBoard.getSpot(ROW_5, COL_H).setPiece(new Rook(WHITE));
+		newBoard.getSpot(ROW_6, COL_F).setPiece(new Pawn(BLACK));
+		newBoard.recalLegalMoves();
+		game.setBoard(newBoard);
 		
 		//test ambiguita' movimento torre
-		move = new StringTokenizer("a4 a5 Ta3 b5 axb5 Ta6 h4 h5 Tah3");
-		while (move.hasMoreTokens()) {
-			game.currentGame(move.nextToken());
-		}
-		assertTrue(game.getBoard().getSpot(ROW_3, COL_H).getPiece() instanceof Rook);
-		assertTrue(game.getBoard().getSpot(ROW_3, COL_A).isEmpty());
-		assertTrue(game.getBoard().getSpot(ROW_1, COL_H).getPiece() instanceof Rook);
+		game.currentGame("Tdd5");
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_D).getPiece() instanceof Rook);
+		assertTrue(game.getBoard().getSpot(ROW_1, COL_D).isEmpty());
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_H).getPiece() instanceof Rook);
 		
 		//test ambiguita' cattura torre
-		game = new Game();
-		move= new StringTokenizer("g4 h5 gxh5 Txh5 h4 g5 a4 gxh4 a5 f6 Ta4 f5 Taxh4");
-		while (move.hasMoreTokens()) {
-			game.currentGame(move.nextToken());
-		}
-		assertTrue(game.getBoard().getSpot(ROW_4, COL_H).getPiece() instanceof Rook);
-		assertTrue(game.getBoard().getSpot(ROW_4, COL_H).getPiece().isWhite());
-		assertTrue(game.getBoard().getSpot(ROW_4, COL_A).isEmpty());
-		assertTrue(game.getBoard().getSpot(ROW_1, COL_H).getPiece() instanceof Rook);
+		game.currentGame("f5");
+		game.currentGame("Tdxf5");
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_F).getPiece() instanceof Rook);
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_F).getPiece().isWhite());
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_D).isEmpty());
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_H).getPiece() instanceof Rook);
 	}
 }

@@ -357,6 +357,14 @@ public class Game {
 	public Board getBoard() {
 		return board;
 	}
+	
+	/**
+	 * Setta la scacchiera
+	 * @param inBoard
+	 */
+	public void setBoard(final Board inBoard) {
+		this.board = inBoard;
+	}
 
 	/**
 	 * restituisce un booleano che indica il turno
@@ -443,4 +451,5 @@ public class Game {
 	public void setBlackCaptures(final ArrayList<Piece> inBlackCaptures) {
 		this.blackCaptures = inBlackCaptures;
 	}
+	
 }
