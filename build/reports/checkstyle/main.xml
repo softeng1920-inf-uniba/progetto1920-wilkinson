@@ -9,6 +9,8 @@
 <file name="C:\scacchi\progetto1920-wilkinson\src\main\java\it\uniba\main\Board.java">
 </file>
 <file name="C:\scacchi\progetto1920-wilkinson\src\main\java\it\uniba\main\Game.java">
+<error line="360" severity="error" message="Line has trailing spaces." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpSinglelineCheck"/>
+<error line="454" severity="error" message="Line has trailing spaces." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpSinglelineCheck"/>
 </file>
 <file name="C:\scacchi\progetto1920-wilkinson\src\main\java\it\uniba\main\King.java">
 </file>

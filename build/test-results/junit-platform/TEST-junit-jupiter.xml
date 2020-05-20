@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="JUnit Jupiter" tests="35" skipped="0" failures="0" errors="0" time="0.158" hostname="DESKTOP-5SM2VTD" timestamp="2020-05-18T21:39:19">
+<testsuite name="JUnit Jupiter" tests="44" skipped="0" failures="0" errors="0" time="0.3" hostname="DESKTOP-5SM2VTD" timestamp="2020-05-20T21:57:22">
 <properties>
 <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
 <property name="file.encoding" value="windows-1252"/>
@@ -57,7 +57,7 @@
 <property name="user.timezone" value="Europe/Berlin"/>
 <property name="user.variant" value=""/>
 </properties>
-<testcase name="testValidAlgebraicNotation()" classname="it.uniba.example.AlgebraicNotationTest" time="0.026">
+<testcase name="testValidAlgebraicNotation()" classname="it.uniba.example.AlgebraicNotationTest" time="0.035">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:it.uniba.example.AlgebraicNotationTest]/[method:testValidAlgebraicNotation()]
 display-name: testValidAlgebraicNotation()
@@ -105,7 +105,7 @@ unique-id: [engine:junit-jupiter]/[class:it.uniba.example.ChessTest]/[method:tes
 display-name: testBishopMovements()
 ]]></system-out>
 </testcase>
-<testcase name="testCastleRookEndUnderAttack()" classname="it.uniba.example.MoveTest" time="0.003">
+<testcase name="testCastleRookEndUnderAttack()" classname="it.uniba.example.MoveTest" time="0.007">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:it.uniba.example.MoveTest]/[method:testCastleRookEndUnderAttack()]
 display-name: testCastleRookEndUnderAttack()
@@ -117,7 +117,7 @@ unique-id: [engine:junit-jupiter]/[class:it.uniba.example.MoveTest]/[method:test
 display-name: testCastleKingMoved()
 ]]></system-out>
 </testcase>
-<testcase name="testCastleLongBlack()" classname="it.uniba.example.MoveTest" time="0.001">
+<testcase name="testCastleLongBlack()" classname="it.uniba.example.MoveTest" time="0">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:it.uniba.example.MoveTest]/[method:testCastleLongBlack()]
 display-name: testCastleLongBlack()
@@ -129,13 +129,13 @@ unique-id: [engine:junit-jupiter]/[class:it.uniba.example.MoveTest]/[method:test
 display-name: testCastleShort()
 ]]></system-out>
 </testcase>
-<testcase name="testCastleRookUnderAttack()" classname="it.uniba.example.MoveTest" time="0.001">
+<testcase name="testCastleRookUnderAttack()" classname="it.uniba.example.MoveTest" time="0">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:it.uniba.example.MoveTest]/[method:testCastleRookUnderAttack()]
 display-name: testCastleRookUnderAttack()
 ]]></system-out>
 </testcase>
-<testcase name="testCastleLong()" classname="it.uniba.example.MoveTest" time="0">
+<testcase name="testCastleLong()" classname="it.uniba.example.MoveTest" time="0.001">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:it.uniba.example.MoveTest]/[method:testCastleLong()]
 display-name: testCastleLong()
@@ -159,13 +159,13 @@ unique-id: [engine:junit-jupiter]/[class:it.uniba.example.MoveTest]/[method:test
 display-name: testCastleKingEndUnderAttack()
 ]]></system-out>
 </testcase>
-<testcase name="testCastleKingUnderAttack()" classname="it.uniba.example.MoveTest" time="0.012">
+<testcase name="testCastleKingUnderAttack()" classname="it.uniba.example.MoveTest" time="0.023">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:it.uniba.example.MoveTest]/[method:testCastleKingUnderAttack()]
 display-name: testCastleKingUnderAttack()
 ]]></system-out>
 </testcase>
-<testcase name="testCastleIncorrectPiece()" classname="it.uniba.example.MoveTest" time="0.001">
+<testcase name="testCastleIncorrectPiece()" classname="it.uniba.example.MoveTest" time="0">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:it.uniba.example.MoveTest]/[method:testCastleIncorrectPiece()]
 display-name: testCastleIncorrectPiece()
@@ -177,31 +177,79 @@ unique-id: [engine:junit-jupiter]/[class:it.uniba.example.MoveTest]/[method:test
 display-name: testCastleEnemyPieceBetween()
 ]]></system-out>
 </testcase>
-<testcase name="testCastleLongSpotUnderAttack()" classname="it.uniba.example.MoveTest" time="0.003">
+<testcase name="testCastleLongSpotUnderAttack()" classname="it.uniba.example.MoveTest" time="0.001">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:it.uniba.example.MoveTest]/[method:testCastleLongSpotUnderAttack()]
 display-name: testCastleLongSpotUnderAttack()
 ]]></system-out>
 </testcase>
-<testcase name="testCastleRookMoved()" classname="it.uniba.example.MoveTest" time="0.001">
+<testcase name="testCastleRookMoved()" classname="it.uniba.example.MoveTest" time="0">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:it.uniba.example.MoveTest]/[method:testCastleRookMoved()]
 display-name: testCastleRookMoved()
 ]]></system-out>
 </testcase>
-<testcase name="testCastleShortBlack()" classname="it.uniba.example.MoveTest" time="0.001">
+<testcase name="testCastleShortBlack()" classname="it.uniba.example.MoveTest" time="0">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:it.uniba.example.MoveTest]/[method:testCastleShortBlack()]
 display-name: testCastleShortBlack()
 ]]></system-out>
 </testcase>
-<testcase name="testBishopMovement()" classname="it.uniba.example.PieceTest" time="0">
+<testcase name="testMoveAndCaptureBishop()" classname="it.uniba.example.GameTest" time="0.016">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:it.uniba.example.GameTest]/[method:testMoveAndCaptureBishop()]
+display-name: testMoveAndCaptureBishop()
+]]></system-out>
+</testcase>
+<testcase name="testMoveAndCaptureKnight()" classname="it.uniba.example.GameTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:it.uniba.example.GameTest]/[method:testMoveAndCaptureKnight()]
+display-name: testMoveAndCaptureKnight()
+]]></system-out>
+</testcase>
+<testcase name="testMoveAndCaptureQueen()" classname="it.uniba.example.GameTest" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:it.uniba.example.GameTest]/[method:testMoveAndCaptureQueen()]
+display-name: testMoveAndCaptureQueen()
+]]></system-out>
+</testcase>
+<testcase name="testIsMovedAndCapturePawn()" classname="it.uniba.example.GameTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:it.uniba.example.GameTest]/[method:testIsMovedAndCapturePawn()]
+display-name: testIsMovedAndCapturePawn()
+]]></system-out>
+</testcase>
+<testcase name="testAmbiguityRook()" classname="it.uniba.example.GameTest" time="0.01">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:it.uniba.example.GameTest]/[method:testAmbiguityRook()]
+display-name: testAmbiguityRook()
+]]></system-out>
+</testcase>
+<testcase name="testMoveAndCaptureKing()" classname="it.uniba.example.GameTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:it.uniba.example.GameTest]/[method:testMoveAndCaptureKing()]
+display-name: testMoveAndCaptureKing()
+]]></system-out>
+</testcase>
+<testcase name="testMoveAndCaptureRook()" classname="it.uniba.example.GameTest" time="0.013">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:it.uniba.example.GameTest]/[method:testMoveAndCaptureRook()]
+display-name: testMoveAndCaptureRook()
+]]></system-out>
+</testcase>
+<testcase name="testPinnedWhiteKingMovements()" classname="it.uniba.example.PieceTest" time="0.02">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:it.uniba.example.PieceTest]/[method:testPinnedWhiteKingMovements()]
+display-name: testPinnedWhiteKingMovements()
+]]></system-out>
+</testcase>
+<testcase name="testBishopMovement()" classname="it.uniba.example.PieceTest" time="0.003">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:it.uniba.example.PieceTest]/[method:testBishopMovement()]
 display-name: testBishopMovement()
 ]]></system-out>
 </testcase>
-<testcase name="testKingRecalculateMovements()" classname="it.uniba.example.PieceTest" time="0.004">
+<testcase name="testKingRecalculateMovements()" classname="it.uniba.example.PieceTest" time="0.002">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:it.uniba.example.PieceTest]/[method:testKingRecalculateMovements()]
 display-name: testKingRecalculateMovements()
@@ -213,13 +261,19 @@ unique-id: [engine:junit-jupiter]/[class:it.uniba.example.PieceTest]/[method:tes
 display-name: testBishopRecalculateMovements()
 ]]></system-out>
 </testcase>
-<testcase name="testKnightRecalculateMovements()" classname="it.uniba.example.PieceTest" time="0.012">
+<testcase name="testKnightRecalculateMovements()" classname="it.uniba.example.PieceTest" time="0.002">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:it.uniba.example.PieceTest]/[method:testKnightRecalculateMovements()]
 display-name: testKnightRecalculateMovements()
 ]]></system-out>
 </testcase>
-<testcase name="testQueenMovement()" classname="it.uniba.example.PieceTest" time="0.001">
+<testcase name="testPinnedBlackKingMovements()" classname="it.uniba.example.PieceTest" time="0.012">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:it.uniba.example.PieceTest]/[method:testPinnedBlackKingMovements()]
+display-name: testPinnedBlackKingMovements()
+]]></system-out>
+</testcase>
+<testcase name="testQueenMovement()" classname="it.uniba.example.PieceTest" time="0">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:it.uniba.example.PieceTest]/[method:testQueenMovement()]
 display-name: testQueenMovement()
@@ -231,7 +285,7 @@ unique-id: [engine:junit-jupiter]/[class:it.uniba.example.PieceTest]/[method:tes
 display-name: testKnightMovement()
 ]]></system-out>
 </testcase>
-<testcase name="testRookRecalculateMovements()" classname="it.uniba.example.PieceTest" time="0.003">
+<testcase name="testRookRecalculateMovements()" classname="it.uniba.example.PieceTest" time="0.008">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:it.uniba.example.PieceTest]/[method:testRookRecalculateMovements()]
 display-name: testRookRecalculateMovements()
@@ -249,19 +303,19 @@ unique-id: [engine:junit-jupiter]/[class:it.uniba.example.PieceTest]/[method:tes
 display-name: testKingMovement()
 ]]></system-out>
 </testcase>
-<testcase name="testQueenRecalculateMovements()" classname="it.uniba.example.PieceTest" time="0.003">
+<testcase name="testQueenRecalculateMovements()" classname="it.uniba.example.PieceTest" time="0.004">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:it.uniba.example.PieceTest]/[method:testQueenRecalculateMovements()]
 display-name: testQueenRecalculateMovements()
 ]]></system-out>
 </testcase>
-<testcase name="testPawnMovement()" classname="it.uniba.example.PieceTest" time="0.001">
+<testcase name="testPawnMovement()" classname="it.uniba.example.PieceTest" time="0">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:it.uniba.example.PieceTest]/[method:testPawnMovement()]
 display-name: testPawnMovement()
 ]]></system-out>
 </testcase>
-<testcase name="testPawnRecalculateMovements()" classname="it.uniba.example.PieceTest" time="0.001">
+<testcase name="testPawnRecalculateMovements()" classname="it.uniba.example.PieceTest" time="0">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:it.uniba.example.PieceTest]/[method:testPawnRecalculateMovements()]
 display-name: testPawnRecalculateMovements()
