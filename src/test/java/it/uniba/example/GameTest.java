@@ -379,7 +379,7 @@ class GameTest {
 		newBoard.getSpot(ROW_7, COL_C).setPiece(new Pawn(WHITE)); 
 		newBoard.recalLegalMoves();
 		newBoard.refineLegalMoves();
-		game.setBoard(newBoard);
+		game.setBoard(newBoard); 
 		game.getBoard().showBoard();
 		game.currentGame("Re2");
 		assertFalse(game.currentGame("Cxc7"));//provo ad effettuare la mossa ambigua
