@@ -163,7 +163,6 @@ class MoveTest {
 			((Pawn) board.getSpot(ROW_4, COL_B).getPiece()).setCapturingEnPassant(true);
 			board.recalLegalMoves();
 			move = new Move("cxb3 e.p.", board, BLACK);
-			board.showBoard();
 			assertTrue(move.isEnPassantMove(board));
 		}
 		
