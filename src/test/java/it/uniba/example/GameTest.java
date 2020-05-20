@@ -226,6 +226,8 @@ class GameTest {
 		newBoard.refineLegalMoves();
 		game.setBoard(newBoard);
 		assertFalse(game.currentGame("Rxf2"));//la mossa non potra' essere effettuata
+		assertFalse(game.currentGame("Re2"));//la mossa non potra' essere effettuata
+		assertFalse(game.currentGame("Rf1"));//la mossa non potra' essere effettuata
 		//controllo che il re non si sia mosso
 		assertTrue(game.getBoard().getSpot(ROW_1, COL_E).getPiece() instanceof King);
 	}
@@ -261,6 +263,8 @@ class GameTest {
 		game.setBoard(newBoard);
 		game.currentGame("Re2");
 		assertFalse(game.currentGame("Rxf7")); //provo ad eseguire la mossa illegale
+		assertFalse(game.currentGame("Re7")); //provo ad eseguire la mossa illegale
+		assertFalse(game.currentGame("Rf8")); //provo ad eseguire la mossa illegale
 		assertTrue(newBoard.getSpot(ROW_8, COL_E).getPiece() instanceof King);
 	}
 	//testo situazione in cui il re nero ha solo una mossa possibile
@@ -315,59 +319,72 @@ class GameTest {
 	@Test
 	void testIsAmbiguityWhiteKnight() {
 		// test ambiguita' movimento cavallo bianco
-		move = new StringTokenizer("Cc3 d6 Cf3 c6 Cg5 b6"); // serie di mosse
-		while (move.hasMoreTokens()) {
-			game.currentGame(move.nextToken());
-		}
-		// provo ad eseguire la mossa ambigua
-		game.currentGame("Cce4");
-		// verifico che il pezzo che spostato sia quello giusto
-		assertTrue(game.getBoard().getSpot(ROW_4, COL_E).getPiece() instanceof Knight);
-		assertTrue(game.getBoard().getSpot(ROW_5, COL_C).isEmpty());
-		assertTrue(game.getBoard().getSpot(ROW_5, COL_G).getPiece() instanceof Knight);
+		Board newBoard =new Board(true);
+		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
+		newBoard.getSpot(ROW_8, COL_E).setPiece(new King(BLACK));
+		newBoard.getSpot(ROW_3, COL_A).setPiece(new Knight(WHITE)); 
+		newBoard.getSpot(ROW_3, COL_E).setPiece(new Knight(WHITE)); 
+		newBoard.recalLegalMoves();
+		newBoard.refineLegalMoves();
+		game.setBoard(newBoard);
+		assertFalse(game.currentGame("Cc2"));//provo ad effettuare la mossa ambigua
+		assertTrue(game.getBoard().getSpot(ROW_2, COL_C).isEmpty());
+		assertTrue(game.currentGame("Cac2"));//effettuo la mossa non ambigua
+		assertTrue(game.getBoard().getSpot(ROW_2, COL_C).getPiece() instanceof Knight);
 	}
+	
 	// test ambiguita' cattura da parte del cavallo bianco
-
 	@Test
 	void testIsAmbiguityWhiteKnightCapture() {
-		move = new StringTokenizer("Cc3 d5 Cf3 a6 e4 dxe4 Cg5 a5");// serie di mosse
-		while (move.hasMoreTokens()) {
-			game.currentGame(move.nextToken());
+		Board newBoard =new Board(true);
+		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
+		newBoard.getSpot(ROW_8, COL_E).setPiece(new King(BLACK));
+		newBoard.getSpot(ROW_3, COL_A).setPiece(new Knight(WHITE)); 
+		newBoard.getSpot(ROW_3, COL_E).setPiece(new Knight(WHITE)); 
+		newBoard.getSpot(ROW_2, COL_C).setPiece(new Pawn(BLACK)); 
+		newBoard.recalLegalMoves();
+		newBoard.refineLegalMoves();
+		game.setBoard(newBoard);
+		assertFalse(game.currentGame("Cxc2"));//provo ad effettuare la mossa ambigua
+		assertTrue(game.currentGame("Caxc2"));//effettuo la mossa non ambigua
+		assertTrue(game.getBoard().getSpot(ROW_2, COL_C).getPiece() instanceof Knight);
 		}
-		// provo ad eseguire la mossa ambigua
-		game.currentGame("Ccxe4");
-		// verifico che il pezzo spostato sia quello giusto
-		assertTrue(game.getBoard().getSpot(ROW_4, COL_E).getPiece() instanceof Knight);
-		assertTrue(game.getBoard().getSpot(ROW_5, COL_C).isEmpty());
-		assertTrue(game.getBoard().getSpot(ROW_5, COL_G).getPiece() instanceof Knight);
-	}
+	
 	// test ambiguita' movimento cavallo nero
 	@Test
 	void testIsAmbiguityBlackKnight() {
-		move = new StringTokenizer("d4 Cc6 e4 Cf6 c3 Cg4 c4"); // serie di mosse
-		while (move.hasMoreTokens()) {
-			game.currentGame(move.nextToken());
-		}
-		// provo ad eseguire la mossa ambigua
-		game.currentGame("Cce5");
-		// verifico che il pezzo che spostato sia quello giusto
-		assertTrue(game.getBoard().getSpot(ROW_5, COL_E).getPiece() instanceof Knight);
-		assertTrue(game.getBoard().getSpot(ROW_6, COL_C).isEmpty());
-		assertTrue(game.getBoard().getSpot(ROW_4, COL_G).getPiece() instanceof Knight);
+		Board newBoard =new Board(true);
+		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
+		newBoard.getSpot(ROW_8, COL_E).setPiece(new King(BLACK));
+		newBoard.getSpot(ROW_6, COL_A).setPiece(new Knight(BLACK)); 
+		newBoard.getSpot(ROW_6, COL_E).setPiece(new Knight(BLACK)); 
+		newBoard.recalLegalMoves();
+		newBoard.refineLegalMoves();
+		game.setBoard(newBoard);
+		game.getBoard().showBoard();
+		game.currentGame("Re2");
+		assertFalse(game.currentGame("Cc7"));//provo ad effettuare la mossa ambigua
+		assertTrue(game.currentGame("Cac7"));//effettuo la mossa non ambigua
+		assertTrue(game.getBoard().getSpot(ROW_7, COL_C).getPiece() instanceof Knight);
 	}
-	// test ambiguita' movimento cavallo nero
+	
+	// test ambiguita' cattura da parte del cavallo nero
 	@Test
 	void testIsAmbiguityBlackKnightCapture() {
-		move = new StringTokenizer("e4 Cc6 e5 Cf6 b3 Cg4 b4"); // serie di mosse
-		while (move.hasMoreTokens()) {
-			game.currentGame(move.nextToken());
-		}
-		// provo ad eseguire la mossa ambigua
-		game.currentGame("Ccxe5");
-		// verifico che il pezzo che spostato sia quello giusto
-		assertTrue(game.getBoard().getSpot(ROW_5, COL_E).getPiece() instanceof Knight);
-		assertTrue(game.getBoard().getSpot(ROW_6, COL_C).isEmpty());
-		assertTrue(game.getBoard().getSpot(ROW_4, COL_G).getPiece() instanceof Knight);
+		Board newBoard =new Board(true);
+		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
+		newBoard.getSpot(ROW_8, COL_E).setPiece(new King(BLACK));
+		newBoard.getSpot(ROW_6, COL_A).setPiece(new Knight(BLACK)); 
+		newBoard.getSpot(ROW_6, COL_E).setPiece(new Knight(BLACK)); 
+		newBoard.getSpot(ROW_7, COL_C).setPiece(new Pawn(WHITE)); 
+		newBoard.recalLegalMoves();
+		newBoard.refineLegalMoves();
+		game.setBoard(newBoard);
+		game.getBoard().showBoard();
+		game.currentGame("Re2");
+		assertFalse(game.currentGame("Cxc7"));//provo ad effettuare la mossa ambigua
+		assertTrue(game.currentGame("Caxc7"));//effettuo la mossa non ambigua
+		assertTrue(game.getBoard().getSpot(ROW_7, COL_C).getPiece() instanceof Knight);
 	}
 	// test ambiguita' movimento pedone bianco, due pedoni nella stessa colonna
 	@Test
