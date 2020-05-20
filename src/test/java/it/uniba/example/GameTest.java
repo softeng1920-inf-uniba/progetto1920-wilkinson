@@ -3,24 +3,28 @@ package it.uniba.example;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.StringTokenizer;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.uniba.main.Bishop;
 import it.uniba.main.Board;
 import it.uniba.main.Game;
 import it.uniba.main.King;
 import it.uniba.main.Knight;
 import it.uniba.main.Pawn;
 import it.uniba.main.Piece;
+import it.uniba.main.Queen;
 import it.uniba.main.Rook;
 import it.uniba.main.Spot;
 
-
-class GameTest {
+public class GameTest {
 	private static final int DIM_BOARD = 8;
+	private static Game game;
+	private static Board newBoard;
+	private static final boolean WHITE = true;
+	private static final boolean BLACK = false;
+//  RIGHE
 	private static final int ROW_1 = 7;
 	private static final int ROW_2 = 6;
 	private static final int ROW_3 = 5;
@@ -29,6 +33,7 @@ class GameTest {
 	private static final int ROW_6 = 2;
 	private static final int ROW_7 = 1;
 	private static final int ROW_8 = 0;
+//  COLONNE
 	private static final int COL_H = 7;
 	private static final int COL_G = 6;
 	private static final int COL_F = 5;
@@ -37,15 +42,13 @@ class GameTest {
 	private static final int COL_C = 2;
 	private static final int COL_B = 1;
 	private static final int COL_A = 0;
-	private static final boolean WHITE = true;
-	private static final boolean BLACK = false;
-	private static Game game;
-	StringTokenizer move;
-	Piece piece;
 
 	@BeforeEach
 	void setUp() {
 		game = new Game();
+		newBoard = new Board(true);
+		newBoard.getSpot(ROW_1, COL_E).setPiece(new King (WHITE));
+		newBoard.getSpot(ROW_8, COL_E).setPiece(new King (BLACK));
 	}
 
 	/**Post-condizioni:
@@ -78,15 +81,12 @@ class GameTest {
 	void testEnPassantWhite() {
 		// Cattura en passant da parte del pedone bianco
 		Piece piece;
-		Board newBoard =new Board(true);
 		// inizializzo pedoni 
 		for (int j = COL_A; j < DIM_BOARD; j++) {
 			newBoard.getSpot(ROW_7, j).setPiece(new Pawn(BLACK));
 			newBoard.getSpot(ROW_2, j).setPiece(new Pawn(WHITE));
 		}
 		newBoard.getSpot(ROW_4, COL_C).setPiece(new Pawn(WHITE));
-		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
-		newBoard.getSpot(ROW_8, COL_C).setPiece(new King(BLACK));
 		newBoard.recalLegalMoves();
 		game.setBoard(newBoard);
 		game.currentGame("c5");
@@ -133,15 +133,12 @@ class GameTest {
 	@Test
 	void testEnPassantOneSpotBlack() {
 		Piece piece;
-		Board newBoard =new Board(true);
 		// inizializzo pedoni 
 		for (int j = COL_A; j < DIM_BOARD; j++) {
 			newBoard.getSpot(ROW_7, j).setPiece(new Pawn(BLACK));
 			newBoard.getSpot(ROW_2, j).setPiece(new Pawn(WHITE));
 		}
 		newBoard.getSpot(ROW_4, COL_C).setPiece(new Pawn(WHITE));
-		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
-		newBoard.getSpot(ROW_8, COL_C).setPiece(new King(BLACK));
 		newBoard.recalLegalMoves();
 		game.setBoard(newBoard);
 		game.currentGame("c5");
@@ -155,15 +152,12 @@ class GameTest {
 	void testEnPassantBlack() {
 		Piece piece;
 		// Cattura en passant da parte del pedone nero
-		Board newBoard =new Board(true);
 		// inizializzo pedoni 
 		for (int j = COL_A; j < DIM_BOARD; j++) {
 			newBoard.getSpot(ROW_7, j).setPiece(new Pawn(BLACK));
 			newBoard.getSpot(ROW_2, j).setPiece(new Pawn(WHITE));
 		}
 		newBoard.getSpot(ROW_4, COL_B).setPiece(new Pawn(BLACK));
-		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
-		newBoard.getSpot(ROW_8, COL_C).setPiece(new King(BLACK));
 		newBoard.recalLegalMoves();
 		game.setBoard(newBoard);
 		game.currentGame("a4");
@@ -194,15 +188,12 @@ class GameTest {
 		@Test
 		void testEnPassantOneSpotWhite() {
 			Piece piece;
-			Board newBoard =new Board(true);
 			// inizializzo pedoni 
 			for (int j = COL_A; j < DIM_BOARD; j++) {
 				newBoard.getSpot(ROW_7, j).setPiece(new Pawn(BLACK));
 				newBoard.getSpot(ROW_2, j).setPiece(new Pawn(WHITE));
 			}
 			newBoard.getSpot(ROW_4, COL_A).setPiece(new Pawn(BLACK));
-			newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
-			newBoard.getSpot(ROW_8, COL_C).setPiece(new King(BLACK));
 			newBoard.recalLegalMoves();
 			game.setBoard(newBoard);
 			game.currentGame("b3"); //Movimento di una sola casa 
@@ -215,9 +206,6 @@ class GameTest {
 	@Test
 	void testWhiteKingNoLegalMoves() {
 		//inserisco i pezzi nella scacchiera per bloccare il movimento del re bianco
-		Board newBoard =new Board(true);
-		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
-		newBoard.getSpot(ROW_8, COL_C).setPiece(new King(BLACK));
 		newBoard.getSpot(ROW_1, COL_D).setPiece(new Rook(WHITE)); 
 		newBoard.getSpot(ROW_2, COL_D).setPiece(new Pawn(WHITE));
 		newBoard.getSpot(ROW_2, COL_F).setPiece(new Rook(BLACK)); 
@@ -235,9 +223,7 @@ class GameTest {
 	@Test
 	void testWhiteKingOneLegalMoves() {
 		//inserisco i pezzi nella scacchiera per dare un solo movimento del re bianco
-		Board newBoard =new Board(true);
-		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
-		newBoard.getSpot(ROW_8, COL_C).setPiece(new King(BLACK));
+		Piece piece;
 		newBoard.getSpot(ROW_1, COL_D).setPiece(new Rook(WHITE)); 
 		newBoard.getSpot(ROW_2, COL_D).setPiece(new Pawn(WHITE));
 		newBoard.getSpot(ROW_2, COL_F).setPiece(new Rook(BLACK)); 
@@ -251,9 +237,6 @@ class GameTest {
 	@Test
 	void testBlackKingNoLegalMoves() {
 		//inserisco i pezzi nella scacchiera per bloccare il movimento del re nero
-		Board newBoard =new Board(true);
-		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
-		newBoard.getSpot(ROW_8, COL_E).setPiece(new King(BLACK));
 		newBoard.getSpot(ROW_7, COL_D).setPiece(new Pawn(BLACK)); 
 		newBoard.getSpot(ROW_8, COL_D).setPiece(new Rook(BLACK));
 		newBoard.getSpot(ROW_7, COL_F).setPiece(new Rook(WHITE)); 
@@ -271,9 +254,6 @@ class GameTest {
 	@Test
 	void testBlackKingOneLegalMoves() {
 		//inserisco i pezzi nella scacchiera per permettere un solo movimento al re nero
-				Board newBoard =new Board(true);
-				newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
-				newBoard.getSpot(ROW_8, COL_E).setPiece(new King(BLACK));
 				newBoard.getSpot(ROW_7, COL_D).setPiece(new Pawn(BLACK)); 
 				newBoard.getSpot(ROW_8, COL_D).setPiece(new Rook(BLACK));
 				newBoard.getSpot(ROW_7, COL_F).setPiece(new Rook(WHITE)); 
@@ -289,9 +269,6 @@ class GameTest {
 	@Test
 	void testWhiteKingUnderAttack() {
 		// serie di mosse per controllare che non sia possibile scoprire il re bianco
-		Board newBoard =new Board(true);
-		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
-		newBoard.getSpot(ROW_8, COL_E).setPiece(new King(BLACK));
 		newBoard.getSpot(ROW_2, COL_E).setPiece(new Rook(WHITE)); 
 		newBoard.getSpot(ROW_7, COL_E).setPiece(new Rook(BLACK)); 
 		newBoard.recalLegalMoves();
@@ -303,9 +280,6 @@ class GameTest {
 	//test di eventuali situazioni in cui il movimento di un pezzo espongono il re nero
 	@Test
 	void testBlackKingUnderAttack() {
-		Board newBoard =new Board(true);
-		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
-		newBoard.getSpot(ROW_8, COL_E).setPiece(new King(BLACK));
 		newBoard.getSpot(ROW_2, COL_E).setPiece(new Rook(WHITE)); 
 		newBoard.getSpot(ROW_7, COL_E).setPiece(new Rook(BLACK)); 
 		newBoard.recalLegalMoves();
@@ -319,9 +293,6 @@ class GameTest {
 	@Test
 	void testIsAmbiguityWhiteKnight() {
 		// test ambiguita' movimento cavallo bianco
-		Board newBoard =new Board(true);
-		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
-		newBoard.getSpot(ROW_8, COL_E).setPiece(new King(BLACK));
 		newBoard.getSpot(ROW_3, COL_A).setPiece(new Knight(WHITE)); 
 		newBoard.getSpot(ROW_3, COL_E).setPiece(new Knight(WHITE)); 
 		newBoard.recalLegalMoves();
@@ -336,9 +307,6 @@ class GameTest {
 	// test ambiguita' cattura da parte del cavallo bianco
 	@Test
 	void testIsAmbiguityWhiteKnightCapture() {
-		Board newBoard =new Board(true);
-		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
-		newBoard.getSpot(ROW_8, COL_E).setPiece(new King(BLACK));
 		newBoard.getSpot(ROW_3, COL_A).setPiece(new Knight(WHITE)); 
 		newBoard.getSpot(ROW_3, COL_E).setPiece(new Knight(WHITE)); 
 		newBoard.getSpot(ROW_2, COL_C).setPiece(new Pawn(BLACK)); 
@@ -353,9 +321,6 @@ class GameTest {
 	// test ambiguita' movimento cavallo nero
 	@Test
 	void testIsAmbiguityBlackKnight() {
-		Board newBoard =new Board(true);
-		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
-		newBoard.getSpot(ROW_8, COL_E).setPiece(new King(BLACK));
 		newBoard.getSpot(ROW_6, COL_A).setPiece(new Knight(BLACK)); 
 		newBoard.getSpot(ROW_6, COL_E).setPiece(new Knight(BLACK)); 
 		newBoard.recalLegalMoves();
@@ -370,9 +335,6 @@ class GameTest {
 	// test ambiguita' cattura da parte del cavallo nero
 	@Test
 	void testIsAmbiguityBlackKnightCapture() {
-		Board newBoard =new Board(true);
-		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
-		newBoard.getSpot(ROW_8, COL_E).setPiece(new King(BLACK));
 		newBoard.getSpot(ROW_6, COL_A).setPiece(new Knight(BLACK)); 
 		newBoard.getSpot(ROW_6, COL_E).setPiece(new Knight(BLACK)); 
 		newBoard.getSpot(ROW_7, COL_C).setPiece(new Pawn(WHITE)); 
@@ -388,9 +350,6 @@ class GameTest {
 	// test ambiguita' movimento pedone bianco, due pedoni nella stessa colonna
 	@Test
 	void testIsAmbiguityWhitePawn() {
-		Board newBoard =new Board(true);
-		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
-		newBoard.getSpot(ROW_8, COL_E).setPiece(new King(BLACK));
 		newBoard.getSpot(ROW_2, COL_A).setPiece(new Pawn(WHITE)); 
 		newBoard.getSpot(ROW_3, COL_A).setPiece(new Pawn(WHITE)); 
 		newBoard.recalLegalMoves();
@@ -405,9 +364,6 @@ class GameTest {
 	// test ambiguita' cattura da parte del pedone bianco
 	@Test
 	void testIsAmbiguityWhitePawnCapture() {
-		Board newBoard =new Board(true);
-		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
-		newBoard.getSpot(ROW_8, COL_E).setPiece(new King(BLACK));
 		newBoard.getSpot(ROW_2, COL_A).setPiece(new Pawn(WHITE)); 
 		newBoard.getSpot(ROW_2, COL_C).setPiece(new Pawn(WHITE)); 
 		newBoard.getSpot(ROW_3, COL_B).setPiece(new Knight(BLACK)); 
@@ -427,9 +383,6 @@ class GameTest {
 	// test ambiguita' movimento pedone nero, due pedoni nella stessa colonna
 	@Test
 	void testIsAmbiguityBlackPawn() {
-		Board newBoard =new Board(true);
-		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
-		newBoard.getSpot(ROW_8, COL_E).setPiece(new King(BLACK));
 		newBoard.getSpot(ROW_7, COL_A).setPiece(new Pawn(BLACK)); 
 		newBoard.getSpot(ROW_6, COL_A).setPiece(new Pawn(BLACK)); 
 		newBoard.recalLegalMoves();
@@ -445,9 +398,6 @@ class GameTest {
 	// test ambiguita' cattura da parte del pedone nero
 	@Test
 	void testIsAmbiguityBlackPawnCapture() {
-		Board newBoard =new Board(true);
-		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
-		newBoard.getSpot(ROW_8, COL_E).setPiece(new King(BLACK));
 		newBoard.getSpot(ROW_7, COL_A).setPiece(new Pawn(BLACK)); 
 		newBoard.getSpot(ROW_7, COL_C).setPiece(new Pawn(BLACK)); 
 		newBoard.getSpot(ROW_6, COL_B).setPiece(new Knight(WHITE)); 
@@ -464,5 +414,163 @@ class GameTest {
 		//controllo che si e' spostato il pezzo giusto
 		assertTrue(game.getBoard().getSpot(ROW_7, COL_A).isEmpty());
 		assertFalse(game.getBoard().getSpot(ROW_7, COL_C).getPiece().isMoved());
+		newBoard = new Board(true);
+		newBoard.getSpot(ROW_1, COL_A).setPiece(new King (WHITE));
+		newBoard.getSpot(ROW_8, COL_A).setPiece(new King (BLACK));
+	}
+	
+	@Test
+	void testIsMovedAndCapturePawn() {
+		
+		//(inizializzazione pezzi per test)
+		newBoard.getSpot(ROW_3, COL_B).setPiece(new Pawn(WHITE));
+		newBoard.getSpot(ROW_6, COL_C).setPiece(new Pawn(BLACK));
+		newBoard.recalLegalMoves();
+		game.setBoard(newBoard);
+		
+		//test isMoved Pedone
+		game.currentGame("b4");
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_B).getPiece().isMoved());
+		assertTrue(game.getBoard().getSpot(ROW_3, COL_B).isEmpty());
+		
+		//test cattura Pedone
+		game.currentGame("c5");
+		game.currentGame("bxc5");
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_C).getPiece() instanceof Pawn);
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_C).getPiece().isWhite());
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_B).isEmpty());
+	}
+	
+	@Test
+	void testMoveAndCaptureQueen() {
+		
+		//(inizializzazione pezzi per test)
+		newBoard.getSpot(ROW_3, COL_D).setPiece(new Queen(WHITE));
+		newBoard.getSpot(ROW_6, COL_C).setPiece(new Pawn(BLACK));
+		newBoard.recalLegalMoves();
+		game.setBoard(newBoard);
+		
+		//test isMoved Regina
+		game.currentGame("Dd4");
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_D).getPiece().isMoved());
+		assertTrue(game.getBoard().getSpot(ROW_3, COL_D).isEmpty());
+
+		//test cattura Regina
+		game.currentGame("c5");
+		game.currentGame("Dxc5");
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_C).getPiece() instanceof Queen);
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_C).getPiece().isWhite());
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_D).isEmpty());
+	}
+	
+	@Test
+	void testMoveAndCaptureKnight() {
+	
+		//(inizializzazione pezzi per test)
+		newBoard.getSpot(ROW_2, COL_E).setPiece(new Knight(WHITE));
+		newBoard.getSpot(ROW_7, COL_C).setPiece(new Pawn(BLACK));
+		newBoard.recalLegalMoves();
+		game.setBoard(newBoard);
+		
+		//test isMoved Cavallo
+		game.currentGame("Cd4");
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_D).getPiece().isMoved());
+		assertTrue(game.getBoard().getSpot(ROW_2, COL_E).isEmpty());
+
+		//test cattura Cavallo
+		game.currentGame("c6");
+		game.currentGame("Cxc6");
+		assertTrue(game.getBoard().getSpot(ROW_6, COL_C).getPiece() instanceof Knight);
+		assertTrue(game.getBoard().getSpot(ROW_6, COL_C).getPiece().isWhite());
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_D).isEmpty());
+	}
+
+	@Test
+	void testMoveAndCaptureBishop() {
+	
+		//(inizializzazione pezzi per test)
+		newBoard.getSpot(ROW_2, COL_G).setPiece(new Bishop(WHITE));
+		newBoard.getSpot(ROW_6, COL_C).setPiece(new Pawn(BLACK));
+		newBoard.recalLegalMoves();
+		game.setBoard(newBoard);
+	
+		//test isMoved Alfiere
+		game.currentGame("Ae4");
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_E).getPiece().isMoved());
+		assertTrue(game.getBoard().getSpot(ROW_2, COL_G).isEmpty());
+
+		//test cattura Alfiere
+		game.currentGame("Re7");
+		game.currentGame("Axc6");
+		assertTrue(game.getBoard().getSpot(ROW_6, COL_C).getPiece() instanceof Bishop);
+		assertTrue(game.getBoard().getSpot(ROW_6, COL_C).getPiece().isWhite());
+	}
+
+	@Test
+	void testMoveAndCaptureRook() {
+		
+		//(inizializzazione pezzi per test)
+		newBoard.getSpot(ROW_3, COL_H).setPiece(new Rook(WHITE));
+		newBoard.getSpot(ROW_5, COL_C).setPiece(new Pawn(BLACK));
+		newBoard.recalLegalMoves();
+		game.setBoard(newBoard);
+	
+		//test isMoved Torre
+		game.currentGame("Th4");
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_H).getPiece().isMoved());
+		assertTrue(game.getBoard().getSpot(ROW_3, COL_H).isEmpty());
+
+		//test cattura Torre
+		game.currentGame("c4");
+		game.currentGame("Txc4");
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_C).getPiece() instanceof Rook);
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_C).getPiece().isWhite());
+		assertTrue(game.getBoard().getSpot(ROW_4, COL_H).isEmpty());
+	}
+		
+	@Test
+	void testMoveAndCaptureKing() {
+		
+		//(inizializzazione pezzi per test)
+		newBoard.getSpot(ROW_3, COL_E).setPiece(new Pawn(BLACK));
+		newBoard.recalLegalMoves();
+		game.setBoard(newBoard);
+		
+		//test isMoved Re
+		game.currentGame("Rf1");
+		assertTrue(game.getBoard().getSpot(ROW_1, COL_F).getPiece().isMoved());
+		assertTrue(game.getBoard().getSpot(ROW_1, COL_E).isEmpty());
+
+		//test cattura Re
+		game.currentGame("e2");
+		game.currentGame("Rxe2");
+		assertTrue(game.getBoard().getSpot(ROW_2, COL_E).getPiece() instanceof King);
+		assertTrue(game.getBoard().getSpot(ROW_2, COL_E).getPiece().isWhite());
+		assertTrue(game.getBoard().getSpot(ROW_1, COL_F).isEmpty());
+	}
+	
+	@Test
+	void testAmbiguityRook() {
+		
+		//(inizializzazione pezzi per test)
+		newBoard.getSpot(ROW_1, COL_D).setPiece(new Rook(WHITE));
+		newBoard.getSpot(ROW_5, COL_H).setPiece(new Rook(WHITE));
+		newBoard.getSpot(ROW_6, COL_F).setPiece(new Pawn(BLACK));
+		newBoard.recalLegalMoves();
+		game.setBoard(newBoard);
+		
+		//test ambiguita' movimento torre
+		game.currentGame("Tdd5");
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_D).getPiece() instanceof Rook);
+		assertTrue(game.getBoard().getSpot(ROW_1, COL_D).isEmpty());
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_H).getPiece() instanceof Rook);
+		
+		//test ambiguita' cattura torre
+		game.currentGame("f5");
+		game.currentGame("Tdxf5");
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_F).getPiece() instanceof Rook);
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_F).getPiece().isWhite());
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_D).isEmpty());
+		assertTrue(game.getBoard().getSpot(ROW_5, COL_H).getPiece() instanceof Rook);
 	}
 }

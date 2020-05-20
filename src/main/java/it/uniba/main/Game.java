@@ -79,8 +79,8 @@ public class Game {
 	 *
 	 * @param command e' il comando/mossa inserita dall'utente
 	 */
-	public void currentGame(final String command) {
-		Move move = new Move(command, this);
+	public boolean currentGame(final String command) {
+		Move move = new Move(command, board, whiteTurn);
 		if (move.getStart() != null && makeMove(move)) {
 			if (move.getPieceMoved() instanceof Pawn && ((Pawn)
 					move.getPieceMoved()).isCapturingEnPassant()) {
@@ -105,10 +105,11 @@ public class Game {
 
 			// setto false i booleani dei pedoni che regolano l'en passant
 			setAllPawnNotEP();
-
 			whiteTurn = (!whiteTurn);
+			return true;
 		} else {
 			System.out.println("\nCOMANDO O MOSSA NON VALIDA");
+			return false;
 		}
 	}
 
@@ -124,7 +125,7 @@ public class Game {
 
 		// controllo se la mossa e' un arrocco
 		if (move.isCastle()) {
-			if (move.makeCastling(this)) {
+			if (move.makeCastling(board, whiteTurn)) {
 				return true;
 			}
 			return false;
@@ -331,7 +332,7 @@ public class Game {
 		}
 		return false;
 	}
-
+	
 	/**
 	 * toString e' il metodo che restituisce delle stringhe. Indicano il turno
 	 * - @return (Turno del bianco) se e' il turno del bianco - @return (Turno del
@@ -371,7 +372,7 @@ public class Game {
 	public Board getBoard() {
 		return board;
 	}
-
+	
 	/**
 	 * Setta la scacchiera
 	 * @param inBoard
@@ -465,4 +466,5 @@ public class Game {
 	public void setBlackCaptures(final ArrayList<Piece> inBlackCaptures) {
 		this.blackCaptures = inBlackCaptures;
 	}
+	
 }
