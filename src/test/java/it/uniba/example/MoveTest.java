@@ -140,6 +140,36 @@ class MoveTest {
 		
 		@Test
 		/**
+		 * Testa un comando per il movimento e cattura e.p. di un pedone bianco
+		 */
+		void testCommandPawnWhiteEP() {
+			board.getSpot(ROW_5, COL_C).setPiece(new Pawn(WHITE));
+			board.getSpot(ROW_5, COL_D).setPiece(new Pawn(BLACK));
+			((Pawn) board.getSpot(ROW_5, COL_D).getPiece()).setPossibleEnPassantCapture(true);
+			((Pawn) board.getSpot(ROW_5, COL_D).getPiece()).setCapturingEnPassant(true);
+			board.recalLegalMoves();
+			move = new Move("cxd6 e.p.", board, WHITE);
+			assertTrue(move.isEnPassantMove(board));
+		}
+		
+		@Test
+		/**
+		 * Testa un comando per il movimento e cattura e.p. di un pedone nero
+		 */
+		void testCommandPawnBlackEP() {
+			board.getSpot(ROW_4, COL_B).setPiece(new Pawn(WHITE));
+			board.getSpot(ROW_4, COL_C).setPiece(new Pawn(BLACK));
+			((Pawn) board.getSpot(ROW_4, COL_B).getPiece()).setPossibleEnPassantCapture(true);
+			((Pawn) board.getSpot(ROW_4, COL_B).getPiece()).setCapturingEnPassant(true);
+			board.recalLegalMoves();
+			move = new Move("cxb3 e.p.", board, BLACK);
+			board.showBoard();
+			assertTrue(move.isEnPassantMove(board));
+		}
+		
+		
+		@Test
+		/**
 		 * Testa un comando per muovere una torre bianca
 		 */
 		void testCommandRookWhite() {

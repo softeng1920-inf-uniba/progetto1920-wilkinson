@@ -99,7 +99,7 @@ public class Pawn extends Piece {
 	 * @param end
 	 * @return
 	 */
-	boolean isCapturingEnPassant(final Board board, final Spot start, final Spot end) {
+	public boolean isCapturingEnPassant(final Board board, final Spot start, final Spot end) {
 
 		if (!board.getSpot(start.getX(), end.getY()).isEmpty()
 				&& board.getSpot(start.getX(), end.getY()).getPiece() instanceof Pawn) {

@@ -252,7 +252,7 @@ public final class Move {
 	 * @param board scacchiera
 	 * @return true se cattura en passant, false altrimenti
 	 */
-	boolean isEnPassantMove(final Board board) {
+	public boolean isEnPassantMove(final Board board) {
 		if (pieceMoved instanceof Pawn
 				&& board.isFrontDiagonal(start, end)
 				&& board.getSpot(end.getX(), end.getY()).isEmpty()
