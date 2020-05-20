@@ -60,7 +60,7 @@ public class Spot {
 	static final int CASE_7 = 7;
 
 	/**
-	 * controlla se lo spot corrente � vuoto
+	 * controlla se lo spot corrente vuoto
 	 *
 	 * @return
 	 */

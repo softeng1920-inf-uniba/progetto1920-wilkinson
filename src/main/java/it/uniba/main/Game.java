@@ -79,7 +79,7 @@ public class Game {
 	 *
 	 * @param command e' il comando/mossa inserita dall'utente
 	 */
-	public void currentGame(final String command) {
+	public boolean currentGame(final String command) {
 		Move move = new Move(command, board, whiteTurn);
 		if (move.getStart() != null && makeMove(move)) {
 			if (move.getPieceMoved() instanceof Pawn && ((Pawn)
@@ -105,10 +105,11 @@ public class Game {
 
 			// setto false i booleani dei pedoni che regolano l'en passant
 			setAllPawnNotEP();
-
 			whiteTurn = (!whiteTurn);
+			return true;
 		} else {
 			System.out.println("\nCOMANDO O MOSSA NON VALIDA");
+			return false;
 		}
 	}
 
@@ -185,7 +186,7 @@ public class Game {
 
 			// se e' un pedone mai mosso setto che e' possibile catturarlo en passant il
 			// prossimo turno
-			if (start.getPiece() instanceof Pawn) {
+			if ((start.getPiece() instanceof Pawn) && board.isTwoSpotsAhead(start, end)) {
 				((Pawn) start.getPiece()).setPossibleEnPassantCapture(true);
 			}
 		}
@@ -330,6 +331,20 @@ public class Game {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * toString e' il metodo che restituisce delle stringhe. Indicano il turno
+	 * - @return (Turno del bianco) se e' il turno del bianco - @return (Turno del
+	 * nero) se e' il turno del nero
+	 */
+	@Override
+	public String toString() {
+		if (this.whiteTurn) {
+			return ANSI_WHITE_BACKGROUND + ANSI_BLACK + "(Turno del bianco)" + ANSI_RESET;
+		} else {
+			return ANSI_BLACK_BACKGROUND + ANSI_WHITE + "(Turno del nero)" + ANSI_RESET;
+		}
 	}
 
 	// Getters & Setters

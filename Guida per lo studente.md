@@ -14,8 +14,8 @@
   - Aggiunta del badge di Coveralls nel README
 - Configurazione locale del progetto
 <!-- - Eseguire l'applicazione -->
-- Lavoro sul codice dell‚Äôapplicazione
-- Test automatici e Controlli di Qualit√†
+- Lavoro sul codice dellíapplicazione
+- Test automatici e Controlli di Qualit‡
 - Esecuzione immagine docker
 
 
@@ -28,7 +28,7 @@ Di seguito si riportano le istruzioni dettagliate per attivare la pipeline.
 
 
 ## Passi preliminari
-√à necessario effettuare l‚Äôiscrizione a diversi servizi che saranno utilizzati durante tutto lo sviluppo del progetto. In particolare:
+» necessario effettuare líiscrizione a diversi servizi che saranno utilizzati durante tutto lo sviluppo del progetto. In particolare:
 
 - Iscrizione a [**Slack**](https://slack.com/) con nome, cognome e foto.
 - Adesione al workspace Slack di progetto (softeng1920) mediante link mostrato dal docente a lezione.
@@ -40,37 +40,37 @@ In aggiunta, occorre installare i seguenti strumenti:
 - [**Git**](https://git-scm.com/downloads);
 - [**Docker**](https://www.docker.com/community-edition#/download).
 
-Si suppone che lo studente abbia gi√† installato sulla sua macchina l‚Äôultima versione disponibile di **Eclipse for Java Developers**.
+Si suppone che lo studente abbia gi‡ installato sulla sua macchina líultima versione disponibile di **Eclipse for Java Developers**.
 
 
 
 ## Comunicazione del gruppo
 * Immettere i propri dati nel form Google Drive pubblicato su Slack;
-  - indicare come email quella usata o che si user√† per l'iscrizione a Github.
+  - indicare come email quella usata o che si user‡ per l'iscrizione a Github.
 * Scrivere nello spreadsheet associato al form il proprio GitHub username;
-  - solo il cognome se non √® ancora stata fatta l'iscrizione a GitHub; nel caso, in seguito aggiornare.
+  - solo il cognome se non Ë ancora stata fatta l'iscrizione a GitHub; nel caso, in seguito aggiornare.
 * Scrivere nello spreadsheet associato al form il nome del gruppo e i GitHub username dei componenti;
   - il nome del gruppo deve essere un cognome di un vincitore del Turing Award, scritto tutto in minuscolo senza spazi e caratteri speciali.
 * Aggiornare il proprio profilo Slack con il nome del gruppo nel campo *What I do*.
 
-Il nome del gruppo sar√† il nome del repository su GitHub Classroom.
+Il nome del gruppo sar‡ il nome del repository su GitHub Classroom.
 
 
 
 ## Configurazione del repository su GitHub
 
 ### Accettazione assignment e accesso al repository su GitHub
-Sar√† necessario aspettare che il docente crei il team e il repository ad esso associato su GitHub.
+Sar‡ necessario aspettare che il docente crei il team e il repository ad esso associato su GitHub.
 Una volta creato il team, riceverete via email un invito a farne parte che dovrete accettare. 
-Questo passo terminer√† con successo se tutti i membri del gruppo potranno accedere al repository con URL ``` https://github.com/softeng1920-inf-uniba/progetto1920-<nome del gruppo> ```.
+Questo passo terminer‡ con successo se tutti i membri del gruppo potranno accedere al repository con URL ``` https://github.com/softeng1920-inf-uniba/progetto1920-<nome del gruppo> ```.
 
 
 
 ### Creazione di un Personal Access Token e impostazione del Secret per l'autenticazione su GitHub Packages
 
-Il repository che vi √® stato assegnato contiene tutto il necessario per cominciare lo sviluppo della vostra applicazione. Oltre a una versione base del codice sorgente, esso presenta la struttura di directory alla quale dovrete attenervi durante lo svolgimento del progetto e i file di configurazione per i principali strumenti inclusi nella pipeline. 
+Il repository che vi Ë stato assegnato contiene tutto il necessario per cominciare lo sviluppo della vostra applicazione. Oltre a una versione base del codice sorgente, esso presenta la struttura di directory alla quale dovrete attenervi durante lo svolgimento del progetto e i file di configurazione per i principali strumenti inclusi nella pipeline. 
 
-In particolare, in `.github/workflows`, trovate un file di configurazione di GitHub Actions, denominato `ingsw1920.yml`. [Actions](https://github.com/features/actions) √® una nuova funzionalit√† di GitHub che consente la definizione e l'esecuzione automatizzata di pipeline di CI (Continuous Integration) e CD (Continuous Deployment). In GitHub Actions, i passaggi di una pipeline vengono specificati in un file `.yml`, detto *workflow*. Generalmente, le pipeline di CI/CD comprendono operazioni di testing, releasing e deployment di un sistema software. Nello specifico, la vostra pipeline √® impostata per realizzare:
+In particolare, in `.github/workflows`, trovate un file di configurazione di GitHub Actions, denominato `ingsw1920.yml`. [Actions](https://github.com/features/actions) Ë una nuova funzionalit‡ di GitHub che consente la definizione e l'esecuzione automatizzata di pipeline di CI (Continuous Integration) e CD (Continuous Deployment). In GitHub Actions, i passaggi di una pipeline vengono specificati in un file `.yml`, detto *workflow*. Generalmente, le pipeline di CI/CD comprendono operazioni di testing, releasing e deployment di un sistema software. Nello specifico, la vostra pipeline Ë impostata per realizzare:
 
 1. il testing del vostro codice (unit test con [JUnit](https://junit.org/junit5/)) e l'analisi dello stesso con strumenti di quality assurance ([checkstyle](https://checkstyle.sourceforge.io) e [spotbugs](https://spotbugs.github.io));
 2. la costruzione di un eseguibile (build) a partire dai sorgenti che svilupperete;
@@ -78,9 +78,9 @@ In particolare, in `.github/workflows`, trovate un file di configurazione di Git
 
 Il workflow predisposto in `ingsw1920.yml` delega i primi due step a [Gradle](https://gradle.org/) - sistema di build-automation adottato per questo progetto - attraverso l'invocazione del task `gradle build`; in seguito, il workflow si occupa di realizzare autonomamente il terzo step, costruendo e caricando su GitHub Packages un'immagine Docker con l'eseguibile appena assemblato. 
 
-Affinch√© vada a buon fine, quest'ultimo passaggio necessita di un piccolo intervento da parte vostra, da svolgere soltanto una volta, nella fase di impostazione iniziale del progetto. Dal momento che ciascuna nuova esecuzione del workflow avviene in una macchina virtuale Ubuntu costruita ex-novo da GitHub Actions, √® necessario che - ad ogni run - il processo preposto al caricamento dell'immagine Docker su Packages si autentichi al servizio (effettuando un login). Al posto della classica coppia di credenziali (username e password) √® possibile usare, a questo scopo, un Personal Access Token di GitHub, da passare in input al comando che effettua la connessione a Packages. Tuttaiva, dal momento che tale comando viene riportato in chiaro nel file di workflow (`ingsw1920.yml`), passargli in input il token in modo esplicito significherebbe memorizzarne una copia che resti visibile a chiunque abbia accesso al repository; ci√≤ non √® affatto sicuro e andrebbe assolutamente evitato (un token appartiene ad uno specifico utente di GitHub e deve restare noto soltanto a lui). Per questo genere di esigenze, GitHub offre ai suoi utenti un'ulteriore funzionalit√†: i cosiddetti Secrets (valori crittografati associati ai repository e accessibili come variabili d'ambiente all'interno dei workflow). Una volta generato, il Personal Access pu√≤ essere memorizzato in tutta sicurezza in un Secret. Al momento opportuno, il valore ivi contenuto verr√† passato al comando di accesso a Packages che ne ha bisogno.
+AffinchÈ vada a buon fine, quest'ultimo passaggio necessita di un piccolo intervento da parte vostra, da svolgere soltanto una volta, nella fase di impostazione iniziale del progetto. Dal momento che ciascuna nuova esecuzione del workflow avviene in una macchina virtuale Ubuntu costruita ex-novo da GitHub Actions, Ë necessario che - ad ogni run - il processo preposto al caricamento dell'immagine Docker su Packages si autentichi al servizio (effettuando un login). Al posto della classica coppia di credenziali (username e password) Ë possibile usare, a questo scopo, un Personal Access Token di GitHub, da passare in input al comando che effettua la connessione a Packages. Tuttaiva, dal momento che tale comando viene riportato in chiaro nel file di workflow (`ingsw1920.yml`), passargli in input il token in modo esplicito significherebbe memorizzarne una copia che resti visibile a chiunque abbia accesso al repository; ciÚ non Ë affatto sicuro e andrebbe assolutamente evitato (un token appartiene ad uno specifico utente di GitHub e deve restare noto soltanto a lui). Per questo genere di esigenze, GitHub offre ai suoi utenti un'ulteriore funzionalit‡: i cosiddetti Secrets (valori crittografati associati ai repository e accessibili come variabili d'ambiente all'interno dei workflow). Una volta generato, il Personal Access puÚ essere memorizzato in tutta sicurezza in un Secret. Al momento opportuno, il valore ivi contenuto verr‡ passato al comando di accesso a Packages che ne ha bisogno.
 
-L'intervento iniziale a voi richiesto deve essere svolto da *un solo membro del team*. Egli dovr√†:
+L'intervento iniziale a voi richiesto deve essere svolto da *un solo membro del team*. Egli dovr‡:
 
 - [dalle impostazioni del proprio account] creare un Personal Access Token;
 - [dalle impostazioni del repository del team] generare un GitHub Secret contenente il token e un ulteriore Secret contenente il proprio GitHub username.
@@ -91,7 +91,7 @@ L'intervento iniziale a voi richiesto deve essere svolto da *un solo membro del 
 
 Il membro del team con i diritti di amministratore sul repository deve:
 
-- entrare nella pagina delle impostazioni del proprio profilo GitHub (click sull'immagine di profilo in alto a destra, poi click sulla voce *"Settings"* nel men√π a tendina che compare);
+- entrare nella pagina delle impostazioni del proprio profilo GitHub (click sull'immagine di profilo in alto a destra, poi click sulla voce *"Settings"* nel men˘ a tendina che compare);
   ![SaveTokenInSecret_1](./res/img/guida-studente/SaveTokenInSecret_1.png)
 
 - entrare nella sezione delle impostazioni per sviluppatori, *"Developer Settings"*, facendo click sul relativo pulsante nella barra laterale;
@@ -100,9 +100,9 @@ Il membro del team con i diritti di amministratore sul repository deve:
 - selezionare *"Personal Access Token"* nella barra laterale e successivamente fare click su *"Generate new Token"*, in alto a destra; 
   ![SaveTokenInSecret_3](./res/img/guida-studente/SaveTokenInSecret_3.png)
 
-- indicare nel campo *"Note"* l'utilizzo che si intende fare del token (ad es.: *"Uploads of Docker images to GitHub Packages"*). Tale appunto torner√† utile in futuro per ricordarsi a quale scopo era stato generato il token;
+- indicare nel campo *"Note"* l'utilizzo che si intende fare del token (ad es.: *"Uploads of Docker images to GitHub Packages"*). Tale appunto torner‡ utile in futuro per ricordarsi a quale scopo era stato generato il token;
 
-- selezionare gli ambiti di validit√† del token (*"Scopes"*). Per consentire al processo Docker di caricare un'immagine su GitHub Packages, il set minimale di scope da abilitare √® il seguente (vedi figura):
+- selezionare gli ambiti di validit‡ del token (*"Scopes"*). Per consentire al processo Docker di caricare un'immagine su GitHub Packages, il set minimale di scope da abilitare Ë il seguente (vedi figura):
 
   - `repo` (con tutte le relative sotto-voci)
   - `write:packages`
@@ -111,14 +111,14 @@ Il membro del team con i diritti di amministratore sul repository deve:
   ![SaveTokenInSecret_4](./res/img/guida-studente/SaveTokenInSecret_4.png)
 
 - fare click sul pulsante *"Generate token"*, in basso nella pagina;
-- copiare il token che apparir√† alla pagina seguente e memorizzarlo in un luogo sicuro.
-  **N.B.**: non sar√† pi√π possibile visionare il token una volta usciti dalla pagina!
+- copiare il token che apparir‡ alla pagina seguente e memorizzarlo in un luogo sicuro.
+  **N.B.**: non sar‡ pi˘ possibile visionare il token una volta usciti dalla pagina!
 
 
 
 #### Impostazione dei GitHub Secret
 
-A questo punto, il membro del team che ha generato il token dovr√†:
+A questo punto, il membro del team che ha generato il token dovr‡:
 
 - recarsi sulla pagina principale del repository e fare click sull'icona *"Settings"* (ultima tab in alto a destra);
   **N.B.**: solo l'amministratore visualizza questa tab!
@@ -134,7 +134,7 @@ A questo punto, il membro del team che ha generato il token dovr√†:
   - inserire il proprio username GitHub nella textarea con l'etichetta *"Value"*;
   - concludere l'operazione cliccando sul pulsante *"Add secret"*.
 
-**N.B.:** √à fondamentale che i nomi dei due GitHub Secret vengano scritti esattamente come sono riportati in questa guida: `GITHUB_ACCESS_TOKEN` e `GITHUB_USERNAME`(rispettando le maiuscole e gli underscore).
+**N.B.:** » fondamentale che i nomi dei due GitHub Secret vengano scritti esattamente come sono riportati in questa guida: `GITHUB_ACCESS_TOKEN` e `GITHUB_USERNAME`(rispettando le maiuscole e gli underscore).
 
 
 
@@ -142,13 +142,13 @@ A questo punto, il membro del team che ha generato il token dovr√†:
 Per aggiungere il badge che riporta l'ultimo esito dell'esecuzione del workflow (stato del workflow) all'interno del file README del vostro repository, seguire le seguenti istruzioni (vedi anche [Adding a workflow status badge to your repository](https://help.github.com/en/actions/configuring-and-managing-workflows/configuring-a-workflow#adding-a-workflow-status-badge-to-your-repository)):
 - entrare nella pagina principale del repository e cliccare su `Actions` (subito sotto il titolo, in alto al centro);
 ![Update_GitHub_badge_1](./res/img/guida-studente/Update_GitHub_badge_1.png)
-- *"All workflows"*, riporta l'elenco delle esecuzioni del workflow  `ingsw1920.yml` (ogni push e ogni pull request sul repository inducono una nuova esecuzione); fare click sul record relativo alla run pi√π recente (quello pi√π in alto) che riporta il tag `master` (**N.B.**: svolgendo questa operazione all'inizio del progetto, in questa lista troverete soltanto un record, quello relativo all'unica esecuzione del workflow indotta dalla creazione del repository);
+- *"All workflows"*, riporta l'elenco delle esecuzioni del workflow  `ingsw1920.yml` (ogni push e ogni pull request sul repository inducono una nuova esecuzione); fare click sul record relativo alla run pi˘ recente (quello pi˘ in alto) che riporta il tag `master` (**N.B.**: svolgendo questa operazione all'inizio del progetto, in questa lista troverete soltanto un record, quello relativo all'unica esecuzione del workflow indotta dalla creazione del repository);
   ![Update_GitHub_badge_2](./res/img/guida-studente/Update_GitHub_badge_2.png)
 - fare click sul pulsante `Create status badge` in alto a destra nella pagina e, lasciando invariate le impostazioni di default (`branch` e `event`), fare click su `Copy status badge Markdown`;
   ![Update_GitHub_badge_3](./res/img/guida-studente/Update_GitHub_badge_3.png)
-- La modifica del file Markdown `README.md`sar√† fatta come parte dei task dello *Sprint 0* incollando il codice markdown per la costruzione del badge in cima al `README.md`, accanto al titolo del repository.
+- La modifica del file Markdown `README.md`sar‡ fatta come parte dei task dello *Sprint 0* incollando il codice markdown per la costruzione del badge in cima al `README.md`, accanto al titolo del repository.
 
-Il titolo del README.md dovr√† apparire come nella seguente figura:
+Il titolo del README.md dovr‡ apparire come nella seguente figura:
 
 ![actions-badge](./res/img/guida-studente/actions-badge.png)
 
@@ -157,24 +157,24 @@ Il colore e lo stato del badge potranno cambiare dopo ogni build, riflettendo lo
 
 
 ## Configurazione Coveralls
-Coveralls √® un servizio web che aiuta a monitorare nel tempo la copertura del codice di un progetto ([code coverage](https://en.wikipedia.org/wiki/Code_coverage)) e a verificare che, di volta in volta, tutto il codice che si aggiunge sia adeguatamente coperto da casi di test.
+Coveralls Ë un servizio web che aiuta a monitorare nel tempo la copertura del codice di un progetto ([code coverage](https://en.wikipedia.org/wiki/Code_coverage)) e a verificare che, di volta in volta, tutto il codice che si aggiunge sia adeguatamente coperto da casi di test.
 
 Per configurare Coveralls, collegarsi al [sito web del servizio](https://coveralls.io) ed effettuare il login tramite il proprio account GitHub. Nel menu a comparsa sulla sinistra, selezionare la voce **+ ADD REPOS**. 
-Il repository `SOFTENG1920-INF-UNIBA/<nome repository>` dovrebbe essere immediatamente visibile nella pagina. Qualora non lo fosse, digitare le prime lettere del nome nel campo di testo. Se cos√¨ facendo ancora non fosse visibile, andare in fondo alla pagina e cliccare sul bottone **REFRESH PRIVATE REPOS**. 
+Il repository `SOFTENG1920-INF-UNIBA/<nome repository>` dovrebbe essere immediatamente visibile nella pagina. Qualora non lo fosse, digitare le prime lettere del nome nel campo di testo. Se cosÏ facendo ancora non fosse visibile, andare in fondo alla pagina e cliccare sul bottone **REFRESH PRIVATE REPOS**. 
 Quando la riga relativa al progetto compare, fare click sul tasto OFF per trasformarlo in ON, come mostrato in figura.
 
 ![](res/img/guida-studente/add_repo_coveralls.png)
 
-Una volta attivato il progetto, fare click su **DETAILS** per visualizzare il _token privato_ associato al repository. Questo token andr√† salvato in un Secret di GitHub denominato `COVERALLS_REPO_TOKEN`, seguendo la procedura riportata al passo precedente per il salvataggio del GitHub Access Token. Pi√π precisamente:
+Una volta attivato il progetto, fare click su **DETAILS** per visualizzare il _token privato_ associato al repository. Questo token andr‡ salvato in un Secret di GitHub denominato `COVERALLS_REPO_TOKEN`, seguendo la procedura riportata al passo precedente per il salvataggio del GitHub Access Token. Pi˘ precisamente:
 
 1. copiare il token dalla pagina dedicata al vostro repository sul sito di Coveralls;
 2. fare click su "Settings" in alto a destra nella pagina dedicata al vostro repository su GitHub
-   (si ricorda che soltanto il membro del gruppo con i diritti di amministratore pu√≤ visualizzare questa voce di men√π);
+   (si ricorda che soltanto il membro del gruppo con i diritti di amministratore puÚ visualizzare questa voce di men˘);
 3. fare click su "Secrets" nella barra laterale e successivamente sul link "Add a new secret", riportato subito sotto `GITHUB_ACCESS_TOKEN` (il Secret con il token di accesso per GitHub Packages che avevate salvato al passo precedente);
 4. avvalorare il campo `Name` con la stringa `COVERALLS_REPO_TOKEN` (da riportare letteralmente, tutta in maiuscolo come mostrata qui) e il campo `Value` con il token di Coveralls copiato al punto 1;
 5. completare la procedura di inserimento del Secret facendo click sul pulsante `Add secret`, in basso nel form.
 
-Con questi accorgimenti, ogni volta che riesegue i test il workflow sar√† in grado di comunicare a Coveralls le informazioni di copertura aggiornate.
+Con questi accorgimenti, ogni volta che riesegue i test il workflow sar‡ in grado di comunicare a Coveralls le informazioni di copertura aggiornate.
 
 
 
@@ -184,12 +184,12 @@ Come GitHub Actions, anche Coveralls permette di arricchire il `README` del vost
 
 I passi per ottenere il badge di Coveralls sono i seguenti:
 
-- tornare sulla pagina "Details" dedicata al vostro repository sul sito di Coveralls (dove avete copiato il token). In uno dei riquadri in alto nella pagina √® riportato il badge da aggiungere al README. Fare click sul tasto `EMBED` (vd. figura); 
+- tornare sulla pagina "Details" dedicata al vostro repository sul sito di Coveralls (dove avete copiato il token). In uno dei riquadri in alto nella pagina Ë riportato il badge da aggiungere al README. Fare click sul tasto `EMBED` (vd. figura); 
   ![CoverallsBadge_1](./res/img/guida-studente/CoverallsBadge_1.png)
 - copiare il codice markdown per la richiesta del badge;
   ![CoverallsBadge_2](./res/img/guida-studente/CoverallsBadge_2.png)
-- La modifica del file Markdown `README.md`sar√† fatta come parte dei task dello *Sprint 0* incollando il codice markdown per la costruzione del badge in cima al `README.md`, accanto al titolo del repository.
-- Alla fine, il file `README.md` dovr√† mostrare due badge, simili a quelli riportati nella figura sottostante:
+- La modifica del file Markdown `README.md`sar‡ fatta come parte dei task dello *Sprint 0* incollando il codice markdown per la costruzione del badge in cima al `README.md`, accanto al titolo del repository.
+- Alla fine, il file `README.md` dovr‡ mostrare due badge, simili a quelli riportati nella figura sottostante:
 ![actions+coveralls-badges](./res/img/guida-studente/actions+coveralls-badges.png)
 
 #### Troubleshooting
@@ -207,15 +207,15 @@ Per rendersi operativi con il progetto in locale, occorre seguire questi passi.
 
 **Clonazione della repository remota**
 
-Come prima attivit√†, √® necessario clonare la repository remota sulla propria macchina. Procedere come segue:
+Come prima attivit‡, Ë necessario clonare la repository remota sulla propria macchina. Procedere come segue:
 
 - Individuare la posizione nel proprio file system dove clonare la cartella di progetto. *Per evitare successivi problemi con l'importazione di Eclipse, evitare di salvare la cartella di progetto nella root del workspace di Eclipse*;
 - Da terminale (Unix) o prompt dei comandi (Windows) spostarsi attraverso il comando *cd* nella cartella scelta al passo precedente;
-- Scrivere il comando `git clone <url>` , dove l‚Äôurl √® quello visibile da GitHub premendo il bottone *Clone or Download*, in alto a destra nell‚Äôinterfaccia. Ad esempio:
+- Scrivere il comando `git clone <url>` , dove líurl Ë quello visibile da GitHub premendo il bottone *Clone or Download*, in alto a destra nellíinterfaccia. Ad esempio:
 
 ![](res/img/guida-studente/cloneusingurl.PNG)
 
-Se l‚Äôoperazione √® andata a buon fine, siamo quasi pronti per partire‚Ä¶ Ma prima, √® necessario importare il progetto in Eclipse!
+Se líoperazione Ë andata a buon fine, siamo quasi pronti per partireÖ Ma prima, Ë necessario importare il progetto in Eclipse!
 
 **Configurazione di Eclipse**
 
@@ -231,41 +231,41 @@ Completate l'installazione e riavviate. -->
 
 **Importazione del progetto in Eclipse**
 
-Per importare correttamente il progetto in Eclipse, si dovr√† seguire solo un semplice accorgimento: anzich√© creare un progetto Java (scelta di default), si opter√† per la creazione di un progetto Gradle. Pi√π nel dettaglio:
+Per importare correttamente il progetto in Eclipse, si dovr‡ seguire solo un semplice accorgimento: anzichÈ creare un progetto Java (scelta di default), si opter‡ per la creazione di un progetto Gradle. Pi˘ nel dettaglio:
 
 - Da *File* selezionare la voce *Import* per importare il progetto;
 - Selezionare sotto la cartella *Gradle*, la voce *Existing Gradle Project*
 
 ![](res/img/guida-studente/Import_e_Java_-_Eclipse.png)
 
-- Dopo aver superato l‚Äôeventuale *Welcome*, bisogner√† specificare come *Project root directory* la cartella di progetto clonata al passo precedente;
-- A questo punto terminare l‚Äôoperazione con *Finish*.
+- Dopo aver superato líeventuale *Welcome*, bisogner‡ specificare come *Project root directory* la cartella di progetto clonata al passo precedente;
+- A questo punto terminare líoperazione con *Finish*.
 
 
 **Modifica della cartella di default per javadoc**
 
-La cartella di default per la generazione di *javadoc* √® la cartella `doc`. Per conformit√† con la struttura della repository di base del progetto, dovremo modificare il percorso e puntare a `nomeprogetto/doc/javadoc`:
+La cartella di default per la generazione di *javadoc* Ë la cartella `doc`. Per conformit‡ con la struttura della repository di base del progetto, dovremo modificare il percorso e puntare a `nomeprogetto/doc/javadoc`:
 
-- Premere il tasto destro sulla cartella di progetto di Eclipse. Scegliere quindi l‚Äôopzione *Properties*, in coda al men√π contestuale.
+- Premere il tasto destro sulla cartella di progetto di Eclipse. Scegliere quindi líopzione *Properties*, in coda al men˘ contestuale.
   ![project_properties](./res/img/guida-studente/project_properties.png)
-- Individuare, tra le propriet√†, quella denominata *Javadoc Location*.![](res/img/guida-studente/javadoc_location.png)
+- Individuare, tra le propriet‡, quella denominata *Javadoc Location*.![](res/img/guida-studente/javadoc_location.png)
 
-- Tramite il pulsante *Browse*, selezionare il percorso `doc/javadoc` all‚Äôinterno della cartella di progetto.
+- Tramite il pulsante *Browse*, selezionare il percorso `doc/javadoc` allíinterno della cartella di progetto.
 - Chiudere la finestra con *Apply and Close*.
 
 <!-- ###### Verifica setup librerie
 
 Verificate la presenza delle librerie nel build path di Java.
 
-Come prima, premere il tasto destro sulla cartella di progetto di Eclipse. Scegliere quindi l‚Äôopzione *Properties*, in coda al men√π contestuale;
+Come prima, premere il tasto destro sulla cartella di progetto di Eclipse. Scegliere quindi líopzione *Properties*, in coda al men˘ contestuale;
 
 ![](res/img/guida-studente/project_properties.png)
 
-Quindi, selezionate la voce `Java Build Path` e verificate le seguenti librerie siano presenti come in figura. Qualora mancassero, procedete ad aggiungerle premendo il bottone `Add JARs‚Ä¶`. I file `jar` richiesti sono salvati nella cartella `<nomeprogetto>/libs`.
+Quindi, selezionate la voce `Java Build Path` e verificate le seguenti librerie siano presenti come in figura. Qualora mancassero, procedete ad aggiungerle premendo il bottone `Add JARsÖ`. I file `jar` richiesti sono salvati nella cartella `<nomeprogetto>/libs`.
 
 ![](res/img/guida-studente/buildpath.png)
 
-Se dovesse invece mancare la voce *Google Cloud Platform Libraries*, aggiungetela premendo sul task *"Add Library‚Ä¶"*.
+Se dovesse invece mancare la voce *Google Cloud Platform Libraries*, aggiungetela premendo sul task *"Add LibraryÖ"*.
 
 ![](res/img/guida-studente/gcloudlib1.png)
 
@@ -281,12 +281,12 @@ Quindi, premete su *"Finish"*, senza selezionare alcuna voce.
 
 Questi passi devono essere eseguiti da un solo componente del gruppo di progetto. 
 
-1. Collegarsi alla [Piattaforma Google Cloud](https://console.cloud.google.com/home/dashboard) (√® richiesta autenticazione tramite account Google).
+1. Collegarsi alla [Piattaforma Google Cloud](https://console.cloud.google.com/home/dashboard) (Ë richiesta autenticazione tramite account Google).
 
-2. Create un nuovo progetto con il nome ***scacchi***, come in figura. L'altro campo non √® necessario.
+2. Create un nuovo progetto con il nome ***scacchi***, come in figura. L'altro campo non Ë necessario.
    <img src="./res/img/guida-studente/googleAPIsetup_1.png" alt="googleAPIsetup_1" style="zoom:50%;" />
 
-3. Assicuratevi che il progetto sia selezionato nella dashboard, dopodich√© dal menu a sinistra selezionate la voce `API e servizi > Libreria`.
+3. Assicuratevi che il progetto sia selezionato nella dashboard, dopodichÈ dal menu a sinistra selezionate la voce `API e servizi > Libreria`.
    ![googleAPIsetup_2](./res/img/guida-studente/googleAPIsetup_2.png)
 
 4. Cercate e selezionate l'API di ***Drive*** (`Google Drive API`), quindi attivatela premendo il tasto `Abilita`, nella pagina dedicata.
@@ -298,7 +298,7 @@ Questi passi devono essere eseguiti da un solo componente del gruppo di progetto
    ![googleAPIsetup_4](./res/img/guida-studente/googleAPIsetup_4.png)
 
 7. Compilate i campi del wizard per la creazione dell'account di servizio come riportato nelle figure a seguire.
-   **N.B.**: il valore del campo `ID account di servizio` √® generato automaticamente. Bisogna annotare, invece, l'**ID di progetto**, evidenziato in rosso nella figura sottostante (in questo caso `scacchi-271210`), compreso tra il simbolo `@` e il resto della stringa `.iam...`.
+   **N.B.**: il valore del campo `ID account di servizio` Ë generato automaticamente. Bisogna annotare, invece, l'**ID di progetto**, evidenziato in rosso nella figura sottostante (in questo caso `scacchi-271210`), compreso tra il simbolo `@` e il resto della stringa `.iam...`.
 
    ![googleAPIsetup_5](./res/img/guida-studente/googleAPIsetup_5.png)
 
@@ -307,78 +307,78 @@ Questi passi devono essere eseguiti da un solo componente del gruppo di progetto
    Prima di completare la procedura con un click sul pulsante "Fine", fate click su **"CREA CHIAVE"** e procedete con la creazione di una chiave in formato JSON.
    ![googleAPIsetup_7](./res/img/guida-studente/googleAPIsetup_7.png)
 
-8. Rinominate il file JSON utilizzando il nome del vostro progetto; per esempio, se fate parte del progetto ***Allen***, la chiave dovr√† chiamarsi `project-allen.json`.
+8. Rinominate il file JSON utilizzando il nome del vostro progetto; per esempio, se fate parte del progetto ***Allen***, la chiave dovr‡ chiamarsi `project-allen.json`.
 
 9. Via Slack, inviate la chiave a Fabio Calefato ***come messaggio privato***.
 
-10. Il file sar√† accessibile all'URL nel formato `http://neo.di.uniba.it/credentials/ID-hash.json`, che vi sar√† inviato in risposta al messaggio.
+10. Il file sar‡ accessibile all'URL nel formato `http://neo.di.uniba.it/credentials/ID-hash.json`, che vi sar‡ inviato in risposta al messaggio.
 
-11. L'URL precedente sar√† impiegato nelle classi Java che necessiteranno di una connessione all'API di Google Cloud Platform (ad esempio per usufruire dei servizi di Google Drive).
+11. L'URL precedente sar‡ impiegato nelle classi Java che necessiteranno di una connessione all'API di Google Cloud Platform (ad esempio per usufruire dei servizi di Google Drive).
 
-12. √à possibile che alcuni metodi dell'API richiedano l'ID del progetto: √® quello annotato nel passo 7.
+12. » possibile che alcuni metodi dell'API richiedano l'ID del progetto: Ë quello annotato nel passo 7.
 
 13. Posizionatevi sul file `AppMain.java` ed eseguite come Java application da Eclipse. -->
 
 
 
-## Lavoro sul codice dell‚Äôapplicazione
+## Lavoro sul codice dellíapplicazione
 
-Il workflow da utilizzare √® il [GitHub Flow](https://guides.github.com/introduction/flow/) e prevede essenzialmente i seguenti passi:
+Il workflow da utilizzare Ë il [GitHub Flow](https://guides.github.com/introduction/flow/) e prevede essenzialmente i seguenti passi:
 
-- Subito prima di lavorare sul codice, √® opportuno eseguire una `git pull` e lavorare sul codice pi√π aggiornato
-- Per ogni nuova *feature* *user story* o *bug fix* occorre creare o scegliere l‚Äôissue su cui lavorare su GitHub e segnarsi come **assigned**
-- Creare un nuovo **branch** sul repository locale con il numero dell'issue o il titolo come nome del branch (*issue#n* oppure *titoloissue*) attraverso il comando `git branch <nome branch>¬†`
+- Subito prima di lavorare sul codice, Ë opportuno eseguire una `git pull` e lavorare sul codice pi˘ aggiornato
+- Per ogni nuova *feature* *user story* o *bug fix* occorre creare o scegliere líissue su cui lavorare su GitHub e segnarsi come **assigned**
+- Creare un nuovo **branch** sul repository locale con il numero dell'issue o il titolo come nome del branch (*issue#n* oppure *titoloissue*) attraverso il comando `git branch <nome branch>†`
 - Spostarsi sul nuovo branch appena creato con il comando `git checkout <nome branch>` 	
-- Lavorare al codice dell‚Äôapplicazione. √à consigliabile fare piccole **commit** autoconsistenti di volta in volta, con uno scopo ben preciso ed una descrizione dettagliata. *Evitare di fare un‚Äôunica grande commit alla fine del lavoro, a meno che la feature o il bug fix non sia davvero di poco conto.*
-- Aggiorna con regolarit√† il branch sul server origin in GitHub con il comando `git push origin <nome branch>`
-- Quando la modifica √® stata correttamente implementata, si consiglia di scrivere adeguati test di unit√† per validarne la correttezza.
-- Dopo l‚Äôesecuzione dei test √® possibile lanciare gli strumenti di **Quality Assurance** (checkstyle e findbugs) per assicurarsi di aver scritto codice di qualit√†. Leggere la sezione *Controlli di Qualit√†* per ulteriori informazioni.
-- A questo punto, dunque, si pu√≤ procedere all'apertura di una pull request, andando su GitHub e posizionandosi sul branch su cui si sta lavorando.
+- Lavorare al codice dellíapplicazione. » consigliabile fare piccole **commit** autoconsistenti di volta in volta, con uno scopo ben preciso ed una descrizione dettagliata. *Evitare di fare uníunica grande commit alla fine del lavoro, a meno che la feature o il bug fix non sia davvero di poco conto.*
+- Aggiorna con regolarit‡ il branch sul server origin in GitHub con il comando `git push origin <nome branch>`
+- Quando la modifica Ë stata correttamente implementata, si consiglia di scrivere adeguati test di unit‡ per validarne la correttezza.
+- Dopo líesecuzione dei test Ë possibile lanciare gli strumenti di **Quality Assurance** (checkstyle e findbugs) per assicurarsi di aver scritto codice di qualit‡. Leggere la sezione *Controlli di Qualit‡* per ulteriori informazioni.
+- A questo punto, dunque, si puÚ procedere all'apertura di una pull request, andando su GitHub e posizionandosi sul branch su cui si sta lavorando.
 - Scrivere un titolo conciso ed esplicativo per la pull request e una descrizione significativa per il revisore come commento, incluso un riferimento all'issue nella forma *closes #n*. Scegliere almeno un reviewer tra i componenti del team.
-- Una volta lanciata la pull request, si attiver√† la costruzione automatica della build e ci sar√† da attendere qualche minuto. In caso di conflitti, bisogna risolverli. Pu√≤ essere utile consultare la documentazione di GitHub (<https://help.github.com/articles/about-merge-conflicts/>) e comunicare con chi ha effettuato le modifiche in conflitto.  
+- Una volta lanciata la pull request, si attiver‡ la costruzione automatica della build e ci sar‡ da attendere qualche minuto. In caso di conflitti, bisogna risolverli. PuÚ essere utile consultare la documentazione di GitHub (<https://help.github.com/articles/about-merge-conflicts/>) e comunicare con chi ha effettuato le modifiche in conflitto.  
 - Discutere eventuali commenti dei reviewer e apportare le modifiche se necessarie come commit sul branch di lavoro. Ricordare che i commit aggiuntivi vanno comunque propagati sul repository remoto in GitHub mediante comando `git push origin <nome branch>`.
-- Ricevuta l'approvazione esplicita di almeno un componente del team, si pu√≤ procedere da GitHub al merge del nuovo *branch* con il *master branch* sul repository remoto.
+- Ricevuta l'approvazione esplicita di almeno un componente del team, si puÚ procedere da GitHub al merge del nuovo *branch* con il *master branch* sul repository remoto.
 - Se la build GitHub Actions e il merge su GitHub sono entrambi andati a buon fine, per completare il lavoro, cancellare il branch sul repository remoto (mediante interfaccia web di GitHub) e sul repository locale con la sequenza di comandi: `git checkout master`, `git pull` e `git branch -d <nome branch>`.
 
 
 
-## Test automatici e Controlli di Qualit√†
+## Test automatici e Controlli di Qualit‡
 
-√à possibile misurare la copertura dei test automatici e operare dei controlli statici sulla qualit√† del codice Java (QA, quality assurance), grazie a strumenti come *JUnit*, *JaCoCo*, *Checkstyle*, *Spotbugs*. Per lanciarli in un colpo solo si pu√≤ utilizzare *Gradle*.
+» possibile misurare la copertura dei test automatici e operare dei controlli statici sulla qualit‡ del codice Java (QA, quality assurance), grazie a strumenti come *JUnit*, *JaCoCo*, *Checkstyle*, *Spotbugs*. Per lanciarli in un colpo solo si puÚ utilizzare *Gradle*.
 
-- Assicurarsi che sia aperta la vista *Gradle Tasks* in Eclipse. In caso negativo, dal men√π *Window*, selezionare *Show View* e poi *Other*. La vista si trover√† sotto la voce *Gradle*. Nell‚Äôeventualit√† che la vista non compaia, provare a cambiare *perspective* su Eclipse e selezionare *Java EE*: ci√≤ si pu√≤ fare o premendo Java EE dal bottone in alto a destra o da men√π *Window-\>Perspective-\>Open Perspective-\>Other* e poi *Java EE*.
+- Assicurarsi che sia aperta la vista *Gradle Tasks* in Eclipse. In caso negativo, dal men˘ *Window*, selezionare *Show View* e poi *Other*. La vista si trover‡ sotto la voce *Gradle*. Nellíeventualit‡ che la vista non compaia, provare a cambiare *perspective* su Eclipse e selezionare *Java EE*: ciÚ si puÚ fare o premendo Java EE dal bottone in alto a destra o da men˘ *Window-\>Perspective-\>Open Perspective-\>Other* e poi *Java EE*.
 - Selezionare il nome del progetto e, tra le diverse opzioni, *verification*.
-- Avviare il controllo attraverso l‚Äôoperazione di **check**, che eseguir√† automaticamente sia la build del progetto, sia i test di unit√†, sia i controlli di qualit√†.
+- Avviare il controllo attraverso líoperazione di **check**, che eseguir‡ automaticamente sia la build del progetto, sia i test di unit‡, sia i controlli di qualit‡.
 - Aggiungere al controllo di versione la cartella `build/reports/` (**non** tutta la cartella `build/`), contenente i report degli strumenti.
 
 ![run_gradle_check](./res/img/guida-studente/run_gradle_check.png)
 
 - Per verificare gli errori, eventualmente individuati dagli strumenti di QA, si deve aprire la vista *Console*.
 
-**N.B.** Nella configurazione attuale del progetto la presenza di errori non impedisce la corretta compilazione del codice. Si suggerisce, tuttavia, di limitare il pi√π possibile *warnings* ed *errori* segnalati da questi strumenti.
+**N.B.** Nella configurazione attuale del progetto la presenza di errori non impedisce la corretta compilazione del codice. Si suggerisce, tuttavia, di limitare il pi˘ possibile *warnings* ed *errori* segnalati da questi strumenti.
 
 
 
 ## Esecuzione immagine docker
 
-Dopo ogni operazione di push o pull request sul repository, GitHub Actions tenta di compilare l‚Äôapplicazione e, in caso di successo, esegue test e controlli di quality assurance. Nel caso in cui la compilazione e i test siano andati a buon fine, GitHub Actions  ha il compito di caricare l‚Äôimmagine del container su GitHub Packages. Per essere certi che il codice non presenti problemi, occorre scaricare l‚Äôimmagine da GitHub Packages ed eseguire il container mediante l‚Äôinstallazione locale di Docker.
+Dopo ogni operazione di push o pull request sul repository, GitHub Actions tenta di compilare líapplicazione e, in caso di successo, esegue test e controlli di quality assurance. Nel caso in cui la compilazione e i test siano andati a buon fine, GitHub Actions  ha il compito di caricare líimmagine del container su GitHub Packages. Per essere certi che il codice non presenti problemi, occorre scaricare líimmagine da GitHub Packages ed eseguire il container mediante líinstallazione locale di Docker.
 
 Si svolgano le seguenti operazioni:
 
-- avviare Docker localmente (una volta aperta l‚Äôapplicazione, bisogna attendere che nel menu di Docker compaia la scritta ‚ÄúDocker is running‚Äù);
+- avviare Docker localmente (una volta aperta líapplicazione, bisogna attendere che nel menu di Docker compaia la scritta ìDocker is runningî);
 
 - se si utilizza Windows selezionare `Switch to Linux containers` nel menu di Docker;
 
 - recarsi alla pagina principale del repository su GitHub e fare click sul link *"package"*, nella barra evidenziata in figura;
-   **N.B.**: se i Secret menzionati in questa guida sono stati impostati correttamente e se almeno un'esecuzione del workflow di GitHub Actions √® andata a buon fine, la vostra immagine Docker (nella sua ultima versione) dovrebbe essere disponibile.
+   **N.B.**: se i Secret menzionati in questa guida sono stati impostati correttamente e se almeno un'esecuzione del workflow di GitHub Actions Ë andata a buon fine, la vostra immagine Docker (nella sua ultima versione) dovrebbe essere disponibile.
    ![ExecuteDockerImage_1](./res/img/guida-studente/ExecuteDockerImage_1.png)
 
 - nella pagina successiva, fare click sul link sul link del package che la contiene;
 
-- nella pagina dedicata al package √® indicato il comando da copiare ed eseguire nel terminale per scaricare l'immagine Docker in locale.
+- nella pagina dedicata al package Ë indicato il comando da copiare ed eseguire nel terminale per scaricare l'immagine Docker in locale.
    ![ExecuteDockerImage_2](./res/img/guida-studente/ExecuteDockerImage_2.png)
    
-- incollare ed eseguire il comando nel terminale. Attendere che Docker scarichi l‚Äôimmagine dell‚Äôapplicazione
+- incollare ed eseguire il comando nel terminale. Attendere che Docker scarichi líimmagine dellíapplicazione
 
 - digitare infine il comando:
 
@@ -387,12 +387,12 @@ Si svolgano le seguenti operazioni:
 	dove per `<nome_immagine>` si intende l'url riportato nel comando precedente, immediatamente dopo le prime due parole (`docker pull`).
 	
 
-Ad esempio, se il comando precedente (copiato da GitHub dal riquadro mostrato in figura), √®:
+Ad esempio, se il comando precedente (copiato da GitHub dal riquadro mostrato in figura), Ë:
 ```
 docker pull docker.pkg.github.com/softeng1920-inf-uniba/docker_1920/<nome_gruppo>:latest
 ```
 
-il comando per eseguire il container sar√†:
+il comando per eseguire il container sar‡:
 
 ```
 docker run -it --rm docker.pkg.github.com/softeng1920-inf-uniba/docker_1920/<nome_gruppo>:latest
@@ -400,14 +400,14 @@ docker run -it --rm docker.pkg.github.com/softeng1920-inf-uniba/docker_1920/<nom
 
 (in altre parole, il secondo comando si ottiene dal primo sostituendo a `docker pull` le parole `docker run -it --rm`).
 
-**N.B.**: in caso di necessit√†, avete la possibilit√† di passare parametri alla vostra applicazione aggiungendo stringhe in coda al comando `run`. Per esempio:
+**N.B.**: in caso di necessit‡, avete la possibilit‡ di passare parametri alla vostra applicazione aggiungendo stringhe in coda al comando `run`. Per esempio:
 
 		docker run -it --rm <nome_immagine> help
 
-**N.B.:** l‚Äôopzione `‚Äî-rm` serve per far s√¨ che Docker interrompa l‚Äôesecuzione del container nel momento in cui l‚Äôapplicazione eseguita al suo interno termina;
+**N.B.:** líopzione `ó-rm` serve per far sÏ che Docker interrompa líesecuzione del container nel momento in cui líapplicazione eseguita al suo interno termina;
 
 le opzioni `-i` e `-t` hanno invece, rispettivamente, le seguenti funzioni:
-- `-i` (abbreviazione di `--interactive`) serve a richiedere un‚Äôesecuzione interattiva del container;
+- `-i` (abbreviazione di `--interactive`) serve a richiedere uníesecuzione interattiva del container;
 - `-t` (abbreviazione di `--tty`) serve ad allocare uno pseudo-tty (una sorta di terminale virtuale) connesso allo standard input (genericamente, la tastiera del computer).
 
 In sostanza si richiede a Docker di eseguire interattivamente il container, specificando la sorgente di input per la sessione interattiva.
