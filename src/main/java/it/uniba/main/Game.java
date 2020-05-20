@@ -332,20 +332,6 @@ public class Game {
 		return false;
 	}
 
-	/**
-	 * toString e' il metodo che restituisce delle stringhe. Indicano il turno
-	 * - @return (Turno del bianco) se e' il turno del bianco - @return (Turno del
-	 * nero) se e' il turno del nero
-	 */
-	@Override
-	public String toString() {
-		if (this.whiteTurn) {
-			return ANSI_WHITE_BACKGROUND + ANSI_BLACK + "(Turno del bianco)" + ANSI_RESET;
-		} else {
-			return ANSI_BLACK_BACKGROUND + ANSI_WHITE + "(Turno del nero)" + ANSI_RESET;
-		}
-	}
-
 	// Getters & Setters
 
 	/**
@@ -371,7 +357,7 @@ public class Game {
 	public Board getBoard() {
 		return board;
 	}
-
+	
 	/**
 	 * Setta la scacchiera
 	 * @param inBoard
@@ -465,4 +451,5 @@ public class Game {
 	public void setBlackCaptures(final ArrayList<Piece> inBlackCaptures) {
 		this.blackCaptures = inBlackCaptures;
 	}
+	
 }
