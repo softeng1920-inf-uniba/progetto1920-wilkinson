@@ -56,12 +56,12 @@ public class GameTest {
 		newBoard.recalLegalMoves();
 		game.setBoard(newBoard);
 		
-		//test isMoved pedone
+		//test isMoved Pedone
 		game.currentGame("b4");
 		assertTrue(game.getBoard().getSpot(ROW_4, COL_B).getPiece().isMoved());
 		assertTrue(game.getBoard().getSpot(ROW_3, COL_B).isEmpty());
 		
-		//test cattura pedone
+		//test cattura Pedone
 		game.currentGame("c5");
 		game.currentGame("bxc5");
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_C).getPiece() instanceof Pawn);
