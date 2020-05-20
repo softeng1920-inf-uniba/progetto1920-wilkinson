@@ -211,65 +211,74 @@ class GameTest {
 			assertFalse(((Pawn) piece).isPossibleEnPassantCapture());
 		}
 
-	//testo situazioni in cui il re non ha possibilità di movimento
+	//testo situazioni in cui il re bianco non ha possibilità di movimento
 	@Test
 	void testWhiteKingNoLegalMoves() {
-		// serie di mosse per non dare possibilita' di movimento al re bianco
-		move = new StringTokenizer(
-				"e4 h5 g4 hxg4 Re2 a5 b4 axb4 Re3 Ta5 c3 Thh5 a3 Tad5 f3 Th3 c4 Td4 e5 Tg3 e6 Tg2 c5 Tf2 a4 b3 a5 b6 a6 bxc5 a7 g3");// serie
-		// di
-		// mosse
-		while (move.hasMoreTokens()) {
-			game.currentGame(move.nextToken());
-		}
-		piece = (game.getBoard().getSpot(ROW_3, COL_E).getPiece());
-		assertTrue(piece.getLegalMoves().isEmpty());
+		//inserisco i pezzi nella scacchiera per bloccare il movimento del re bianco
+		Board newBoard =new Board(true);
+		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
+		newBoard.getSpot(ROW_8, COL_C).setPiece(new King(BLACK));
+		newBoard.getSpot(ROW_1, COL_D).setPiece(new Rook(WHITE)); 
+		newBoard.getSpot(ROW_2, COL_D).setPiece(new Pawn(WHITE));
+		newBoard.getSpot(ROW_2, COL_F).setPiece(new Rook(BLACK)); 
+		newBoard.getSpot(ROW_2, COL_H).setPiece(new Rook(BLACK));
+		newBoard.recalLegalMoves();
+		newBoard.refineLegalMoves();
+		game.setBoard(newBoard);
+		assertFalse(game.currentGame("Rxf2"));//la mossa non potra' essere effettuata
+		//controllo che il re non si sia mosso
+		assertTrue(game.getBoard().getSpot(ROW_1, COL_E).getPiece() instanceof King);
 	}
-
+	
 	@Test
 	void testWhiteKingOneLegalMoves() {
-
-		// serie di mosse che permette una sola mossa legale
-		move = new StringTokenizer(
-				"e4 h5 g4 hxg4 Re2 a5 b4 axb4 Re3 Ta5 c3 Thh5 a3 Tad5 f3 Th3 c4 Td4 e5 Tg3 e6 Tg2 c5 Tf2 a4 b3 a5 b2 a6 b6 a7 bxc5");// serie
-		// di
-		// mosse
-		while (move.hasMoreTokens()) {
-			game.currentGame(move.nextToken());
-		}
-		piece = (game.getBoard().getSpot(ROW_3, COL_E).getPiece());
-		assertTrue(game.getBoard().getSpot(ROW_2, COL_F).getPiece() instanceof Rook);
-		game.currentGame("Rxf2");
+		//inserisco i pezzi nella scacchiera per dare un solo movimento del re bianco
+		Board newBoard =new Board(true);
+		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
+		newBoard.getSpot(ROW_8, COL_C).setPiece(new King(BLACK));
+		newBoard.getSpot(ROW_1, COL_D).setPiece(new Rook(WHITE)); 
+		newBoard.getSpot(ROW_2, COL_D).setPiece(new Pawn(WHITE));
+		newBoard.getSpot(ROW_2, COL_F).setPiece(new Rook(BLACK)); 
+		newBoard.recalLegalMoves();
+		game.setBoard(newBoard);
+		piece= game.getBoard().getSpot(ROW_1, COL_E).getPiece();
+		assertTrue(game.currentGame("Rxf2")); //eseguo l'unica mossa possibile
 		assertTrue(game.getBoard().getSpot(ROW_2, COL_F).getPiece() instanceof King);
 	}
 
 	@Test
 	void testBlackKingNoLegalMoves() {
-		// serie di mosse per non dare possibilita' di movimento al re nero
-		move = new StringTokenizer(
-				"a4 b5 axb5 e5 Txa7 Re7 h4 g5 hxg5 Re6 Th5 h6 gxh6 Cc6 Txc7 Cb4 Txd7 Cf6 Tf5 Ta7 g4 Ca6 Cc3 Cb4 Ca2 Ca6 c4 Ta8 c5 Ta7 c6"); // serie
-		// di
-		// mosse
-		while (move.hasMoreTokens()) {
-			game.currentGame(move.nextToken());
-		}
-		piece = (game.getBoard().getSpot(ROW_6, COL_E).getPiece());
-		assertTrue(piece.getLegalMoves().isEmpty());
+		//inserisco i pezzi nella scacchiera per bloccare il movimento del re nero
+		Board newBoard =new Board(true);
+		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
+		newBoard.getSpot(ROW_8, COL_E).setPiece(new King(BLACK));
+		newBoard.getSpot(ROW_7, COL_D).setPiece(new Pawn(BLACK)); 
+		newBoard.getSpot(ROW_8, COL_D).setPiece(new Rook(BLACK));
+		newBoard.getSpot(ROW_7, COL_F).setPiece(new Rook(WHITE)); 
+		newBoard.getSpot(ROW_6, COL_G).setPiece(new Pawn(WHITE));
+		newBoard.recalLegalMoves();
+		newBoard.refineLegalMoves();
+		game.setBoard(newBoard);
+		game.currentGame("Re2");
+		assertFalse(game.currentGame("Rxf7")); //provo ad eseguire la mossa illegale
+		assertTrue(newBoard.getSpot(ROW_8, COL_E).getPiece() instanceof King);
 	}
 	//testo situazione in cui il re nero ha solo una mossa possibile
 	@Test
 	void testBlackKingOneLegalMoves() {
-		// serie di mosse che permette una sola mossa legale
-		move = new StringTokenizer(
-				"a4 b5 h4 g5 hxg5 e5 axb5 Re7 Ta6 e4 f3 exf3 b6 Re6 b7+ Re5 Td6 a6 Th4 De7 Tf4 a5 g3"); // serie di
-		// mosse
-		while (move.hasMoreTokens()) {
-			game.currentGame(move.nextToken());
-		}
-		piece = (game.getBoard().getSpot(ROW_5, COL_E).getPiece());
-		assertTrue(game.getBoard().getSpot(ROW_6, COL_D).getPiece() instanceof Rook);
-		game.currentGame("Rxd6");
-		assertTrue(game.getBoard().getSpot(ROW_6, COL_D).getPiece() instanceof King);
+		//inserisco i pezzi nella scacchiera per permettere un solo movimento al re nero
+				Board newBoard =new Board(true);
+				newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
+				newBoard.getSpot(ROW_8, COL_E).setPiece(new King(BLACK));
+				newBoard.getSpot(ROW_7, COL_D).setPiece(new Pawn(BLACK)); 
+				newBoard.getSpot(ROW_8, COL_D).setPiece(new Rook(BLACK));
+				newBoard.getSpot(ROW_7, COL_F).setPiece(new Rook(WHITE)); 
+				newBoard.recalLegalMoves();
+				newBoard.refineLegalMoves();
+				game.setBoard(newBoard);
+				game.currentGame("Re2");
+				assertTrue(game.currentGame("Rxf7")); //provo ad eseguire l'unica mossa
+				assertTrue(newBoard.getSpot(ROW_7, COL_F).getPiece() instanceof King);
 	}
 
 	//test di eventuali situazioni in cui il movimento di un pezzo espongono il re bianco
