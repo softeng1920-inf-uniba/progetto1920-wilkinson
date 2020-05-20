@@ -285,28 +285,30 @@ class GameTest {
 	@Test
 	void testWhiteKingUnderAttack() {
 		// serie di mosse per controllare che non sia possibile scoprire il re bianco
-		move = new StringTokenizer("e4 a5 b4 axb4 Re2 Ta5 a3 Te5 a4 f5"); // serie di mosse
-		while (move.hasMoreTokens()) {
-			game.currentGame(move.nextToken());
-		}
-		piece = (game.getBoard().getSpot(ROW_2, COL_E).getPiece());
-		// provo ad eseguire la mossa che esporrebbe il re allo scacco
-		game.currentGame("exf5");
-		// verifico che il pezzo che proteggeva il re non si sia spostato
-		assertTrue(game.getBoard().getSpot(ROW_4, COL_E).getPiece() instanceof Pawn);
+		Board newBoard =new Board(true);
+		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
+		newBoard.getSpot(ROW_8, COL_E).setPiece(new King(BLACK));
+		newBoard.getSpot(ROW_2, COL_E).setPiece(new Rook(WHITE)); 
+		newBoard.getSpot(ROW_7, COL_E).setPiece(new Rook(BLACK)); 
+		newBoard.recalLegalMoves();
+		newBoard.refineLegalMoves();
+		game.setBoard(newBoard);
+		assertFalse(game.currentGame("Ta2")); //provo ad eseguire la mossa che esporrebbe il re bianco
 	}
+	
 	//test di eventuali situazioni in cui il movimento di un pezzo espongono il re nero
 	@Test
 	void testBlackKingUnderAttack() {
-		move = new StringTokenizer("a4 b5 axb5 e5 Ta4 Re7 Te4 Re6 f4"); // serie di mosse
-		while (move.hasMoreTokens()) {
-			game.currentGame(move.nextToken());
-		}
-		piece = (game.getBoard().getSpot(ROW_6, COL_E).getPiece());
-		// provo ad eseguire la mossa che esporrebbe il re allo scacco
-		game.currentGame("exf4");
-		// verifico che il pezzo che proteggeva il re non si sia spostato
-		assertTrue(game.getBoard().getSpot(ROW_5, COL_E).getPiece() instanceof Pawn);
+		Board newBoard =new Board(true);
+		newBoard.getSpot(ROW_1, COL_E).setPiece(new King(WHITE));
+		newBoard.getSpot(ROW_8, COL_E).setPiece(new King(BLACK));
+		newBoard.getSpot(ROW_2, COL_E).setPiece(new Rook(WHITE)); 
+		newBoard.getSpot(ROW_7, COL_E).setPiece(new Rook(BLACK)); 
+		newBoard.recalLegalMoves();
+		newBoard.refineLegalMoves();
+		game.setBoard(newBoard);
+		game.currentGame("Te3");
+		assertFalse(game.currentGame("Ta7")); //provo ad eseguire la mossa che esporrebbe il re nero
 	}
 
 	// test di situazioni di ambiguita: quando due cavalli bianchi possono spostarsi nella stessa casa d'arrivo
