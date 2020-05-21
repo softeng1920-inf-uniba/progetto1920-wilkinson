@@ -42,8 +42,7 @@ public class GameTest {
 	private static final int COL_C = 2;
 	private static final int COL_B = 1;
 	private static final int COL_A = 0;
-	
-//inizializzazione game e scacchiera con il re nero e bianco 
+
 	@BeforeEach
 	void setUp() {
 		game = new Game();
@@ -199,11 +198,13 @@ public class GameTest {
 	@Test
 	void testWhiteKingOneLegalMoves() {
 		//inserisco i pezzi nella scacchiera per dare un solo movimento del re bianco
+		Piece piece;
 		newBoard.getSpot(ROW_1, COL_D).setPiece(new Rook(WHITE)); 
 		newBoard.getSpot(ROW_2, COL_D).setPiece(new Pawn(WHITE));
 		newBoard.getSpot(ROW_2, COL_F).setPiece(new Rook(BLACK)); 
 		newBoard.recalLegalMoves();
 		game.setBoard(newBoard);
+		piece= game.getBoard().getSpot(ROW_1, COL_E).getPiece();
 		assertTrue(game.currentGame("Rxf2")); //eseguo l'unica mossa possibile
 		assertTrue(game.getBoard().getSpot(ROW_2, COL_F).getPiece() instanceof King);
 	}
@@ -548,9 +549,12 @@ public class GameTest {
 		assertTrue(game.getBoard().getSpot(ROW_5, COL_H).getPiece() instanceof Rook);
 	}
 
-	//Post-condizioni: non devono esserci pezzi killed sulla scacchiera
-	// i booleani di en passant devono essere resettati correttamente
-	 //il pezzo considerato deve essere settato come mosso
+	/**Post-condizioni:
+	 * 	- non devono esserci pezzi killed sulla scacchiera
+	 * 	- i booleani di en passant devono essere resettati correttamente
+	 *  - il pezzo considerato deve essere settato come mosso
+	 *  -
+	 */
 	@AfterEach
 	void tearDown() {
 		for (int i = 0; i < DIM_BOARD; i++) {

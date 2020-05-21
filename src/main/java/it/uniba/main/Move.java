@@ -29,7 +29,8 @@ public final class Move {
 	private Spot end; // casa di arrivo
 	private Piece pieceMoved; // pezzo che deve eseguire il movimento
 	private boolean isAmbiguity = false; // caso in cui ci sia ambiguita' di movimento
-	private String ambiguity; // primo carattere di un'ambiguit√
+	private String ambiguity; // primo carattere di un'ambiguit√ 
+
 	/**
 	 * costruttore dell'oggetto Move
 	 *
@@ -118,7 +119,8 @@ public final class Move {
 	/**
 	 * trova lo spot di partenza cercando il pezzo con: 1) casa di arrivo
 	 * corrispodente a quella inserita 2) controlla solo i pezzi della classe
-	 * inserita dall'utente 3) controlla eventuali ambiguita'
+	 * inserita dall'utente 3) controlla eventuali ambiguita' 
+	 *
 	 * @param board
 	 * @param piece
 	 * @return
