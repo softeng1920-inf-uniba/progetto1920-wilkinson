@@ -50,7 +50,7 @@ public abstract class Piece {
 	 * trova tutte le possibili mosse legali del pezzo corrente
 	 *
 	 */
-	public void findLegalMoves(final Board board, final Spot currentSpot) {
+	void findLegalMoves(final Board board, final Spot currentSpot) {
 		this.legalMoves.clear();
 		for (int i = 0; i < BOARDDIM; i++) {
 			for (int j = 0; j < BOARDDIM; j++) {
@@ -69,7 +69,7 @@ public abstract class Piece {
 	 *
 	 * @param board
 	 */
-	public void recalculateMoves(final Board board) {
+	void recalculateMoves(final Board board) {
 		ArrayList<Move> movesCopy = new ArrayList<Move>();
 		ArrayList<Move> movesToRemove = new ArrayList<Move>();
 

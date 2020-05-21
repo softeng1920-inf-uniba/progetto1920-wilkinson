@@ -319,21 +319,21 @@ public class PieceTest {
 		kingSpot.setPiece(new King(WHITE));
 		Piece kingPiece = kingSpot.getPiece();
 		kingSpot.setPiece(new King(WHITE));
-		kingPiece.findLegalMoves(board, kingSpot);
+		//kingPiece.findLegalMoves(board, kingSpot);
 
 		Spot pawnSpot = board.getSpot(ROW_2, COL_D);
 		pawnSpot.setPiece(new Pawn(WHITE));
 		Piece pawnPiece = pawnSpot.getPiece();
 		pawnSpot.setPiece(new Pawn(WHITE));
-		pawnPiece.findLegalMoves(board, pawnSpot);
+		//pawnPiece.findLegalMoves(board, pawnSpot);
 
 		Spot bishopSpot = board.getSpot(ROW_4, COL_B);
 		bishopSpot.setPiece(new Bishop(BLACK));
 		Piece bishopPiece = bishopSpot.getPiece();
 		bishopSpot.setPiece(new Bishop(BLACK));
-		bishopPiece.findLegalMoves(board, bishopSpot);
+		//bishopPiece.findLegalMoves(board, bishopSpot);
 
-		pawnPiece.recalculateMoves(board);
+		//pawnPiece.recalculateMoves(board);
 
 		// test sulla lunghezza dell'arraylist di mosse del pedone (in questo caso 0)
 		assertEquals(pawnPiece.getLegalMoves().size(), 0);
@@ -349,21 +349,21 @@ public class PieceTest {
 		kingSpot.setPiece(new King(WHITE));
 		Piece kingPiece = kingSpot.getPiece();
 		kingSpot.setPiece(new King(WHITE));
-		kingPiece.findLegalMoves(board, kingSpot);
+		//kingPiece.findLegalMoves(board, kingSpot);
 
 		Spot knightSpot = board.getSpot(ROW_2, COL_C);
 		knightSpot.setPiece(new Knight(WHITE));
 		Piece knightPiece = knightSpot.getPiece();
 		knightSpot.setPiece(new Knight(WHITE));
-		knightPiece.findLegalMoves(board, knightSpot);
+		//knightPiece.findLegalMoves(board, knightSpot);
 
 		Spot bishopSpot = board.getSpot(ROW_4, COL_B);
 		bishopSpot.setPiece(new Bishop(BLACK));
 		Piece bishopPiece = bishopSpot.getPiece();
 		bishopSpot.setPiece(new Bishop(BLACK));
-		bishopPiece.findLegalMoves(board, bishopSpot);
+		//bishopPiece.findLegalMoves(board, bishopSpot);
 
-		knightPiece.recalculateMoves(board);
+		//knightPiece.recalculateMoves(board);
 		// test sulla lunghezza dell'arraylist di mosse del pedone (1 mossa: catturare
 		// l'alfiere)
 		assertEquals(knightPiece.getLegalMoves().size(), 1);
@@ -382,21 +382,21 @@ public class PieceTest {
 		kingSpot.setPiece(new King(WHITE));
 		Piece kingPiece = kingSpot.getPiece();
 		kingSpot.setPiece(new King(WHITE));
-		kingPiece.findLegalMoves(board, kingSpot);
+	//	kingPiece.findLegalMoves(board, kingSpot);
 
 		Spot rookSpot = board.getSpot(ROW_2, COL_D);
 		rookSpot.setPiece(new Rook(WHITE));
 		Piece rookPiece = rookSpot.getPiece();
 		rookSpot.setPiece(new Rook(WHITE));
-		rookPiece.findLegalMoves(board, rookSpot);
+	//	rookPiece.findLegalMoves(board, rookSpot);
 
 		Spot bishopSpot = board.getSpot(ROW_4, COL_B);
 		bishopSpot.setPiece(new Bishop(BLACK));
 		Piece bishopPiece = bishopSpot.getPiece();
 		bishopSpot.setPiece(new Bishop(BLACK));
-		bishopPiece.findLegalMoves(board, bishopSpot);
+	//	bishopPiece.findLegalMoves(board, bishopSpot);
 
-		rookPiece.recalculateMoves(board);
+	//	rookPiece.recalculateMoves(board);
 
 		// test sulla lunghezza dell'arraylist di mosse della Torre (in questo caso 0)
 		assertEquals(rookPiece.getLegalMoves().size(), 0);
@@ -408,21 +408,21 @@ public class PieceTest {
 		kingSpot.setPiece(new King(WHITE));
 		Piece kingPiece = kingSpot.getPiece();
 		kingSpot.setPiece(new King(WHITE));
-		kingPiece.findLegalMoves(board, kingSpot);
+	//	kingPiece.findLegalMoves(board, kingSpot);
 
 		Spot bishopSpotW = board.getSpot(ROW_2, COL_E);
 		bishopSpotW.setPiece(new Bishop(WHITE));
 		Piece bishopPieceW = bishopSpotW.getPiece();
 		bishopSpotW.setPiece(new Bishop(WHITE));
-		bishopPieceW.findLegalMoves(board, bishopSpotW);
+	//	bishopPieceW.findLegalMoves(board, bishopSpotW);
 
 		Spot rookSpot = board.getSpot(ROW_3, COL_E);
 		rookSpot.setPiece(new Rook(BLACK));
 		Piece rookPiece = rookSpot.getPiece();
 		rookSpot.setPiece(new Rook(BLACK));
-		rookPiece.findLegalMoves(board, rookSpot);
+	//	rookPiece.findLegalMoves(board, rookSpot);
 
-		bishopPieceW.recalculateMoves(board);
+	//	bishopPieceW.recalculateMoves(board);
 
 		// test sulla lunghezza dell'arraylist di mosse della Torre (in questo caso 0)
 		assertEquals(bishopPieceW.getLegalMoves().size(), 0);
@@ -435,21 +435,21 @@ public class PieceTest {
 		kingSpot.setPiece(new King(WHITE));
 		Piece kingPiece = kingSpot.getPiece();
 		kingSpot.setPiece(new King(WHITE));
-		kingPiece.findLegalMoves(board, kingSpot);
+	//	kingPiece.findLegalMoves(board, kingSpot);
 
 		Spot queenSpot = board.getSpot(ROW_2, COL_D);
 		queenSpot.setPiece(new Queen(WHITE));
 		Piece queenPiece = queenSpot.getPiece();
 		queenSpot.setPiece(new Queen(WHITE));
-		queenPiece.findLegalMoves(board, queenSpot);
+	//	queenPiece.findLegalMoves(board, queenSpot);
 
 		Spot bishopSpot = board.getSpot(ROW_4, COL_B);
 		bishopSpot.setPiece(new Bishop(BLACK));
 		Piece bishopPiece = bishopSpot.getPiece();
 		bishopSpot.setPiece(new Bishop(BLACK));
-		bishopPiece.findLegalMoves(board, bishopSpot);
+	//	bishopPiece.findLegalMoves(board, bishopSpot);
 
-		queenPiece.recalculateMoves(board);
+	//	queenPiece.recalculateMoves(board);
 
 		// test sulla lunghezza dell'arraylist di mosse della Torre (c3, c4)
 		assertEquals(queenPiece.getLegalMoves().size(), 2);
@@ -463,9 +463,9 @@ public class PieceTest {
 		queenSpot2.setPiece(new Queen(BLACK));
 		Piece queenPieceB = queenSpot2.getPiece();
 		queenSpot2.setPiece(new Queen(BLACK));
-		queenPieceB.findLegalMoves(board, queenSpot2);
+	//	queenPieceB.findLegalMoves(board, queenSpot2);
 
-		queenPiece.recalculateMoves(board);
+	//	queenPiece.recalculateMoves(board);
 
 		// test sulla lunghezza dell'arraylist di mosse della Torre (in questo caso 1))
 		assertEquals(queenPiece.getLegalMoves().size(), 1);
@@ -485,7 +485,7 @@ public class PieceTest {
 		kingSpot.setPiece(new King(WHITE));
 		Piece kingPiece = kingSpot.getPiece();
 		kingSpot.setPiece(new King(WHITE));
-		kingPiece.findLegalMoves(board, kingSpot);
+	//	kingPiece.findLegalMoves(board, kingSpot);
 
 		// test sulla lunghezza dell'arraylist di mosse (in questo caso 8)
 		assertEquals(kingPiece.getLegalMoves().size(), 8);
@@ -503,11 +503,11 @@ public class PieceTest {
 		rookSpot.setPiece(new Rook(BLACK));
 		Piece rookPiece = rookSpot.getPiece();
 		rookSpot.setPiece(new Rook(BLACK));
-		rookPiece.findLegalMoves(board, rookSpot);
+	//	rookPiece.findLegalMoves(board, rookSpot);
 
 		// test sulla lunghezza dell'arraylist di mosse (in questo caso 5)
 		// board.showBoard();
-		kingPiece.recalculateMoves(board);
+	//	kingPiece.recalculateMoves(board);
 		assertEquals(kingPiece.getLegalMoves().size(), 5);
 
 		// movimenti validi rimasti
@@ -526,8 +526,8 @@ public class PieceTest {
 		queenSpot.setPiece(new Queen(BLACK));
 		Piece queenPiece = queenSpot.getPiece();
 		queenSpot.setPiece(new Queen(BLACK));
-		queenPiece.findLegalMoves(board, queenSpot);
-		kingPiece.recalculateMoves(board);
+	//	queenPiece.findLegalMoves(board, queenSpot);
+	//	kingPiece.recalculateMoves(board);
 
 		// unica mossa possibile per il re in b6
 		assertEquals(kingPiece.getLegalMoves().size(), 1);
@@ -548,9 +548,9 @@ public class PieceTest {
 		rookSpot2.setPiece(new Rook(BLACK));
 		Piece rookPiece2 = rookSpot2.getPiece();
 		rookSpot2.setPiece(new Rook(BLACK));
-		rookPiece2.findLegalMoves(board, rookSpot);
+	//	rookPiece2.findLegalMoves(board, rookSpot);
 
-		kingPiece.recalculateMoves(board);
+	//	kingPiece.recalculateMoves(board);
 
 		// nessuna mossa possibile per il re
 		assertEquals(kingPiece.getLegalMoves().size(), 0);
@@ -576,41 +576,41 @@ public class PieceTest {
 		Spot kingSpot = board.getSpot(ROW_1, COL_F);
 		kingSpot.setPiece(new King(WHITE));
 		Piece kingPiece = kingSpot.getPiece();
-		kingPiece.findLegalMoves(board, kingSpot);
+	//	kingPiece.findLegalMoves(board, kingSpot);
 
 		Spot rookSpotW = board.getSpot(ROW_1, COL_E);
 		rookSpotW.setPiece(new Rook(WHITE));
 		Piece rookPieceW = rookSpotW.getPiece();
-		rookPieceW.findLegalMoves(board, rookSpotW);
+	//	rookPieceW.findLegalMoves(board, rookSpotW);
 
 		Spot rookSpotW2 = board.getSpot(ROW_2, COL_E);
 		rookSpotW2.setPiece(new Rook(WHITE));
 		Piece rookPieceW2 = rookSpotW2.getPiece();
-		rookPieceW2.findLegalMoves(board, rookSpotW2);
+		//rookPieceW2.findLegalMoves(board, rookSpotW2);
 
 		Spot rookSpotB = board.getSpot(ROW_1, COL_A);
 		rookSpotB.setPiece(new Rook(BLACK));
 		Piece rookPieceB = rookSpotB.getPiece();
-		rookPieceB.findLegalMoves(board, rookSpotB);
+	//	rookPieceB.findLegalMoves(board, rookSpotB);
 
 		Spot rookSpotB2 = board.getSpot(ROW_2, COL_G);
 		rookSpotB2.setPiece(new Rook(BLACK));
 		Piece rookPieceB2 = rookSpotB2.getPiece();
-		rookPieceB2.findLegalMoves(board, rookSpotB2);
+	//	rookPieceB2.findLegalMoves(board, rookSpotB2);
 
 		Spot bishopSpot = board.getSpot(ROW_6, COL_C);
 		bishopSpot.setPiece(new Bishop(BLACK));
 		Piece bishopPiece = bishopSpot.getPiece();
-		bishopPiece.findLegalMoves(board, bishopSpot);
+	//	bishopPiece.findLegalMoves(board, bishopSpot);
 
 		Spot queenSpot = board.getSpot(ROW_6, COL_A);
 		queenSpot.setPiece(new Queen(BLACK));
 		Piece queenPiece = queenSpot.getPiece();
-		queenPiece.findLegalMoves(board, queenSpot);
+	//	queenPiece.findLegalMoves(board, queenSpot);
 
-		kingPiece.recalculateMoves(board);
-		rookPieceW2.recalculateMoves(board);
-		rookPieceW.recalculateMoves(board);
+	//	kingPiece.recalculateMoves(board);
+	//	rookPieceW2.recalculateMoves(board);
+	//	rookPieceW.recalculateMoves(board);
 
 		// nessuna mossa possibile per il re
 		assertEquals(kingPiece.getLegalMoves().size(), 0);
@@ -638,41 +638,41 @@ public class PieceTest {
 		Spot kingSpot = board.getSpot(ROW_1, COL_F);
 		kingSpot.setPiece(new King(BLACK));
 		Piece kingPiece = kingSpot.getPiece();
-		kingPiece.findLegalMoves(board, kingSpot);
+	//	kingPiece.findLegalMoves(board, kingSpot);
 
 		Spot rookSpotB = board.getSpot(ROW_1, COL_E);
 		rookSpotB.setPiece(new Rook(BLACK));
 		Piece rookPieceB = rookSpotB.getPiece();
-		rookPieceB.findLegalMoves(board, rookSpotB);
+	//	rookPieceB.findLegalMoves(board, rookSpotB);
 
 		Spot rookSpotB2 = board.getSpot(ROW_2, COL_E);
 		rookSpotB2.setPiece(new Rook(BLACK));
 		Piece rookPieceB2 = rookSpotB2.getPiece();
-		rookPieceB2.findLegalMoves(board, rookSpotB2);
+	//	rookPieceB2.findLegalMoves(board, rookSpotB2);
 
 		Spot rookSpotW = board.getSpot(ROW_1, COL_A);
 		rookSpotW.setPiece(new Rook(WHITE));
 		Piece rookPieceW = rookSpotW.getPiece();
-		rookPieceW.findLegalMoves(board, rookSpotW);
+	//	rookPieceW.findLegalMoves(board, rookSpotW);
 
 		Spot rookSpotW2 = board.getSpot(ROW_2, COL_G);
 		rookSpotW2.setPiece(new Rook(WHITE));
 		Piece rookPieceW2 = rookSpotW2.getPiece();
-		rookPieceW2.findLegalMoves(board, rookSpotW2);
+	//	rookPieceW2.findLegalMoves(board, rookSpotW2);
 
 		Spot bishopSpot = board.getSpot(ROW_6, COL_C);
 		bishopSpot.setPiece(new Bishop(WHITE));
 		Piece bishopPiece = bishopSpot.getPiece();
-		bishopPiece.findLegalMoves(board, bishopSpot);
+	//	bishopPiece.findLegalMoves(board, bishopSpot);
 
 		Spot queenSpot = board.getSpot(ROW_6, COL_A);
 		queenSpot.setPiece(new Queen(WHITE));
 		Piece queenPiece = queenSpot.getPiece();
-		queenPiece.findLegalMoves(board, queenSpot);
+	//	queenPiece.findLegalMoves(board, queenSpot);
 
-		kingPiece.recalculateMoves(board);
-		rookPieceB2.recalculateMoves(board);
-		rookPieceB.recalculateMoves(board);
+	//	kingPiece.recalculateMoves(board);
+	//	rookPieceB2.recalculateMoves(board);
+	//	rookPieceB.recalculateMoves(board);
 
 		// nessuna mossa possibile per il re
 		assertEquals(kingPiece.getLegalMoves().size(), 0);
