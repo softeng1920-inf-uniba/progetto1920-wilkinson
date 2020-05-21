@@ -664,5 +664,133 @@ public class BoardTest {
 				);
 		isRefine = false;
 	}
+	
+	@Test
+	void testKingLegalMoves() {
+		board.getSpot(ROW_4, COL_D).setPiece(new King(WHITE)); // re esaminato (d4)
+		examinedPiece = board.getSpot(ROW_4, COL_D).getPiece();
+		board.recalLegalMoves();
+		assertAll(
+				// mosse del re bianco possibili: [8]
+				() -> assertEquals(examinedPiece.getLegalMoves().size(), 8),
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_C)))), // 1.(d4->c3)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_D)))), // 2.(d4->d3
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_E)))), // 3.(d4->e3)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_4, COL_C)))), // 4.(d4->c4)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_4, COL_E)))), // 5.(d4->e4)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_5, COL_C)))), // 6.(d4->c5)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_5, COL_D)))), // 7.(d4->d5)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_5, COL_E))))  // 8.(d4->e5)
+				);
+		isRefine = false;
+	}
+
+	@Test
+	void testKingReducedLegalMoves() {
+		board.getSpot(ROW_4, COL_D).setPiece(new King(WHITE)); // re esaminato  (d4)
+		examinedPiece = board.getSpot(ROW_4, COL_D).getPiece();
+		board.getSpot(ROW_4, COL_E).setPiece(new Rook(WHITE)); // torre amica   (e4)
+		board.getSpot(ROW_3, COL_C).setPiece(new Pawn(BLACK)); // pedone nemico (c3)
+		board.getSpot(ROW_3, COL_D).setPiece(new Pawn(BLACK)); // pedone nemico (d3)
+		board.recalLegalMoves();
+		assertAll(
+				// mosse del re bianco possibili: [7]
+				() -> assertEquals(examinedPiece.getLegalMoves().size(), 7),
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_E)))), // 1.(d4->e3)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_4, COL_C)))), // 2.(d4->c4)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_5, COL_C)))), // 3.(d4->c5)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_5, COL_D)))), // 4.(d4->d5)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_5, COL_E)))), // 5.(d4->e5)
+				// cattura, movimento possibile
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_C)))), // 6.(d4->c3)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_D)))), // 7.(d4->d3)
+				// casa contenente pezzo amico, movimento non possibile
+				() -> assertFalse(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_4, COL_E))))  // (d4->e4) NO!
+				);
+		isRefine = false;
+	}
+
+	@Test
+	void testKingRefinedLegalMoves() {
+		board.getSpot(ROW_4, COL_D).setPiece(new King(WHITE)); // re esaminato   (d4)
+		examinedPiece = board.getSpot(ROW_4, COL_D).getPiece();
+		board.getSpot(ROW_5, COL_D).setPiece(new Rook(WHITE)); // torre amica    (d5)
+		board.getSpot(ROW_5, COL_F).setPiece(new Pawn(BLACK)); // pedone nemico  (f5)
+		board.getSpot(ROW_8, COL_A).setPiece(new King(BLACK)); // re nemico      (a8)
+		board.getSpot(ROW_6, COL_C).setPiece(new Queen(BLACK)); // regina nemica (c6)
+		board.getSpot(ROW_3, COL_D).setPiece(new Rook(BLACK)); // torre nemica   (d3)
+		board.recalLegalMoves();
+		board.refineLegalMoves();
+		assertAll(
+				// mosse del re bianco possibili: [2]
+				() -> assertEquals(examinedPiece.getLegalMoves().size(), 2),
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_5, COL_E)))), // 1.(d4->e5)
+				// cattura, movimento possibile
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_D)))), // 2.(d4->d3)
+				// case precluse da pezzi avversari
+				() -> assertFalse(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_4, COL_E)))), // (d4->e4) NO!
+				() -> assertFalse(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_E)))), // (d4->e3) NO!
+				() -> assertFalse(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_C)))), // (d4->c3) NO!
+				() -> assertFalse(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_4, COL_C)))), // (d4->c4) NO!
+				() -> assertFalse(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_5, COL_C)))), // (d4->c5) NO!
+				// casa contenente pezzi amici, movimento non possibile
+				() -> assertFalse(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_5, COL_D))))  // (d4->d5) NO!
+				);
+		isRefine = true;
+	}
+
+	@Test
+	void testGenericPieceRefinedLegalMoves() {
+		board.getSpot(ROW_4, COL_D).setPiece(new King(WHITE)); // re esaminato            (d4)
+		examinedPiece = board.getSpot(ROW_4, COL_D).getPiece();
+		board.getSpot(ROW_5, COL_C).setPiece(new Pawn(WHITE)); // pedone amico inchiodato (c5)
+		board.getSpot(ROW_8, COL_A).setPiece(new King(BLACK)); // re nemico               (a8)
+		board.getSpot(ROW_7, COL_A).setPiece(new Bishop(BLACK)); // alfiere nemico        (a7)
+		board.getSpot(ROW_5, COL_D).setPiece(new Knight(BLACK)); // cavallo nemico        (d5)
+		board.getSpot(ROW_3, COL_C).setPiece(new Rook(BLACK)); // torre nemica            (c3)
+		board.recalLegalMoves();
+		board.refineLegalMoves();
+		assertAll(
+				// mosse del pedone bianco possibili: [0]
+				() -> assertTrue(board.getSpot(ROW_5, COL_C).getPiece().getLegalMoves().isEmpty()), // nessuna mossa legale
+				// mosse del re bianco possibili: [3]
+				() -> assertEquals(examinedPiece.getLegalMoves().size(), 3),
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_4, COL_E)))), // 1.(d4->e4)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_5, COL_E)))), // 2.(d4->e5)
+				// cattura del cavallo nemico possibile (non protetto)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_5, COL_D)))), // 3.(d4->d5)
+				// cattura della torre nemica non possibile (protetta da cavallo)
+				() -> assertFalse(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_C))))  // (d4->c3) NO!
+				);
+		isRefine = true;
+	}
 
 }
