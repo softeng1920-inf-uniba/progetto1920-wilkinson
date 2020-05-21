@@ -722,4 +722,41 @@ public class BoardTest {
 		isRefine = false;
 	}
 
+	@Test
+	void testKingRefinedLegalMoves() {
+		board.getSpot(ROW_4, COL_D).setPiece(new King(WHITE)); // re esaminato   (d4)
+		examinedPiece = board.getSpot(ROW_4, COL_D).getPiece();
+		board.getSpot(ROW_5, COL_D).setPiece(new Rook(WHITE)); // torre amica    (d5)
+		board.getSpot(ROW_5, COL_F).setPiece(new Pawn(BLACK)); // pedone nemico  (f5)
+		board.getSpot(ROW_8, COL_A).setPiece(new King(BLACK)); // re nemico      (a8)
+		board.getSpot(ROW_6, COL_C).setPiece(new Queen(BLACK)); // regina nemica (c6)
+		board.getSpot(ROW_3, COL_D).setPiece(new Rook(BLACK)); // torre nemica   (d3)
+		board.recalLegalMoves();
+		board.refineLegalMoves();
+		assertAll(
+				// mosse del re bianco possibili: [2]
+				() -> assertEquals(examinedPiece.getLegalMoves().size(), 2),
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_5, COL_E)))), // 1.(d4->e5)
+				// cattura, movimento possibile
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_D)))), // 2.(d4->d3)
+				// case precluse da pezzi avversari
+				() -> assertFalse(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_4, COL_E)))), // (d4->e4) NO!
+				() -> assertFalse(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_E)))), // (d4->e3) NO!
+				() -> assertFalse(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_C)))), // (d4->c3) NO!
+				() -> assertFalse(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_4, COL_C)))), // (d4->c4) NO!
+				() -> assertFalse(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_5, COL_C)))), // (d4->c5) NO!
+				// casa contenente pezzi amici, movimento non possibile
+				() -> assertFalse(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_5, COL_D))))  // (d4->d5) NO!
+				);
+		isRefine = true;
+	}
+
 }
