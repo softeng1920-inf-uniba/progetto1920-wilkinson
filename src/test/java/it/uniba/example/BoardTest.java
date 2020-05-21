@@ -355,4 +355,42 @@ public class BoardTest {
 				);
 		isRefine = false;
 	}
+	
+	@Test
+	void testBishopLegalMoves() {
+		board.getSpot(ROW_4, COL_D).setPiece(new Bishop(WHITE)); // alfiere esaminato (d4)
+		examinedPiece = board.getSpot(ROW_4, COL_D).getPiece();
+		board.recalLegalMoves();
+		assertAll(
+				// mosse dell'alfiere bianco possibili: [13]
+				() -> assertEquals(examinedPiece.getLegalMoves().size(), 13),
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_1, COL_A)))), // 1.(d4->a1)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_2, COL_B)))), // 2.(d4->b2)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_C)))), // 3.(d4->c3)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_5, COL_E)))), // 4.(d4->e5)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_6, COL_F)))), // 5.(d4->f6)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_7, COL_G)))), // 6.(d4->g7)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_8, COL_H)))), // 7.(d4->h8)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_7, COL_A)))), // 8.(d4->a7)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_6, COL_B)))), // 9.(d4->b6)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_5, COL_C)))), // 10.(d4->c5)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_E)))), // 11.(d4->e3)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_2, COL_F)))), // 12.(d4->f2)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_1, COL_G))))  // 13.(d4->g1)
+				);
+		isRefine = false;
+	}
 }
