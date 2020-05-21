@@ -168,4 +168,15 @@ public class BoardTest {
 		assertTrue(examinedPiece.getLegalMoves().isEmpty());
 		isRefine = false;
 	}
+	
+	@Test
+	void testWhitePawnFrontPieceLegalMoves() {
+		board.getSpot(ROW_2, COL_D).setPiece(new Pawn(WHITE)); // pedone esaminato (d2)
+		examinedPiece = board.getSpot(ROW_2, COL_D).getPiece();
+		board.getSpot(ROW_3, COL_D).setPiece(new Pawn(BLACK)); // pedone nemico    (d3) -> DI FRONTE
+		board.recalLegalMoves();
+		// mosse del pedone bianco possibili: [0]
+		assertTrue(examinedPiece.getLegalMoves().isEmpty());
+		isRefine = false;
+	}
 }
