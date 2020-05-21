@@ -272,5 +272,15 @@ public class BoardTest {
 				);
 		isRefine = false;
 	}
+	
+	@Test
+	void testBlackPawnEndBoardLegalMoves() {
+		board.getSpot(ROW_1, COL_D).setPiece(new Pawn(BLACK)); // pedone esaminato (d1) -> BORDO SCACCHIERA
+		examinedPiece = board.getSpot(ROW_1, COL_D).getPiece();
+		board.recalLegalMoves();
+		// mosse del pedone nero possibili: [0]
+		assertTrue(examinedPiece.getLegalMoves().isEmpty());
+		isRefine = false;
+	}
 
 }
