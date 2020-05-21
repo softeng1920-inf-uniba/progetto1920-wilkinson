@@ -599,7 +599,7 @@ public class Board {
 	 * metodo che permette la stampa a video della scacchiera nella configurazione
 	 * attuale
 	 */
-	public void showBoard() {
+	public boolean showBoard() {
 		String orizline = "\u2550";
 		String vertline = "\u2551";
 		String plusline = "\u256c";
@@ -657,6 +657,7 @@ public class Board {
 			System.out.println("\t");
 		}
 		System.out.print("      a   b   c   d   e   f   g   h\n");
+		return true;
 	}
 
 	/**restituisce lo spot dove si trova il re bianco

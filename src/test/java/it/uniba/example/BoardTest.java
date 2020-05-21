@@ -792,5 +792,16 @@ public class BoardTest {
 				);
 		isRefine = true;
 	}
+	
+	
+	/**
+	 * Se il metodo showBoard viene eseguito fino alla fine
+	 * il test passa
+	 */
+	@Test
+	void testShowBoard() {
+		board = new Board();
+		assertTrue(board.showBoard());
+	}
 
 }
