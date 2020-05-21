@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="8.8">
 <file name="C:\scacchi\progetto1920-wilkinson\src\main\java\it\uniba\main\AlgebraicNotation.java">
+<error line="0" severity="error" message="File does not end with a newline." source="com.puppycrawl.tools.checkstyle.checks.NewlineAtEndOfFileCheck"/>
 </file>
 <file name="C:\scacchi\progetto1920-wilkinson\src\main\java\it\uniba\main\AppMain.java">
 </file>
 <file name="C:\scacchi\progetto1920-wilkinson\src\main\java\it\uniba\main\Bishop.java">
 </file>
 <file name="C:\scacchi\progetto1920-wilkinson\src\main\java\it\uniba\main\Board.java">
+<error line="0" severity="error" message="File does not end with a newline." source="com.puppycrawl.tools.checkstyle.checks.NewlineAtEndOfFileCheck"/>
 </file>
 <file name="C:\scacchi\progetto1920-wilkinson\src\main\java\it\uniba\main\Game.java">
-<error line="360" severity="error" message="Line has trailing spaces." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpSinglelineCheck"/>
-<error line="454" severity="error" message="Line has trailing spaces." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpSinglelineCheck"/>
+<error line="335" severity="error" message="Line has trailing spaces." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpSinglelineCheck"/>
+<error line="375" severity="error" message="Line has trailing spaces." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpSinglelineCheck"/>
+<error line="469" severity="error" message="Line has trailing spaces." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpSinglelineCheck"/>
 </file>
 <file name="C:\scacchi\progetto1920-wilkinson\src\main\java\it\uniba\main\King.java">
 </file>
 <file name="C:\scacchi\progetto1920-wilkinson\src\main\java\it\uniba\main\Knight.java">
 </file>
 <file name="C:\scacchi\progetto1920-wilkinson\src\main\java\it\uniba\main\Move.java">
+<error line="0" severity="error" message="File does not end with a newline." source="com.puppycrawl.tools.checkstyle.checks.NewlineAtEndOfFileCheck"/>
+<error line="32" severity="error" message="Line has trailing spaces." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpSinglelineCheck"/>
+<error line="122" severity="error" message="Line has trailing spaces." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpSinglelineCheck"/>
 </file>
 <file name="C:\scacchi\progetto1920-wilkinson\src\main\java\it\uniba\main\Pawn.java">
 </file>
@@ -27,5 +33,6 @@
 <file name="C:\scacchi\progetto1920-wilkinson\src\main\java\it\uniba\main\Rook.java">
 </file>
 <file name="C:\scacchi\progetto1920-wilkinson\src\main\java\it\uniba\main\Spot.java">
+<error line="0" severity="error" message="File does not end with a newline." source="com.puppycrawl.tools.checkstyle.checks.NewlineAtEndOfFileCheck"/>
 </file>
 </checkstyle>

@@ -84,7 +84,7 @@
          <br/>
       </p>
       <h2>Metrics</h2>
-      <p>971 lines of code analyzed,
+      <p>1218 lines of code analyzed,
 	in 5 classes, 
 	in 1 packages.</p>
       <table width="500" cellpadding="5" cellspacing="2">
@@ -96,22 +96,22 @@
          <tr class="tablerow0">
             <td>High Priority Warnings</td>
             <td align="right">5</td>
-            <td align="right">5.15</td>
+            <td align="right">4.11</td>
          </tr>
          <tr class="tablerow1">
             <td>Medium Priority Warnings</td>
-            <td align="right">8</td>
-            <td align="right">8.24</td>
+            <td align="right">9</td>
+            <td align="right">7.39</td>
          </tr>
          <tr class="$totalClass">
             <td>
                <b>Total Warnings</b>
             </td>
             <td align="right">
-               <b>13</b>
+               <b>14</b>
             </td>
             <td align="right">
-               <b>13.39</b>
+               <b>11.49</b>
             </td>
          </tr>
       </table>
@@ -141,14 +141,14 @@
             <td>
                <a href="#Warnings_STYLE">Dodgy code Warnings</a>
             </td>
-            <td align="right">13</td>
+            <td align="right">14</td>
          </tr>
          <tr class="tablerow1">
             <td>
                <b>Total</b>
             </td>
             <td align="right">
-               <b>13</b>
+               <b>14</b>
             </td>
          </tr>
       </table>
@@ -162,13 +162,27 @@
             <th align="left">Code</th>
             <th align="left">Warning</th>
          </tr>
-         <tr class="tablerow1" onclick="toggleRow('d1e46');">
+         <tr class="tablerow1" onclick="toggleRow('d1e209');">
+            <td>
+               <span class="priority-2">DLS</span>
+            </td>
+            <td>Dead store to piece in it.uniba.example.GameTest.testWhiteKingOneLegalMoves()</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e209" style="display: none;">
+                  <a href="#DLS_DEAD_LOCAL_STORE">Bug type DLS_DEAD_LOCAL_STORE (click for details)</a>
+                  <br/>In class it.uniba.example.GameTest<br/>In method it.uniba.example.GameTest.testWhiteKingOneLegalMoves()<br/>Local variable named piece<br/>At GameTest.java:[line 207]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e46');">
             <td>
                <span class="priority-1">ST</span>
             </td>
             <td>Write to static field it.uniba.example.ChessTest.board from instance method it.uniba.example.ChessTest.testBishopMovements()</td>
          </tr>
-         <tr class="detailrow1">
+         <tr class="detailrow0">
             <td/>
             <td>
                <p id="d1e46" style="display: none;">
@@ -176,13 +190,13 @@
                   <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testBishopMovements()<br/>Field it.uniba.example.ChessTest.board<br/>At ChessTest.java:[line 155]</p>
             </td>
          </tr>
-         <tr class="tablerow0" onclick="toggleRow('d1e62');">
+         <tr class="tablerow1" onclick="toggleRow('d1e62');">
             <td>
                <span class="priority-1">ST</span>
             </td>
             <td>Write to static field it.uniba.example.ChessTest.board from instance method it.uniba.example.ChessTest.testKingMovements()</td>
          </tr>
-         <tr class="detailrow0">
+         <tr class="detailrow1">
             <td/>
             <td>
                <p id="d1e62" style="display: none;">
@@ -190,13 +204,13 @@
                   <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testKingMovements()<br/>Field it.uniba.example.ChessTest.board<br/>At ChessTest.java:[line 194]</p>
             </td>
          </tr>
-         <tr class="tablerow1" onclick="toggleRow('d1e78');">
+         <tr class="tablerow0" onclick="toggleRow('d1e78');">
             <td>
                <span class="priority-1">ST</span>
             </td>
             <td>Write to static field it.uniba.example.ChessTest.board from instance method it.uniba.example.ChessTest.testKnightMovements()</td>
          </tr>
-         <tr class="detailrow1">
+         <tr class="detailrow0">
             <td/>
             <td>
                <p id="d1e78" style="display: none;">
@@ -204,13 +218,13 @@
                   <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testKnightMovements()<br/>Field it.uniba.example.ChessTest.board<br/>At ChessTest.java:[line 90]</p>
             </td>
          </tr>
-         <tr class="tablerow0" onclick="toggleRow('d1e94');">
+         <tr class="tablerow1" onclick="toggleRow('d1e94');">
             <td>
                <span class="priority-1">ST</span>
             </td>
             <td>Write to static field it.uniba.example.ChessTest.board from instance method it.uniba.example.ChessTest.testPawnMovements()</td>
          </tr>
-         <tr class="detailrow0">
+         <tr class="detailrow1">
             <td/>
             <td>
                <p id="d1e94" style="display: none;">
@@ -218,13 +232,13 @@
                   <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testPawnMovements()<br/>Field it.uniba.example.ChessTest.board<br/>At ChessTest.java:[line 49]</p>
             </td>
          </tr>
-         <tr class="tablerow1" onclick="toggleRow('d1e110');">
+         <tr class="tablerow0" onclick="toggleRow('d1e110');">
             <td>
                <span class="priority-1">ST</span>
             </td>
             <td>Write to static field it.uniba.example.ChessTest.board from instance method it.uniba.example.ChessTest.testRookMovements()</td>
          </tr>
-         <tr class="detailrow1">
+         <tr class="detailrow0">
             <td/>
             <td>
                <p id="d1e110" style="display: none;">
@@ -232,13 +246,13 @@
                   <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testRookMovements()<br/>Field it.uniba.example.ChessTest.board<br/>At ChessTest.java:[line 124]</p>
             </td>
          </tr>
-         <tr class="tablerow0" onclick="toggleRow('d1e126');">
+         <tr class="tablerow1" onclick="toggleRow('d1e126');">
             <td>
                <span class="priority-2">ST</span>
             </td>
             <td>Write to static field it.uniba.example.ChessTest.genericPiece from instance method it.uniba.example.ChessTest.testBishopMovements()</td>
          </tr>
-         <tr class="detailrow0">
+         <tr class="detailrow1">
             <td/>
             <td>
                <p id="d1e126" style="display: none;">
@@ -246,13 +260,13 @@
                   <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testBishopMovements()<br/>Field it.uniba.example.ChessTest.genericPiece<br/>At ChessTest.java:[line 159]</p>
             </td>
          </tr>
-         <tr class="tablerow1" onclick="toggleRow('d1e142');">
+         <tr class="tablerow0" onclick="toggleRow('d1e142');">
             <td>
                <span class="priority-2">ST</span>
             </td>
             <td>Write to static field it.uniba.example.ChessTest.genericPiece from instance method it.uniba.example.ChessTest.testKingMovements()</td>
          </tr>
-         <tr class="detailrow1">
+         <tr class="detailrow0">
             <td/>
             <td>
                <p id="d1e142" style="display: none;">
@@ -260,13 +274,13 @@
                   <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testKingMovements()<br/>Field it.uniba.example.ChessTest.genericPiece<br/>At ChessTest.java:[line 198]</p>
             </td>
          </tr>
-         <tr class="tablerow0" onclick="toggleRow('d1e158');">
+         <tr class="tablerow1" onclick="toggleRow('d1e158');">
             <td>
                <span class="priority-2">ST</span>
             </td>
             <td>Write to static field it.uniba.example.ChessTest.genericPiece from instance method it.uniba.example.ChessTest.testKnightMovements()</td>
          </tr>
-         <tr class="detailrow0">
+         <tr class="detailrow1">
             <td/>
             <td>
                <p id="d1e158" style="display: none;">
@@ -274,13 +288,13 @@
                   <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testKnightMovements()<br/>Field it.uniba.example.ChessTest.genericPiece<br/>At ChessTest.java:[line 94]</p>
             </td>
          </tr>
-         <tr class="tablerow1" onclick="toggleRow('d1e174');">
+         <tr class="tablerow0" onclick="toggleRow('d1e174');">
             <td>
                <span class="priority-2">ST</span>
             </td>
             <td>Write to static field it.uniba.example.ChessTest.genericPiece from instance method it.uniba.example.ChessTest.testPawnMovements()</td>
          </tr>
-         <tr class="detailrow1">
+         <tr class="detailrow0">
             <td/>
             <td>
                <p id="d1e174" style="display: none;">
@@ -288,13 +302,13 @@
                   <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testPawnMovements()<br/>Field it.uniba.example.ChessTest.genericPiece<br/>At ChessTest.java:[line 53]<br/>Another occurrence at ChessTest.java:[line 71]</p>
             </td>
          </tr>
-         <tr class="tablerow0" onclick="toggleRow('d1e192');">
+         <tr class="tablerow1" onclick="toggleRow('d1e192');">
             <td>
                <span class="priority-2">ST</span>
             </td>
             <td>Write to static field it.uniba.example.ChessTest.genericPiece from instance method it.uniba.example.ChessTest.testRookMovements()</td>
          </tr>
-         <tr class="detailrow0">
+         <tr class="detailrow1">
             <td/>
             <td>
                <p id="d1e192" style="display: none;">
@@ -302,44 +316,44 @@
                   <br/>In class it.uniba.example.ChessTest<br/>In method it.uniba.example.ChessTest.testRookMovements()<br/>Field it.uniba.example.ChessTest.genericPiece<br/>At ChessTest.java:[line 128]</p>
             </td>
          </tr>
-         <tr class="tablerow1" onclick="toggleRow('d1e209');">
+         <tr class="tablerow0" onclick="toggleRow('d1e226');">
             <td>
                <span class="priority-2">ST</span>
             </td>
             <td>Write to static field it.uniba.example.GameTest.game from instance method it.uniba.example.GameTest.setUp()</td>
          </tr>
-         <tr class="detailrow1">
+         <tr class="detailrow0">
             <td/>
             <td>
-               <p id="d1e209" style="display: none;">
+               <p id="d1e226" style="display: none;">
                   <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.GameTest<br/>In method it.uniba.example.GameTest.setUp()<br/>Field it.uniba.example.GameTest.game<br/>At GameTest.java:[line 44]</p>
+                  <br/>In class it.uniba.example.GameTest<br/>In method it.uniba.example.GameTest.setUp()<br/>Field it.uniba.example.GameTest.game<br/>At GameTest.java:[line 48]</p>
             </td>
          </tr>
-         <tr class="tablerow0" onclick="toggleRow('d1e225');">
+         <tr class="tablerow1" onclick="toggleRow('d1e242');">
             <td>
                <span class="priority-2">ST</span>
             </td>
             <td>Write to static field it.uniba.example.GameTest.newBoard from instance method it.uniba.example.GameTest.setUp()</td>
          </tr>
-         <tr class="detailrow0">
+         <tr class="detailrow1">
             <td/>
             <td>
-               <p id="d1e225" style="display: none;">
+               <p id="d1e242" style="display: none;">
                   <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
-                  <br/>In class it.uniba.example.GameTest<br/>In method it.uniba.example.GameTest.setUp()<br/>Field it.uniba.example.GameTest.newBoard<br/>At GameTest.java:[line 45]</p>
+                  <br/>In class it.uniba.example.GameTest<br/>In method it.uniba.example.GameTest.setUp()<br/>Field it.uniba.example.GameTest.newBoard<br/>At GameTest.java:[line 49]</p>
             </td>
          </tr>
-         <tr class="tablerow1" onclick="toggleRow('d1e241');">
+         <tr class="tablerow0" onclick="toggleRow('d1e258');">
             <td>
                <span class="priority-2">ST</span>
             </td>
             <td>Write to static field it.uniba.example.PieceTest.board from instance method it.uniba.example.PieceTest.setup()</td>
          </tr>
-         <tr class="detailrow1">
+         <tr class="detailrow0">
             <td/>
             <td>
-               <p id="d1e241" style="display: none;">
+               <p id="d1e258" style="display: none;">
                   <a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
                   <br/>In class it.uniba.example.PieceTest<br/>In method it.uniba.example.PieceTest.setup()<br/>Field it.uniba.example.PieceTest.board<br/>At PieceTest.java:[line 45]</p>
             </td>
@@ -349,6 +363,22 @@
          <a name="Details">Details</a>
       </h1>
       <h2>
+         <a name="DLS_DEAD_LOCAL_STORE">DLS_DEAD_LOCAL_STORE: Dead store to local variable</a>
+      </h2>
+
+<p>
+This instruction assigns a value to a local variable,
+but the value is not read or used in any subsequent instruction.
+Often, this indicates an error, because the value computed is never
+used.
+</p>
+<p>
+Note that Sun's javac compiler often generates dead stores for
+final local variables.  Because SpotBugs is a bytecode-based tool,
+there is no easy way to eliminate these false positives.
+</p>
+
+    <h2>
          <a name="ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD: Write to static field from instance method</a>
       </h2>
 
