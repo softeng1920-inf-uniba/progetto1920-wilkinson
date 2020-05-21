@@ -293,5 +293,33 @@ public class BoardTest {
 		assertTrue(examinedPiece.getLegalMoves().isEmpty());
 		isRefine = false;
 	}
+	
+	@Test
+	void testKnightLegalMoves() {
+		board.getSpot(ROW_4, COL_D).setPiece(new Knight(WHITE)); // cavallo esaminato (d4)
+		examinedPiece = board.getSpot(ROW_4, COL_D).getPiece();
+		board.recalLegalMoves();
+		assertAll(
+				// mosse del cavallo bianco possibili: [8]
+				() -> assertEquals(examinedPiece.getLegalMoves().size(), 8),
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_B)))), // 1.(d4->b3)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_5, COL_B)))), // 2.(d4->b5)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_2, COL_C)))), // 3.(d4->c2)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_6, COL_C)))), // 4.(d4-c6)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_2, COL_E)))), // 5.(d4->e2)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_6, COL_E)))), // 6.(d4->e6)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_F)))), // 7.(d4->f3)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_5, COL_F))))  // 8.(d4->f5)
+				);
+		isRefine = false;
+	}
 
 }
