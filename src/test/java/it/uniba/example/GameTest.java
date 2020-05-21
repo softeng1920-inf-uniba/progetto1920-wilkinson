@@ -177,7 +177,7 @@ public class GameTest {
 		assertFalse(((Pawn) piece).isPossibleEnPassantCapture());
 	}
 
-	//testo situazioni in cui il re bianco non ha possibilità di movimento
+	//testo situazioni in cui il re bianco non ha possibilita' di movimento
 	@Test
 	void testWhiteKingNoLegalMoves() {
 		//inserisco i pezzi nella scacchiera per bloccare il movimento del re bianco
