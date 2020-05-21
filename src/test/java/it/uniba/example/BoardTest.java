@@ -322,4 +322,37 @@ public class BoardTest {
 		isRefine = false;
 	}
 
+	
+	@Test
+	void testKnightReducedLegalMoves() {
+		board.getSpot(ROW_4, COL_D).setPiece(new Knight(WHITE)); // cavallo esaminato (d4)
+		examinedPiece = board.getSpot(ROW_4, COL_D).getPiece();
+		board.getSpot(ROW_3, COL_B).setPiece(new Knight(WHITE)); // cavallo amico     (b3)
+		board.getSpot(ROW_6, COL_E).setPiece(new Knight(WHITE)); // cavallo amico     (e6)
+		board.getSpot(ROW_5, COL_F).setPiece(new Knight(BLACK)); // cavallo nemico    (f5)
+		board.recalLegalMoves();
+		assertAll(
+				// mosse del cavallo bianco possibili: [6]
+				() -> assertEquals(examinedPiece.getLegalMoves().size(), 6),
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_5, COL_B)))), // 1.(d4->b5)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_2, COL_C)))), // 2.(d4->c2)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_6, COL_C)))), // 3.(d4-c6)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_2, COL_E)))), // 4.(d4->e2)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_F)))), // 5.(d4->f3)
+				// cattura, movimento possibile
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_5, COL_F)))), // 6.(d4->f5)
+				// pezzo amico, movimento non consentito
+				() -> assertFalse(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_B)))), // (d4->b3) NO!
+				() -> assertFalse(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_6, COL_E))))  // (d4->e6) NO!
+				);
+		isRefine = false;
+	}
 }
