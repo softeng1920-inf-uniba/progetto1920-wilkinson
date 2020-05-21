@@ -78,5 +78,20 @@ public class BoardTest {
 				);
 		isRefine = false;
 	}
+	
+	@Test
+	void testWhitePawnAlreadyMovedLegalMoves() {
+		board.getSpot(ROW_3, COL_D).setPiece(new Pawn(WHITE)); // pedone esaminato (d3)
+		examinedPiece = board.getSpot(ROW_3, COL_D).getPiece();
+		board.getSpot(ROW_3, COL_D).getPiece().setAsMoved(); // pedone in (d3) gia' mosso
+		board.recalLegalMoves();
+		assertAll(
+				// mosse del pedone bianco possibili: [1]
+				() -> assertEquals(examinedPiece.getLegalMoves().size(), 1),
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_3, COL_D), new Spot(ROW_4, COL_D)))) // 1.(d3->d4)
+				);
+		isRefine = false;
+	}
 
 }
