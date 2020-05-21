@@ -195,4 +195,19 @@ public class BoardTest {
 				);
 		isRefine = false;
 	}
+	
+	@Test
+	void testBlackPawnAlreadyMovedLegalMoves() {
+		board.getSpot(ROW_6, COL_D).setPiece(new Pawn(BLACK)); // pedone esaminato (d6)
+		examinedPiece = board.getSpot(ROW_6, COL_D).getPiece();
+		board.getSpot(ROW_6, COL_D).getPiece().setAsMoved(); // pedone in (d6) gia' mosso
+		board.recalLegalMoves();
+		assertAll(
+				// mosse del pedone nero possibili: [1]
+				() -> assertEquals(examinedPiece.getLegalMoves().size(), 1),
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_6, COL_D), new Spot(ROW_5, COL_D)))) // 1.(d6->d5)
+				);
+		isRefine = false;
+	}
 }
