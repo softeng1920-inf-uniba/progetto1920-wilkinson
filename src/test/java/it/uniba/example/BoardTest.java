@@ -182,4 +182,119 @@ public class BoardTest {
 		isRefine = false;
 	}
 
+	@Test
+	void testBlackPawnLegalMoves() {
+		board.getSpot(ROW_7, COL_D).setPiece(new Pawn(BLACK)); // pedone esaminato (d6)
+		examinedPiece = board.getSpot(ROW_7, COL_D).getPiece();
+		board.recalLegalMoves();
+		assertAll(
+				// mosse del pedone nero possibili: [2]
+				() -> assertEquals(examinedPiece.getLegalMoves().size(), 2),
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_7, COL_D), new Spot(ROW_6, COL_D)))), // 1.(d7->d6)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_7, COL_D), new Spot(ROW_5, COL_D))))  // 2.(d7->d5)
+				);
+		isRefine = false;
+	}
+
+	@Test
+	void testBlackPawnAlreadyMovedLegalMoves() {
+		board.getSpot(ROW_6, COL_D).setPiece(new Pawn(BLACK)); // pedone esaminato (d6)
+		examinedPiece = board.getSpot(ROW_6, COL_D).getPiece();
+		board.getSpot(ROW_6, COL_D).getPiece().setAsMoved(); // pedone in (d6) gia' mosso
+		board.recalLegalMoves();
+		assertAll(
+				// mosse del pedone nero possibili: [1]
+				() -> assertEquals(examinedPiece.getLegalMoves().size(), 1),
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_6, COL_D), new Spot(ROW_5, COL_D)))) // 1.(d6->d5)
+				);
+		isRefine = false;
+	}
+
+	@Test
+	void testBlackPawnCaptureLegalMoves() {
+		board.getSpot(ROW_7, COL_D).setPiece(new Pawn(BLACK)); // pedone esaminato (d7)
+		examinedPiece = board.getSpot(ROW_7, COL_D).getPiece();
+		board.getSpot(ROW_6, COL_E).setPiece(new Pawn(WHITE)); // pedone nemico    (e6)
+		board.getSpot(ROW_6, COL_E).getPiece().setAsMoved(); // pedone in (e6) gia' mosso
+		board.recalLegalMoves();
+		assertAll(
+				// mosse del pedone nero possibili: [3]
+				() -> assertEquals(examinedPiece.getLegalMoves().size(), 3),
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_7, COL_D), new Spot(ROW_6, COL_D)))), // 1.(d7->d6)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_7, COL_D), new Spot(ROW_5, COL_D)))), // 2.(d7->d5)
+				// cattura, movimento possibile
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_7, COL_D), new Spot(ROW_6, COL_E))))  // 3.(d7->e6)
+				);
+		isRefine = false;
+	}
+
+	@Test
+	void testBlackPawnEnPassantLegalMoves() {
+		board.getSpot(ROW_4, COL_D).setPiece(new Pawn(BLACK)); // pedone esaminato (d4)
+		examinedPiece = board.getSpot(ROW_4, COL_D).getPiece();
+		board.getSpot(ROW_4, COL_E).setPiece(new Pawn(WHITE)); // pedone nemico    (e4)
+		board.getSpot(ROW_4, COL_D).getPiece().setAsMoved(); // pedone in (d4) gia' mosso
+		board.getSpot(ROW_4, COL_E).getPiece().setAsMoved(); // pedone in (e4) gia' mosso
+		// pedone in (e4) catturabile en passant
+		((Pawn) (board.getSpot(ROW_4, COL_E).getPiece())).setPossibleEnPassantCapture(true);
+		board.recalLegalMoves();
+		assertAll(
+				// mosse del pedone nero possibili: [2]
+				() -> assertEquals(examinedPiece.getLegalMoves().size(), 2),
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_D)))), // 1.(d4->d3)
+				// cattura en passant, movimento possibile
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_E))))  // 2.(d4->e3)
+				);
+		isRefine = false;
+	}
+
+	@Test
+	void testBlackPawnEnPassantNotPossibleLegalMoves() {
+		board.getSpot(ROW_4, COL_D).setPiece(new Pawn(BLACK)); // pedone esaminato (d4)
+		board.getSpot(ROW_4, COL_E).setPiece(new Pawn(WHITE)); // pedone nemico    (e4)
+		board.getSpot(ROW_4, COL_D).getPiece().setAsMoved(); // pedone in (d4) gia' mosso
+		board.getSpot(ROW_4, COL_E).getPiece().setAsMoved(); // pedone in (e4) gia' mosso
+		// pedone in (e4) NON PIU' catturabile en passant (es. mosso turno precedente)
+		((Pawn) (board.getSpot(ROW_4, COL_E).getPiece())).setPossibleEnPassantCapture(false);
+		board.recalLegalMoves();
+		assertAll(
+				// mosse del pedone nero possibili: [1]
+				() -> assertEquals(board.getSpot(ROW_4, COL_D).getPiece().getLegalMoves().size(), 1),
+				() -> assertTrue(board.getSpot(ROW_4, COL_D).getPiece().getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_D)))), // 1.(d4->d3)
+				// cattura en passant, movimento non possibile
+				() -> assertFalse(board.getSpot(ROW_4, COL_D).getPiece().getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_E))))  // (d4->e3) NO!
+				);
+		isRefine = false;
+	}
+
+	@Test
+	void testBlackPawnEndBoardLegalMoves() {
+		board.getSpot(ROW_1, COL_D).setPiece(new Pawn(BLACK)); // pedone esaminato (d1) -> BORDO SCACCHIERA
+		examinedPiece = board.getSpot(ROW_1, COL_D).getPiece();
+		board.recalLegalMoves();
+		// mosse del pedone nero possibili: [0]
+		assertTrue(examinedPiece.getLegalMoves().isEmpty());
+		isRefine = false;
+	}
+
+	@Test
+	void testBlackPawnFrontPieceLegalMoves() {
+		board.getSpot(ROW_7, COL_D).setPiece(new Pawn(BLACK)); // pedone esaminato (d7)
+		examinedPiece = board.getSpot(ROW_7, COL_D).getPiece();
+		board.getSpot(ROW_6, COL_D).setPiece(new Pawn(WHITE)); // pedone nemico    (d6) -> DI FRONTE
+		board.recalLegalMoves();
+		// mosse del pedone nero possibili: [0]
+		assertTrue(examinedPiece.getLegalMoves().isEmpty());
+		isRefine = false;
+	}
 }
