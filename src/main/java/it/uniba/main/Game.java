@@ -332,7 +332,6 @@ public class Game {
 		}
 		return false;
 	}
-	
 	/**
 	 * toString e' il metodo che restituisce delle stringhe. Indicano il turno
 	 * - @return (Turno del bianco) se e' il turno del bianco - @return (Turno del
@@ -372,7 +371,6 @@ public class Game {
 	public Board getBoard() {
 		return board;
 	}
-	
 	/**
 	 * Setta la scacchiera
 	 * @param inBoard
@@ -466,5 +464,4 @@ public class Game {
 	public void setBlackCaptures(final ArrayList<Piece> inBlackCaptures) {
 		this.blackCaptures = inBlackCaptures;
 	}
-	
 }
