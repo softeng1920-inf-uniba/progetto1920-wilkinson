@@ -179,4 +179,20 @@ public class BoardTest {
 		assertTrue(examinedPiece.getLegalMoves().isEmpty());
 		isRefine = false;
 	}
+	
+	@Test
+	void testBlackPawnLegalMoves() {
+		board.getSpot(ROW_7, COL_D).setPiece(new Pawn(BLACK)); // pedone esaminato (d6)
+		examinedPiece = board.getSpot(ROW_7, COL_D).getPiece();
+		board.recalLegalMoves();
+		assertAll(
+				// mosse del pedone nero possibili: [2]
+				() -> assertEquals(examinedPiece.getLegalMoves().size(), 2),
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_7, COL_D), new Spot(ROW_6, COL_D)))), // 1.(d7->d6)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_7, COL_D), new Spot(ROW_5, COL_D))))  // 2.(d7->d5)
+				);
+		isRefine = false;
+	}
 }
