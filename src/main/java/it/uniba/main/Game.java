@@ -108,7 +108,6 @@ public class Game {
 			whiteTurn = (!whiteTurn);
 			return true;
 		} else {
-			System.out.println("\nCOMANDO O MOSSA NON VALIDA");
 			return false;
 		}
 	}

@@ -51,12 +51,12 @@ public class GameTest {
 		newBoard.getSpot(ROW_8, COL_E).setPiece(new King (BLACK));
 	}
 
-	// Test situazioni en passant pedone bianco 
+	// Test situazioni en passant pedone bianco
 	@Test
 	void testEnPassantWhite() {
 		// Cattura en passant da parte del pedone bianco
 		Piece piece;
-		// inizializzo pedoni 
+		// inizializzo pedoni
 		for (int j = COL_A; j < DIM_BOARD; j++) {
 			newBoard.getSpot(ROW_7, j).setPiece(new Pawn(BLACK));
 			newBoard.getSpot(ROW_2, j).setPiece(new Pawn(WHITE));
@@ -73,7 +73,7 @@ public class GameTest {
 		// il booleano dell'en passant settato a false
 		checkEnPassantBoolean();
 		// controllo che finito il turno il pedone non sia piu' catturabile en passant
-		game.currentGame("a3"); 
+		game.currentGame("a3");
 		assertFalse(((Pawn) piece).isPossibleEnPassantCapture());
 		// controllo che il nuovo pedone mosso (d5) sia catturabile en passant
 		// e che quello in (b5) non lo sia piu'
@@ -102,13 +102,13 @@ public class GameTest {
 			}
 		}
 	}
-	//controllo che lo spostamento di una casa di un pezzo nero 
+	//controllo che lo spostamento di una casa di un pezzo nero
 	//alla prima mossa, non setti il booleano per la possibile
 	//cattura en passant
 	@Test
 	void testEnPassantOneSpotBlack() {
 		Piece piece;
-		// inizializzo pedoni 
+		// inizializzo pedoni
 		for (int j = COL_A; j < DIM_BOARD; j++) {
 			newBoard.getSpot(ROW_7, j).setPiece(new Pawn(BLACK));
 			newBoard.getSpot(ROW_2, j).setPiece(new Pawn(WHITE));
@@ -127,7 +127,7 @@ public class GameTest {
 	void testEnPassantBlack() {
 		Piece piece;
 		// Cattura en passant da parte del pedone nero
-		// inizializzo pedoni 
+		// inizializzo pedoni
 		for (int j = COL_A; j < DIM_BOARD; j++) {
 			newBoard.getSpot(ROW_7, j).setPiece(new Pawn(BLACK));
 			newBoard.getSpot(ROW_2, j).setPiece(new Pawn(WHITE));
@@ -163,7 +163,7 @@ public class GameTest {
 	@Test
 	void testEnPassantOneSpotWhite() {
 		Piece piece;
-		// inizializzo pedoni 
+		// inizializzo pedoni
 		for (int j = COL_A; j < DIM_BOARD; j++) {
 			newBoard.getSpot(ROW_7, j).setPiece(new Pawn(BLACK));
 			newBoard.getSpot(ROW_2, j).setPiece(new Pawn(WHITE));
@@ -171,7 +171,7 @@ public class GameTest {
 		newBoard.getSpot(ROW_4, COL_A).setPiece(new Pawn(BLACK));
 		newBoard.recalLegalMoves();
 		game.setBoard(newBoard);
-		game.currentGame("b3"); //Movimento di una sola casa 
+		game.currentGame("b3"); //Movimento di una sola casa
 		piece= game.getBoard().getSpot(ROW_3, COL_B).getPiece();
 		// controllo che il booleano non sia stato settato a true
 		assertFalse(((Pawn) piece).isPossibleEnPassantCapture());
@@ -181,9 +181,9 @@ public class GameTest {
 	@Test
 	void testWhiteKingNoLegalMoves() {
 		//inserisco i pezzi nella scacchiera per bloccare il movimento del re bianco
-		newBoard.getSpot(ROW_1, COL_D).setPiece(new Rook(WHITE)); 
+		newBoard.getSpot(ROW_1, COL_D).setPiece(new Rook(WHITE));
 		newBoard.getSpot(ROW_2, COL_D).setPiece(new Pawn(WHITE));
-		newBoard.getSpot(ROW_2, COL_F).setPiece(new Rook(BLACK)); 
+		newBoard.getSpot(ROW_2, COL_F).setPiece(new Rook(BLACK));
 		newBoard.getSpot(ROW_2, COL_H).setPiece(new Rook(BLACK));
 		newBoard.recalLegalMoves();
 		newBoard.refineLegalMoves();
@@ -199,9 +199,9 @@ public class GameTest {
 	void testWhiteKingOneLegalMoves() {
 		//inserisco i pezzi nella scacchiera per dare un solo movimento del re bianco
 		Piece piece;
-		newBoard.getSpot(ROW_1, COL_D).setPiece(new Rook(WHITE)); 
+		newBoard.getSpot(ROW_1, COL_D).setPiece(new Rook(WHITE));
 		newBoard.getSpot(ROW_2, COL_D).setPiece(new Pawn(WHITE));
-		newBoard.getSpot(ROW_2, COL_F).setPiece(new Rook(BLACK)); 
+		newBoard.getSpot(ROW_2, COL_F).setPiece(new Rook(BLACK));
 		newBoard.recalLegalMoves();
 		game.setBoard(newBoard);
 		piece= game.getBoard().getSpot(ROW_1, COL_E).getPiece();
@@ -212,9 +212,9 @@ public class GameTest {
 	@Test
 	void testBlackKingNoLegalMoves() {
 		//inserisco i pezzi nella scacchiera per bloccare il movimento del re nero
-		newBoard.getSpot(ROW_7, COL_D).setPiece(new Pawn(BLACK)); 
+		newBoard.getSpot(ROW_7, COL_D).setPiece(new Pawn(BLACK));
 		newBoard.getSpot(ROW_8, COL_D).setPiece(new Rook(BLACK));
-		newBoard.getSpot(ROW_7, COL_F).setPiece(new Rook(WHITE)); 
+		newBoard.getSpot(ROW_7, COL_F).setPiece(new Rook(WHITE));
 		newBoard.getSpot(ROW_6, COL_G).setPiece(new Pawn(WHITE));
 		newBoard.recalLegalMoves();
 		newBoard.refineLegalMoves();
@@ -229,9 +229,9 @@ public class GameTest {
 	@Test
 	void testBlackKingOneLegalMoves() {
 		//inserisco i pezzi nella scacchiera per permettere un solo movimento al re nero
-		newBoard.getSpot(ROW_7, COL_D).setPiece(new Pawn(BLACK)); 
+		newBoard.getSpot(ROW_7, COL_D).setPiece(new Pawn(BLACK));
 		newBoard.getSpot(ROW_8, COL_D).setPiece(new Rook(BLACK));
-		newBoard.getSpot(ROW_7, COL_F).setPiece(new Rook(WHITE)); 
+		newBoard.getSpot(ROW_7, COL_F).setPiece(new Rook(WHITE));
 		newBoard.recalLegalMoves();
 		newBoard.refineLegalMoves();
 		game.setBoard(newBoard);
@@ -244,8 +244,8 @@ public class GameTest {
 	@Test
 	void testWhiteKingUnderAttack() {
 		// serie di mosse per controllare che non sia possibile scoprire il re bianco
-		newBoard.getSpot(ROW_2, COL_E).setPiece(new Rook(WHITE)); 
-		newBoard.getSpot(ROW_7, COL_E).setPiece(new Rook(BLACK)); 
+		newBoard.getSpot(ROW_2, COL_E).setPiece(new Rook(WHITE));
+		newBoard.getSpot(ROW_7, COL_E).setPiece(new Rook(BLACK));
 		newBoard.recalLegalMoves();
 		newBoard.refineLegalMoves();
 		game.setBoard(newBoard);
@@ -255,8 +255,8 @@ public class GameTest {
 	//test di eventuali situazioni in cui il movimento di un pezzo espongono il re nero
 	@Test
 	void testBlackKingUnderAttack() {
-		newBoard.getSpot(ROW_2, COL_E).setPiece(new Rook(WHITE)); 
-		newBoard.getSpot(ROW_7, COL_E).setPiece(new Rook(BLACK)); 
+		newBoard.getSpot(ROW_2, COL_E).setPiece(new Rook(WHITE));
+		newBoard.getSpot(ROW_7, COL_E).setPiece(new Rook(BLACK));
 		newBoard.recalLegalMoves();
 		newBoard.refineLegalMoves();
 		game.setBoard(newBoard);
@@ -268,8 +268,8 @@ public class GameTest {
 	@Test
 	void testIsAmbiguityWhiteKnight() {
 		// test ambiguita' movimento cavallo bianco
-		newBoard.getSpot(ROW_3, COL_A).setPiece(new Knight(WHITE)); 
-		newBoard.getSpot(ROW_3, COL_E).setPiece(new Knight(WHITE)); 
+		newBoard.getSpot(ROW_3, COL_A).setPiece(new Knight(WHITE));
+		newBoard.getSpot(ROW_3, COL_E).setPiece(new Knight(WHITE));
 		newBoard.recalLegalMoves();
 		newBoard.refineLegalMoves();
 		game.setBoard(newBoard);
@@ -282,9 +282,9 @@ public class GameTest {
 	// test ambiguita' cattura da parte del cavallo bianco
 	@Test
 	void testIsAmbiguityWhiteKnightCapture() {
-		newBoard.getSpot(ROW_3, COL_A).setPiece(new Knight(WHITE)); 
-		newBoard.getSpot(ROW_3, COL_E).setPiece(new Knight(WHITE)); 
-		newBoard.getSpot(ROW_2, COL_C).setPiece(new Pawn(BLACK)); 
+		newBoard.getSpot(ROW_3, COL_A).setPiece(new Knight(WHITE));
+		newBoard.getSpot(ROW_3, COL_E).setPiece(new Knight(WHITE));
+		newBoard.getSpot(ROW_2, COL_C).setPiece(new Pawn(BLACK));
 		newBoard.recalLegalMoves();
 		newBoard.refineLegalMoves();
 		game.setBoard(newBoard);
@@ -296,8 +296,8 @@ public class GameTest {
 	// test ambiguita' movimento cavallo nero
 	@Test
 	void testIsAmbiguityBlackKnight() {
-		newBoard.getSpot(ROW_6, COL_A).setPiece(new Knight(BLACK)); 
-		newBoard.getSpot(ROW_6, COL_E).setPiece(new Knight(BLACK)); 
+		newBoard.getSpot(ROW_6, COL_A).setPiece(new Knight(BLACK));
+		newBoard.getSpot(ROW_6, COL_E).setPiece(new Knight(BLACK));
 		newBoard.recalLegalMoves();
 		newBoard.refineLegalMoves();
 		game.setBoard(newBoard);
@@ -310,12 +310,12 @@ public class GameTest {
 	// test ambiguita' cattura da parte del cavallo nero
 	@Test
 	void testIsAmbiguityBlackKnightCapture() {
-		newBoard.getSpot(ROW_6, COL_A).setPiece(new Knight(BLACK)); 
-		newBoard.getSpot(ROW_6, COL_E).setPiece(new Knight(BLACK)); 
-		newBoard.getSpot(ROW_7, COL_C).setPiece(new Pawn(WHITE)); 
+		newBoard.getSpot(ROW_6, COL_A).setPiece(new Knight(BLACK));
+		newBoard.getSpot(ROW_6, COL_E).setPiece(new Knight(BLACK));
+		newBoard.getSpot(ROW_7, COL_C).setPiece(new Pawn(WHITE));
 		newBoard.recalLegalMoves();
 		newBoard.refineLegalMoves();
-		game.setBoard(newBoard); 
+		game.setBoard(newBoard);
 		game.currentGame("Re2");
 		assertFalse(game.currentGame("Cxc7"));//provo ad effettuare la mossa ambigua
 		assertTrue(game.currentGame("Caxc7"));//effettuo la mossa non ambigua
@@ -325,11 +325,11 @@ public class GameTest {
 	// test ambiguita' movimento pedone bianco, due pedoni nella stessa colonna
 	@Test
 	void testIsAmbiguityWhitePawn() {
-		newBoard.getSpot(ROW_2, COL_A).setPiece(new Pawn(WHITE)); 
-		newBoard.getSpot(ROW_3, COL_A).setPiece(new Pawn(WHITE)); 
+		newBoard.getSpot(ROW_2, COL_A).setPiece(new Pawn(WHITE));
+		newBoard.getSpot(ROW_3, COL_A).setPiece(new Pawn(WHITE));
 		newBoard.recalLegalMoves();
 		newBoard.refineLegalMoves();
-		game.setBoard(newBoard); 
+		game.setBoard(newBoard);
 		game.currentGame("a4");
 		//controllo che si e' spostato il pedone piu' avanazato
 		assertTrue(game.getBoard().getSpot(ROW_4, COL_A).getPiece() instanceof Pawn);
@@ -339,12 +339,12 @@ public class GameTest {
 	// test ambiguita' cattura da parte del pedone bianco
 	@Test
 	void testIsAmbiguityWhitePawnCapture() {
-		newBoard.getSpot(ROW_2, COL_A).setPiece(new Pawn(WHITE)); 
-		newBoard.getSpot(ROW_2, COL_C).setPiece(new Pawn(WHITE)); 
-		newBoard.getSpot(ROW_3, COL_B).setPiece(new Knight(BLACK)); 
+		newBoard.getSpot(ROW_2, COL_A).setPiece(new Pawn(WHITE));
+		newBoard.getSpot(ROW_2, COL_C).setPiece(new Pawn(WHITE));
+		newBoard.getSpot(ROW_3, COL_B).setPiece(new Knight(BLACK));
 		newBoard.recalLegalMoves();
 		newBoard.refineLegalMoves();
-		game.setBoard(newBoard); 
+		game.setBoard(newBoard);
 		//provo a spostarmi senza cattura
 		assertFalse(game.currentGame("b3"));
 		game.currentGame("axb3");
@@ -358,11 +358,11 @@ public class GameTest {
 	// test ambiguita' movimento pedone nero, due pedoni nella stessa colonna
 	@Test
 	void testIsAmbiguityBlackPawn() {
-		newBoard.getSpot(ROW_7, COL_A).setPiece(new Pawn(BLACK)); 
-		newBoard.getSpot(ROW_6, COL_A).setPiece(new Pawn(BLACK)); 
+		newBoard.getSpot(ROW_7, COL_A).setPiece(new Pawn(BLACK));
+		newBoard.getSpot(ROW_6, COL_A).setPiece(new Pawn(BLACK));
 		newBoard.recalLegalMoves();
 		newBoard.refineLegalMoves();
-		game.setBoard(newBoard); 
+		game.setBoard(newBoard);
 		game.currentGame("Re2");
 		game.currentGame("a5");
 		//controllo che si e' spostato il pedone piu' avanazato
@@ -373,12 +373,12 @@ public class GameTest {
 	// test ambiguita' cattura da parte del pedone nero
 	@Test
 	void testIsAmbiguityBlackPawnCapture() {
-		newBoard.getSpot(ROW_7, COL_A).setPiece(new Pawn(BLACK)); 
-		newBoard.getSpot(ROW_7, COL_C).setPiece(new Pawn(BLACK)); 
-		newBoard.getSpot(ROW_6, COL_B).setPiece(new Knight(WHITE)); 
+		newBoard.getSpot(ROW_7, COL_A).setPiece(new Pawn(BLACK));
+		newBoard.getSpot(ROW_7, COL_C).setPiece(new Pawn(BLACK));
+		newBoard.getSpot(ROW_6, COL_B).setPiece(new Knight(WHITE));
 		newBoard.recalLegalMoves();
 		newBoard.refineLegalMoves();
-		game.setBoard(newBoard); 
+		game.setBoard(newBoard);
 		game.currentGame("Re2");
 		//provo a spostarmi senza cattura
 		assertFalse(game.currentGame("b6"));

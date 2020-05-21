@@ -29,7 +29,7 @@ public final class Move {
 	private Spot end; // casa di arrivo
 	private Piece pieceMoved; // pezzo che deve eseguire il movimento
 	private boolean isAmbiguity = false; // caso in cui ci sia ambiguita' di movimento
-	private String ambiguity; // primo carattere di un'ambiguit√
+	private String ambiguity; // primo carattere di un'ambiguita'
 
 	/**
 	 * costruttore dell'oggetto Move
@@ -423,7 +423,7 @@ public final class Move {
 		return false;
 	}
 
-	/**applica una serie di controlli per stabilire se l'arrocco Ë possibile
+	/**applica una serie di controlli per stabilire se l'arrocco e' possibile
 	 *
 	 * @param board
 	 * @param kingSpot
