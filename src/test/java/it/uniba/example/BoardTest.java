@@ -229,5 +229,27 @@ public class BoardTest {
 		);
 		isRefine = false;
 	}
+	
+	@Test
+	void testBlackPawnEnPassantLegalMoves() {
+		board.getSpot(ROW_4, COL_D).setPiece(new Pawn(BLACK)); // pedone esaminato (d4)
+		examinedPiece = board.getSpot(ROW_4, COL_D).getPiece();
+		board.getSpot(ROW_4, COL_E).setPiece(new Pawn(WHITE)); // pedone nemico    (e4)
+		board.getSpot(ROW_4, COL_D).getPiece().setAsMoved(); // pedone in (d4) gia' mosso
+		board.getSpot(ROW_4, COL_E).getPiece().setAsMoved(); // pedone in (e4) gia' mosso
+		// pedone in (e4) catturabile en passant
+		((Pawn) (board.getSpot(ROW_4, COL_E).getPiece())).setPossibleEnPassantCapture(true);
+		board.recalLegalMoves();
+		assertAll(
+				// mosse del pedone nero possibili: [2]
+				() -> assertEquals(examinedPiece.getLegalMoves().size(), 2),
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_D)))), // 1.(d4->d3)
+				// cattura en passant, movimento possibile
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_E))))  // 2.(d4->e3)
+				);
+		isRefine = false;
+	}
 
 }
