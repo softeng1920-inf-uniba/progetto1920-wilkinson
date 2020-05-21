@@ -55,13 +55,13 @@ class AlgebraicNotationTest {
 		assertEquals(interpreter.getSymbol().size(), 1);
 		assertTrue(interpreter.isCapture());
 		assertTrue(interpreter.isGoodMove());
-		// torre con ambiguit√† di colonna
+		// torre con ambiguit‡ di colonna
 		interpreter = new AlgebraicNotation("Tba3");
 		assertEquals(interpreter.getPieceLetter(), "T");
 		assertEquals(interpreter.getEndSquareId(), "ba3");
 		assertTrue(interpreter.getSymbol().isEmpty());
 		assertTrue(interpreter.isGoodMove());
-		// cavallo con ambiguit√† di riga con cattura
+		// cavallo con ambiguit‡ di riga con cattura
 		interpreter = new AlgebraicNotation("C2xa3");
 		assertEquals(interpreter.getPieceLetter(), "C");
 		assertEquals(interpreter.getEndSquareId(), "2a3");
@@ -121,7 +121,7 @@ class AlgebraicNotationTest {
 		// simbolo non posizionato correttamente (caso 2)
 		interpreter = new AlgebraicNotation("Dg6x");
 		assertFalse(interpreter.isGoodMove());
-		// pedone con cattura senza ambiguit√†
+		// pedone con cattura senza ambiguit‡
 		interpreter = new AlgebraicNotation("xg6");
 		assertFalse(interpreter.isGoodMove());
 		// lettera non valida
@@ -166,7 +166,7 @@ class AlgebraicNotationTest {
 		// comando en passant inizio stringa
 		interpreter = new AlgebraicNotation("ep exf4");
 		assertFalse(interpreter.isGoodMove());
-		// comando en passant met√† stringa
+		// comando en passant met‡ stringa
 		interpreter = new AlgebraicNotation("exe.p. f4");
 		assertFalse(interpreter.isGoodMove());
 		// comando en passant senza cattura
