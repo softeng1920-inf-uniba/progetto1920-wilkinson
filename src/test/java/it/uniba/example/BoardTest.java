@@ -49,5 +49,34 @@ public class BoardTest {
 		board = new Board(true);
 	}
 
+	@AfterEach
+	void tearDown() {
+		// numero di mosse calcolate
+		int moveNumber = examinedPiece.getLegalMoves().size();
+		// ricalcolo mosse
+		board.recalLegalMoves();
+		// refine mosse relativo alla posizione del re (solo se test di refine)
+		if (isRefine) {
+			board.refineLegalMoves();
+		}
+		// controllo se il numero di mosse non e' cambiato dopo il ricalcolo
+		assertEquals(examinedPiece.getLegalMoves().size(), moveNumber);
+	}
+
+	@Test
+	void testWhitePawnLegalMoves() {
+		board.getSpot(ROW_2, COL_D).setPiece(new Pawn(WHITE)); // pedone esaminato (d2)
+		examinedPiece = board.getSpot(ROW_2, COL_D).getPiece();
+		board.recalLegalMoves();
+		assertAll(
+				// mosse del pedone bianco possibili: [2]
+				() -> assertEquals(examinedPiece.getLegalMoves().size(), 2),
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_2, COL_D), new Spot(ROW_3, COL_D)))), // 1.(d2->d3)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_2, COL_D), new Spot(ROW_4, COL_D))))  // 2.(d2->d4)
+				);
+		isRefine = false;
+	}
 
 }
