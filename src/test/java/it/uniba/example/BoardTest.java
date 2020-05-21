@@ -158,4 +158,14 @@ public class BoardTest {
 				);
 		isRefine = false;
 	}
+	
+	@Test
+	void testWhitePawnEndBoardLegalMoves() {
+		board.getSpot(ROW_8, COL_D).setPiece(new Pawn(WHITE)); // pedone esaminato (d8) -> BORDO SCACCHIERA
+		examinedPiece = board.getSpot(ROW_8, COL_D).getPiece();
+		board.recalLegalMoves();
+		// mosse del pedone bianco possibili: [0]
+		assertTrue(examinedPiece.getLegalMoves().isEmpty());
+		isRefine = false;
+	}
 }
