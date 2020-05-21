@@ -688,5 +688,38 @@ public class BoardTest {
 				);
 		isRefine = false;
 	}
+	
+	@Test
+	void testKingReducedLegalMoves() {
+		board.getSpot(ROW_4, COL_D).setPiece(new King(WHITE)); // re esaminato  (d4)
+		examinedPiece = board.getSpot(ROW_4, COL_D).getPiece();
+		board.getSpot(ROW_4, COL_E).setPiece(new Rook(WHITE)); // torre amica   (e4)
+		board.getSpot(ROW_3, COL_C).setPiece(new Pawn(BLACK)); // pedone nemico (c3)
+		board.getSpot(ROW_3, COL_D).setPiece(new Pawn(BLACK)); // pedone nemico (d3)
+		board.recalLegalMoves();
+		assertAll(
+				// mosse del re bianco possibili: [7]
+				() -> assertEquals(examinedPiece.getLegalMoves().size(), 7),
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_E)))), // 1.(d4->e3)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_4, COL_C)))), // 2.(d4->c4)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_5, COL_C)))), // 3.(d4->c5)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_5, COL_D)))), // 4.(d4->d5)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_5, COL_E)))), // 5.(d4->e5)
+				// cattura, movimento possibile
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_C)))), // 6.(d4->c3)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_D)))), // 7.(d4->d3)
+				// casa contenente pezzo amico, movimento non possibile
+				() -> assertFalse(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_4, COL_E))))  // (d4->e4) NO!
+				);
+		isRefine = false;
+	}
 
 }
