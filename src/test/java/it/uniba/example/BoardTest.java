@@ -439,4 +439,89 @@ public class BoardTest {
 				);
 		isRefine = false;
 	}
+	
+	@Test
+	void testRookLegalMoves() {
+		board.getSpot(ROW_4, COL_D).setPiece(new Rook(WHITE)); // torre esaminata (d4)
+		examinedPiece = board.getSpot(ROW_4, COL_D).getPiece();
+		board.recalLegalMoves();
+		assertAll(
+				// mosse della torre bianca possibili: [14]
+				() -> assertEquals(examinedPiece.getLegalMoves().size(), 14),
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_4, COL_A)))), // 1.(d4->a4)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_4, COL_B)))), // 2.(d4->b4)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_4, COL_C)))), // 3.(d4->c4)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_4, COL_E)))), // 4.(d4->e4)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_4, COL_F)))), // 5.(d4->f4)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_4, COL_G)))), // 6.(d4->g4)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_4, COL_H)))), // 7.(d4->h4)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_1, COL_D)))), // 8.(d4->d1)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_2, COL_D)))), // 9.(d4->d2)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_D)))), // 10.(d4->d3)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_5, COL_D)))), // 11.(d4->d5)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_6, COL_D)))), // 12.(d4->d6)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_7, COL_D)))), // 13.(d4->d7)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_8, COL_D))))  // 14.(d4->d8)
+				);
+		isRefine = false;
+	}
+
+	void testRookReducedLegalMoves() {
+		board.getSpot(ROW_4, COL_D).setPiece(new Rook(WHITE)); // torre esaminata (d4)
+		examinedPiece = board.getSpot(ROW_4, COL_D).getPiece();
+		board.getSpot(ROW_5, COL_D).setPiece(new Rook(WHITE)); // torre amica     (d5)
+		board.getSpot(ROW_4, COL_F).setPiece(new Rook(BLACK)); // torre nemica    (f4)
+		board.recalLegalMoves();
+		assertAll(
+				// mosse della torre bianca possibili: [8]
+				() -> assertEquals(examinedPiece.getLegalMoves().size(), 8),
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_4, COL_A)))), // 1.(d4->a4)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_4, COL_B)))), // 2.(d4->b4)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_4, COL_C)))), // 3.(d4->c4)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_4, COL_E)))), // 4.(d4->e4)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_1, COL_D)))), // 5.(d4->d1)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_2, COL_D)))), // 6.(d4->d2)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_3, COL_D)))), // 7.(d4->d3)
+				// cattura, movimento possibile
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_4, COL_F)))), // 8.(d4->f4)
+				// pezzo nemico sul percorso, movimento non possibile
+				() -> assertFalse(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_4, COL_G)))), // (d4->g4) NO!
+				() -> assertFalse(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_4, COL_H)))), // (d4->h4) NO!
+				// pezzo amico sul percorso, movimento non possibile
+				() -> assertFalse(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_5, COL_D)))), // (d4->d5) NO!
+				() -> assertFalse(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_6, COL_D)))), // (d4->d6) NO!
+				() -> assertFalse(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_7, COL_D)))), // (d4->d7) NO!
+				() -> assertFalse(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_4, COL_D), new Spot(ROW_8, COL_D))))  // (d4->d8) NO!
+				);
+		isRefine = false;
+	}
+
 }
