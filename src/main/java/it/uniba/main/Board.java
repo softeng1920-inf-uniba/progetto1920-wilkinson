@@ -212,7 +212,7 @@ public class Board {
 		newBoard.recalLegalMoves();
 		// ricerco la nuova posizione del re
 		newBoard.searchForKings();
-		// controllo se la casa corrente del re è sotto attacco o meno
+		// controllo se la casa corrente del re e' sotto attacco o meno
 		if (newEnd.getPiece().isWhite()) {
 			if (newBoard.getWhiteKingSpot().isUnderAttack(newBoard, color)) {
 				return true;

@@ -14,9 +14,9 @@ import java.util.Scanner;
  *
  * <h2>CLASSIFICAZIONE ECB</h2>
  * <strong>Boundary</strong> <br>
- * poiché è la classe che comunica con gli attori esterni: cioè i giocatori. <br>
- * Questa classe è il punto di accesso al programma e quella che permette ai
- * giocatori di introdurre i comandi i notazione <br>
+ * poiche' e' la classe che comunica con gli attori esterni: cioe' i giocatori. <br>
+ * Questa classe e' il punto di accesso al programma e quella che permette ai
+ * giocatori di introdurre i comandi in notazione <br>
  * algebrica per muovere i pezzi, e di utilizzare i comandi ausiliari messi a
  * disposizione dal gioco.
  *
