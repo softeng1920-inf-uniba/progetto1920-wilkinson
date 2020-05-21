@@ -29,11 +29,10 @@ public final class Move {
 	private Spot end; // casa di arrivo
 	private Piece pieceMoved; // pezzo che deve eseguire il movimento
 	private boolean isAmbiguity = false; // caso in cui ci sia ambiguita' di movimento
-	private String ambiguity; // primo carattere di un'ambiguit√ 
+	private String ambiguity; // primo carattere di un'ambiguita'
 
 	/**
 	 * costruttore dell'oggetto Move
-	 *
 	 * @param command comando da interpretare in mossa
 	 * @param game    partita in corso
 	 */
@@ -119,8 +118,7 @@ public final class Move {
 	/**
 	 * trova lo spot di partenza cercando il pezzo con: 1) casa di arrivo
 	 * corrispodente a quella inserita 2) controlla solo i pezzi della classe
-	 * inserita dall'utente 3) controlla eventuali ambiguita' 
-	 *
+	 * inserita dall'utente 3) controlla eventuali ambiguita'
 	 * @param board
 	 * @param piece
 	 * @return
@@ -425,7 +423,7 @@ public final class Move {
 		return false;
 	}
 
-	/**applica una serie di controlli per stabilire se l'arrocco Ë possibile
+	/**applica una serie di controlli per stabilire se l'arrocco e' possibile
 	 *
 	 * @param board
 	 * @param kingSpot
