@@ -74,7 +74,7 @@ public final class AppMain {
 					} else if (userChoiceMenu.equals("no")) {
 						quitGame = false;
 					} else {
-						System.out.println("COMANDO NON VALIDO\n");
+						System.out.println("RISPOSTA NON VALIDA\n");
 					}
 				} while (!userChoiceMenu.equals("si") && !userChoiceMenu.equals("no"));
 				break;
