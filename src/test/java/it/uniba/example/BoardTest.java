@@ -93,5 +93,25 @@ public class BoardTest {
 				);
 		isRefine = false;
 	}
-
+	
+	@Test
+	void testWhitePawnCaptureLegalMoves() {
+		board.getSpot(ROW_2, COL_D).setPiece(new Pawn(WHITE)); // pedone esaminato (d2)
+		examinedPiece = board.getSpot(ROW_2, COL_D).getPiece();
+		board.getSpot(ROW_3, COL_E).setPiece(new Pawn(BLACK)); // pedone nemico    (e3)
+		board.getSpot(ROW_3, COL_E).getPiece().setAsMoved(); // pedone in (e3) gia' mosso
+		board.recalLegalMoves();
+		assertAll(
+				// mosse del pedone bianco possibili: [3]
+				() -> assertEquals(examinedPiece.getLegalMoves().size(), 3),
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_2, COL_D), new Spot(ROW_3, COL_D)))), // 1.(d2->d3)
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_2, COL_D), new Spot(ROW_4, COL_D)))), // 2.(d2->d4)
+				// cattura, movimento possibile
+				() -> assertTrue(examinedPiece.getLegalMoves().contains(
+						new Move(new Spot(ROW_2, COL_D), new Spot(ROW_3, COL_E))))  // 3.(d2->e3)
+				);
+		isRefine = false;
+	}
 }
