@@ -20,11 +20,11 @@ import it.uniba.main.Spot;
 
 public class GameTest {
 	private static final int DIM_BOARD = 8;
-	private static Game game;
-	private static Board newBoard;
-	private static Spot start;
-	private static Spot end;
-	private static Piece examinedPiece;
+	private Game game;
+	private Board newBoard;
+	private Spot start;
+	private Spot end;
+	private Piece examinedPiece;
 	private static boolean legalMove;
 
 	private static final boolean WHITE = true;
