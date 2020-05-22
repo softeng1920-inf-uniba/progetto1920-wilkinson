@@ -301,9 +301,13 @@ public final class Move {
 				if (isCastlePossible(board, whiteNewKingSpot, whiteNewRookSpot, whiteKingSpot,
 						whiteDxRookSpot, null)) {
 					whiteNewKingSpot.setPiece(whiteKingSpot.getPiece());
+					whiteNewKingSpot.getPiece().setAsMoved();
 					whiteNewRookSpot.setPiece(whiteDxRookSpot.getPiece());
+					whiteNewRookSpot.getPiece().setAsMoved();
 					whiteKingSpot.setPiece(null);
 					whiteDxRookSpot.setPiece(null);
+
+
 					return true;
 				}
 			} else if (this.getInterpreter().isCastleLong()) { // arrocco lungo bianco
@@ -314,7 +318,9 @@ public final class Move {
 				if (isCastlePossible(board, whiteNewKingSpot, whiteNewRookSpot, whiteKingSpot,
 						whiteSxRookSpot, knightSpot)) {
 					whiteNewKingSpot.setPiece(whiteKingSpot.getPiece());
+					whiteNewKingSpot.getPiece().setAsMoved();
 					whiteNewRookSpot.setPiece(whiteSxRookSpot.getPiece());
+					whiteNewRookSpot.getPiece().setAsMoved();
 					whiteKingSpot.setPiece(null);
 					whiteSxRookSpot.setPiece(null);
 					return true;
@@ -329,7 +335,9 @@ public final class Move {
 				if (isCastlePossible(board, blackNewKingSpot, blackNewRookSpot, blackKingSpot,
 						blackDxRookSpot, null)) {
 					blackNewKingSpot.setPiece(blackKingSpot.getPiece());
+					blackNewKingSpot.getPiece().setAsMoved();
 					blackNewRookSpot.setPiece(blackDxRookSpot.getPiece());
+					blackNewRookSpot.getPiece().setAsMoved();
 					blackKingSpot.setPiece(null);
 					blackDxRookSpot.setPiece(null);
 					return true;
@@ -342,7 +350,9 @@ public final class Move {
 				if (isCastlePossible(board, blackNewKingSpot, blackNewRookSpot, blackKingSpot,
 						blackSxRookSpot, knightSpot)) {
 					blackNewKingSpot.setPiece(blackKingSpot.getPiece());
+					blackNewKingSpot.getPiece().setAsMoved();
 					blackNewRookSpot.setPiece(blackSxRookSpot.getPiece());
+					blackNewRookSpot.getPiece().setAsMoved();
 					blackKingSpot.setPiece(null);
 					blackSxRookSpot.setPiece(null);
 					return true;
@@ -531,23 +541,11 @@ public final class Move {
 		return pieceMoved;
 	}
 
-	public boolean isAmbiguity() {
-		return isAmbiguity;
-	}
-
 	public void setAmbiguity(final boolean inIsAmbiguity) {
 		this.isAmbiguity = inIsAmbiguity;
 	}
 
 	public void setStart(final Spot inStart) {
 		this.start = inStart;
-	}
-
-	public void setEnd(final Spot inEnd) {
-		this.end = inEnd;
-	}
-
-	public void setPieceMoved(final Piece inPieceMoved) {
-		this.pieceMoved = inPieceMoved;
 	}
 }

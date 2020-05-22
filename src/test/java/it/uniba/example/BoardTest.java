@@ -20,8 +20,6 @@ import it.uniba.main.Queen;
 import it.uniba.main.Rook;
 import it.uniba.main.Spot;
 
-
-
 public class BoardTest {
 	private static Board board;
 	private static Piece examinedPiece;
@@ -44,7 +42,7 @@ public class BoardTest {
 	private static final int COL_C = 2;
 	private static final int COL_B = 1;
 	private static final int COL_A = 0;
-	
+
 	@BeforeEach
 	void setup() {
 		// inizializzazione scacchiera vuota
@@ -80,7 +78,7 @@ public class BoardTest {
 				);
 		isRefine = false;
 	}
-	
+
 	@Test
 	void testWhitePawnAlreadyMovedLegalMoves() {
 		board.getSpot(ROW_3, COL_D).setPiece(new Pawn(WHITE)); // pedone esaminato (d3)
@@ -297,7 +295,7 @@ public class BoardTest {
 		assertTrue(examinedPiece.getLegalMoves().isEmpty());
 		isRefine = false;
 	}
-	
+
 	@Test
 	void testKnightLegalMoves() {
 		board.getSpot(ROW_4, COL_D).setPiece(new Knight(WHITE)); // cavallo esaminato (d4)
@@ -358,7 +356,7 @@ public class BoardTest {
 				);
 		isRefine = false;
 	}
-	
+
 	@Test
 	void testBishopLegalMoves() {
 		board.getSpot(ROW_4, COL_D).setPiece(new Bishop(WHITE)); // alfiere esaminato (d4)
@@ -439,7 +437,7 @@ public class BoardTest {
 				);
 		isRefine = false;
 	}
-	
+
 	@Test
 	void testRookLegalMoves() {
 		board.getSpot(ROW_4, COL_D).setPiece(new Rook(WHITE)); // torre esaminata (d4)
@@ -523,7 +521,7 @@ public class BoardTest {
 				);
 		isRefine = false;
 	}
-	
+
 
 	@Test
 	void testQueenLegalMoves() {
@@ -664,7 +662,7 @@ public class BoardTest {
 				);
 		isRefine = false;
 	}
-	
+
 	@Test
 	void testKingLegalMoves() {
 		board.getSpot(ROW_4, COL_D).setPiece(new King(WHITE)); // re esaminato (d4)

@@ -314,9 +314,7 @@ public final class AlgebraicNotation {
 
 		// scompongo il comando in token
 		char[] tokens = this.command.toCharArray();
-		if (tokens.length > MAXCOMMANDLENGTH) {
-			return false; // stringa troppo lunga
-		}
+
 		// controllo la posizione della 'x'
 		for (int i = 0; i < MAXCOMMANDLENGTH; i++) {
 			// la x non e' seguita da una lettera (colonna della casa)
