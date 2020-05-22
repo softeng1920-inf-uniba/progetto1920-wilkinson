@@ -48,7 +48,7 @@ public class Pawn extends Piece {
 	 * cattura classica o attraverso la cattura en-passant
 	 */
 	@Override
-	public boolean canMove(final Board board, final Spot start, final Spot end) {
+	protected boolean canMove(final Board board, final Spot start, final Spot end) {
 		Pawn startPiece = (Pawn) start.getPiece();
 		Piece endPiece = end.getPiece();
 

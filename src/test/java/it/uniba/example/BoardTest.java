@@ -21,9 +21,9 @@ import it.uniba.main.Rook;
 import it.uniba.main.Spot;
 
 public class BoardTest {
-	private static Board board;
-	private static Piece examinedPiece;
-	private static boolean isRefine;
+	private Board board;
+	private Piece examinedPiece;
+	private boolean isRefine;
 	private static final boolean BLACK = false;
 	private static final boolean WHITE = true;
 	private static final int ROW_1 = 7;
@@ -257,6 +257,7 @@ public class BoardTest {
 	@Test
 	void testBlackPawnEnPassantNotPossibleLegalMoves() {
 		board.getSpot(ROW_4, COL_D).setPiece(new Pawn(BLACK)); // pedone esaminato (d4)
+		examinedPiece = board.getSpot(ROW_4, COL_D).getPiece();
 		board.getSpot(ROW_4, COL_E).setPiece(new Pawn(WHITE)); // pedone nemico    (e4)
 		board.getSpot(ROW_4, COL_D).getPiece().setAsMoved(); // pedone in (d4) gia' mosso
 		board.getSpot(ROW_4, COL_E).getPiece().setAsMoved(); // pedone in (e4) gia' mosso

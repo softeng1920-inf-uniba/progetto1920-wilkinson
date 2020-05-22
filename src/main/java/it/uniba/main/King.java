@@ -44,7 +44,7 @@ public class King extends Piece {
 	 * @return true se movimento possibile, false se mossa illegale
 	 */
 	@Override
-	public boolean canMove(final Board board, final Spot start, final Spot end) {
+	protected boolean canMove(final Board board, final Spot start, final Spot end) {
 		if (board.isSpotAround(start, end)) {
 			if (end.isEmpty()) {
 				return true;
