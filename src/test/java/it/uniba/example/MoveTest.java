@@ -84,7 +84,7 @@ class MoveTest {
 		assertFalse(move.makeCastling(board, WHITE));
 	}
 
-	//test arrocco con il re gi� mosso in precedenza
+	//test arrocco con il re gia' mosso in precedenza
 	@Test
 	void testCastleKingMoved() {
 		move = new Move("0-0", board, WHITE);
@@ -94,7 +94,7 @@ class MoveTest {
 		assertFalse(move.makeCastling(board, WHITE));
 	}
 
-	//test arrocco con torre gi� mossa in precedenza
+	//test arrocco con torre gia' mossa in precedenza
 	@Test
 	void testCastleRookMoved() {
 		move = new Move("0-0", board, WHITE);
