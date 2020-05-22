@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import it.uniba.main.Move;
 import it.uniba.main.Board;
+import it.uniba.main.Spot;
 import it.uniba.main.Pawn;
 import it.uniba.main.Rook;
 import it.uniba.main.Knight;
@@ -102,8 +103,9 @@ class MoveTest {
 		 */
 		void testNotGoodMoveWhite() {
 			move = new Move(" ", board, WHITE);
-			assertFalse(move.getInterpreter().isGoodMove());
 			assertFalse(move.isCastle());
+			assertNull(move.getStart());
+			assertNull(move.getEnd());
 		}
 		
 		@Test
@@ -112,8 +114,9 @@ class MoveTest {
 		 */
 		void testNotGoodMoveBlack() {
 			move = new Move(" ", board, BLACK);
-			assertFalse(move.getInterpreter().isGoodMove());
 			assertFalse(move.isCastle());
+			assertNull(move.getStart());
+			assertNull(move.getEnd());
 		}
 		
 		@Test
@@ -125,6 +128,7 @@ class MoveTest {
 			board.recalLegalMoves();
 			move = new Move("a3", board, WHITE);
 			assertNotNull(move.getStart());
+			assertEquals(move.getStart(), new Spot(ROW_2, COL_A));
 		}
 		
 		@Test
@@ -140,30 +144,32 @@ class MoveTest {
 		
 		@Test
 		/**
-		 * Testa un comando per il movimento e cattura e.p. di un pedone bianco
+		 * Testa un comando per muovere un pedone bianco con cattura e.p.
 		 */
 		void testCommandPawnWhiteEP() {
 			board.getSpot(ROW_5, COL_C).setPiece(new Pawn(WHITE));
 			board.getSpot(ROW_5, COL_D).setPiece(new Pawn(BLACK));
 			((Pawn) board.getSpot(ROW_5, COL_D).getPiece()).setPossibleEnPassantCapture(true);
-			((Pawn) board.getSpot(ROW_5, COL_D).getPiece()).setCapturingEnPassant(true);
 			board.recalLegalMoves();
 			move = new Move("cxd6 e.p.", board, WHITE);
-			assertTrue(move.isEnPassantMove(board));
+			assertEquals(move.getStart(), new Spot(ROW_5, COL_C));
+			assertEquals(move.getEnd(), new Spot(ROW_6, COL_D));
+			assertTrue(((Pawn) board.getSpot(ROW_5, COL_C).getPiece()).isCapturingEnPassant());
 		}
 		
 		@Test
 		/**
-		 * Testa un comando per il movimento e cattura e.p. di un pedone nero
+		 * Testa un comando per muovere un pedone nero con cattura e.p.
 		 */
 		void testCommandPawnBlackEP() {
 			board.getSpot(ROW_4, COL_B).setPiece(new Pawn(WHITE));
 			board.getSpot(ROW_4, COL_C).setPiece(new Pawn(BLACK));
 			((Pawn) board.getSpot(ROW_4, COL_B).getPiece()).setPossibleEnPassantCapture(true);
-			((Pawn) board.getSpot(ROW_4, COL_B).getPiece()).setCapturingEnPassant(true);
 			board.recalLegalMoves();
 			move = new Move("cxb3 e.p.", board, BLACK);
-			assertTrue(move.isEnPassantMove(board));
+			assertEquals(move.getStart(), new Spot(ROW_4, COL_C));
+			assertEquals(move.getEnd(), new Spot(ROW_3, COL_B));
+			assertTrue(((Pawn) board.getSpot(ROW_4, COL_C).getPiece()).isCapturingEnPassant());
 		}
 		
 		
