@@ -26,9 +26,9 @@ public class Board {
 	private static final int BOARDDIM = 8; // dimensioni della scacchiera
 	private static final int ROW_1 = 7;
 	private static final int ROW_2 = 6;
-//	private static final int ROW_3 = 5;
-//	private static final int ROW_4 = 4;
-//	private static final int ROW_5 = 3;
+	//	private static final int ROW_3 = 5;
+	//	private static final int ROW_4 = 4;
+	//	private static final int ROW_5 = 3;
 	private static final int ROW_6 = 2;
 	private static final int ROW_7 = 1;
 	private static final int ROW_8 = 0;
@@ -238,14 +238,11 @@ public class Board {
 	Spot frontSpot(final Spot spot) {
 		final int oneDiffPosX = 1; // differenza di 1 sulle coordinate X
 		final int oneDiffNegX = -1; // differenza di -1 sulle coordinate X
-		if (!spot.isEmpty()) {
-			if (spot.getPiece().isWhite()) {
-				return this.getSpot(spot.getX() + oneDiffNegX, spot.getY());
-			} else {
-				return this.getSpot(spot.getX() + oneDiffPosX, spot.getY());
-			}
+		if (spot.getPiece().isWhite()) {
+			return this.getSpot(spot.getX() + oneDiffNegX, spot.getY());
+		} else {
+			return this.getSpot(spot.getX() + oneDiffPosX, spot.getY());
 		}
-		return null;
 	}
 
 	/**
@@ -454,7 +451,7 @@ public class Board {
 						if (startY > endY) {
 							for (int i = 1; i < BOARDDIM; i++) { // NW: movimento diagonale
 								if ((startX - i >= 0 && startX - i < BOARDDIM)
-									&& (startY - i >= 0 && startY - i < BOARDDIM)) {
+										&& (startY - i >= 0 && startY - i < BOARDDIM)) {
 									Spot examined = getSpot(startX - i, startY - i);
 									if (checkPath(examined, start, end) == 1) {
 										return true;
@@ -467,7 +464,7 @@ public class Board {
 						} else {
 							for (int i = 1; i < BOARDDIM; i++) { // NE: movimento diagonale
 								if ((startX - i >= 0 && startX - i < BOARDDIM)
-									&& (startY + i >= 0 && startY + i < BOARDDIM)) {
+										&& (startY + i >= 0 && startY + i < BOARDDIM)) {
 									Spot examined = getSpot(startX - i, startY + i);
 									if (checkPath(examined, start, end) == 1) {
 										return true;
@@ -482,7 +479,7 @@ public class Board {
 						if (startY > endY) {
 							for (int i = 1; i < BOARDDIM; i++) { // SW: movimento diagonale
 								if ((startX + i >= 0 && startX + i < BOARDDIM)
-									&& (startY - i >= 0 && startY - i < BOARDDIM)) {
+										&& (startY - i >= 0 && startY - i < BOARDDIM)) {
 									Spot examined = getSpot(startX + i, startY - i);
 									if (checkPath(examined, start, end) == 1) {
 										return true;
@@ -495,7 +492,7 @@ public class Board {
 						} else {
 							for (int i = 1; i < BOARDDIM; i++) { // SE: movimento diagonale
 								if ((startX + i >= 0 && startX + i < BOARDDIM)
-									&& (startY + i >= 0 && startY + i < BOARDDIM)) {
+										&& (startY + i >= 0 && startY + i < BOARDDIM)) {
 									Spot examined = getSpot(startX + i, startY + i);
 									if (checkPath(examined, start, end) == 1) {
 										return true;
