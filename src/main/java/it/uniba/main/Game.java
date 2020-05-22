@@ -300,7 +300,7 @@ public class Game {
 			for (int j = 0; j < BOARDDIM; j++) {
 				Spot currentSpot = getBoard().getSpot(i, j);
 				if (!currentSpot.isEmpty()) {
-					currentSpot.getPiece().setAsNotKilled();;
+					currentSpot.getPiece().setAsNotKilled();
 				}
 			}
 		}
