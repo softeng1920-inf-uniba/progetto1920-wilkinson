@@ -11,7 +11,7 @@ package it.uniba.main;
  * ed effettua controlli sulla posizione reciproca di due Spot <br>
  * permette la stampa a video della scacchiera nella configurazione attuale <br>
  *
- * <h2>CLASSIFICAZIONE ECB<h2>
+ * <h2>CLASSIFICAZIONE ECB</h2>
  * <strong>Entity</strong><br>
  * perche' deriva dal concetto concreto di "Scacchiera"<br>
  * e tiene traccia dei dati sottoforma di configurazione attuale della scacchiera
@@ -667,27 +667,11 @@ public class Board {
 		return whiteKingSpot;
 	}
 
-	/**setta lo spot dove si trova il re bianco
-	 *
-	 * @param newWhiteKingSpot
-	 */
-	public void setWhiteKingSpot(final Spot newWhiteKingSpot) {
-		this.whiteKingSpot = newWhiteKingSpot;
-	}
-
 	/**restituisce lo spot dove si trova il re nero
 	 *
 	 * @return
 	 */
 	public Spot getBlackKingSpot() {
 		return blackKingSpot;
-	}
-
-	/**setta lo spot dove si trova il re bianco
-	 *
-	 * @param newBlackKingSpot
-	 */
-	public void setBlackKingSpot(final Spot newBlackKingSpot) {
-		this.blackKingSpot = newBlackKingSpot;
 	}
 }

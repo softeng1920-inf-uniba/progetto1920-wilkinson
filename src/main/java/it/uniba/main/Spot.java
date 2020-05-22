@@ -102,35 +102,6 @@ public class Spot {
 		return false;
 	}
 
-	/**
-	 * converte la coordinata Y di uno spot in lettera
-	 *
-	 * @param coordinate
-	 * @return
-	 */
-	private String convertCoordinate(final int coordinate) {
-		switch (coordinate) {
-		case CASE_0:
-			return "a";
-		case CASE_1:
-			return "b";
-		case CASE_2:
-			return "c";
-		case CASE_3:
-			return "d";
-		case CASE_4:
-			return "e";
-		case CASE_5:
-			return "f";
-		case CASE_6:
-			return "g";
-		case CASE_7:
-			return "h";
-		default:
-			return null;
-		}
-	}
-
 	// Getters & Setters
 
 	/**
@@ -148,13 +119,6 @@ public class Spot {
 	}
 
 	/**
-	 * @param abscissa ascissa di Spot da settare
-	 */
-	public void setX(final int abscissa) {
-		this.x = abscissa;
-	}
-
-	/**
 	 * @return y ordinata di Spot
 	 */
 	public int getY() {
@@ -162,26 +126,9 @@ public class Spot {
 	}
 
 	/**
-	 * @param ordinate ordinata di Spot da settare
-	 */
-	public void setY(final int ordinate) {
-		this.y = ordinate;
-	}
-
-	/**
 	 * @param chessman modifica il pezzo corrente
 	 */
 	public void setPiece(final Piece chessman) {
 		this.piece = chessman;
-	}
-
-	/**
-	 * rappresenta la stringa "Riga + Colonna"
-	 */
-	@Override
-	public String toString() {
-		String output = "";
-		output += convertCoordinate(y) + (BOARDDIM - x);
-		return output;
 	}
 }

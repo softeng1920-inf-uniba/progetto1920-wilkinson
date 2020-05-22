@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * ha associato un colore, uno stato associato alla cattura, uno stato riferito <br>
  * a se e' stato mosso o meno e una lista di mosse legali <br>
  *
- * <h2>RESPONSABILITA' DI CLASSE<h2>
+ * <h2>RESPONSABILITA' DI CLASSE</h2>
  * la classe e' astratta in quanto generica, si occupa <br>
  * di restituire l'unicode del pezzo e stabilisce se un pezzo puo' muoversi, <br>
  * quindi se la mossa passata dall'utente e' legale inoltre ricerca tutte le <br>
@@ -135,6 +135,14 @@ public abstract class Piece {
 	}
 
 	/**
+	 * setta il pezzo come non catturato
+	 *
+	 */
+	public void setAsNotKilled() {
+		this.killed = false;
+	}
+
+	/**
 	 * ritorna il valore dell'attributo moved
 	 *
 	 * @return moved true se il pezzo e' stato mosso, false altrimenti
@@ -158,14 +166,5 @@ public abstract class Piece {
 	 */
 	public ArrayList<Move> getLegalMoves() {
 		return legalMoves;
-	}
-
-	/**
-	 * Metodo che salva le mosse legali in un ArrayList
-	 *
-	 * @param legalMovesIo
-	 */
-	public void setLegalMoves(final ArrayList<Move> legalMovesIo) {
-		this.legalMoves = legalMovesIo;
 	}
 }

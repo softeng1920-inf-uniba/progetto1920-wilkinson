@@ -108,6 +108,7 @@ public class Game {
 			whiteTurn = (!whiteTurn);
 			return true;
 		} else {
+			setAllPieceNotKilled();
 			return false;
 		}
 	}
@@ -129,18 +130,10 @@ public class Game {
 			}
 			return false;
 		}
-		if (!move.getInterpreter().isGoodMove()) {
-			return false;
-		}
 
 		// spot di partenza e arrivo derivati dall'interpretazione di move
 		Spot start = getBoard().getSpot(move.getStart().getX(), move.getStart().getY());
 		Spot end = getBoard().getSpot(move.getEnd().getX(), move.getEnd().getY());
-
-		// se lo spot di partenza e' vuoto, non e' stato trovato -> mossa illegale
-		if (start == null) {
-			return false;
-		}
 
 		// cerca se sulla scacchiera c'e' stata una cattura
 		searchForCapture(start, end);
@@ -153,26 +146,21 @@ public class Game {
 		// gestisce il caso in cui ci sia una cattura
 		if (isCapture) {
 
+			// controllo se c'e' una cattura en passant
+			if (start.getPiece() instanceof Pawn && ((Pawn)
+					start.getPiece()).isCapturingEnPassant()) {
+
+				// svuoto la casa dell'en passant
+				getBoard().getSpot(start.getX(), end.getY()).setPiece(null);
+			} else if (checkIfEnPassant(move.getInterpreter())) {
+				return false;
+			}
+
 			// controlla se nel comando c'e' la x
 			if (checkIfIsCapture(move.getInterpreter())) {
 				addCapture(); // aggiunge la cattura all'array corrispondente
-
-				// controllo se c'e' una cattura en passant
-				if (start.getPiece() instanceof Pawn && ((Pawn)
-						start.getPiece()).isCapturingEnPassant()) {
-
-					// svuoto la casa dell'en passant
-					getBoard().getSpot(start.getX(), end.getY()).setPiece(null);
-				} else if (checkIfEnPassant(move.getInterpreter())) {
-					return false;
-				}
 			} else {
-
 				// se c'e' una cattura ma l'utente non ha scritto la x
-				return false;
-			}
-		} else {
-			if (checkIfIsCapture(move.getInterpreter())) {
 				return false;
 			}
 		}
@@ -304,6 +292,21 @@ public class Game {
 	}
 
 	/**
+	 * setta tutti i pezzi sulla scacchiera come non catturati
+	 * (in caso di mossa non valida)
+	 */
+	private void setAllPieceNotKilled() {
+		for (int i = 0; i < BOARDDIM; i++) {
+			for (int j = 0; j < BOARDDIM; j++) {
+				Spot currentSpot = getBoard().getSpot(i, j);
+				if (!currentSpot.isEmpty()) {
+					currentSpot.getPiece().setAsNotKilled();;
+				}
+			}
+		}
+	}
+
+	/**
 	 * Il metodo checkIfIsCapture e' un booleano. Controlla se il comando e' una
 	 * cattura Il metodo: - @return true se e' una cattura - @return false viceversa
 	 *
@@ -395,72 +398,11 @@ public class Game {
 	}
 
 	/**
-	 * Restituisce un booleando che indica se il pezzo \E8 stato catturato
-	 * @return isCapture
-	 */
-	public boolean isCapture() {
-		return isCapture;
-	}
-
-	/**
-	 * Setta un booleano che indica se il pezzo \E8 stato catturato
-	 * @param inIsCapture
-	 */
-	public void setCapture(final boolean inIsCapture) {
-		this.isCapture = inIsCapture;
-	}
-
-	/**
 	 * Restituisce un array che ha all'interno i record
 	 * delle mosse effettuate in precedenza
 	 * @return allMoves
 	 */
 	public ArrayList<String> getAllMoves() {
 		return allMoves;
-	}
-
-	/**
-	 * Setta un array che ha all'interno i record
-	 * delle mosse effettuate in precedenza
-	 * @param inAllMoves
-	 */
-	public void setAllMoves(final ArrayList<String> inAllMoves) {
-		this.allMoves = inAllMoves;
-	}
-
-	/**
-	 * Restituisce un array che ha all'interno i record
-	 * delle catture effettuate dal bianco in precedenza
-	 * @return whiteCaptures
-	 */
-	public ArrayList<Piece> getWhiteCaptures() {
-		return whiteCaptures;
-	}
-
-	/**
-	 * Setta un array che ha all'interno i record
-	 * delle catture effettuate dal bianco in precedenza
-	 * @param inWhiteCaptures
-	 */
-	public void setWhiteCaptures(final ArrayList<Piece> inWhiteCaptures) {
-		this.whiteCaptures = inWhiteCaptures;
-	}
-
-	/**
-	 * Restituisce un array che ha all'interno i record
-	 * delle catture effettuate dal nero in precedenza
-	 * @return blackCaptures
-	 */
-	public ArrayList<Piece> getBlackCaptures() {
-		return blackCaptures;
-	}
-
-	/**
-	 * Setta un array che ha all'interno i record
-	 * delle catture effettuate dal bianco in precedenza
-	 * @param inBlackCaptures
-	 */
-	public void setBlackCaptures(final ArrayList<Piece> inBlackCaptures) {
-		this.blackCaptures = inBlackCaptures;
 	}
 }
