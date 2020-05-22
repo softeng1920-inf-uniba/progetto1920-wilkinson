@@ -21,9 +21,9 @@ import it.uniba.main.Rook;
 import it.uniba.main.Spot;
 
 public class BoardTest {
-	private static Board board;
+	private Board board;
 	private static Piece examinedPiece;
-	private static boolean isRefine;
+	private boolean isRefine;
 	private static final boolean BLACK = false;
 	private static final boolean WHITE = true;
 	private static final int ROW_1 = 7;
