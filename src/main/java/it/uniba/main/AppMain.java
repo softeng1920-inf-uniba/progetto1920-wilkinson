@@ -154,7 +154,6 @@ public final class AppMain {
 						if (!userChoiceMenu.matches("")) {
 							// uso la stringa non convertita in minuscolo per
 							// proseguire con l'interpretazione della mossa
-							game.currentGame(userChoiceGame);
 							if (!game.currentGame(userChoiceGame)) {
 								System.out.println("\nCOMANDO O MOSSA NON VALIDA");
 							}
