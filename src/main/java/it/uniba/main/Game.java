@@ -5,15 +5,21 @@ import java.util.ArrayList;
 import it.uniba.main.Move.GameStatus;
 
 /**
- * DESCRIZIONE rappresenta una partita di scacchi in corso ha associato uno
- * stato e una scacchiera
+ * <body>
+ * <h2>DESCRIZIONE</h2>
+ * rappresenta una partita di scacchi in corso ha associato uno <br>
+ * stato e una scacchiera <br>
  *
- * RESPONSABILITA' DI CLASSE crea e gestisce la partita in corso, ed esegue una
- * mossa a partire dal comando in input dell'utente, si occupa dello store delle
- * mosse e delle catture eseguite e relativa stampa
+ * <h2>RESPONSABILITA' DI CLASSE</h2>
+ * crea e gestisce la partita in corso, ed esegue una <br>
+ * mossa a partire dal comando in input dell'utente, si occupa dello store delle <br>
+ * mosse e delle catture eseguite e relativa stampa <br>
  *
- * CLASSIFICAZIONE ECB <<Control>> contiene tutta la logica di gioco e fa vari
+ * <h2>CLASSIFICAZIONE ECB</h2>
+ * <strong>Control</strong><br>
+ * poiche' contiene tutta la logica di gioco e fa vari <br>
  * controlli sui tipi di mosse da eseguire
+ * </body>
  *
  * @author wilkinson
  */
@@ -73,8 +79,8 @@ public class Game {
 	 *
 	 * @param command e' il comando/mossa inserita dall'utente
 	 */
-	public void currentGame(final String command) {
-		Move move = new Move(command, this);
+	public boolean currentGame(final String command) {
+		Move move = new Move(command, board, whiteTurn);
 		if (move.getStart() != null && makeMove(move)) {
 			if (move.getPieceMoved() instanceof Pawn && ((Pawn)
 					move.getPieceMoved()).isCapturingEnPassant()) {
@@ -98,11 +104,12 @@ public class Game {
 			board.refineLegalMoves();
 
 			// setto false i booleani dei pedoni che regolano l'en passant
-			setAllPawnNotEP(getBoard());
-
+			setAllPawnNotEP();
 			whiteTurn = (!whiteTurn);
+			return true;
 		} else {
-			System.out.println("\nCOMANDO O MOSSA NON VALIDA");
+			setAllPieceNotKilled();
+			return false;
 		}
 	}
 
@@ -118,23 +125,15 @@ public class Game {
 
 		// controllo se la mossa e' un arrocco
 		if (move.isCastle()) {
-			if (move.makeCastling(this)) {
+			if (move.makeCastling(board, whiteTurn)) {
 				return true;
 			}
-			return false;
-		}
-		if (!move.getInterpreter().isGoodMove()) {
 			return false;
 		}
 
 		// spot di partenza e arrivo derivati dall'interpretazione di move
 		Spot start = getBoard().getSpot(move.getStart().getX(), move.getStart().getY());
 		Spot end = getBoard().getSpot(move.getEnd().getX(), move.getEnd().getY());
-
-		// se lo spot di partenza e' vuoto, non e' stato trovato -> mossa illegale
-		if (start == null) {
-			return false;
-		}
 
 		// cerca se sulla scacchiera c'e' stata una cattura
 		searchForCapture(start, end);
@@ -147,26 +146,21 @@ public class Game {
 		// gestisce il caso in cui ci sia una cattura
 		if (isCapture) {
 
+			// controllo se c'e' una cattura en passant
+			if (start.getPiece() instanceof Pawn && ((Pawn)
+					start.getPiece()).isCapturingEnPassant()) {
+
+				// svuoto la casa dell'en passant
+				getBoard().getSpot(start.getX(), end.getY()).setPiece(null);
+			} else if (checkIfEnPassant(move.getInterpreter())) {
+				return false;
+			}
+
 			// controlla se nel comando c'e' la x
 			if (checkIfIsCapture(move.getInterpreter())) {
 				addCapture(); // aggiunge la cattura all'array corrispondente
-
-				// controllo se c'e' una cattura en passant
-				if (start.getPiece() instanceof Pawn && ((Pawn)
-						start.getPiece()).isCapturingEnPassant()) {
-
-					// svuoto la casa dell'en passant
-					getBoard().getSpot(start.getX(), end.getY()).setPiece(null);
-				} else if (checkIfEnPassant(move.getInterpreter())) {
-					return false;
-				}
 			} else {
-
 				// se c'e' una cattura ma l'utente non ha scritto la x
-				return false;
-			}
-		} else {
-			if (checkIfIsCapture(move.getInterpreter())) {
 				return false;
 			}
 		}
@@ -179,7 +173,7 @@ public class Game {
 
 			// se e' un pedone mai mosso setto che e' possibile catturarlo en passant il
 			// prossimo turno
-			if (start.getPiece() instanceof Pawn) {
+			if ((start.getPiece() instanceof Pawn) && board.isTwoSpotsAhead(start, end)) {
 				((Pawn) start.getPiece()).setPossibleEnPassantCapture(true);
 			}
 		}
@@ -214,18 +208,25 @@ public class Game {
 	 * mostra le mosse giocate durante la partita
 	 *
 	 */
-	public void showMoves() {
-		int moveNumber = 0;
-		int turnControl = 0;
-		if (!allMoves.isEmpty()) {
-			for (String currentMove : allMoves) {
-				if (turnControl % 2 == 0) {
-					moveNumber++;
-					System.out.print("\n" + ANSI_WHITE_BACKGROUND + ANSI_BLACK + moveNumber + ".");
+	public boolean showMoves() {
+		if (this.isEnd()) {
+			return false;
+		} else {
+			int moveNumber = 0;
+			int turnControl = 0;
+			if (!allMoves.isEmpty()) {
+				for (String currentMove : allMoves) {
+					if (turnControl % 2 == 0) {
+						moveNumber++;
+						System.out.print("\n" + ANSI_WHITE_BACKGROUND + ANSI_BLACK + moveNumber + ".");
+					}
+					turnControl++;
+					System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + currentMove + " " + ANSI_RESET);
 				}
-				turnControl++;
-				System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + currentMove + " " + ANSI_RESET);
+			} else {
+				System.out.print("\nNESSUNA MOSSA ESEGUITA\n");
 			}
+			return true;
 		}
 	}
 
@@ -233,24 +234,38 @@ public class Game {
 	 * mostra i pezzi catturati dalle due fazioni durante la partita
 	 *
 	 */
-	public void showCaptures() {
-		System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + "Catture del bianco:" + ANSI_RESET);
-		if (!whiteCaptures.isEmpty()) {
-			for (Piece currentPiece : whiteCaptures) {
-				System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + " "
-						+ currentPiece.draw() + " " + ANSI_RESET);
-			}
+	public boolean showCaptures() {
+		if (this.isEnd()) {
+			return false;
 		} else {
-			System.out.print(" Nessuna cattura per il bianco.");
+			System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + "Catture del bianco:" + ANSI_RESET);
+			if (!whiteCaptures.isEmpty()) {
+				for (Piece currentPiece : whiteCaptures) {
+					System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + " "
+							+ currentPiece.draw() + " " + ANSI_RESET);
+				}
+			} else {
+				System.out.print(" Nessuna cattura per il bianco.");
+			}
+			System.out.print(ANSI_BLACK_BACKGROUND + ANSI_WHITE + "\nCatture del nero  :" + ANSI_RESET);
+			if (!blackCaptures.isEmpty()) {
+				for (Piece currentPiece : blackCaptures) {
+					System.out.print(ANSI_BLACK_BACKGROUND + ANSI_WHITE + " "
+							+ currentPiece.draw() + " " + ANSI_RESET);
+				}
+			} else {
+				System.out.print(" Nessuna cattura per il nero.");
+			}
+			return true;
 		}
-		System.out.print(ANSI_BLACK_BACKGROUND + ANSI_WHITE + "\nCatture del nero  :" + ANSI_RESET);
-		if (!blackCaptures.isEmpty()) {
-			for (Piece currentPiece : blackCaptures) {
-				System.out.print(ANSI_BLACK_BACKGROUND + ANSI_WHITE + " "
-						+ currentPiece.draw() + " " + ANSI_RESET);
-			}
+	}
+
+	public boolean printBoard() {
+		if (this.isEnd()) {
+			return false;
 		} else {
-			System.out.print(" Nessuna cattura per il nero.");
+			board.showBoard();
+			return true;
 		}
 	}
 
@@ -282,10 +297,8 @@ public class Game {
 	/**
 	 * Il metodo setAllPawnNotEP setta false la possibile cattura en-passant di
 	 * tutti i pedoni ogni turno
-	 *
-	 * @param board
 	 */
-	private void setAllPawnNotEP(final Board inBoard) {
+	private void setAllPawnNotEP() {
 		for (int i = 0; i < BOARDDIM; i++) {
 			for (int j = 0; j < BOARDDIM; j++) {
 				Spot currentSpot = getBoard().getSpot(i, j);
@@ -294,6 +307,21 @@ public class Game {
 						((Pawn) currentSpot.getPiece()).setPossibleEnPassantCapture(false);
 					}
 					((Pawn) currentSpot.getPiece()).setCapturingEnPassant(false);
+				}
+			}
+		}
+	}
+
+	/**
+	 * setta tutti i pezzi sulla scacchiera come non catturati
+	 * (in caso di mossa non valida)
+	 */
+	private void setAllPieceNotKilled() {
+		for (int i = 0; i < BOARDDIM; i++) {
+			for (int j = 0; j < BOARDDIM; j++) {
+				Spot currentSpot = getBoard().getSpot(i, j);
+				if (!currentSpot.isEmpty()) {
+					currentSpot.getPiece().setAsNotKilled();
 				}
 			}
 		}
@@ -327,7 +355,6 @@ public class Game {
 		}
 		return false;
 	}
-
 	/**
 	 * toString e' il metodo che restituisce delle stringhe. Indicano il turno
 	 * - @return (Turno del bianco) se e' il turno del bianco - @return (Turno del
@@ -367,7 +394,6 @@ public class Game {
 	public Board getBoard() {
 		return board;
 	}
-
 	/**
 	 * Setta la scacchiera
 	 * @param inBoard
@@ -393,72 +419,11 @@ public class Game {
 	}
 
 	/**
-	 * Restituisce un booleando che indica se il pezzo \E8 stato catturato
-	 * @return isCapture
-	 */
-	public boolean isCapture() {
-		return isCapture;
-	}
-
-	/**
-	 * Setta un booleano che indica se il pezzo \E8 stato catturato
-	 * @param inIsCapture
-	 */
-	public void setCapture(final boolean inIsCapture) {
-		this.isCapture = inIsCapture;
-	}
-
-	/**
 	 * Restituisce un array che ha all'interno i record
 	 * delle mosse effettuate in precedenza
 	 * @return allMoves
 	 */
 	public ArrayList<String> getAllMoves() {
 		return allMoves;
-	}
-
-	/**
-	 * Setta un array che ha all'interno i record
-	 * delle mosse effettuate in precedenza
-	 * @param inAllMoves
-	 */
-	public void setAllMoves(final ArrayList<String> inAllMoves) {
-		this.allMoves = inAllMoves;
-	}
-
-	/**
-	 * Restituisce un array che ha all'interno i record
-	 * delle catture effettuate dal bianco in precedenza
-	 * @return whiteCaptures
-	 */
-	public ArrayList<Piece> getWhiteCaptures() {
-		return whiteCaptures;
-	}
-
-	/**
-	 * Setta un array che ha all'interno i record
-	 * delle catture effettuate dal bianco in precedenza
-	 * @param inWhiteCaptures
-	 */
-	public void setWhiteCaptures(final ArrayList<Piece> inWhiteCaptures) {
-		this.whiteCaptures = inWhiteCaptures;
-	}
-
-	/**
-	 * Restituisce un array che ha all'interno i record
-	 * delle catture effettuate dal nero in precedenza
-	 * @return blackCaptures
-	 */
-	public ArrayList<Piece> getBlackCaptures() {
-		return blackCaptures;
-	}
-
-	/**
-	 * Setta un array che ha all'interno i record
-	 * delle catture effettuate dal bianco in precedenza
-	 * @param inBlackCaptures
-	 */
-	public void setBlackCaptures(final ArrayList<Piece> inBlackCaptures) {
-		this.blackCaptures = inBlackCaptures;
 	}
 }

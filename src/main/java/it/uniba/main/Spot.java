@@ -1,20 +1,22 @@
 package it.uniba.main;
 
 /**
- * DESCRIZIONE
- * Rappresenta una casella della scacchiera.
- * Essa e' composta da una coordinata X e una Y.
- * Tali coordinate corrispondono ai numeri da 1 a 8 (per la X)
- * e lettere da 'a' ad 'h' (per la Y).
+ * <body>
+ * <h2>DESCRIZIONE</h2>
+ * Rappresenta una casella della scacchiera. <br>
+ * Essa e' composta da una coordinata X e una Y. <br>
+ * Tali coordinate corrispondono ai numeri da 1 a 8 (per la X) <br>
+ * e lettere da 'a' ad 'h' (per la Y). <br>
  *
- * RESPONSABILITA' DI CLASSE
- * Si occupa di verificare se su di una casella e' presente o meno un pezzo
- * e controlla se la casa corrente e' sotto attacco da pezzi avversari
+ * <h2>RESPONSABILITA' DI CLASSE</h2>
+ * Si occupa di verificare se su di una casella e' presente o meno un pezzo <br>
+ * e controlla se la casa corrente e' sotto attacco da pezzi avversari <br>
  *
- * CLASSIFICAZIONE ECB
- * <<Entity>>
- * E' un componente formante della tavola da gioco
- * e dunque deriva dal concetto concreto di "Scacchiera"
+ * <h2>CLASSIFICAZIONE ECB</h2>
+ * <strong>Entity</strong><br>
+ * E' un componente formante della tavola da gioco <br>
+ * e dunque deriva dal concetto concreto di "Scacchiera" <br>
+ * </body>
  *
  * @author wilkinson
  */
@@ -26,8 +28,9 @@ public class Spot {
 	/**
 	 * costruttore di Spot (che rappresenta una casella della scacchiera)
 	 *
-	 * @param x coordinata della riga (corrispondente ad un numero)
-	 * @param y coordinata della colonna (corrispondente ad una lettera)
+	 * @param abscissa coordinata della riga (corrispondente ad un numero)
+	 * @param ordinate coordinata della colonna (corrispondente ad una lettera)
+	 * @param chessman pezzo nello spot
 	 */
 	public Spot(final int abscissa, final int ordinate, final Piece chessman) {
 		this.x = abscissa;
@@ -38,8 +41,8 @@ public class Spot {
 	/**
 	 * costruttore di uno spot generico (per confronti tra spot)
 	 *
-	 * @param x
-	 * @param y
+	 * @param abscissa
+	 * @param ordinate
 	 */
 	public Spot(final int abscissa, final int ordinate) {
 		this.x = abscissa;
@@ -57,7 +60,7 @@ public class Spot {
 	static final int CASE_7 = 7;
 
 	/**
-	 * controlla se lo spot corrente � vuoto
+	 * controlla se lo spot corrente vuoto
 	 *
 	 * @return
 	 */
@@ -72,11 +75,10 @@ public class Spot {
 	 * controllo se la casa examined e' sotto attacco da pezzi avversari
 	 *
 	 * @param board    scacchiera attuale
-	 * @param examined mossa che ha come end lo spot corrente
 	 * @param color    colore del pezzo amico
 	 * @return true se lo Spot corrente e' sotto attacco, false altrimenti
 	 */
-	boolean isUnderAttack(final Board board, final boolean color) {
+	public boolean isUnderAttack(final Board board, final boolean color) {
 		Move examinedMove = new Move(null, this);
 		for (int i = 0; i < BOARDDIM; i++) {
 			for (int j = 0; j < BOARDDIM; j++) {
@@ -100,58 +102,6 @@ public class Spot {
 		return false;
 	}
 
-	/**
-	 * converte la coordinata Y di uno spot in lettera
-	 *
-	 * @param coordinate
-	 * @return
-	 */
-	private String convertCoordinate(final int coordinate) {
-		switch (coordinate) {
-		case CASE_0:
-			return "a";
-		case CASE_1:
-			return "b";
-		case CASE_2:
-			return "c";
-		case CASE_3:
-			return "d";
-		case CASE_4:
-			return "e";
-		case CASE_5:
-			return "f";
-		case CASE_6:
-			return "g";
-		case CASE_7:
-			return "h";
-		default:
-			return null;
-		}
-	}
-	
-	@Override
-	public boolean equals(Object examined) {
-		if (!(examined instanceof Spot)) {
-			return false;
-		}
-		Spot s = (Spot) examined;
-		if (this.getX() == s.getX() && this.getY() == s.getY()) {
-			return true;
-		}
-		return false;
-	}
-	
-	private static final int HASH = 42;
-
-	/**
-	 * default hashcode (di nessuna utilita', poiche' non c'e' un Set implementato)
-	 */
-	@Override
-	public int hashCode() {
-	    assert false : "hashCode not designed";
-	    return HASH; // any arbitrary constant will do
-	}
-
 	// Getters & Setters
 
 	/**
@@ -169,13 +119,6 @@ public class Spot {
 	}
 
 	/**
-	 * @param abscissa ascissa di Spot da settare
-	 */
-	public void setX(final int abscissa) {
-		this.x = abscissa;
-	}
-
-	/**
 	 * @return y ordinata di Spot
 	 */
 	public int getY() {
@@ -183,26 +126,9 @@ public class Spot {
 	}
 
 	/**
-	 * @param ordinate ordinata di Spot da settare
-	 */
-	public void setY(final int ordinate) {
-		this.y = ordinate;
-	}
-
-	/**
 	 * @param chessman modifica il pezzo corrente
 	 */
 	public void setPiece(final Piece chessman) {
 		this.piece = chessman;
-	}
-
-	/**
-	 * rappresenta la stringa "Riga + Colonna"
-	 */
-	@Override
-	public String toString() {
-		String output = "";
-		output += convertCoordinate(y) + (BOARDDIM - x);
-		return output;
 	}
 }

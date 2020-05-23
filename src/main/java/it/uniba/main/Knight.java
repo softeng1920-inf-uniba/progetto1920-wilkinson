@@ -1,15 +1,18 @@
 package it.uniba.main;
 
 /**
- * DESCRIZIONE
- * rappresenta un pezzo cavallo
+ * <body>
+ * <h2>DESCRIZIONE</h2>
+ * rappresenta un pezzo cavallo <br>
  *
- * RESPONSABILITA' DI CLASSE
- * calcola le mosse legali di un cavallo seguendo le
- * regole ufficiale degli scacchi
+ * <h2>RESPONSABILITA' DI CLASSE</h2>
+ * calcola le mosse legali di un cavallo seguendo le <br>
+ * regole ufficiale degli scacchi <br>
  *
- * CLASSIFICAZIONE ECB
- * <<Entity>> poiche' eredita dalla classe Piece.java
+ * <h2>CLASSIFICAZIONE ECB</h2>
+ * <strong>Entity</strong><br>
+ * poiche' eredita dalla classe Piece.java
+ * </body>
  *
  * @author wilkinson
  */
@@ -45,12 +48,11 @@ public class Knight extends Piece {
 	 * @param board       scacchiera attuale
 	 * @param start       posizione di partenza del pezzo
 	 * @param end         posizione di arrivo del pezzo
-	 * @param isWhiteTurn turno del giocatore
 	 *
 	 * @return True se e' una mossa legale altrimenti False
 	 */
 	@Override
-	public boolean canMove(final Board board, final Spot start, final Spot end) {
+	protected boolean canMove(final Board board, final Spot start, final Spot end) {
 		Knight startPiece = (Knight) start.getPiece();
 		Piece endPiece = end.getPiece();
 

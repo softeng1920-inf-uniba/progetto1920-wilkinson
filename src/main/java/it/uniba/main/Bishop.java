@@ -1,15 +1,18 @@
 package it.uniba.main;
 
 /**
- * DESCRIZIONE
- * rappresenta un pezzo alfiere
+ * <body>
+ * <h2>DESCRIZIONE</h2>
+ * rappresenta un pezzo alfiere <br>
  *
- * RESPONSABILITA' DI CLASSE
- * calcola le mosse legali di un alfiere seguendo le
- * regole ufficiale degli scacchi
+ * <h2>RESPONSABILITA' DI CLASSE</h2>
+ * calcola le mosse legali di un alfiere seguendo le <br>
+ * regole ufficiale degli scacchi <br>
  *
- * CLASSIFICAZIONE ECB <<Entity>>
+ * <h2>CLASSIFICAZIONE ECB</h2>
+ * <strong>Entity</strong><br>
  * poiche' eredita dalla classe Piece.java
+ * </body>
  *
  * @author wilkinson
  */
@@ -41,7 +44,7 @@ public class Bishop extends Piece {
 	 * @return true se movimento possibile, false se mossa illegale
 	 */
 	@Override
-	public boolean canMove(final Board board, final Spot start, final Spot end) {
+	protected boolean canMove(final Board board, final Spot start, final Spot end) {
 		if (board.isFreePath(start, end)) {
 			return true;
 		}

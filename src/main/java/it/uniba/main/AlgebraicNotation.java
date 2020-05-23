@@ -3,20 +3,22 @@ package it.uniba.main;
 import java.util.ArrayList;
 
 /**
- * DESCRIZIONE
- * interprete di notazione algebrica abbreviata
+ * <body>
+ * <h2>DESCRIZIONE</h2>
+ * interprete di notazione algebrica abbreviata <br>
  *
- * RESPONSABILITA' DI CLASSE
- * interpreta un comando scritto in notazione algebrica abbreviata,
- * capendo che pezzo muovere, la casa finale di movimento sulla scacchiera
- * e i gli eventuali simboli associati ad eventi specifici
- * controlla inoltre se il comando inserito dall'utente e' scritto
- * con una sintassi corretta
+ * <h2>RESPONSABILITA' DI CLASSE</h2>
+ * interpreta un comando scritto in notazione algebrica abbreviata, <br>
+ * capendo che pezzo muovere, la casa finale di movimento sulla scacchiera <br>
+ * e i gli eventuali simboli associati ad eventi specifici <br>
+ * controlla inoltre se il comando inserito dall'utente e' scritto <br>
+ * con una sintassi corretta <br>
  *
- * CLASSIFICAZIONE ECB
- * <<Control>>
- * poichè gestisce l'interpretazione dell'input utente
+ * <h2>CLASSIFICAZIONE ECB</h2>
+ * <strong>Control</strong><br>
+ * poiche' gestisce l'interpretazione dell'input utente <br>
  * alla base della logica dell'applicazione
+ * </body>
  *
  * @author wilkinson
  */
@@ -41,6 +43,9 @@ public final class AlgebraicNotation {
 	private static final int MAXLENGTHENDSQ = 3;
 	private static final int MAXSYMBOLS = 2;
 	private static final int ENPASSANTLENGTH = 3;
+	private static final int AMBIGUITYLENGTH = 3;
+	private static final int EPSTRINGLENSHORT = 7;
+	private static final int EPSTRINGLENLONG = 9;
 	// costanti per le posizioni nell'arraylist di tutti i simboli possibili
 	private static final int CHECKINDEX = 0;
 	private static final int CAPTUREINDEX = 1;
@@ -54,17 +59,19 @@ public final class AlgebraicNotation {
 
 	/**
 	 * costruttore, inizializza i membri, l'arraylist dei simboli, interpreta la
-	 * stringa in input e decide se è una stringa valida
+	 * stringa in input e decide se e' una stringa valida
 	 *
-	 * @param command stringa da interpretare
+	 * @param inCommand stringa da interpretare
 	 */
-	AlgebraicNotation(final String inCommand) {
+	public AlgebraicNotation(final String inCommand) {
 		pieceLetter = "";
 		symbol = new ArrayList<String>();
 		symbolList = new ArrayList<String>();
 		initializeSymbolList();
 		this.command = inCommand;
-		divideCommand(inCommand);
+		if (!command.isEmpty()) {
+			divideCommand(inCommand);
+		}
 		isGoodMove = isValidAlgebraicNotation();
 	}
 
@@ -84,7 +91,7 @@ public final class AlgebraicNotation {
 	/**
 	 * interpreta la stringa in input avvalorando gli attributi di classe
 	 *
-	 * @param command stringa in input da interpretare
+	 * @param inCommand stringa in input da interpretare
 	 */
 	private void divideCommand(final String inCommand) {
 		String commandInterpreted = inCommand.replace('O', '0');
@@ -113,7 +120,7 @@ public final class AlgebraicNotation {
 			// caso arrocco
 			setEndSquareId("");
 		} else {
-			// il resto della stringa è la casella di partenza/arrivo
+			// il resto della stringa e' la casella di partenza/arrivo
 			setEndSquareId(commandInterpreted);
 		}
 	}
@@ -121,11 +128,11 @@ public final class AlgebraicNotation {
 	/**
 	 * controllo se il comando riguarda un pedone
 	 *
-	 * @param command stringa in input da interpretare
+	 * @param inCommand stringa in input da interpretare
 	 * @return
 	 */
 	private boolean isPawn(final String inCommand) {
-		// controllo se la mossa è di un pedone (nessuna lettera iniziale)
+		// controllo se la mossa e' di un pedone (nessuna lettera iniziale)
 		char firstLetter = inCommand.charAt(FIRST);
 		if (Character.isUpperCase(firstLetter)) {
 			return false;
@@ -136,7 +143,7 @@ public final class AlgebraicNotation {
 	/**
 	 * estrae i simboli contenuti nel comando
 	 *
-	 * @param command stringa in input
+	 * @param inCommand stringa in input
 	 */
 	private void extractSymbol(final String inCommand) { // estrae l'eventuale simbolo speciale
 		int pos = 0;
@@ -165,7 +172,8 @@ public final class AlgebraicNotation {
 					this.isCheck = true;
 				}
 
-				if (inCommand.contains("e.p.") || inCommand.contains("e.p")) {
+				if (!this.isEnPassant()
+						&& inCommand.contains("e.p.")) {
 					this.isEnPassant = true;
 					getSymbol().add("ep");
 				}
@@ -177,7 +185,7 @@ public final class AlgebraicNotation {
 	/**
 	 * riduce la prima stringa togliendo il contenuto della seconda
 	 *
-	 * @param command   prima stringa contenente il comando da ridurre
+	 * @param inCommand   prima stringa contenente il comando da ridurre
 	 * @param extracted seconda stringa da sottrarre a command
 	 * @return stringa ridotta
 	 */
@@ -185,7 +193,7 @@ public final class AlgebraicNotation {
 		// riduce la stringa di comando eliminando i
 		// caratteri gia' estratti
 
-		// controllo se la stringa da sottrarre è vuota o se contiene un simbolo da
+		// controllo se la stringa da sottrarre e' vuota o se contiene un simbolo da
 		// trattare diversamente*/
 		if (!extracted.isEmpty()
 				&& !(extracted.equals("ep"))
@@ -225,6 +233,10 @@ public final class AlgebraicNotation {
 			return getSymbol().get(FIRST).equals("0-0");
 		} else if (isCastleLong()) {
 			return getSymbol().get(FIRST).equals("0-0-0");
+		}
+
+		if (getSymbol().size() > MAXSYMBOLS) {
+			return false;
 		}
 
 		if (!this.getPieceLetter().equals("")) {
@@ -273,9 +285,6 @@ public final class AlgebraicNotation {
 				return false;
 			}
 		}
-		if (getSymbol().size() > MAXSYMBOLS) {
-			return false;
-		}
 		return true;
 	}
 
@@ -287,7 +296,6 @@ public final class AlgebraicNotation {
 		if (command.isEmpty()) {
 			return false;
 		}
-		char[] tokens = this.command.toCharArray();
 		if (isCastleShort()) {
 			if (!(command.equals("0-0") || command.equals("O-O"))) {
 				return false;
@@ -296,12 +304,18 @@ public final class AlgebraicNotation {
 			if (!(command.equals("0-0-0") || command.equals("O-O-O"))) {
 				return false;
 			}
+		} else if (isEnPassant()) {
+			if (command.contains("ep") && command.length() != EPSTRINGLENSHORT) {
+				return false;
+			} else if (command.contains("e.p.") && command.length() != EPSTRINGLENLONG) {
+				return false;
+			}
 		}
 
-		if (tokens.length > MAXCOMMANDLENGTH) {
-			return false; // stringa troppo lunga
-		}
+		// scompongo il comando in token
+		char[] tokens = this.command.toCharArray();
 
+		// controllo la posizione della 'x'
 		for (int i = 0; i < MAXCOMMANDLENGTH; i++) {
 			// la x non e' seguita da una lettera (colonna della casa)
 			if (i < tokens.length - 1 && i >= FIRST && tokens[i] == 'x') {
@@ -315,8 +329,16 @@ public final class AlgebraicNotation {
 					if (!isGoodLetter(tokens[i + 1])) {
 						return false;
 					}
+					if (getEndSquareId().length() == AMBIGUITYLENGTH) {
+						if (!(isGoodLetter(tokens[i - 1]) || isGoodDigit(tokens[i - 1]))) {
+							return false;
+						}
+					}
 				}
 			}
+		}
+		if (tokens[command.length() - 1] == 'x') {
+			return false;
 		}
 		return true;
 	}
