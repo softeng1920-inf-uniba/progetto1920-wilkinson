@@ -51,7 +51,7 @@ public final class Move {
 
 		if (this.getInterpreter().isGoodMove() && !this.isCastle()) {
 			// estrae le coordinate di arrivo del pezzo
-			this.end = extractCoordinates(interpreter.getEndSquareId());
+			extractCoordinates(interpreter.getEndSquareId());
 
 			// individua che tipo di pezzo muovere e cerca lo spot di partenza giusto
 			Piece classPiece = classPieceMoved(interpreter.getPieceLetter());
@@ -96,23 +96,19 @@ public final class Move {
 	 * @param algebraicFinalSpot stringa di coordinate
 	 * @return spot di arrivo instanziato come elemento di classe Spot
 	 */
-	private Spot extractCoordinates(final String algebraicFinalSpot) {
-		Spot endSpot;
+	private void extractCoordinates(final String algebraicFinalSpot) {
 		if (algebraicFinalSpot.length() == EXPECTED_COMMAND_LENGTH) {
 			// caso in cui la stringa sia lunga 2
-			endSpot = new Spot(convertCoordinate(algebraicFinalSpot.substring(1, 2)),
+			this.end = new Spot(convertCoordinate(algebraicFinalSpot.substring(1, 2)),
 					convertCoordinate(algebraicFinalSpot.substring(0, 1)), null);
-			return endSpot;
 		} else if (algebraicFinalSpot.length() == EXPECTED_AMBIGUOUS_COMMAND_LENGTH) {
 			// caso in cui la stringa sia lunga 3 (ambiguita')
-			endSpot = new Spot(convertCoordinate(algebraicFinalSpot.substring(LETTER_INDEX, NUMBER_INDEX)),
+			this.end = new Spot(convertCoordinate(algebraicFinalSpot.substring(LETTER_INDEX, NUMBER_INDEX)),
 					convertCoordinate(algebraicFinalSpot.substring(1, LETTER_INDEX)), null);
 			ambiguity = algebraicFinalSpot.substring(0, 1);
 
 			setAmbiguity(true);
-			return endSpot;
 		}
-		return null;
 	}
 
 	/**
@@ -267,7 +263,7 @@ public final class Move {
 	 *
 	 * @return
 	 */
-	boolean isCastle() {
+	public boolean isCastle() {
 		if (this.getInterpreter().isCastleShort() || this.getInterpreter().isCastleLong()) {
 			return true;
 		}

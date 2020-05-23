@@ -581,6 +581,7 @@ class MoveTest {
 	}
 
 	// mossa non valida (casa di arrivo non legale)
+
 	@Test
 	void testCommandNotValidEnd() {
 		interpret("Rd6", BLACK);
