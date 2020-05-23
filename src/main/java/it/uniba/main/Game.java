@@ -218,10 +218,12 @@ public class Game {
 				for (String currentMove : allMoves) {
 					if (turnControl % 2 == 0) {
 						moveNumber++;
-						System.out.print("\n" + ANSI_WHITE_BACKGROUND + ANSI_BLACK + moveNumber + ".");
+						System.out.print("\n" + ANSI_WHITE_BACKGROUND
+								+ ANSI_BLACK + moveNumber + ".");
 					}
 					turnControl++;
-					System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + currentMove + " " + ANSI_RESET);
+					System.out.print(ANSI_WHITE_BACKGROUND
+							+ ANSI_BLACK + currentMove + " " + ANSI_RESET);
 				}
 				System.out.println();
 			} else {
@@ -239,8 +241,8 @@ public class Game {
 		if (this.isEnd()) {
 			return false;
 		} else {
-			System.out.print("\n" + ANSI_WHITE_BACKGROUND + ANSI_BLACK +
-					"Catture del bianco:" + ANSI_RESET);
+			System.out.print("\n" + ANSI_WHITE_BACKGROUND + ANSI_BLACK
+					+ "Catture del bianco:" + ANSI_RESET);
 			if (!whiteCaptures.isEmpty()) {
 				for (Piece currentPiece : whiteCaptures) {
 					System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + " "
@@ -249,8 +251,8 @@ public class Game {
 			} else {
 				System.out.print(" Nessuna cattura per il bianco.");
 			}
-			System.out.print(ANSI_BLACK_BACKGROUND + ANSI_WHITE +
-					"\nCatture del nero  :" + ANSI_RESET);
+			System.out.print(ANSI_BLACK_BACKGROUND + ANSI_WHITE
+					+ "\nCatture del nero  :" + ANSI_RESET);
 			if (!blackCaptures.isEmpty()) {
 				for (Piece currentPiece : blackCaptures) {
 					System.out.print(ANSI_BLACK_BACKGROUND + ANSI_WHITE + " "
@@ -264,6 +266,10 @@ public class Game {
 		}
 	}
 
+	/**
+	 * permette la stampa della scacchiera della partita in corso
+	 * @return true se la partita e' in corso, false altrimenti
+	 */
 	public boolean printBoard() {
 		if (this.isEnd()) {
 			return false;
