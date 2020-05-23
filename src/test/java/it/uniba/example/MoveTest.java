@@ -35,7 +35,7 @@ class MoveTest {
 	private static final int ROW_6 = 2;
 	private static final int ROW_7 = 1;
 	private static final int ROW_8 = 0;
-=======
+
 import it.uniba.main.Board;
 import it.uniba.main.King;
 import it.uniba.main.Move;
@@ -589,7 +589,7 @@ class MoveTest {
 	 * TEST DI INTERPRETAZIONE DEI COMANDI NON VALIDI
 	 */
 
-	// test sui
+	// test su mosse non valide (pezzo da muovere Re)
 	@Test
 	void testCommandNotValidPiece() {
 		interpret("d7", BLACK);
@@ -597,6 +597,7 @@ class MoveTest {
 		assertNull(moveInterpreted.getStart());
 	}
 
+	// test su mosse non valide (casa di arrivo non valida)
 	@Test
 	void testCommandNotValidEnd() {
 		interpret("Rd6", BLACK);
@@ -604,6 +605,7 @@ class MoveTest {
 		assertNull(moveInterpreted.getStart());
 	}
 
+	// test su mosse non valide (spot inesistente)
 	@Test
 	void testCommandNotValidSpot() {
 		interpret("Rd9", BLACK);
@@ -611,6 +613,7 @@ class MoveTest {
 		assertNull(moveInterpreted.getStart());
 	}
 
+	// test su mosse non valide (cattura di pezzo amico)
 	@Test
 	void testCommandNotValidCapture() {
 		board.getSpot(ROW_7, COL_D).setPiece(new Knight(BLACK));
