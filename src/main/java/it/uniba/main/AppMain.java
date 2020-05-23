@@ -62,7 +62,7 @@ public final class AppMain {
 			userChoiceMenu = scanner().nextLine();
 			userChoiceGame = userChoiceMenu;
 
-			switch (userChoiceMenu) {
+			switch (userChoiceMenu.toLowerCase()) {
 			case "help":
 				helpPrint();
 				break;
