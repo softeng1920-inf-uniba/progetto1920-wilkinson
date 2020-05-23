@@ -450,8 +450,10 @@ public class Board {
 					if (startX > endX) {
 						if (startY > endY) {
 							for (int i = 1; i < BOARDDIM; i++) { // NW: movimento diagonale
-								if ((startX - i >= 0 && startX - i < BOARDDIM)
-										&& (startY - i >= 0 && startY - i < BOARDDIM)) {
+								if ((startX - i >= 0
+										&& startX - i < BOARDDIM)
+										&& (startY - i >= 0
+										&& startY - i < BOARDDIM)) {
 									Spot examined = getSpot(startX - i, startY - i);
 									if (checkPath(examined, start, end) == 1) {
 										return true;
@@ -463,8 +465,10 @@ public class Board {
 							} // end movimento NW
 						} else {
 							for (int i = 1; i < BOARDDIM; i++) { // NE: movimento diagonale
-								if ((startX - i >= 0 && startX - i < BOARDDIM)
-										&& (startY + i >= 0 && startY + i < BOARDDIM)) {
+								if ((startX - i >= 0
+										&& startX - i < BOARDDIM)
+										&& (startY + i >= 0
+										&& startY + i < BOARDDIM)) {
 									Spot examined = getSpot(startX - i, startY + i);
 									if (checkPath(examined, start, end) == 1) {
 										return true;
@@ -478,8 +482,10 @@ public class Board {
 					} else {
 						if (startY > endY) {
 							for (int i = 1; i < BOARDDIM; i++) { // SW: movimento diagonale
-								if ((startX + i >= 0 && startX + i < BOARDDIM)
-										&& (startY - i >= 0 && startY - i < BOARDDIM)) {
+								if ((startX + i >= 0
+										&& startX + i < BOARDDIM)
+										&& (startY - i >= 0
+										&& startY - i < BOARDDIM)) {
 									Spot examined = getSpot(startX + i, startY - i);
 									if (checkPath(examined, start, end) == 1) {
 										return true;
@@ -491,8 +497,10 @@ public class Board {
 							} // end movimento Sw
 						} else {
 							for (int i = 1; i < BOARDDIM; i++) { // SE: movimento diagonale
-								if ((startX + i >= 0 && startX + i < BOARDDIM)
-										&& (startY + i >= 0 && startY + i < BOARDDIM)) {
+								if ((startX + i >= 0
+										&& startX + i < BOARDDIM)
+										&& (startY + i >= 0
+										&& startY + i < BOARDDIM)) {
 									Spot examined = getSpot(startX + i, startY + i);
 									if (checkPath(examined, start, end) == 1) {
 										return true;

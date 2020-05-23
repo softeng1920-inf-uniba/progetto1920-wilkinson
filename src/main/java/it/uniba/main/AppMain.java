@@ -50,11 +50,12 @@ public final class AppMain {
 		// movimento dei pezzi
 		String userChoiceMenu; // Memorizza le scelte che vengono effettuate dall'utente nel menu'
 		boolean quitGame = false; // Flag per gestire l'uscita dal programma
-		boolean notFirstMatch = false;
+		boolean notFirstMatch = false; // true se non e' il primo lancio di 'play'
+		boolean confirmed = true;
 		System.out.println("\n**BENVENUTO NEL GIOCO DEGLI SCACCHI**");
 		System.out.println("(Digitare 'help' per visualizzare la lista dei comandi disponibili)");
 
-		while(!quitGame) {
+		while (!quitGame) {
 			if (!game.isEnd()) {
 				System.out.print("\n" + game);
 			}
@@ -76,16 +77,21 @@ public final class AppMain {
 
 						if (userChoiceMenu.equals("si")) {
 							System.out.println("...ripristino partita");
+							confirmed = true;
 						} else if (userChoiceMenu.equals("no")) {
-							break;
+							confirmed = false;
 						} else {
-							System.out.println("COMANDO NON VALIDO\n");
+							System.out.println("\nCONFERMA NON VALIDA\n");
+							confirmed = false;
 						}
 					} while (!userChoiceMenu.equals("si") && !userChoiceMenu.equals("no"));
 				}
-				startPrint();
-				game = new Game();
-				notFirstMatch = true;
+				if (confirmed) {
+					startPrint();
+					game = new Game();
+					notFirstMatch = true;
+					confirmed = false;
+				}
 				break;
 			case "board":
 				if (!game.printBoard()) {
