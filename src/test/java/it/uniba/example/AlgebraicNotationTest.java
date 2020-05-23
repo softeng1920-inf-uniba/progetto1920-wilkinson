@@ -1,6 +1,7 @@
 package it.uniba.example;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -12,93 +13,147 @@ class AlgebraicNotationTest {
 	AlgebraicNotation interpreter;
 
 	@Test
-	void testValidAlgebraicNotation() {
+	void testAlgebraicNotationPawn() {
 		// pedone
 		interpreter = new AlgebraicNotation("d5");
-		assertEquals(interpreter.getPieceLetter(), "");
-		assertEquals(interpreter.getEndSquareId(), "d5");
-		assertTrue(interpreter.getSymbol().isEmpty());
-		assertTrue(interpreter.isGoodMove());
+		assertAll(
+		() -> assertEquals(interpreter.getPieceLetter(), ""),
+		() -> assertEquals(interpreter.getEndSquareId(), "d5"),
+		() -> assertTrue(interpreter.getSymbol().isEmpty()),
+		() -> assertTrue(interpreter.isGoodMove())
+		);
+	}
+
+	@Test
+	void testAlgebraicNotationPawnCapture() {
 		// pedone con cattura
 		interpreter = new AlgebraicNotation("cxd5");
-		assertEquals(interpreter.getPieceLetter(), "");
-		assertEquals(interpreter.getEndSquareId(), "cd5");
-		assertEquals(interpreter.getSymbol().get(0), "x");
-		assertEquals(interpreter.getSymbol().size(), 1);
-		assertTrue(interpreter.isCapture());
-		assertTrue(interpreter.isGoodMove());
+		assertAll(
+		() -> assertEquals(interpreter.getPieceLetter(), ""),
+		() -> assertEquals(interpreter.getEndSquareId(), "cd5"),
+		() -> assertEquals(interpreter.getSymbol().get(0), "x"),
+		() -> assertEquals(interpreter.getSymbol().size(), 1),
+		() -> assertTrue(interpreter.isCapture()),
+		() -> assertTrue(interpreter.isGoodMove())
+		);
+	}
+
+	@Test
+	void testAlgebraicNotationPawnEnPassant() {
 		// pedone con en passant (scritta 'ep')
 		interpreter = new AlgebraicNotation("cxd5 ep");
-		assertEquals(interpreter.getPieceLetter(), "");
-		assertEquals(interpreter.getEndSquareId(), "cd5");
-		assertEquals(interpreter.getSymbol().get(0), "x");
-		assertEquals(interpreter.getSymbol().get(1), "ep");
-		assertEquals(interpreter.getSymbol().size(), 2);
-		assertTrue(interpreter.isCapture());
-		assertTrue(interpreter.isEnPassant());
-		assertTrue(interpreter.isGoodMove());
+		assertAll(
+		() -> assertEquals(interpreter.getPieceLetter(), ""),
+		() -> assertEquals(interpreter.getEndSquareId(), "cd5"),
+		() -> assertEquals(interpreter.getSymbol().get(0), "x"),
+		() -> assertEquals(interpreter.getSymbol().get(1), "ep"),
+		() -> assertEquals(interpreter.getSymbol().size(), 2),
+		() -> assertTrue(interpreter.isCapture()),
+		() -> assertTrue(interpreter.isEnPassant()),
+		() -> assertTrue(interpreter.isGoodMove())
+		);
 		// pedone con en passant (scritta 'e.p.')
 		interpreter = new AlgebraicNotation("cxd5 e.p.");
-		assertEquals(interpreter.getPieceLetter(), "");
-		assertEquals(interpreter.getEndSquareId(), "cd5");
-		assertEquals(interpreter.getSymbol().get(0), "x");
-		assertEquals(interpreter.getSymbol().get(1), "ep");
-		assertEquals(interpreter.getSymbol().size(), 2);
-		assertTrue(interpreter.isCapture());
-		assertTrue(interpreter.isEnPassant());
-		assertTrue(interpreter.isGoodMove());
+		assertAll(
+		() -> assertEquals(interpreter.getPieceLetter(), ""),
+		() -> assertEquals(interpreter.getEndSquareId(), "cd5"),
+		() -> assertEquals(interpreter.getSymbol().get(0), "x"),
+		() -> assertEquals(interpreter.getSymbol().get(1), "ep"),
+		() -> assertEquals(interpreter.getSymbol().size(), 2),
+		() -> assertTrue(interpreter.isCapture()),
+		() -> assertTrue(interpreter.isEnPassant()),
+		() -> assertTrue(interpreter.isGoodMove())
+		);
+	}
+
+		@Test
+		void testAlgebraicNotationCapture() {
 		// cavallo con cattura
 		interpreter = new AlgebraicNotation("Cxa3");
-		assertEquals(interpreter.getPieceLetter(), "C");
-		assertEquals(interpreter.getEndSquareId(), "a3");
-		assertEquals(interpreter.getSymbol().get(0), "x");
-		assertEquals(interpreter.getSymbol().size(), 1);
-		assertTrue(interpreter.isCapture());
-		assertTrue(interpreter.isGoodMove());
+		assertAll(
+		() -> assertEquals(interpreter.getPieceLetter(), "C"),
+		() -> assertEquals(interpreter.getEndSquareId(), "a3"),
+		() -> assertEquals(interpreter.getSymbol().get(0), "x"),
+		() -> assertEquals(interpreter.getSymbol().size(), 1),
+		() -> assertTrue(interpreter.isCapture()),
+		() -> assertTrue(interpreter.isGoodMove())
+		);
+		}
+
+		@Test
+		void testAlgebraicNotationColAmbiguity() {
 		// torre con ambiguita' di colonna
 		interpreter = new AlgebraicNotation("Tba3");
-		assertEquals(interpreter.getPieceLetter(), "T");
-		assertEquals(interpreter.getEndSquareId(), "ba3");
-		assertTrue(interpreter.getSymbol().isEmpty());
-		assertTrue(interpreter.isGoodMove());
+		assertAll(
+		() -> assertEquals(interpreter.getPieceLetter(), "T"),
+		() -> assertEquals(interpreter.getEndSquareId(), "ba3"),
+		() -> assertTrue(interpreter.getSymbol().isEmpty()),
+		() -> assertTrue(interpreter.isGoodMove())
+		);
+		}
+
+		@Test
+		void testAlgebraicNotationRowAmbiguity() {
 		// cavallo con ambiguita' di riga con cattura
 		interpreter = new AlgebraicNotation("C2xa3");
-		assertEquals(interpreter.getPieceLetter(), "C");
-		assertEquals(interpreter.getEndSquareId(), "2a3");
-		assertEquals(interpreter.getSymbol().get(0), "x");
-		assertEquals(interpreter.getSymbol().size(), 1);
-		assertTrue(interpreter.isCapture());
-		assertTrue(interpreter.isGoodMove());
+		assertAll(
+		() -> assertEquals(interpreter.getPieceLetter(), "C"),
+		() -> assertEquals(interpreter.getEndSquareId(), "2a3"),
+		() -> assertEquals(interpreter.getSymbol().get(0), "x"),
+		() -> assertEquals(interpreter.getSymbol().size(), 1),
+		() -> assertTrue(interpreter.isCapture()),
+		() -> assertTrue(interpreter.isGoodMove())
+		);
+		}
+
+		@Test
+		void testAlgebraicNotationCheck() {
 		// comando con scacco
 		interpreter = new AlgebraicNotation("Cd6+");
-		assertEquals(interpreter.getPieceLetter(), "C");
-		assertEquals(interpreter.getEndSquareId(), "d6");
-		assertEquals(interpreter.getSymbol().get(0), "+");
-		assertEquals(interpreter.getSymbol().size(), 1);
-		assertTrue(interpreter.isCheck());
-		assertTrue(interpreter.isGoodMove());
+		assertAll(
+		() -> assertEquals(interpreter.getPieceLetter(), "C"),
+		() -> assertEquals(interpreter.getEndSquareId(), "d6"),
+		() -> assertEquals(interpreter.getSymbol().get(0), "+"),
+		() -> assertEquals(interpreter.getSymbol().size(), 1),
+		() -> assertTrue(interpreter.isCheck()),
+		() -> assertTrue(interpreter.isGoodMove())
+		);
+		}
+
+		@Test
+		void testAlgebraicNotationDoubleCheck() {
 		// comando con scacco doppio
 		interpreter = new AlgebraicNotation("Cd6++");
-		assertEquals(interpreter.getPieceLetter(), "C");
-		assertEquals(interpreter.getEndSquareId(), "d6");
-		assertEquals(interpreter.getSymbol().get(0), "++");
-		assertEquals(interpreter.getSymbol().size(), 1);
-		assertTrue(interpreter.isDoubleCheck());
-		assertTrue(interpreter.isGoodMove());
+		assertAll(
+		() -> assertEquals(interpreter.getPieceLetter(), "C"),
+		() -> assertEquals(interpreter.getEndSquareId(), "d6"),
+		() -> assertEquals(interpreter.getSymbol().get(0), "++"),
+		() -> assertEquals(interpreter.getSymbol().size(), 1),
+		() -> assertTrue(interpreter.isDoubleCheck()),
+		() -> assertTrue(interpreter.isGoodMove())
+		);
+		}
+
+		@Test
+		void testAlgebraicNotationCastle() {
 		// arrocco lungo (notazione con gli zeri)
 		interpreter = new AlgebraicNotation("0-0-0");
-		assertEquals(interpreter.getPieceLetter(), "");
-		assertEquals(interpreter.getEndSquareId(), "");
-		assertEquals(interpreter.getSymbol().get(0), "0-0-0");
-		assertEquals(interpreter.getSymbol().size(), 1);
-		assertTrue(interpreter.isGoodMove());
+		assertAll(
+		() -> assertEquals(interpreter.getPieceLetter(), ""),
+		() -> assertEquals(interpreter.getEndSquareId(), ""),
+		() -> assertEquals(interpreter.getSymbol().get(0), "0-0-0"),
+		() -> assertEquals(interpreter.getSymbol().size(), 1),
+		() -> assertTrue(interpreter.isGoodMove())
+		);
 		// arrocco corto (notazione con le 'O')
 		interpreter = new AlgebraicNotation("O-O");
-		assertEquals(interpreter.getPieceLetter(), "");
-		assertEquals(interpreter.getEndSquareId(), "");
-		assertEquals(interpreter.getSymbol().get(0), "0-0");
-		assertEquals(interpreter.getSymbol().size(), 1);
-		assertTrue(interpreter.isGoodMove());
+		assertAll(
+		() -> assertEquals(interpreter.getPieceLetter(), ""),
+		() -> assertEquals(interpreter.getEndSquareId(), ""),
+		() -> assertEquals(interpreter.getSymbol().get(0), "0-0"),
+		() -> assertEquals(interpreter.getSymbol().size(), 1),
+		() -> assertTrue(interpreter.isGoodMove())
+		);
 	}
 
 	@Test
