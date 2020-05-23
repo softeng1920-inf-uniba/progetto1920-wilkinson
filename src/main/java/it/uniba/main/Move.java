@@ -29,11 +29,10 @@ public final class Move {
 	private Spot end; // casa di arrivo
 	private Piece pieceMoved; // pezzo che deve eseguire il movimento
 	private boolean isAmbiguity = false; // caso in cui ci sia ambiguita' di movimento
-	private String ambiguity; // primo carattere di un'ambiguit√†
+	private String ambiguity; // primo carattere di un'ambiguita'
 
 	/**
 	 * costruttore dell'oggetto Move
-	 *
 	 * @param command comando da interpretare in mossa
 	 * @param game    partita in corso
 	 */
@@ -52,7 +51,7 @@ public final class Move {
 
 		if (this.getInterpreter().isGoodMove() && !this.isCastle()) {
 			// estrae le coordinate di arrivo del pezzo
-			this.end = extractCoordinates(interpreter.getEndSquareId());
+			extractCoordinates(interpreter.getEndSquareId());
 
 			// individua che tipo di pezzo muovere e cerca lo spot di partenza giusto
 			Piece classPiece = classPieceMoved(interpreter.getPieceLetter());
@@ -97,35 +96,30 @@ public final class Move {
 	 * @param algebraicFinalSpot stringa di coordinate
 	 * @return spot di arrivo instanziato come elemento di classe Spot
 	 */
-	private Spot extractCoordinates(final String algebraicFinalSpot) {
-		Spot endSpot;
+	private void extractCoordinates(final String algebraicFinalSpot) {
 		if (algebraicFinalSpot.length() == EXPECTED_COMMAND_LENGTH) {
 			// caso in cui la stringa sia lunga 2
-			endSpot = new Spot(convertCoordinate(algebraicFinalSpot.substring(1, 2)),
+			this.end = new Spot(convertCoordinate(algebraicFinalSpot.substring(1, 2)),
 					convertCoordinate(algebraicFinalSpot.substring(0, 1)), null);
-			return endSpot;
 		} else if (algebraicFinalSpot.length() == EXPECTED_AMBIGUOUS_COMMAND_LENGTH) {
 			// caso in cui la stringa sia lunga 3 (ambiguita')
-			endSpot = new Spot(convertCoordinate(algebraicFinalSpot.substring(LETTER_INDEX, NUMBER_INDEX)),
+			this.end = new Spot(convertCoordinate(algebraicFinalSpot.substring(LETTER_INDEX, NUMBER_INDEX)),
 					convertCoordinate(algebraicFinalSpot.substring(1, LETTER_INDEX)), null);
 			ambiguity = algebraicFinalSpot.substring(0, 1);
 
 			setAmbiguity(true);
-			return endSpot;
 		}
-		return null;
 	}
 
 	/**
 	 * trova lo spot di partenza cercando il pezzo con: 1) casa di arrivo
 	 * corrispodente a quella inserita 2) controlla solo i pezzi della classe
-	 * inserita dall'utente 3) controlla eventuali ambiguita'†
-	 *
+	 * inserita dall'utente 3) controlla eventuali ambiguita'
 	 * @param board
 	 * @param piece
 	 * @return
 	 */
-	public boolean findStartSpot(final Board board, final Piece piece, final boolean turn) {
+	boolean findStartSpot(final Board board, final Piece piece, final boolean turn) {
 		ArrayList<Piece> piecesMovable = new ArrayList<Piece>();
 		for (int i = 0; i < BOARD_LENGTH; i++) {
 			for (int j = 0; j < BOARD_HEIGHT; j++) {
@@ -293,7 +287,7 @@ public final class Move {
 	 * @param game
 	 * @return
 	 */
-	boolean makeCastling(final Board board, final boolean color) {
+	public boolean makeCastling(final Board board, final boolean color) {
 		if (color) {
 			Spot whiteKingSpot = board.getSpot(ROW_1, COL_E);
 			if (this.getInterpreter().isCastleShort()) { // arrocco corto bianco
@@ -303,9 +297,13 @@ public final class Move {
 				if (isCastlePossible(board, whiteNewKingSpot, whiteNewRookSpot, whiteKingSpot,
 						whiteDxRookSpot, null)) {
 					whiteNewKingSpot.setPiece(whiteKingSpot.getPiece());
+					whiteNewKingSpot.getPiece().setAsMoved();
 					whiteNewRookSpot.setPiece(whiteDxRookSpot.getPiece());
+					whiteNewRookSpot.getPiece().setAsMoved();
 					whiteKingSpot.setPiece(null);
 					whiteDxRookSpot.setPiece(null);
+
+
 					return true;
 				}
 			} else if (this.getInterpreter().isCastleLong()) { // arrocco lungo bianco
@@ -316,7 +314,9 @@ public final class Move {
 				if (isCastlePossible(board, whiteNewKingSpot, whiteNewRookSpot, whiteKingSpot,
 						whiteSxRookSpot, knightSpot)) {
 					whiteNewKingSpot.setPiece(whiteKingSpot.getPiece());
+					whiteNewKingSpot.getPiece().setAsMoved();
 					whiteNewRookSpot.setPiece(whiteSxRookSpot.getPiece());
+					whiteNewRookSpot.getPiece().setAsMoved();
 					whiteKingSpot.setPiece(null);
 					whiteSxRookSpot.setPiece(null);
 					return true;
@@ -331,7 +331,9 @@ public final class Move {
 				if (isCastlePossible(board, blackNewKingSpot, blackNewRookSpot, blackKingSpot,
 						blackDxRookSpot, null)) {
 					blackNewKingSpot.setPiece(blackKingSpot.getPiece());
+					blackNewKingSpot.getPiece().setAsMoved();
 					blackNewRookSpot.setPiece(blackDxRookSpot.getPiece());
+					blackNewRookSpot.getPiece().setAsMoved();
 					blackKingSpot.setPiece(null);
 					blackDxRookSpot.setPiece(null);
 					return true;
@@ -344,7 +346,9 @@ public final class Move {
 				if (isCastlePossible(board, blackNewKingSpot, blackNewRookSpot, blackKingSpot,
 						blackSxRookSpot, knightSpot)) {
 					blackNewKingSpot.setPiece(blackKingSpot.getPiece());
+					blackNewKingSpot.getPiece().setAsMoved();
 					blackNewRookSpot.setPiece(blackSxRookSpot.getPiece());
+					blackNewRookSpot.getPiece().setAsMoved();
 					blackKingSpot.setPiece(null);
 					blackSxRookSpot.setPiece(null);
 					return true;
@@ -425,7 +429,7 @@ public final class Move {
 		return false;
 	}
 
-	/**applica una serie di controlli per stabilire se l'arrocco Ë possibile
+	/**applica una serie di controlli per stabilire se l'arrocco e' possibile
 	 *
 	 * @param board
 	 * @param kingSpot
@@ -533,23 +537,11 @@ public final class Move {
 		return pieceMoved;
 	}
 
-	public boolean isAmbiguity() {
-		return isAmbiguity;
-	}
-
 	public void setAmbiguity(final boolean inIsAmbiguity) {
 		this.isAmbiguity = inIsAmbiguity;
 	}
 
 	public void setStart(final Spot inStart) {
 		this.start = inStart;
-	}
-
-	public void setEnd(final Spot inEnd) {
-		this.end = inEnd;
-	}
-
-	public void setPieceMoved(final Piece inPieceMoved) {
-		this.pieceMoved = inPieceMoved;
 	}
 }
