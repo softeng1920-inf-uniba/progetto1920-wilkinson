@@ -2,6 +2,8 @@ package it.uniba.main;
 
 import java.util.Scanner;
 
+import it.uniba.main.Move.GameStatus;
+
 /**
  * <body>
  * <h2>DESCRIZIONE</h2>
@@ -41,33 +43,72 @@ public final class AppMain {
 	 * @param args argomento command-line.
 	 */
 	public static void main(final String[] args) {
-		Game game;
+		Game game = new Game();
+		game.setStatus(GameStatus.NOT_STARTED);
+
 		String userChoiceGame; // memorizza le scelte dell'utente durante il gioco, ossia i comandi per il
-								// movimento dei pezzi
+		// movimento dei pezzi
 		String userChoiceMenu; // Memorizza le scelte che vengono effettuate dall'utente nel menu'
 		boolean quitGame = false; // Flag per gestire l'uscita dal programma
-		System.out.println("\n**BENVENUTO NEL GIOCO DEGLI SCACCHI**\n");
-		welcomePrint();
+		boolean notFirstMatch = false;
+		System.out.println("\n**BENVENUTO NEL GIOCO DEGLI SCACCHI**");
+		System.out.println("(Digitare 'help' per visualizzare la lista dei comandi disponibili)");
 
-		/*
-		 * Il ciclo di immissione comandi continua fino a che l'utente non digita il
-		 * comando >quit che setta il flag da true a false, uscendo dal programma. Se il
-		 * giocatore sceglie il comando "play" dopo aver gia' avviato una partita, il
-		 * programma fara' partire una nuova partita previa conferma del giocatore.
-		 */
-		while (!quitGame) {
-			System.out.print("Inserire il comando che si intende eseguire\n > ");
-			// gestisce la possibile immissione di caratteri maiuscoli
-			userChoiceMenu = scanner().nextLine().toLowerCase();
-			switch (userChoiceMenu) {
+		while(!quitGame) {
+			if (!game.isEnd()) {
+				System.out.print("\n" + game);
+			}
+			System.out.print("\nInserire comando/mossa ('help' per elenco)\n > ");
+			userChoiceMenu = scanner().nextLine();
+			userChoiceGame = userChoiceMenu;
+
+			switch (userChoiceMenu.toLowerCase()) {
 			case "help":
-				welcomePrint();
+				helpPrint();
 				break;
+			case "play":
+				if (notFirstMatch) {
+					do {
+						System.out.println("\nSei sicuro di voler resettare le partita?");
+						confirmPrint();
 
+						userChoiceMenu = scanner().nextLine().toLowerCase();
+
+						if (userChoiceMenu.equals("si")) {
+							System.out.println("...ripristino partita");
+						} else if (userChoiceMenu.equals("no")) {
+							break;
+						} else {
+							System.out.println("COMANDO NON VALIDO\n");
+						}
+					} while (!userChoiceMenu.equals("si") && !userChoiceMenu.equals("no"));
+				}
+				startPrint();
+				game = new Game();
+				notFirstMatch = true;
+				break;
+			case "board":
+				if (!game.printBoard()) {
+					System.out.print("\nCOMANDO NON VALIDO A PARTITA NON IN CORSO\n");
+				}
+				break;
+			case "moves":
+				if (!game.showMoves()) {
+					System.out.print("\nCOMANDO NON VALIDO A PARTITA NON IN CORSO\n");
+				}
+				break;
+			case "captures":
+				if (!game.showCaptures()) {
+					System.out.print("\nCOMANDO NON VALIDO A PARTITA NON IN CORSO\n");
+				}
+				break;
 			case "quit":
 				do {
+					System.out.println("\nSei sicuro di voler chiudere il gioco?");
 					confirmPrint();
+
 					userChoiceMenu = scanner().nextLine().toLowerCase();
+
 					if (userChoiceMenu.equals("si")) {
 						System.out.println("...uscita dal gioco");
 						quitGame = true;
@@ -78,92 +119,15 @@ public final class AppMain {
 					}
 				} while (!userChoiceMenu.equals("si") && !userChoiceMenu.equals("no"));
 				break;
-
-			case "play":
-				quitGame = false;
-				startPrint();
-				game = new Game();
-				while (!game.isEnd() && !quitGame) {
-					System.out.print("\n" + game);
-					System.out.print(" \nInserire comando o mossa che si intende eseguire\n > ");
-					userChoiceMenu = scanner().nextLine();
-					// assegno la stringa digitata dall'utente alla variabile
-					 // userChoiceGame prima di convertire la stringa in miuscolo
-					userChoiceGame = userChoiceMenu;
-					// converto in miniscolo per gestire i casi del menu'
-					switch (userChoiceMenu.toLowerCase()) {
-
-					case "help":
-						helpPrint();
-						break;
-
-					case "play":
-						do {
-							System.out.println("\nSei sicuro di voler "
-									+ "iniziare una nuova partita?\n");
-							confirmPrint();
-							userChoiceMenu = scanner().nextLine().toLowerCase();
-							if (userChoiceMenu.equals("si")) {
-								System.out.println("...ripristino partita");
-								game.initialize();
-								game.setWhiteTurn(true);
-							} else if (userChoiceMenu.equals("no")) {
-								quitGame = false;
-							} else {
-								System.out.println("COMANDO NON VALIDO\n");
-							}
-						} while (!userChoiceMenu.equals("si") && !userChoiceMenu.equals("no"));
-
-						break;
-
-					case "board":
-						game.getBoard().showBoard();
-						break;
-
-					case "moves":
-						System.out.print("\nSERIE DI MOSSE:");
-						game.showMoves();
-						System.out.print("\n");
-						break;
-
-					case "captures":
-						System.out.println("\nELENCO DELLE CATTURE PER COLORE:");
-						game.showCaptures();
-						System.out.print("\n");
-						break;
-
-					case "quit":
-						do {
-							System.out.println("\nSei sicuro di voler chiudere il gioco?");
-							confirmPrint();
-
-							userChoiceMenu = scanner().nextLine().toLowerCase();
-
-							if (userChoiceMenu.equals("si")) {
-								System.out.println("...uscita dal gioco");
-								quitGame = true;
-							} else if (userChoiceMenu.equals("no")) {
-								quitGame = false;
-							} else {
-								System.out.println("COMANDO NON VALIDO\n");
-							}
-						} while (!userChoiceMenu.equals("si") && !userChoiceMenu.equals("no"));
-						break;
-
-					default:
-						if (!userChoiceMenu.matches("")) {
-							// uso la stringa non convertita in minuscolo per
-							// proseguire con l'interpretazione della mossa
-							if (!game.currentGame(userChoiceGame)) {
-								System.out.println("\nCOMANDO O MOSSA NON VALIDA");
-							}
-						}
+			default:
+				if (!userChoiceMenu.matches("")) {
+					// uso la stringa non convertita in minuscolo per
+					// proseguire con l'interpretazione della mossa
+					if (!game.currentGame(userChoiceGame)) {
+						System.out.println("\nCOMANDO O MOSSA NON VALIDA");
 					}
 				}
 				break;
-
-			default:
-				quitGame = false;
 			}
 		}
 		scanner().close();
@@ -171,13 +135,6 @@ public final class AppMain {
 
 	private static Scanner scanner() {
 		return new Scanner(System.in, "UTF-8");
-	}
-
-	private static void welcomePrint() {
-		System.out.println("\n COMANDI ");
-		System.out.println(">play     :: inizia una nuova partita");
-		System.out.println(">help     :: mostra i comandi disponibili");
-		System.out.println(">quit     :: chiudi il gioco\n");
 	}
 
 	private static void confirmPrint() {
@@ -188,7 +145,7 @@ public final class AppMain {
 
 	private static void helpPrint() {
 		System.out.println("\n COMANDI ");
-		System.out.println(">play     ::  ripristina la partita");
+		System.out.println(">play     ::  inizia/ripristina la partita");
 		System.out.println(">board    ::  mostra al scacchiera");
 		System.out.println(">moves    ::  mostra lo storico delle mosse giocate");
 		System.out.println(">captures ::  mostra i pezzi catturati");
@@ -198,6 +155,5 @@ public final class AppMain {
 	private static void startPrint() {
 		System.out.println("\n**INIZIO PARTITA**\n");
 		System.out.println("Le pedine si muovono usando la notazione algebrica abbreviata.");
-		System.out.println("(Digitare 'help' per visualizzare la lista dei comandi disponibili)");
 	}
 }

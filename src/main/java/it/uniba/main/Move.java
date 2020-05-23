@@ -241,7 +241,7 @@ public final class Move {
 	 *
 	 */
 	enum GameStatus {
-		ACTIVE, BLACK_WIN, WHITE_WIN, DROW, FORCED_END
+		ACTIVE, BLACK_WIN, WHITE_WIN, DROW, FORCED_END, NOT_STARTED
 	}
 
 	/**

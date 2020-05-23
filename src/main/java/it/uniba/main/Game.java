@@ -208,18 +208,25 @@ public class Game {
 	 * mostra le mosse giocate durante la partita
 	 *
 	 */
-	public void showMoves() {
-		int moveNumber = 0;
-		int turnControl = 0;
-		if (!allMoves.isEmpty()) {
-			for (String currentMove : allMoves) {
-				if (turnControl % 2 == 0) {
-					moveNumber++;
-					System.out.print("\n" + ANSI_WHITE_BACKGROUND + ANSI_BLACK + moveNumber + ".");
+	public boolean showMoves() {
+		if (this.isEnd()) {
+			return false;
+		} else {
+			int moveNumber = 0;
+			int turnControl = 0;
+			if (!allMoves.isEmpty()) {
+				for (String currentMove : allMoves) {
+					if (turnControl % 2 == 0) {
+						moveNumber++;
+						System.out.print("\n" + ANSI_WHITE_BACKGROUND + ANSI_BLACK + moveNumber + ".");
+					}
+					turnControl++;
+					System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + currentMove + " " + ANSI_RESET);
 				}
-				turnControl++;
-				System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + currentMove + " " + ANSI_RESET);
+			} else {
+				System.out.print("\nNESSUNA MOSSA ESEGUITA\n");
 			}
+			return true;
 		}
 	}
 
@@ -227,24 +234,38 @@ public class Game {
 	 * mostra i pezzi catturati dalle due fazioni durante la partita
 	 *
 	 */
-	public void showCaptures() {
-		System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + "Catture del bianco:" + ANSI_RESET);
-		if (!whiteCaptures.isEmpty()) {
-			for (Piece currentPiece : whiteCaptures) {
-				System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + " "
-						+ currentPiece.draw() + " " + ANSI_RESET);
-			}
+	public boolean showCaptures() {
+		if (this.isEnd()) {
+			return false;
 		} else {
-			System.out.print(" Nessuna cattura per il bianco.");
+			System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + "Catture del bianco:" + ANSI_RESET);
+			if (!whiteCaptures.isEmpty()) {
+				for (Piece currentPiece : whiteCaptures) {
+					System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + " "
+							+ currentPiece.draw() + " " + ANSI_RESET);
+				}
+			} else {
+				System.out.print(" Nessuna cattura per il bianco.");
+			}
+			System.out.print(ANSI_BLACK_BACKGROUND + ANSI_WHITE + "\nCatture del nero  :" + ANSI_RESET);
+			if (!blackCaptures.isEmpty()) {
+				for (Piece currentPiece : blackCaptures) {
+					System.out.print(ANSI_BLACK_BACKGROUND + ANSI_WHITE + " "
+							+ currentPiece.draw() + " " + ANSI_RESET);
+				}
+			} else {
+				System.out.print(" Nessuna cattura per il nero.");
+			}
+			return true;
 		}
-		System.out.print(ANSI_BLACK_BACKGROUND + ANSI_WHITE + "\nCatture del nero  :" + ANSI_RESET);
-		if (!blackCaptures.isEmpty()) {
-			for (Piece currentPiece : blackCaptures) {
-				System.out.print(ANSI_BLACK_BACKGROUND + ANSI_WHITE + " "
-						+ currentPiece.draw() + " " + ANSI_RESET);
-			}
+	}
+
+	public boolean printBoard() {
+		if (this.isEnd()) {
+			return false;
 		} else {
-			System.out.print(" Nessuna cattura per il nero.");
+			board.showBoard();
+			return true;
 		}
 	}
 
