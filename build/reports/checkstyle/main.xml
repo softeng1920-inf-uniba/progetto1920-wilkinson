@@ -7,8 +7,17 @@
 <file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Bishop.java">
 </file>
 <file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Board.java">
+<error line="454" severity="error" message="Line is longer than 120 characters (found 128)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="467" severity="error" message="Line is longer than 120 characters (found 128)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="482" severity="error" message="Line is longer than 120 characters (found 128)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="495" severity="error" message="Line is longer than 120 characters (found 128)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
 </file>
 <file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Game.java">
+<error line="221" severity="error" message="Line is longer than 120 characters (found 127)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="224" severity="error" message="Line is longer than 120 characters (found 126)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="242" column="84" severity="error" message="&apos;+&apos; should be on a new line." source="com.puppycrawl.tools.checkstyle.checks.whitespace.OperatorWrapCheck"/>
+<error line="252" column="77" severity="error" message="&apos;+&apos; should be on a new line." source="com.puppycrawl.tools.checkstyle.checks.whitespace.OperatorWrapCheck"/>
+<error line="267" column="9" severity="error" message="Class &apos;Game&apos; looks like designed for extension (can be subclassed), but the method &apos;printBoard&apos; does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class &apos;Game&apos; final or making the method &apos;printBoard&apos; static/final/abstract/empty, or adding allowed annotation for the method." source="com.puppycrawl.tools.checkstyle.checks.design.DesignForExtensionCheck"/>
 </file>
 <file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/King.java">
 </file>
