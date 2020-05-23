@@ -21,28 +21,6 @@ import it.uniba.main.Rook;
 import it.uniba.main.Spot;
 
 class MoveTest {
-	private Move moveInterpreted;
-	private Move moveExpected;
-	private Board board;
-	private Piece examinedPiece;
-	private static final boolean WHITE = true;
-	private static final boolean BLACK = false;
-	private static final int ROW_1 = 7;
-	private static final int ROW_2 = 6;
-	private static final int ROW_3 = 5;
-	private static final int ROW_4 = 4;
-	private static final int ROW_5 = 3;
-	private static final int ROW_6 = 2;
-	private static final int ROW_7 = 1;
-	private static final int ROW_8 = 0;
-
-import it.uniba.main.Board;
-import it.uniba.main.King;
-import it.uniba.main.Move;
-import it.uniba.main.Queen;
-import it.uniba.main.Rook;
-
-class MoveTest {
 	private Move move;
 	private Board board;
 	private static final boolean WHITE = true;
