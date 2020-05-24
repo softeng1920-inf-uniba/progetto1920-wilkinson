@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * <h2>RESPONSABILITA' DI CLASSE</h2>
  * interpreta un comando scritto in notazione algebrica abbreviata, <br>
  * capendo che pezzo muovere, la casa finale di movimento sulla scacchiera <br>
- * e i gli eventuali simboli associati ad eventi specifici <br>
+ * e gli eventuali simboli associati ad eventi specifici; <br>
  * controlla inoltre se il comando inserito dall'utente e' scritto <br>
  * con una sintassi corretta <br>
  *
