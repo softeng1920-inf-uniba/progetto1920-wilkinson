@@ -12,9 +12,10 @@ package it.uniba.main;
  * permette la stampa a video della scacchiera nella configurazione attuale <br>
  *
  * <h2>CLASSIFICAZIONE ECB</h2>
- * <strong>Entity</strong><br>
- * perche' deriva dal concetto concreto di "Scacchiera"<br>
- * e tiene traccia dei dati sottoforma di configurazione attuale della scacchiera
+ * <strong>Control</strong><br>
+ * poiche' responsabile dell'analisi della posizione degli Spot<br>
+ * in funzione del movimento peculiare di ogni pezzo<br>
+ * seguendo la logica di gioco
  * </body>
  *
  * @author wilkinson
