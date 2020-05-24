@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * <h2>CLASSIFICAZIONE ECB</h2>
  * <strong>Control</strong><br>
  * essendo responsabile della logica che interessa il movimento <br>
- * di un pezzo sulla scacchiera, alla base del concetto di "movimento"
+ * di un pezzo sulla scacchiera, da uno Spot ad un altro
  * </body>
  *
  * @author wilkinson
