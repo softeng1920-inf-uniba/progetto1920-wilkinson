@@ -1,4 +1,4 @@
-package it.uniba.main;
+package it.uniba.logic;
 
 import java.util.ArrayList;
 
@@ -236,7 +236,7 @@ public final class Move {
 	 * @author wilkinson
 	 *
 	 */
-	enum GameStatus {
+	public enum GameStatus {
 		ACTIVE, BLACK_WIN, WHITE_WIN, DROW, FORCED_END, NOT_STARTED
 	}
 

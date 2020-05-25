@@ -2,7 +2,8 @@ package it.uniba.main;
 
 import java.util.Scanner;
 
-import it.uniba.main.Move.GameStatus;
+import it.uniba.logic.Game;
+import it.uniba.logic.Move.GameStatus;
 
 /**
  * <body>

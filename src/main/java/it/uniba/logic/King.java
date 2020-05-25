@@ -1,13 +1,14 @@
-package it.uniba.main;
+package it.uniba.logic;
 
 /**
  * <body>
  * <h2>DESCRIZIONE</h2>
- * rappresenta un pezzo alfiere <br>
+ * rappresenta un pezzo re <br>
  *
  * <h2>RESPONSABILITA' DI CLASSE</h2>
- * calcola le mosse legali di un alfiere seguendo le <br>
- * regole ufficiale degli scacchi <br>
+ * calcola le mosse legali di un re seguendo le <br>
+ * regole ufficiale degli scacchi, impedendone il movimento <br>
+ * in case minacciate da pezzi avversari <br>
  *
  * <h2>CLASSIFICAZIONE ECB</h2>
  * <strong>Entity</strong><br>
@@ -16,22 +17,21 @@ package it.uniba.main;
  *
  * @author wilkinson
  */
-public class Bishop extends Piece {
+public class King extends Piece {
 
-	public Bishop(final boolean white) {
+	public King(final boolean white) {
 		super(white);
 	}
 
 	/**
-	 * Metodo per ottenere l'unicode delll'alfiere in base al suo colore (bianco o
-	 * nero)
+	 * Metodo per ottenere l'unicode del re in base al suo colore (bianco o nero)
 	 */
 	@Override
 	public String draw() {
 		if (isWhite()) {
-			return "\u2657";
+			return "\u2654";
 		} else {
-			return "\u265d";
+			return "\u265a";
 		}
 	}
 
@@ -45,8 +45,12 @@ public class Bishop extends Piece {
 	 */
 	@Override
 	protected boolean canMove(final Board board, final Spot start, final Spot end) {
-		if (board.isFreePath(start, end)) {
-			return true;
+		if (board.isSpotAround(start, end)) {
+			if (end.isEmpty()) {
+				return true;
+			} else if (this.isWhite() != end.getPiece().isWhite()) {
+				return true;
+			}
 		}
 		return false;
 	}

@@ -1,4 +1,4 @@
-package it.uniba.example;
+package it.uniba.test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import it.uniba.main.AlgebraicNotation;
+import it.uniba.logic.AlgebraicNotation;
 
 class AlgebraicNotationTest {
 	AlgebraicNotation interpreter;

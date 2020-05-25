@@ -1,12 +1,12 @@
-package it.uniba.main;
+package it.uniba.logic;
 
 /**
  * <body>
  * <h2>DESCRIZIONE</h2>
- * rappresenta un pezzo torre <br>
+ * rappresenta un pezzo alfiere <br>
  *
  * <h2>RESPONSABILITA' DI CLASSE</h2>
- * calcola le mosse legali di una torre seguendo le <br>
+ * calcola le mosse legali di un alfiere seguendo le <br>
  * regole ufficiale degli scacchi <br>
  *
  * <h2>CLASSIFICAZIONE ECB</h2>
@@ -16,22 +16,22 @@ package it.uniba.main;
  *
  * @author wilkinson
  */
-public class Rook extends Piece {
+public class Bishop extends Piece {
 
-	public Rook(final boolean white) {
+	public Bishop(final boolean white) {
 		super(white);
 	}
 
 	/**
-	 * Metodo per ottenere l'unicode della torre in base al suo colore (bianco o
+	 * Metodo per ottenere l'unicode delll'alfiere in base al suo colore (bianco o
 	 * nero)
 	 */
 	@Override
 	public String draw() {
 		if (isWhite()) {
-			return "\u2656";
+			return "\u2657";
 		} else {
-			return "\u265c";
+			return "\u265d";
 		}
 	}
 
