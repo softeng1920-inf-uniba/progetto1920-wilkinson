@@ -1,4 +1,4 @@
-package it.uniba.example;
+package it.uniba.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -9,14 +9,14 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import it.uniba.main.Bishop;
-import it.uniba.main.Board;
-import it.uniba.main.Game;
-import it.uniba.main.King;
-import it.uniba.main.Pawn;
-import it.uniba.main.Piece;
-import it.uniba.main.Rook;
-import it.uniba.main.Spot;
+import it.uniba.logic.Bishop;
+import it.uniba.logic.Board;
+import it.uniba.logic.Game;
+import it.uniba.logic.King;
+import it.uniba.logic.Pawn;
+import it.uniba.logic.Piece;
+import it.uniba.logic.Rook;
+import it.uniba.logic.Spot;
 
 public class GameTest {
 	private static final int DIM_BOARD = 8;
@@ -25,7 +25,7 @@ public class GameTest {
 	private Spot start;
 	private Spot end;
 	private Piece examinedPiece;
-	private static boolean legalMove;
+	private boolean legalMove;
 
 	private static final boolean WHITE = true;
 	private static final boolean BLACK = false;

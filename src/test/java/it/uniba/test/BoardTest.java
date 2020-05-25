@@ -1,4 +1,4 @@
-package it.uniba.example;
+package it.uniba.test;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -9,16 +9,16 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import it.uniba.main.Bishop;
-import it.uniba.main.Board;
-import it.uniba.main.King;
-import it.uniba.main.Knight;
-import it.uniba.main.Move;
-import it.uniba.main.Pawn;
-import it.uniba.main.Piece;
-import it.uniba.main.Queen;
-import it.uniba.main.Rook;
-import it.uniba.main.Spot;
+import it.uniba.logic.Bishop;
+import it.uniba.logic.Board;
+import it.uniba.logic.King;
+import it.uniba.logic.Knight;
+import it.uniba.logic.Move;
+import it.uniba.logic.Pawn;
+import it.uniba.logic.Piece;
+import it.uniba.logic.Queen;
+import it.uniba.logic.Rook;
+import it.uniba.logic.Spot;
 
 public class BoardTest {
 	private Board board;
@@ -479,6 +479,7 @@ public class BoardTest {
 		isRefine = false;
 	}
 
+	@Test
 	void testRookReducedLegalMoves() {
 		board.getSpot(ROW_4, COL_D).setPiece(new Rook(WHITE)); // torre esaminata (d4)
 		examinedPiece = board.getSpot(ROW_4, COL_D).getPiece();

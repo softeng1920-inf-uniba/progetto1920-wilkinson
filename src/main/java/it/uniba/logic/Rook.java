@@ -1,14 +1,13 @@
-package it.uniba.main;
+package it.uniba.logic;
 
 /**
  * <body>
  * <h2>DESCRIZIONE</h2>
- * rappresenta un pezzo re <br>
+ * rappresenta un pezzo torre <br>
  *
  * <h2>RESPONSABILITA' DI CLASSE</h2>
- * calcola le mosse legali di un re seguendo le <br>
- * regole ufficiale degli scacchi, impedendone il movimento <br>
- * in case minacciate da pezzi avversari <br>
+ * calcola le mosse legali di una torre seguendo le <br>
+ * regole ufficiale degli scacchi <br>
  *
  * <h2>CLASSIFICAZIONE ECB</h2>
  * <strong>Entity</strong><br>
@@ -17,21 +16,22 @@ package it.uniba.main;
  *
  * @author wilkinson
  */
-public class King extends Piece {
+public class Rook extends Piece {
 
-	public King(final boolean white) {
+	public Rook(final boolean white) {
 		super(white);
 	}
 
 	/**
-	 * Metodo per ottenere l'unicode del re in base al suo colore (bianco o nero)
+	 * Metodo per ottenere l'unicode della torre in base al suo colore (bianco o
+	 * nero)
 	 */
 	@Override
 	public String draw() {
 		if (isWhite()) {
-			return "\u2654";
+			return "\u2656";
 		} else {
-			return "\u265a";
+			return "\u265c";
 		}
 	}
 
@@ -45,12 +45,8 @@ public class King extends Piece {
 	 */
 	@Override
 	protected boolean canMove(final Board board, final Spot start, final Spot end) {
-		if (board.isSpotAround(start, end)) {
-			if (end.isEmpty()) {
-				return true;
-			} else if (this.isWhite() != end.getPiece().isWhite()) {
-				return true;
-			}
+		if (board.isFreePath(start, end)) {
+			return true;
 		}
 		return false;
 	}

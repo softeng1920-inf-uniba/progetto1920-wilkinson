@@ -1,8 +1,8 @@
-package it.uniba.main;
+package it.uniba.logic;
 
 import java.util.ArrayList;
 
-import it.uniba.main.Move.GameStatus;
+import it.uniba.logic.Move.GameStatus;
 
 /**
  * <body>

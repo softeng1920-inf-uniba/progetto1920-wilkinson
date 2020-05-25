@@ -1,4 +1,4 @@
-package it.uniba.main;
+package it.uniba.logic;
 
 import java.util.ArrayList;
 
