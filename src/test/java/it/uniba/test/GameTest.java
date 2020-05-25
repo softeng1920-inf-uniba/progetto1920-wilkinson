@@ -25,7 +25,7 @@ public class GameTest {
 	private Spot start;
 	private Spot end;
 	private Piece examinedPiece;
-	private static boolean legalMove;
+	private boolean legalMove;
 
 	private static final boolean WHITE = true;
 	private static final boolean BLACK = false;
