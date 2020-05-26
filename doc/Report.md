@@ -35,7 +35,7 @@
 
    L'esecuzione dell'applicazione è possibile attraverso linee di comando via [Docker](https://hub.docker.com/).
 
-   L'interazione avviene attraverso un'interfaccia disegnata su linea di comando, dove la ***scacchiera*** viene opportunamente disegnata, indicando anche lettere e numeri di colonna, per permettere all'utente di giocare agevolmente.
+   L'interazione avviene attraverso un'interfaccia rappresentata su linea di comando, dove la ***scacchiera*** viene opportunamente disegnata, indicando anche lettere e numeri di colonna, per permettere all'utente di giocare agevolmente.
 
    **SCACCHI** è figlia del corso di INGEGNERIA DEL SOFTWARE tenuto dal [*Professore Filippo Lanubile*](http://www.di.uniba.it/~lanubile/) nell'Anno Accademico 2019-2020, dal gruppo ***wilkinson*** composto da: 
    
@@ -463,11 +463,11 @@ Abbiamo però vagliato diverse opzioni di *pattern*, da cui abbiamo preso spunto
 <a name="Commenti-OO"></a>
 
 ### Commenti
-- analizzando le varie **User Stories** e la relativa realizzazione a livello di *OO Design*, abbiamo riscontrato che per la maggior parte di esse le operazioni ed i pattern di progetto seguiti permettessero una divisione delle stesse in **3 macro-categorie**:
+- Analizzando le varie **User Stories** e la relativa realizzazione a livello di *OO Design*, abbiamo riscontrato che per la maggior parte di esse le operazioni ed i pattern di progetto seguiti permettessero una divisione delle stesse in **3 macro-categorie**:
 	- User Stories sui **comandi speciali** da utilizzare in partita (*>play, >moves, >captures, >board, >help*);
 	- User Stories sul **movimento dei pezzi** sulla scacchiera (*Pedone, Alfiere, Cavallo, Torre, Regina e Re*);
 	- User Stories sull'effettuare un **arrocco** (*corto o lungo*);
-- la realizzazione dei **diagrammi delle Classi** e dei **diagrammi di Sequenza** ha dunque seguito questa classificazione effettuata a priori.
+- La realizzazione dei **diagrammi delle Classi** e dei **diagrammi di Sequenza** ha dunque seguito questa classificazione effettuata a priori.
 
 <br><br>
 [Torna all'indice...](#Indice)
@@ -488,9 +488,7 @@ Abbiamo però vagliato diverse opzioni di *pattern*, da cui abbiamo preso spunto
 
 
 ### <a name="Commenti-TEST"></a>Commenti delle decisioni prese
-* abbiamo preso la decisione di non testare i metodi di stampa (per visualizzare le catture, la scacchiera o le mosse effettuate) poichè ritenuti di poco interesse e di funzionalità facilmente testabile "visivamente".  
-<br><br>
-* in particolare questi ultimi sono dislocati all'interno delle classi *Board.java* e *Game.java*, inoltre le singole classi dei pezzi (derivate dalla classe astratta *Piece.java*) contengono un metodo che ritorna il carattere Unicode corrispondente, anch'esso non testato per i motivi di cui sopra.
+* Abbiamo preso la decisione di non testare i metodi di stampa (per visualizzare le catture, la scacchiera o le mosse effettuate) poichè ritenuti di poco interesse e di funzionalità facilmente testabile "visivamente". In particolare questi ultimi sono dislocati all'interno delle classi *Board.java* e *Game.java*, inoltre le singole classi dei pezzi (derivate dalla classe astratta *Piece.java*) contengono un metodo che ritorna il carattere Unicode corrispondente, anch'esso non testato per i motivi di cui sopra.
 
 <br><br>
 [Torna all'indice...](#Indice)
@@ -511,7 +509,7 @@ Per avviare l'applicazione bisogna:
 ###### N.B.: se l'utente sta utilizzando Git Bash for Windows, deve aggiungere il prefisso "winpty" prima dell'intero comando
 ###### N.B.: Per eseguire l'applicazione sui terminali Windows e terminale macOS, a prescindere dalla shell selezionata, deve essere lanciata prima l'applicazione docker e caricati i container Linux.
 <br><br>
-* L'applicazione consente di giocare una partita di **scacchi** da un singolo terminale, condividendo il metodo di input con un altro giocatore o svolgere una partita in solitaria.
+* L'applicazione consente di giocare una partita di **scacchi** da un singolo terminale, condividendo il metodo di input con un altro giocatore, o svolgere una partita in solitaria.
 <br><br>
 * All'interno del gioco sono presenti diversi comandi utili all'utente(i) al fine di rendere migliore l'esperienza di gioco; alcuni di essi sono utilizzabili correttamente solo a partita in corso.
 <br><br>
@@ -533,7 +531,7 @@ Lo sviluppo dell'applicazione ha previsto tre sprint di diversa durata.
   - Il Professore ha ricoperto, a seconda delle necessità e per fini didattici, il ruolo del **Product Owner**, assumendosi la responsabilità della gestione del Product Backlog, e quello dello **Scrum Master**, fornendo aiuto a capire le regole, la teoria ed i valori di Scrum. 
   Prima dell'inizio di ogni sprint, ci sono stati comunicati  gli obiettivi da realizzare, e le loro priorità, attraverso i concetti di *User Stories* e *Definition of Done*.
   Sono state previste delle board per ogni sprint, ed una board generale di **Product Backlog** in cui è stato elencato tutto il lavoro da fare in futuro, sotto forma di *User Story*.
-  Le priorità sono quindi state definite dal Product Owner, e le storie associate, hanno fatto parte della *Sprint Board* di ogni sprint.
+  Le priorità sono quindi state definite dal Product Owner e le storie associate hanno fatto parte della *Sprint Board* di ogni sprint.
   <br> <br>
   - L'obiettivo del team da raggiungere alla fine di ogni sprint, detto **Sprint Goal**, è stato dettato, dalla *Definition of Done*, una lista contenente le user story da portare a termine, per considerare lo sprint compiuto. 
   <br> <br>
@@ -545,10 +543,10 @@ Lo sviluppo dell'applicazione ha previsto tre sprint di diversa durata.
     - **READY**, compiti svolti ma in attesa di revisione da parte dei Professori
     - **DONE**, compiti svolti che non necessitano di ulteriore revisione
   <br> <br>
-  - Come gruppo ci siamo auto-organizzati ed abbiamo gestito in autonomia la suddivisione del lavoro. I vari componenti hanno affrontato le varie problematiche da affrontare con flessibilità ma sempre con responsabilità nei confronti del lavoro da svolgere e nei confronti degli altri componenti del gruppo.
+  - Come gruppo ci siamo auto-organizzati ed abbiamo gestito in autonomia la suddivisione del lavoro. I vari componenti hanno affrontato le varie problematiche da fronteggiare con flessibilità e sempre con responsabilità nei confronti del lavoro da svolgere e nei confronti degli altri componenti del gruppo.
   <br> <br>
   - La gestione dello sviluppo è stata coordinata attraverso il **GitHub Flow**: <br>
-    il lavoro da svolgere è stato rappresentato da diversi *Issue*, ogni issue è stato assegnato ad almeno un membro del gruppo, ed è stata associata ad un *branch* sul quale sviluppare il software necessario.
+    il lavoro da svolgere è stato rappresentato da diversi *Issue*, ogni issue è stato assegnato ad almeno un membro del gruppo, ed è stato associato ad un *branch* sul quale sviluppare il software necessario.
     Alla fine dello sviluppo necessario per un *Issue*, il contenuto del *branch* è stato testato e sottoposto alla review degli altri componenti del gruppo tramite una *pull request*. Solo quando il team ha approvato il software associato all'issue in pull request, il branch è stato inserito all'interno del branch *master* attraverso un'operazione di *merge*, previa risoluzione di eventuali conflitti.
   <br><br>
   - Per dividerci i diversi **task** abbiamo utilizzato una *Project Board* parallela, contenente gli *issue* identificati dal gruppo (oltre le *user stories*), contestualmente all'efficace meccanismo di aggiunta delle *note con spunta* messo a disposizione direttamente da GitHub, che ci ha permesso una consultazione in tempo reale dei compiti da svolgere.
@@ -559,18 +557,18 @@ Lo sviluppo dell'applicazione ha previsto tre sprint di diversa durata.
 [Torna all'indice...](#Indice)
 # Analisi retrospettiva
 - ### Soddisfazioni
-    La comunicazione e la puntualità dei membri del gruppo è stata senza dubbio un segnale di maturità e motivazione. I contatti tra di noi sono stati molto costruttivi, gli scambi di idee e i consigli hanno permesso ad ogni membro del team di imparare qualcosa da un altro membro. Questo ha permesso durante l'arco della durata del progetto, ad ogni membro del team di impare qualcosa di nuovo ed utile, oltre che a migliorare l'uso delle metodologie di svilippo AGILE.
+    La comunicazione e la puntualità dei membri del gruppo è stata senza dubbio un segnale di maturità e motivazione. I contatti tra di noi sono stati molto costruttivi, gli scambi di idee e i consigli hanno permesso ad ogni membro del team di imparare qualcosa da un altro membro. Questo ha permesso, durante l'arco della durata del progetto, a ciascun elemento del team di impare qualcosa di nuovo ed utile, oltre che a migliorare l'uso delle metodologie di sviluppo AGILE.
     <br> <br>
 Gli strumenti [**GitHub**](https://github.com/) e [**Git**](https://git-scm.com/), inzialmente visti con un certo scetticismo, sono diventati imprescindibili per portare avanti lo sviluppo in team.
     <br> <br>
     Il Daily Scrum Meeting è sempre avvenuto su [**Microsoft Teams**](https://www.microsoft.com/it-it/microsoft-365/microsoft-teams/free?market=it) in virtù della ben nota problematica del nuovo Coronavirus in corso. Il tool di Microsoft si è rivelato molto utile grazie alle sue diverse features.
     <br> <br>
-Grazie al progetto abbiamo avuto la possibiltà di ricevere nuovi stimoli e mettersi in gioco in un ambito sconosciuto ad ognuno di noi. Ognuno ha dimostato di essere indispensabile al raggiungimento dell'obiettivo finale, ma allo stesso tempo di avere una visione aperta nel ricevere consigli da altri membri del team quando si presentavano difficoltà; quindi crediamo che il progetto ci abbia fatto anche crescere a livello personale, avvicinandoci un po' di più a ciò che sarà il nostro futuro in ambito lavorativo.
+Grazie al progetto abbiamo avuto la possibiltà di ricevere nuovi stimoli e di metterci in gioco in un ambito sconosciuto ad ognuno di noi. Ognuno ha dimostato di essere indispensabile al raggiungimento dell'obiettivo finale, ma allo stesso tempo di avere una visione aperta nel ricevere consigli da altri membri del team quando si presentavano difficoltà; quindi crediamo che il progetto ci abbia fatto anche crescere a livello personale, avvicinandoci un po' di più a ciò che sarà il nostro futuro in ambito lavorativo.
 	
 - ### Insoddisfazioni
-    In alcuni casi, oltre al Daily Scrum Meeting, è stato necessario "incontrarci" per poter dialogare e discutere sulle problematiche che via via si sono presentate. Quindi in aggiunta al metodo [**SCRUM**](https://it.wikipedia.org/wiki/Scrum_%28informatica%29) classico, è stato necessario aggiungere delle sessioni di vero e proprio lavoro congiunto che potesse risolvere nuovi problemi, dovuti principalmente al fatto che la maggior parte dei membri del team abbiano dovuto studiare java "in corso d'opera". Queste sessioni tuttavia, si sono via via ridotte in quanto ognuno, grazie all'esperienza accumulata durante le sessioni precedenti, è stato in grado di procedere in autonomia, sempre secondo il [**GitHub flow**](https://guides.github.com/introduction/flow/).
+    In alcuni casi, oltre al Daily Scrum Meeting, è stato necessario "incontrarci" per poter dialogare e discutere sulle problematiche che via via si sono presentate. Quindi in aggiunta al metodo [**SCRUM**](https://it.wikipedia.org/wiki/Scrum_%28informatica%29) classico, è stato necessario aggiungere delle sessioni di vero e proprio lavoro congiunto che potesse risolvere nuovi problemi, dovuti principalmente al fatto che la maggior parte dei membri del team abbiano dovuto studiare java "in corso d'opera". Queste sessioni, tuttavia, si sono via via ridotte in quanto ognuno, grazie all'esperienza accumulata durante le sessioni precedenti, è stato in grado di procedere in autonomia, sempre secondo il [**GitHub flow**](https://guides.github.com/introduction/flow/).
      <br> <br>
-    Un'altra insoddisfazione è stata quella di non avere mai avuto l'occasione di *incontrarci di persona* durante tutta la durata del progetto, magari dopo le lezioni universitarie in aula. Pur avendo avuto a disposizione diverse tecnologie e tante opportunità di essere sempre in contatto, l'assenza di veri e propri faccia a faccia fra i membri del gruppo, ha reso a tratti estranianti le relazioni interpersonali del gruppo. 
+    Un'altra insoddisfazione è stata quella di non avere mai avuto l'occasione di *incontrarci di persona* durante tutta la durata del progetto, magari dopo le lezioni universitarie in aula. Pur avendo avuto a disposizione diverse tecnologie e tante opportunità di essere sempre in contatto, l'assenza di veri e propri faccia a faccia fra i membri del gruppo ha reso a tratti estranianti le relazioni interpersonali del gruppo. 
      <br> <br>
      Dato l'elevato numero di membri del Team, spesso è risultato dispendioso (in termini di tempo) riuscire a suddividere efficacemente il lavoro da svolgere al fine di ridurre al minimo i *conflitti*, contestualmente sia sui task da portare a termine che quelli sulle **pull request** che avrebbero generato.
 
