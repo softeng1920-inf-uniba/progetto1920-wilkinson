@@ -443,13 +443,22 @@ _______________
 
 <br>
 
-<img height=700 src="drawings/RiepilogoTest/coverall-List.PNG">
+<img src="/res/img/report/coverall-List.png">
 
-<img height=400 src="drawings/RiepilogoTest/coverall.PNG">
+<img src="/res/img/report/coverall.PNG">
 
-<img src="drawings/RiepilogoTest/jacoco.PNG">
+<img src="/res/img/report/jacoco.png">
 
-<img height="120" src="drawings/RiepilogoTest/TestSummary.PNG">
+<img src="/res/img/report/jacocoExt.png">
+
+<img src="/res/img/report/TestSummary.png">
+
+### <a name="Commenti-TEST"></a>Commenti delle decisioni prese
+* abbiamo preso la decisione di non testare i metodi di stampa (per visualizzare le catture, la scacchiera o le mosse effettuate) poichè ritenuti di poco interesse e di funzionalità facilmente testabile "visivamente".  
+<br><br>
+* in particolare questi ultimi sono dislocati all'interno delle classi *Board.java* e *Game.java*, inoltre le singole classi dei pezzi (derivate dalla classe astratta *Piece.java*) contengono un metodo che ritorna il carattere Unicode corrispondente, anch'esso non testato per i motivi di cui sopra.
+
+<br><br>
 
 ### <a name="Commenti-TEST"></a>Commenti delle decisioni prese
 * abbiamo preso la decisione di non testare i metodi di stampa (per visualizzare le catture, la scacchiera o le mosse effettuate) poichè ritenuti di poco interesse e di funzionalità facilmente testabile "visivamente".  
