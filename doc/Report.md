@@ -29,7 +29,7 @@
    [***FIDE***](https://www.fide.com/) è il sito web della Federazione internazionale degli scacchi, la principale organizzazione mondiale del gioco degli scacchi, che organizza campionati mondiali e che regolamenta il gioco.
 
    Il nostro gioco è basato su una matrice 8x8 che rappresenta le 64 case di una scacchiera.
-    ![Chess_board](https://github.com/softeng1920-inf-uniba/progetto1920-wilkinson/blob/reportWriting/res/img/report/chessboard.png)
+    ![Chess_board](https://github.com/softeng1920-inf-uniba/progetto1920-wilkinson/blob/master/res/img/report/chessboard.png)
 
    L'applicazione permette di giocare seguendo la [notazione algebrica](https://it.wikipedia.org/wiki/Notazione_algebrica) abbreviata degli scacchi.
 
@@ -388,7 +388,7 @@ Esso sfrutta e orchestra le classi di gioco, a seconda della situazione può: im
 ### Diagramma dei package
 
 <br>
-  <img width="600" src="drawings/SystemDesign/diagramma-package.png">
+  <img width="600" src="drawings/diagr_package.png">
 <br>
 
 ### <a name="Commenti-SD"></a>Commenti delle decisioni prese
