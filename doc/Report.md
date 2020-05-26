@@ -40,7 +40,7 @@
 # Modello di dominio
 
 <center>
-<img width="700" alt="Modello_di_dominio.jpg" src="./drawings/ModelloDiDominio/Modello_di_dominio.jpg">
+<img width="700" alt="ModelDomainv2-ids1920.png" src="./drawings/ModelDomainv2-ids1920.png">
 </center>
 
 <br> <br>
@@ -66,7 +66,7 @@
 ### Diagramma dei package
 
 <br>
-  <img width="600" src="drawings/SystemDesign/diagramma-package.png">
+  <img width="600" src="drawings/diagr_package.png">
 <br>
 
 ### Diagramma dei componenti
@@ -84,26 +84,50 @@
 # OO Design
 ### <a name="Diagrammi-delle-classi-e-diagrammi-di-sequenza"></a> Diagrammi delle classi e diagrammi di sequenza
 
-* Diagramma delle classi ...
+* ***Diagramma delle classi*** per le User Stories che interessano i **comandi speciali** da inviare all'applicazione
 
 <center>
-	<img width="900" alt="Classes.png" src="./drawings/OODesign/Classes.png">
+	<img width="500" alt="diagr_class_commands.png" src="./drawings/diagr_class_commands.png">
 </center>
 
 <br> <br>
 
-... Diagramma di sequenza relativo alla user story x dello sprint x ...
+... ***Diagramma di sequenza*** relativo alla User Story del **comando 'play'** ...
 
 <center>
-	<img width="900" alt="Sprint1Query1Sequence.png" src="./drawings/OODesign/Sprint1Query1Sequence.png">
+	<img width="900" alt="diagr_seq_commands.png" src="./drawings/diagr_seq_commands.png">
 </center>
 
 <br> <br>
 
-... Diagramma di sequenza relativo alla user story y dello sprint y.
+... ***Diagramma delle classi*** per le User Stories che interessano il **movimento di un pezzo** sulla scacchiera ...
 
 <center>
-	<img width="900" alt="Sprint2Query1Sequence.png" src="./drawings/OODesign/Sprint2Query1Sequence.png">
+	<img width="900" alt="diagr_class_moves.png" src="./drawings/diagr_class_moves.png">
+</center>
+
+<br> <br>
+
+... ***Diagramma di sequenza*** relativo alle User Stories del **movimento di un pezzo** sulla scacchiera ...
+
+<center>
+	<img width="900" alt="diagr_seq_moves.png" src="./drawings/diagr_seq_moves.png">
+</center>
+
+<br> <br>
+
+... ***Diagramma delle classi*** per le User Stories che interessano l'**arrocco** corto e lungo ...
+
+<center>
+	<img width="650" alt="diagr_class_castle.png" src="./drawings/diagr_class_castle.png">
+</center>
+
+<br> <br>
+
+... ***Diagramma di sequenza*** relativo alle User Stories dell'**arrocco** corto e lungo.
+
+<center>
+	<img width="900" alt="diagr_seq_castle.png" src="./drawings/diagr_seq_castle.png">
 </center>
 
 <br> <br>
