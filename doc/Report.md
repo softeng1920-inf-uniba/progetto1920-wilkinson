@@ -381,13 +381,6 @@ Lo stile architetturale adottato segue il pattern del [Model-view-controller](ht
 Tale modello di architettura è molto diffuso nello sviluppo di sistemi software, nello specifico nell'ambito della programmazione orientata agli oggetti. Questo schema consente di realizzare la separazione dei 
 concetti, dunque porre una netta divisione tra la logica di presentazione dei dati (*View*) e la logica business (*Model*).
 
-Utilizzando questo schema le richieste dell'utente vengono indirizzate ad un *controller*, che accetta l'input e lo converte in comandi per il *modello*. Quest'ultimo è fondamentale per lo stile MVC, infatti esso cattura il 
-comportamento dell'applicazione in termini di dominio del problema, gestendo direttamente i dati, la logica e le regole dell'applicazione, indipendentemente dall'interfaccia utente.
-Il *controller* converte l'input in comandi anche per la *vista*, la quale è una qualsiasi rappresentazione in output di informazioni.
-
-E' chiaro come la visualizzazione e il controller dipendono dal modello. Il modello, tuttavia, è indipendente e questo rappresenta uno dei principali vantaggi della separazione. La separazione, infatti, consente di 
-compilare e testare il modello in modo indipendente dalla presentazione visiva, componente solitamente più mutabile.
-
 Sebbene **SCACCHI** non segua pedissequamente i principi del pattern **MVC**, è, ad ogni modo, lo stile che meglio rappresenta il modello da noi adottato, ne consegue che i tre componenti principali del suddetto stile, applicati al nostro progetto, sono:
 
 - **Model :** E' il fulcro del gioco. Ne fanno parte tutte quelle classi che contengono in se la logica di gioco, come la classe Move che gestisce il movimento di un qualunque pezzo, o la classe AlgebraicNotation che interpreta in notazione algebrica un comando ricevuto dal controller.
