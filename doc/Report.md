@@ -392,14 +392,8 @@ Esso sfrutta e orchestra le classi di gioco, a seconda della situazione può: im
   <img width="600" src="drawings/SystemDesign/diagramma-package.png">
 <br>
 
-### Diagramma dei componenti
-
-<br>
-  <img height="400" src="drawings/SystemDesign/diagramma-componenti.PNG">
-<br>
-
 ### <a name="Commenti-SD"></a>Commenti delle decisioni prese
-
+- L'applicazione è stata organizzata in due package per permetterne futuri sviluppi ai quali il gioco degli scacchi ben si presta: sono realizzabili diverse *features*, dall'introduzione di **giocatori personalizzabili**, allo **store delle partite**, al calcolo di **ELO** di un giocatore o alla possibilità di giocare **in rete**.
 
 <br><br>
 [Torna all'indice...](#Indice)
