@@ -376,9 +376,27 @@ _______________
 # System Design
 
 ### Stile architetturale adottato
+Lo stile architetturale adottato segue il pattern del [Model-view-controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller).
+
+Tale modello di architettura è molto diffuso nello sviluppo di sistemi software, nello specifico nell'ambito della programmazione orientata agli oggetti. Questo schema consente di realizzare la separazione dei 
+concetti, dunque porre una netta divisione tra la logica di presentazione dei dati (*View*) e la logica business (*Model*).
+
+Utilizzando questo schema le richieste dell'utente vengono indirizzate ad un *controller*, che accetta l'input e lo converte in comandi per il *modello*. Quest'ultimo è fondamentale per lo stile MVC, infatti esso cattura il 
+comportamento dell'applicazione in termini di dominio del problema, gestendo direttamente i dati, la logica e le regole dell'applicazione, indipendentemente dall'interfaccia utente.
+Il *controller* converte l'input in comandi anche per la *vista*, la quale è una qualsiasi rappresentazione in output di informazioni.
+
+E' chiaro come la visualizzazione e il controller dipendono dal modello. Il modello, tuttavia, è indipendente e questo rappresenta uno dei principali vantaggi della separazione. La separazione, infatti, consente di 
+compilare e testare il modello in modo indipendente dalla presentazione visiva, componente solitamente più mutabile.
+
+Sebbene **SCACCHI** non segua pedissequamente i principi del pattern **MVC**, è, ad ogni modo, lo stile che meglio rappresenta il modello da noi adottato, ne consegue che i tre componenti principali del suddetto stile, applicati al nostro progetto, sono:
+
+- **Model :** E' il fulcro del gioco. Ne fanno parte tutte quelle classi che contengono in se la logica di gioco, come la classe Move che gestisce il movimento di un qualunque pezzo, o la classe AlgebraicNotation che interpreta in notazione algebrica un comando ricevuto dal controller.
+- **Controller :** Il controller collega il modello, la vista e l'interazione dell'utente, di fatto fa da collante tra le classi.
+Esso sfrutta e orchestra le classi di gioco, a seconda della situazione può: impostare una nuova scacchiera, ricevere l'input dell'utente, convalidarlo e quindi aggiornare la Board di conseguenza. Il controller inoltre può interrompere una partita e/o iniziarne una nuova.
+- **View :** Come precisato in precedenza, la nostra applicazione software si distingue dall'MVC "puro" anche per via della mancanza di una vera e propria GUI ([Graphical user interface](https://en.wikipedia.org/wiki/Graphical_user_interface)), essendo un'applicazione a riga di comando. Ad ogni modo è comunque possibile visualizzare la scacchiera, le mosse e le catture effettuate, tramite immissione di specifici comandi.
 
 <br>
-  <img width="600" src="drawings/SystemDesign/MVP.PNG">
+  <img width="600" src="drawings/SystemDesign/MVC.PNG">
 <br>
 
 ### Diagramma dei package
