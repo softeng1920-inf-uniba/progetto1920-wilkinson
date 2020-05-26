@@ -389,7 +389,7 @@ Esso sfrutta e orchestra le classi di gioco, a seconda della situazione può: im
 - **View :** Come precisato in precedenza, la nostra applicazione software si distingue dall'MVC "puro" anche per via della mancanza di una vera e propria GUI ([Graphical user interface](https://en.wikipedia.org/wiki/Graphical_user_interface)), essendo un'applicazione a riga di comando. Ad ogni modo è comunque possibile visualizzare la scacchiera, le mosse e le catture effettuate, tramite immissione di specifici comandi.
 
 <br>
-  <img width="600" src="drawings/SystemDesign/MVC.PNG">
+  <img width="600" src="/res/img/report/MVC.PNG">
 <br>
 
 ### Diagramma dei package
