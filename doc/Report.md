@@ -451,6 +451,11 @@ _______________
 
 <img height="120" src="drawings/RiepilogoTest/TestSummary.PNG">
 
+### <a name="Commenti-TEST"></a>Commenti delle decisioni prese
+* abbiamo preso la decisione di non testare i metodi di stampa (per visualizzare le catture, la scacchiera o le mosse effettuate) poichè ritenuti di poco interesse e di funzionalità facilmente testabile "visivamente".  
+<br><br>
+* in particolare questi ultimi sono dislocati all'interno delle classi *Board.java* e *Game.java*, inoltre le singole classi dei pezzi (derivate dalla classe astratta *Piece.java*) contengono un metodo che ritorna il carattere Unicode corrispondente, anch'esso non testato per i motivi di cui sopra.
+
 <br><br>
 [Torna all'indice...](#Indice)
 
