@@ -447,12 +447,29 @@ Esso sfrutta e orchestra le classi di gioco, a seconda della situazione può: im
 <a name="Design-pattern-utilizzati"></a>
 
 ### Design patterns
- 
+Nel progetto da noi sviluppato, vengono rispettati i due fondamentali principi del "**GoF Design Patterns**"; infatti viene privilegiato l'uso di una classe astratta "Piece", che discerne dalla vera e propria implementazione del movimento dei pezzi, ma che pone le basi per poi svilupparne una diversa  in base alla diversa funzione di ogni pezzo (**Primo principio**), ed inoltre è favorita la composizione tra classi; l'ereditarietà è usata solamente per esprime il concetto di generalizzazione, ossia i vari tipi di pezzi (**Secondo principio**).
+
+**1)Creational Pattern:**
+**-Abstract Factory:**  consente di definire diverse implementazioni dei pezzi che compongono la scacchiera, senza che il contesto d’uso dell’istanza debba essere modificato al variare dell’implementazione scelta;  quindi il seguente Pattern è stato adottato esclusivamente per gestire la codifica in Unicode di ogni pezzo e per fornirne una diversa implementazione per il loro movimento nella scacchiera.
+
+**2)Structural Pattern:**
+**-Composite:** viene utilizzato quando si ha la necessità di realizzare una gerarchia di oggetti in cui l’oggetto contenitore può detenere oggetti elementari e/o  contenitori. Essendo il gioco degli scacchi concretamente basato su un aggregazione di oggetti, scacchiera formata da case, che a loro volta ospitano dei pezzi, la nostra scelta strutturale è ricaduta su questo pattern; infatti nel nostro caso abbiamo la classe Game.java che nella gerarchia potremmo porre al vertice, che istanzia un oggetto di classe Board.java, che a sua volta istazia gli oggetti di classe Spot.java, che a loro volta contengono informazioni sul pezzo che le occupa. 
+
+**3) Behavioral Patterns:**
+**-Interpreter:**  Si tratta di un pattern comportamentale che viene utilizzato quando si vuole definire una grammatica e il relativo interprete.  La grammatica è costituita da tutte le espressioni che possono essere utilizzate mentre l’interprete permette di tradurre l'espressione. Nel nostro caso, utilizziamo la classe AlgebricNotation che è in grado di tradurre il linguaggio espresso dall'utente in notazione algebrica, che successivamente verrà convertita nella vera e propria mossa effettuata nella scacchiera.
+
+**-Mediator:** Si tratta di un Pattern comportamentale e viene utilizzato per permettere lo scambio di messaggi tra diversi attori tramite un intermediario. In questo modo gli attori sono collegati indirettamente tramite un intermediario. In questo modo possiamo separare la logica che vi è tra iterpretazione del comando scritto in notazione algebrica e la mossa effettiva che altera la scacchiera ed il flusso di gioco. Nel nostro caso possiamo porre come mediatore la classe Move, che ha il compito di ricevere il comando in notazione algebrica che è stato analizzato dalla classe AlgebricNotation, e che predisporrà il "terreno" per effettuare la vera e propria mossa nella classe Game.
+
+
 
 <a name="Commenti-OO"></a>
 
 ### Commenti
-
+- analizzando le varie **User Stories** e la relativa realizzazione a livello di *OO Design*, abbiamo riscontrato che per la maggior parte di esse le operazioni ed i pattern di progetto seguiti permettessero una divisione delle stesse in **3 macro-categorie**:
+	- User Stories sui **comandi speciali** da utilizzare in partita (*>play, >moves, >captures, >board, >help*);
+	- User Stories sul **movimento dei pezzi** sulla scacchiera (*Pedone, Alfiere, Cavallo, Torre, Regina e Re*);
+	- User Stories sull'effettuare un **arrocco** (*corto o lungo*);
+- la realizzazione dei **diagrammi delle Classi** e dei **diagrammi di Sequenza** ha dunque seguito questa classificazione effettuata a priori.
 
 <br><br>
 [Torna all'indice...](#Indice)
