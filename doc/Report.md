@@ -38,12 +38,6 @@
 
    L'interazione avviene attraverso un'interfaccia disegnata su linea di comando, dove la ***scacchiera*** viene opportunamente disegnata, indicando anche lettere e numeri di colonna, per permettere all'utente di giocare agevolmente.
 
-   Oltre alla possibilità di specificare i diversi movimenti tramite la notazione algebrica, il programma permette all'utente di accedere a diverse funzioni aggiuntive.
-   Il comando *moves* permette all'utente di visualizzare tutti i movimenti della partita finora avvenuti, permettendo quindi di consultare lo storico della partita. <br>
-
-   Il comando *captures* invece fornisce all'utente una lista contenente tutte le catture avvenute fino a quel momento.
-
-
    **SCACCHI** è figlia del corso di INGEGNERIA DEL SOFTWARE tenuto dal [*Professore Filippo Lanubile*](http://www.di.uniba.it/~lanubile/) nell'Anno Accademico 2019-2020, dal gruppo ***wilkinson*** composto da: 
    
    - [Gianluca Laera](https://github.com/gian01pie)  
