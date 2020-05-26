@@ -9,11 +9,10 @@ import java.util.ArrayList;
  * da una casa di partenza ad una di arrivo <br>
  *
  * <h2>RESPONSABILITA' DI CLASSE</h2>
- * La classe effettua operazioni a partire da un input interpretato <br>
- * - controlla quale pezzo si vuol muovere <br>
- * - controlla la casa di arrivo e stabilisce quella di partenza <br>
- * - stabilisce se e' possibile una cattura (classica o en-passant) <br>
- * - controlla casi di ambiguita' nel movimento <br>
+ * La classe e' responsabile della rapprensentazione di una mossa <br>
+ * sulla scacchiera partendo dall'input utente interpretato, <br>
+ * e nel caso di input di arrocco, di effettuarlo previo controllo <br>
+ * di legalità <br>
  *
  * <h2>CLASSIFICAZIONE ECB</h2>
  * <strong>Control</strong><br>
