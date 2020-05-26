@@ -7,7 +7,6 @@
 4. [System Design](#System-Design)
     - [Stile architetturale adottato](#Stile-architetturale-adottato)
     - [Diagramma dei package](#Diagramma-dei-package)
-    - [Diagramma dei componenti](#Diagramma-dei-componenti)
     - [Commenti](#Commenti-SD)
 5. [OO Design](#OO-Design)
     - [Diagrammi delle classi e diagrammi di sequenza](#Diagrammi-delle-classi-e-diagrammi-di-sequenza)
