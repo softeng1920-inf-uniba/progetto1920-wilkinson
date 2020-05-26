@@ -440,20 +440,14 @@ Esso sfrutta e orchestra le classi di gioco, a seconda della situazione può: im
 <a name="Design-pattern-utilizzati"></a>
 
 ### Design patterns
-Nel progetto da noi sviluppato, vengono rispettati i due fondamentali principi del "**GoF Design Patterns**"; infatti viene privilegiato l'uso di una classe astratta "Piece", che discerne dalla vera e propria implementazione del movimento dei pezzi, ma che pone le basi per poi svilupparne una diversa  in base alla diversa funzione di ogni pezzo (**Primo principio**), ed inoltre è favorita la composizione tra classi; l'ereditarietà è usata solamente per esprime il concetto di generalizzazione, ossia i vari tipi di pezzi (**Secondo principio**).
-
-**1)Creational Pattern:**
-**-Abstract Factory:**  consente di definire diverse implementazioni dei pezzi che compongono la scacchiera, senza che il contesto d’uso dell’istanza debba essere modificato al variare dell’implementazione scelta;  quindi il seguente Pattern è stato adottato esclusivamente per gestire la codifica in Unicode di ogni pezzo e per fornirne una diversa implementazione per il loro movimento nella scacchiera.
-
-**2)Structural Pattern:**
-**-Composite:** viene utilizzato quando si ha la necessità di realizzare una gerarchia di oggetti in cui l’oggetto contenitore può detenere oggetti elementari e/o  contenitori. Essendo il gioco degli scacchi concretamente basato su un aggregazione di oggetti, scacchiera formata da case, che a loro volta ospitano dei pezzi, la nostra scelta strutturale è ricaduta su questo pattern; infatti nel nostro caso abbiamo la classe Game.java che nella gerarchia potremmo porre al vertice, che istanzia un oggetto di classe Board.java, che a sua volta istazia gli oggetti di classe Spot.java, che a loro volta contengono informazioni sul pezzo che le occupa. 
-
-**3) Behavioral Patterns:**
-**-Interpreter:**  Si tratta di un pattern comportamentale che viene utilizzato quando si vuole definire una grammatica e il relativo interprete.  La grammatica è costituita da tutte le espressioni che possono essere utilizzate mentre l’interprete permette di tradurre l'espressione. Nel nostro caso, utilizziamo la classe AlgebricNotation che è in grado di tradurre il linguaggio espresso dall'utente in notazione algebrica, che successivamente verrà convertita nella vera e propria mossa effettuata nella scacchiera.
-
-**-Mediator:** Si tratta di un Pattern comportamentale e viene utilizzato per permettere lo scambio di messaggi tra diversi attori tramite un intermediario. In questo modo gli attori sono collegati indirettamente tramite un intermediario. In questo modo possiamo separare la logica che vi è tra iterpretazione del comando scritto in notazione algebrica e la mossa effettiva che altera la scacchiera ed il flusso di gioco. Nel nostro caso possiamo porre come mediatore la classe Move, che ha il compito di ricevere il comando in notazione algebrica che è stato analizzato dalla classe AlgebricNotation, e che predisporrà il "terreno" per effettuare la vera e propria mossa nella classe Game.
-
-
+Il progetto da noi sviluppato non è ascrivibile ad un particolare *Design Pattern*. 
+Abbiamo però vagliato diverse opzioni di *pattern*, da cui abbiamo preso spunto e che ci hanno aiutato a realizzare alcune parti implementative:
+<br>
+- **Prototype pattern:** la configurazione iniziale della scacchiera è un ottimo esempio di prototipo, da poter istanziare e clonare ad ogni nuovo inizio partita.
+<br><br>
+- **Abstract Factory pattern:** abbiamo scartato l'introdurre una ideale *PieceFactory* per la chiamata singola o multipla agli oggetti sulla scacchiera a seconda dei parametri di input, invece la specializzazione di un pezzo è risultata molto comoda nell'implementazione, permettendoci in modo semplice ed intuitivo di differenziare i vari pezzi degli scacchi ma lasciandone intatta la logica di base (un pezzo differisce da un altro solo nel comportamento sulla scacchiera).
+<br><br>
+- **Strategy pattern:** piuttosto che creare una classe astratta generica estendibile da quelle specifiche implementandone il proprio movimento caratteristico, abbiamo delegato alla classe scacchiera la determinazione della posizione reciproca di due case (differente per ogni tipo di pezzo), per poi utilizzarla nel calcolo delle mosse legali.
 
 <a name="Commenti-OO"></a>
 
