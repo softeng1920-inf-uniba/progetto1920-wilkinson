@@ -521,16 +521,25 @@ Lo sviluppo dell'applicazione ha previsto tre sprint di diversa durata.
 [Torna all'indice...](#Indice)
 # Analisi retrospettiva
 - ### Soddisfazioni
-    
-    <br> 
-
+    La comunicazione e la puntualità dei membri del gruppo è stata senza dubbio un segnale di maturità e motivazione. I contatti tra di noi sono stati molto costruttivi, gli scambi di idee e i consigli hanno permesso ad ogni membro del team di imparare qualcosa da un altro membro. Questo ha permesso durante l'arco della durata del progetto, ad ogni membro del team di impare qualcosa di nuovo ed utile, oltre che a migliorare l'uso delle metodologie di svilippo AGILE.
+    <br> <br>
+Gli strumenti [**GitHub**](https://github.com/) e [**Git**](https://git-scm.com/), inzialmente visti con un certo scetticismo, sono diventati imprescindibili per portare avanti lo sviluppo in team.
+    <br> <br>
+    Il Daily Scrum Meeting è sempre avvenuto su [**Microsoft Teams**](https://www.microsoft.com/it-it/microsoft-365/microsoft-teams/free?market=it) in virtù della ben nota problematica del nuovo Coronavirus in corso. Il tool di Microsoft si è rivelato molto utile grazie alle sue diverse features.
+    <br> <br>
+Grazie al progetto abbiamo avuto la possibiltà di ricevere nuovi stimoli e mettersi in gioco in un ambito sconosciuto ad ognuno di noi. Ognuno ha dimostato di essere indispensabile al raggiungimento dell'obiettivo finale, ma allo stesso tempo di avere una visione aperta nel ricevere consigli da altri membri del team quando si presentavano difficoltà; quindi crediamo che il progetto ci abbia fatto anche crescere a livello personale, avvicinandoci un po' di più a ciò che sarà il nostro futuro in ambito lavorativo.
+	
 - ### Insoddisfazioni
-
-    <br>
+    In alcuni casi, oltre al Daily Scrum Meeting, è stato necessario "incontrarci" per poter dialogare e discutere sulle problematiche che via via si sono presentate. Quindi in aggiunta al metodo [**SCRUM**](https://it.wikipedia.org/wiki/Scrum_%28informatica%29) classico, è stato necessario aggiungere delle sessioni di vero e proprio lavoro congiunto che potesse risolvere nuovi problemi, dovuti principalmente al fatto che la maggior parte dei membri del team abbiano dovuto studiare java "in corso d'opera". Queste sessioni tuttavia, si sono via via ridotte in quanto ognuno, grazie all'esperienza accumulata durante le sessioni precedenti, è stato in grado di procedere in autonomia, sempre secondo il [**GitHub flow**](https://guides.github.com/introduction/flow/).
+     <br> <br>
+    Un'altra insoddisfazione è stata quella di non avere mai avuto l'occasione di *incontrarci di persona* durante tutta la durata del progetto, magari dopo le lezioni universitarie in aula. Pur avendo avuto a disposizione diverse tecnologie e tante opportunità di essere sempre in contatto, l'assenza di veri e propri faccia a faccia fra i membri del gruppo, ha reso a tratti estranianti le relazioni interpersonali del gruppo. 
+     <br> <br>
+     Dato l'elevato numero di membri del Team, spesso è risultato dispendioso (in termini di tempo) riuscire a suddividere efficacemente il lavoro da svolgere al fine di ridurre al minimo i *conflitti*, contestualmente sia sui task da portare a termine che quelli sulle **pull request** che avrebbero generato.
 
 - ### Cosa ci ha fatto impazzire
-
-    <br>
+	Lo scoglio più grande dal punto di vista implementativo è stato senza dubbio quello della cattura _en passant_ del pedone, a tal punto che nel gruppo pronunciare questo tipo di cattura è diventato un vero e proprio **tabù**: la cattura in questione ha portato ad un elevato numero di situazioni particolari da analizzare e da risolvere, non senza episodi di apparente risoluzione di un problema e di riscontro immediato del successivo.
+    <br><br>
+    Si è rivelato necessario, durante il tempo decorso dallo Sprint1 allo Sprint2, una revisione totale del modello di calcolo delle mosse legali dei pezzi, dovendolo estendere a tutti i pezzi sulla scacchiera, che ha un po' rimesso in discussione tutto il lavoro svolto fino a quel momento.
 
 <br> <br>
 [Torna all'indice...](#Indice)
