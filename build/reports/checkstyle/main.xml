@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="8.8">
-<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/AlgebraicNotation.java">
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/logic/AlgebraicNotation.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/logic/Bishop.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/logic/Board.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/logic/Game.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/logic/King.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/logic/Knight.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/logic/Move.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/logic/Pawn.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/logic/Piece.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/logic/Queen.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/logic/Rook.java">
+</file>
+<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/logic/Spot.java">
 </file>
 <file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/AppMain.java">
-</file>
-<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Bishop.java">
-</file>
-<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Board.java">
-</file>
-<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Game.java">
-</file>
-<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/King.java">
-</file>
-<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Knight.java">
-</file>
-<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Move.java">
-</file>
-<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Pawn.java">
-</file>
-<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Piece.java">
-</file>
-<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Queen.java">
-</file>
-<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Rook.java">
-</file>
-<file name="/home/pierpaolo/Documents/GitHub/IDS1920/progetto-wilkinson/progetto1920-wilkinson/src/main/java/it/uniba/main/Spot.java">
 </file>
 </checkstyle>

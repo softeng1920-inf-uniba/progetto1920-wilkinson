@@ -10,10 +10,9 @@ import java.util.ArrayList;
  * a se e' stato mosso o meno e una lista di mosse legali <br>
  *
  * <h2>RESPONSABILITA' DI CLASSE</h2>
- * la classe e' astratta in quanto generica, si occupa <br>
- * di restituire l'unicode del pezzo e stabilisce se un pezzo puo' muoversi, <br>
- * quindi se la mossa passata dall'utente e' legale inoltre ricerca tutte le <br>
- * possibili mosse legali del pezzo corrente <br>
+ * la classe e' astratta in quanto generica, si occupa di restituire<br>
+ * l'unicode del pezzo nel momento di stampa a video,<br>
+ * ed e' responsabile dello store delle mosse legali del pezzo sulla scacchiera<br>
  *
  * <h2>CLASSIFICAZIONE ECB</h2>
  * <strong>Entity</strong><br>
