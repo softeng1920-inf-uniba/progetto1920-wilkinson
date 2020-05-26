@@ -526,6 +526,8 @@ Lo sviluppo dell'applicazione ha previsto tre sprint di diversa durata.
   - La gestione dello sviluppo è stata coordinata attraverso il **GitHub Flow**: <br>
     il lavoro da svolgere è stato rappresentato da diversi *Issue*, ogni issue è stato assegnato ad almeno un membro del gruppo, ed è stata associata ad un *branch* sul quale sviluppare il software necessario.
     Alla fine dello sviluppo necessario per un *Issue*, il contenuto del *branch* è stato testato e sottoposto alla review degli altri componenti del gruppo tramite una *pull request*. Solo quando il team ha approvato il software associato all'issue in pull request, il branch è stato inserito all'interno del branch *master* attraverso un'operazione di *merge*, previa risoluzione di eventuali conflitti.
+  <br><br>
+  - Per dividerci i diversi **task** abbiamo utilizzato una *Project Board* parallela, contenente gli *issue* identificati dal gruppo (oltre le *user stories*), contestualmente all'efficace meccanismo di aggiunta delle *note con spunta* messo a disposizione direttamente da GitHub, che ci ha permesso una consultazione in tempo reale dei compiti da svolgere.
   <br> <br>
   - I **Daily Meeting** sono avvenuti quotidianamente su [**Microsoft Teams**](https://www.microsoft.com/it-it/microsoft-365/microsoft-teams/free?market=it), per via dell'impossibilità di incontrarsi di persona, dettata dalla diffusione del virus SARS-CoV-2. Anche alcune sessioni di sviluppo sono avvenute tramite Microsoft Teams, che è risultato molto utile grazie agli strumenti di condivisione dello schermo, e alla [**Whiteboard**](https://www.microsoft.com/it-it/microsoft-365/microsoft-whiteboard/digital-whiteboard-app) associata.
 
