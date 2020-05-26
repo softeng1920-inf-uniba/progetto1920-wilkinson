@@ -456,6 +456,32 @@ _______________
 
 # Manuale utente
 
+Per avviare l'applicazione bisogna:
+
+ 1. Lanciare il comando per scaricare l'immagine docker più recente
+```
+    docker pull docker.pkg.github.com/softeng1920-inf-uniba/docker_1920/wilkinson:latest
+```
+ 2. Lanciare il comando per avviare l'immagine docker in locale
+```
+    docker run -it --rm docker.pkg.github.com/softeng1920-inf-uniba/docker_1920/wilkinson:latest
+```
+   per utilizzare Scacchi sul proprio terminale, occorre scaricare l'immagine Docker dell'ultima build, ed in seguito, avviarla.  
+###### N.B.: se l'utente sta utilizzando Git Bash for Windows, deve aggiungere il prefisso "winpty" prima dell'intero comando
+###### N.B.: Per eseguire l'applicazione sui terminali Windows e terminale macOS, a prescindere dalla shell selezionata, deve essere lanciata prima l'applicazione docker e caricati i container Linux.
+<br><br>
+* L'applicazione consente di giocare una partita di **scacchi** da un singolo terminale, condividendo il metodo di input con un altro giocatore o svolgere una partita in solitaria.
+<br><br>
+* All'interno del gioco sono presenti diversi comandi utili all'utente(i) al fine di rendere migliore l'esperienza di gioco; alcuni di essi sono utilizzabili correttamente solo a partita in corso.
+<br><br>
+* il comando `play` consente di iniziare una nuova partita e offre queste funzionalità:  
+   - la possibilità di introdurre mosse in `notazione algebrica abbreviata` per proseguire con la partita appena iniziata  
+   - `board`: mostra la scacchiera con la configurazione attuale dei pezzi presenti sulla scacchiera  
+   - `moves`: mostra in notazione algebrica tutti i movimenti eseguiti fino al lancio del comando  
+   - `captures`: mostra tutte le catture avvenute fino al momento in cui viene eseguito il comando  
+   - `help`: mostra i comandi disponibili per l'applicazione  
+   - `play`: a partita in corso, consente di interrompere la partita corrente, e previa conferma, iniziarne una nuova  
+   - `quit`: permette all'utente di abbandonare la partita in corso, previa conferma  
 
 <br> <br>
 [Torna all'indice...](#Indice)
