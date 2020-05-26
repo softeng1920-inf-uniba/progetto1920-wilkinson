@@ -34,7 +34,8 @@ public final class Move {
 	/**
 	 * costruttore dell'oggetto Move
 	 * @param command comando da interpretare in mossa
-	 * @param game    partita in corso
+	 * @param board   scacchiera
+	 * @param color   turno
 	 */
 	public Move(final String command, final Board board, final boolean color) {
 		this.interpreter = new AlgebraicNotation(command); // Istanzio l'oggetto interpreter
@@ -94,7 +95,6 @@ public final class Move {
 	 * estrae le coordinate della casa di arrivo
 	 *
 	 * @param algebraicFinalSpot stringa di coordinate
-	 * @return spot di arrivo instanziato come elemento di classe Spot
 	 */
 	private void extractCoordinates(final String algebraicFinalSpot) {
 		if (algebraicFinalSpot.length() == EXPECTED_COMMAND_LENGTH) {
@@ -112,11 +112,13 @@ public final class Move {
 	}
 
 	/**
-	 * trova lo spot di partenza cercando il pezzo con: 1) casa di arrivo
-	 * corrispodente a quella inserita 2) controlla solo i pezzi della classe
-	 * inserita dall'utente 3) controlla eventuali ambiguita'
-	 * @param board
-	 * @param piece
+	 * trova lo spot di partenza cercando il pezzo con:
+	 * 		1) casa di arrivo corrispodente a quella inserita
+	 * 		2) controlla solo i pezzi della classe inserita dall'utente
+	 * 		3) controlla eventuali ambiguita'
+	 * @param board scacchiera in configurazione attuale
+	 * @param piece classe del pezzo da muovere
+	 * @param turn turno di gioco
 	 * @return
 	 */
 	boolean findStartSpot(final Board board, final Piece piece, final boolean turn) {
@@ -284,8 +286,9 @@ public final class Move {
 	/**
 	 * controlla se e' possibile arroccare ed effettua l'arrocco
 	 *
-	 * @param game
-	 * @return
+	 * @param board scacchiera in configurazione attuale
+	 * @param color turno di gioco
+	 * @return true se arrocco effettuato correttamente, false altrimenti
 	 */
 	public boolean makeCastling(final Board board, final boolean color) {
 		if (color) {
