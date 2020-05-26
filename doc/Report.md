@@ -443,9 +443,9 @@ _______________
 
 <br>
 
-<img src="/res/img/report/coverall-List.png">
+<img src="/res/img/report/coverall.png">
 
-<img src="/res/img/report/coverall.PNG">
+<img src="/res/img/report/coverall-List.png">
 
 <img src="/res/img/report/jacoco.png">
 
