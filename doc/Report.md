@@ -198,12 +198,179 @@ _______________
  >    - può catturare i pezzi avversari che si trovano in una delle due caselle oblique a lui adiacenti (a eccezione della presa [en passant](https://lh3.googleusercontent.com/proxy/HdFbE8mPf0x5pYtg7hqGuf2lYdxeZZWUVjgbkjy3ofzEqL_EHpY7zvgWleUN-oAH7ZcafKkFByJezfbaukukb97P0wPq7pWUZo0b0xoA2jBXSSWRv4vT6SBDRgf1UsJOzmRAKghF)): è quindi l'unico pezzo che mangia in modo diverso dal proprio normale movimento  
  >    - se un pedone riesce a raggiungere il lato opposto della scacchiera, il proprietario del pedone lo deve promuovere sostituendolo con un qualsiasi altro pezzo a sua scelta (purché dello stesso colore, e che non sia il re)
 _______________
+#### ***>>>>> [SPRINT 2] user stories <<<<<***
+_______________
 
-### Requisiti funzionali
+#### 2.1) MUOVERE UN CAVALLO
+  ***Scopo:*** permettere il movimento del pezzo *cavallo* sulla scacchiera
+  ##### CRITERI DI ACCETTAZIONE
+  - scrivendo il comando in notazione algebrica abbreviata degli scacchi in italiano  
+  	- la mossa deve essere legale
+  	- se si tenta una mossa non valida viene visualizzato un messaggio *mossa illegale* e l'applicazione rimane in attesa di una mossa valida  
+  	- la mossa deve essere preceduta da una 'C' 
+  
+<center>
+	<img width="300" alt="knight_move.png" src="/res/img/report/knight_move.png">
+</center>
 
+ > - ***movimento del cavallo***
+ >    - il *Cavallo* si muove e cattura alternativamente su case bianche e case nere
+ >    - ogni mossa può essere descritta come due passi in orizzontale (verticale) seguito da un passo in verticale (orizzontale), in modo che il tragitto percorso formi idealmente una "L"
+ >    - il *Cavallo* è l'unico pezzo presente sulla scacchiera a cui è permesso "saltare" i pezzi, sia alleati, sia avversari 
+ >    - l'unico dietro i pedoni che all'inizio può essere mosso senza bisogno di spostare prima questi ultimi
+ _______________
+#### 2.2) MUOVERE UN ALFIERE
+  ***Scopo:*** permettere il movimento del pezzo *alfiere* sulla scacchiera
+  ##### CRITERI DI ACCETTAZIONE
+  - scrivendo il comando in notazione algebrica abbreviata degli scacchi in italiano  
+  	- la mossa deve essere legale
+  	- se si tenta una mossa non valida viene visualizzato un messaggio *mossa illegale* e l'applicazione rimane in attesa di una mossa valida  
+  	- la mossa deve essere preceduta da una 'A' 
+  
+<center>
+	<img width="300" alt="bishop_move.png" src="/res/img/report/bishop_move.png">
+</center>
+
+ > - ***movimento dell'alfiere***
+ >    - l'*Alfiere* si muove diagonalmente per il numero di caselle libere che ha a disposizione
+ >    - l'*Alfiere* è l'unico pezzo che non può cambiare il colore delle case su cui si appoggia nei suoi movimenti in diagonale
+ _______________
+#### 2.3) MUOVERE UNA TORRE
+  ***Scopo:*** permettere il movimento del pezzo *torre* sulla scacchiera
+  ##### CRITERI DI ACCETTAZIONE
+  - scrivendo il comando in notazione algebrica abbreviata degli scacchi in italiano  
+  	- la mossa deve essere legale
+  	- se si tenta una mossa non valida viene visualizzato un messaggio *mossa illegale* e l'applicazione rimane in attesa di una mossa valida  
+  	- la mossa deve essere preceduta da una 'T' 
+  
+<center>
+	<img width="300" alt="rook_move.png" src="/res/img/report/rook_move.png">
+</center>
+
+ > - ***movimento della torre***
+ >    - la *Torre* si muove sia orizzontalmente sia verticalmente per il numero di caselle libere che ha a disposizione
+ >    - in congiunzione con il *Re*, può eseguire la mossa dell'arrocco
+ _______________
+#### 2.4) MUOVERE LA DONNA
+ ***Scopo:*** permettere il movimento del pezzo *donna* sulla scacchiera
+  ##### CRITERI DI ACCETTAZIONE
+  - scrivendo il comando in notazione algebrica abbreviata degli scacchi in italiano  
+  	- la mossa deve essere legale
+  	- se si tenta una mossa non valida viene visualizzato un messaggio *mossa illegale* e l'applicazione rimane in attesa di una mossa valida  
+  	- la mossa deve essere preceduta da una 'D' 
+  
+<center>
+	<img width="300" alt="quuen_move.png" src="/res/img/report/queen_move.png">
+</center>
+
+ > - ***movimento della donna***
+ >    - la *Donna* si può muovere in linee rette verticalmente, orizzontalmente o in diagonale per il numero di case non occupate che trova
+ >    - combina dunque le mosse della torre e dell'alfiere
+_______________
+#### 2.5) MUOVERE IL RE
+ ***Scopo:*** permettere il movimento del pezzo *re* sulla scacchiera
+ ##### CRITERI DI ACCETTAZIONE
+ - scrivendo il comando in notazione algebrica abbreviata degli scacchi in italiano  
+ 	- la mossa deve essere legale
+  	- se si tenta una mossa non valida viene visualizzato un messaggio *mossa illegale* e l'applicazione rimane in attesa di una mossa valida  
+  	- la mossa deve essere preceduta da una 'R' 
+  	- il *Re* non può muoversi in case minacciate da pezzi avversari 
+  	- il *Re* può catturare pezzi avversari
+	- nessun pezzo amico deve permettere di "scoprire" il *Re* con la propria mossa
+  
+<center>
+	<img width="300" alt="king_move.png" src="/res/img/report/king_move.png">
+</center>
+
+ > - ***movimento del re***
+ >    - il *Re* può muoversi di una casa alla volta in qualsiasi direzione (verticale, orizzontale o diagonale) a condizione che la casa di arrivo non sia minacciata da un pezzo avversario
+ >    - in congiunzione con la *Torre*, può eseguire la mossa dell'arrocco
+_______________
+ #### 2.6) EFFETTUARE UN ARROCCO CORTO
+  ***Scopo:*** permettere l'esecuzione di un arrocco corto
+  ##### CRITERI DI ACCETTAZIONE
+  - scrivendo il comando '0-0' in notazione algebrica abbreviata degli scacchi
+  	- il giocatore non deve aver mai mosso il *Re*
+  	- il giocatore non deve aver mai mosso la *Torre* coinvolta nell'arrocco corto (deve quindi essere in un angolo di destra della scacchiera) 
+  	- non ci devono essere pezzi tra il *Re* e la *Torre* coinvolta, né amici né avversari 
+  	- il *Re* non deve essere minacciato 
+  	- il *Re*, durante il movimento dell'arrocco, non deve attraversare caselle in cui si troverebbe sotto *scacco* 
+  
+<center>
+	<img width="300" alt="castle_short_move.png" src="/res/img/report/castle_short_move.png">
+</center>
+
+<center>
+	<img width="300" alt="castle_short_move2.png" src="/res/img/report/castle_short_move2.png">
+</center>
+
+ > - ***definizione di arrocco corto***
+ >    - l'arrocco è effettuato sull'ala di *Re* (sulla destra della scacchiera)
+ >    - [***per il Bianco***] il *Re* da **e1** muove in **g1**, la *Torre* da **h1** muove in **f1**
+ >    - [***per il Nero***] il *Re* da **e8** muove in **g8**, la *Torre* da **h8** muove in **f8**
+_______________
+#### 2.7) EFFETTUARE UN ARROCCO LUNGO
+  ***Scopo:*** permettere l'esecuzione di un arrocco lungo
+  ##### CRITERI DI ACCETTAZIONE
+  - scrivendo il comando '0-0-0' in notazione algebrica abbreviata degli scacchi
+  	- il giocatore non deve aver mai mosso il *Re*
+  	- il giocatore non deve aver mai mosso la *Torre* coinvolta nell'arrocco lungo (deve quindi essere in un angolo di sinistra della scacchiera) 
+  	- non ci devono essere pezzi tra il *Re* e la *Torre* coinvolta, né amici né avversari 
+  	- il *Re* non deve essere minacciato 
+  	- il *Re*, durante il movimento dell'arrocco, non deve attraversare caselle in cui si troverebbe sotto *scacco* 
+  
+<center>
+	<img width="300" alt="castle_long_move.png" src="/res/img/report//castle_long_move.png">
+</center>
+
+<center>
+	<img width="300" alt="castle_long_move2.png" src="/res/img/report/castle_long_move2.png">
+</center>
+
+ > - ***definizione di arrocco lungo***
+ >    - l'arrocco è effettuato sull'ala di *Donna* (sulla sinistra della scacchiera)
+ >    - [***per il Bianco***] il *Re* da **e1** muove in **c1**, la *Torre* da **a1** muove in **d1**
+ >    - [***per il Nero***] il *Re* da **e8** muove in **c8**, la *Torre* da **a8** muove in **d8**
+_______________
 ### Requisiti non funzionali
+_______________
 
-<br> <br>
+L'applicazione Scacchi viene eseguita tramite macchina virtuale Linux grazie alla containerizzazione docker. Pertanto dovrà essere eseguito su sistemi operativi e macchine che supportano la virtualizzazione OS.
+
+L'utente deve conoscere la [notazione algebrica](https://it.wikipedia.org/wiki/Notazione_algebrica) "abbreviata" italiana per poter giocare in quanto l'applicazione è prettamente testuale.
+
+Il gioco può essere eseguito sui sistemi operativi più comuni ([Linux](https://it.wikipedia.org/wiki/Linux), [macOS](https://it.wikipedia.org/wiki/MacOS), [Microsoft Windows](https://it.wikipedia.org/wiki/Microsoft_Windows)) su [shell](https://it.wikipedia.org/wiki/Shell_%28informatica%29)  apposite:
+
+***Linux***
+ - Terminal incluso nell'OS;
+
+***macOS***
+ - Terminale incluso nell'OS;
+
+***Microsoft Windows***
+ - [Windows Terminal](https://www.microsoft.com/it-it/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)
+ - [Git Bash for Windows](https://git-scm.com/download/win)
+
+###### N.B.: l'utente dovrà installare [Docker](https://www.docker.com/products/docker-desktop)  a prescindere dal sistema operativo o shell utilizzati.
+L’interfaccia utente è stata implementata con caratteri UTF-8. In questa codifica, ci sono oltre i caratteri di uso comune (lettere) anche i caratteri [*Unicode*](https://en.wikipedia.org/wiki/Chess_symbols_in_Unicode) per visualizzare la stampa della scacchiera (linee divisorie delle case e pezzi della scacchiera).
+Vengono utilizzati anche codici [ANSI](https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html#colors) per colorare le case della scacchiera per rendere più visibile il gioco degli scacchi.
+_______________
+#### ***>>>>> Requisiti minimi <<<<<***
+_______________
+***requisiti minimi per Linux*** 
+ - Ubuntu versione 16.04 (LTS) 64Bit o successiva.
+
+***requisiti minimi per macOS*** 
+- macOS versione 10.13 o successiva:  High Sierra (10.13), Mojave (10.14) o Catalina (10.15);
+- L'hardware Mac deve essere di un modello 2010 o più recente che sia compatibile con la tecnologia di virtualizzazione.
+
+***requisiti minimi per Windows*** 
+- Windows 10 Pro, Enterprise, Education 64Bit che supporta [Hyper-V](https://docs.microsoft.com/it-it/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v);
+- Processore a 64 bit con SLAT (Second Level Address Translation, Conversione indirizzi di secondo livello).
+- Supporto della CPU per estensioni modalità di monitoraggio macchina virtuale (VT-c nelle CPU Intel).
+- Almeno 4 GB di memoria RAM.
+
+<br><br>
 [Torna all'indice...](#Indice)
 
 # System Design
