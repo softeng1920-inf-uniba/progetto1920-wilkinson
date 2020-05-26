@@ -2,7 +2,8 @@
 
 import java.util.Scanner;
 
-import it.uniba.main.Move.GameStatus;
+import it.uniba.logic.Game;
+import it.uniba.logic.Move.GameStatus;
 
 /**
  * &lt;body&gt;
@@ -43,124 +44,124 @@ public final class AppMain {
 	 * @param args argomento command-line.
 	 */
 	public static void main(final String[] args) {
-<span class="nc" id="L46">		Game game = new Game();</span>
-<span class="nc" id="L47">		game.setStatus(GameStatus.NOT_STARTED);</span>
+<span class="nc" id="L47">		Game game = new Game();</span>
+<span class="nc" id="L48">		game.setStatus(GameStatus.NOT_STARTED);</span>
 
 		String userChoiceGame; // memorizza le scelte dell'utente durante il gioco, ossia i comandi per il
 		// movimento dei pezzi
 		String userChoiceMenu; // Memorizza le scelte che vengono effettuate dall'utente nel menu'
-<span class="nc" id="L52">		boolean quitGame = false; // Flag per gestire l'uscita dal programma</span>
-<span class="nc" id="L53">		boolean notFirstMatch = false; // true se non e' il primo lancio di 'play'</span>
-<span class="nc" id="L54">		boolean confirmed = true;</span>
-<span class="nc" id="L55">		System.out.println(&quot;\n**BENVENUTO NEL GIOCO DEGLI SCACCHI**&quot;);</span>
-<span class="nc" id="L56">		System.out.println(&quot;(Digitare 'help' per visualizzare la lista dei comandi disponibili)&quot;);</span>
+<span class="nc" id="L53">		boolean quitGame = false; // Flag per gestire l'uscita dal programma</span>
+<span class="nc" id="L54">		boolean notFirstMatch = false; // true se non e' il primo lancio di 'play'</span>
+<span class="nc" id="L55">		boolean confirmed = true;</span>
+<span class="nc" id="L56">		System.out.println(&quot;\n**BENVENUTO NEL GIOCO DEGLI SCACCHI**&quot;);</span>
+<span class="nc" id="L57">		System.out.println(&quot;(Digitare 'help' per visualizzare la lista dei comandi disponibili)&quot;);</span>
 
-<span class="nc bnc" id="L58" title="All 2 branches missed.">		while (!quitGame) {</span>
-<span class="nc bnc" id="L59" title="All 2 branches missed.">			if (!game.isEnd()) {</span>
-<span class="nc" id="L60">				System.out.print(&quot;\n&quot; + game);</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">		while (!quitGame) {</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">			if (!game.isEnd()) {</span>
+<span class="nc" id="L61">				System.out.print(&quot;\n&quot; + game);</span>
 			}
-<span class="nc" id="L62">			System.out.print(&quot;\nInserire comando/mossa ('help' per elenco)\n &gt; &quot;);</span>
-<span class="nc" id="L63">			userChoiceMenu = scanner().nextLine();</span>
-<span class="nc" id="L64">			userChoiceGame = userChoiceMenu;</span>
+<span class="nc" id="L63">			System.out.print(&quot;\nInserire comando/mossa ('help' per elenco)\n &gt; &quot;);</span>
+<span class="nc" id="L64">			userChoiceMenu = scanner().nextLine();</span>
+<span class="nc" id="L65">			userChoiceGame = userChoiceMenu;</span>
 
-<span class="nc bnc" id="L66" title="All 7 branches missed.">			switch (userChoiceMenu.toLowerCase()) {</span>
+<span class="nc bnc" id="L67" title="All 7 branches missed.">			switch (userChoiceMenu.toLowerCase()) {</span>
 			case &quot;help&quot;:
-<span class="nc" id="L68">				helpPrint();</span>
-<span class="nc" id="L69">				break;</span>
+<span class="nc" id="L69">				helpPrint();</span>
+<span class="nc" id="L70">				break;</span>
 			case &quot;play&quot;:
-<span class="nc bnc" id="L71" title="All 2 branches missed.">				if (notFirstMatch) {</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">				if (notFirstMatch) {</span>
 					do {
-<span class="nc" id="L73">						System.out.println(&quot;\nSei sicuro di voler resettare le partita?&quot;);</span>
-<span class="nc" id="L74">						confirmPrint();</span>
+<span class="nc" id="L74">						System.out.println(&quot;\nSei sicuro di voler resettare le partita?&quot;);</span>
+<span class="nc" id="L75">						confirmPrint();</span>
 
-<span class="nc" id="L76">						userChoiceMenu = scanner().nextLine().toLowerCase();</span>
+<span class="nc" id="L77">						userChoiceMenu = scanner().nextLine().toLowerCase();</span>
 
-<span class="nc bnc" id="L78" title="All 2 branches missed.">						if (userChoiceMenu.equals(&quot;si&quot;)) {</span>
-<span class="nc" id="L79">							System.out.println(&quot;...ripristino partita&quot;);</span>
-<span class="nc" id="L80">							confirmed = true;</span>
-<span class="nc bnc" id="L81" title="All 2 branches missed.">						} else if (userChoiceMenu.equals(&quot;no&quot;)) {</span>
-<span class="nc" id="L82">							confirmed = false;</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">						if (userChoiceMenu.equals(&quot;si&quot;)) {</span>
+<span class="nc" id="L80">							System.out.println(&quot;...ripristino partita&quot;);</span>
+<span class="nc" id="L81">							confirmed = true;</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">						} else if (userChoiceMenu.equals(&quot;no&quot;)) {</span>
+<span class="nc" id="L83">							confirmed = false;</span>
 						} else {
-<span class="nc" id="L84">							System.out.println(&quot;\nCONFERMA NON VALIDA\n&quot;);</span>
-<span class="nc" id="L85">							confirmed = false;</span>
+<span class="nc" id="L85">							System.out.println(&quot;\nCONFERMA NON VALIDA\n&quot;);</span>
+<span class="nc" id="L86">							confirmed = false;</span>
 						}
-<span class="nc bnc" id="L87" title="All 4 branches missed.">					} while (!userChoiceMenu.equals(&quot;si&quot;) &amp;&amp; !userChoiceMenu.equals(&quot;no&quot;));</span>
+<span class="nc bnc" id="L88" title="All 4 branches missed.">					} while (!userChoiceMenu.equals(&quot;si&quot;) &amp;&amp; !userChoiceMenu.equals(&quot;no&quot;));</span>
 				}
-<span class="nc bnc" id="L89" title="All 2 branches missed.">				if (confirmed) {</span>
-<span class="nc" id="L90">					startPrint();</span>
-<span class="nc" id="L91">					game = new Game();</span>
-<span class="nc" id="L92">					notFirstMatch = true;</span>
-<span class="nc" id="L93">					confirmed = false;</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">				if (confirmed) {</span>
+<span class="nc" id="L91">					startPrint();</span>
+<span class="nc" id="L92">					game = new Game();</span>
+<span class="nc" id="L93">					notFirstMatch = true;</span>
+<span class="nc" id="L94">					confirmed = false;</span>
 				}
 				break;
 			case &quot;board&quot;:
-<span class="nc bnc" id="L97" title="All 2 branches missed.">				if (!game.printBoard()) {</span>
-<span class="nc" id="L98">					System.out.print(&quot;\nCOMANDO NON VALIDO A PARTITA NON IN CORSO\n&quot;);</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">				if (!game.printBoard()) {</span>
+<span class="nc" id="L99">					System.out.print(&quot;\nCOMANDO NON VALIDO A PARTITA NON IN CORSO\n&quot;);</span>
 				}
 				break;
 			case &quot;moves&quot;:
-<span class="nc bnc" id="L102" title="All 2 branches missed.">				if (!game.showMoves()) {</span>
-<span class="nc" id="L103">					System.out.print(&quot;\nCOMANDO NON VALIDO A PARTITA NON IN CORSO\n&quot;);</span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">				if (!game.showMoves()) {</span>
+<span class="nc" id="L104">					System.out.print(&quot;\nCOMANDO NON VALIDO A PARTITA NON IN CORSO\n&quot;);</span>
 				}
 				break;
 			case &quot;captures&quot;:
-<span class="nc bnc" id="L107" title="All 2 branches missed.">				if (!game.showCaptures()) {</span>
-<span class="nc" id="L108">					System.out.print(&quot;\nCOMANDO NON VALIDO A PARTITA NON IN CORSO\n&quot;);</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">				if (!game.showCaptures()) {</span>
+<span class="nc" id="L109">					System.out.print(&quot;\nCOMANDO NON VALIDO A PARTITA NON IN CORSO\n&quot;);</span>
 				}
 				break;
 			case &quot;quit&quot;:
 				do {
-<span class="nc" id="L113">					System.out.println(&quot;\nSei sicuro di voler chiudere il gioco?&quot;);</span>
-<span class="nc" id="L114">					confirmPrint();</span>
+<span class="nc" id="L114">					System.out.println(&quot;\nSei sicuro di voler chiudere il gioco?&quot;);</span>
+<span class="nc" id="L115">					confirmPrint();</span>
 
-<span class="nc" id="L116">					userChoiceMenu = scanner().nextLine().toLowerCase();</span>
+<span class="nc" id="L117">					userChoiceMenu = scanner().nextLine().toLowerCase();</span>
 
-<span class="nc bnc" id="L118" title="All 2 branches missed.">					if (userChoiceMenu.equals(&quot;si&quot;)) {</span>
-<span class="nc" id="L119">						System.out.println(&quot;...uscita dal gioco&quot;);</span>
-<span class="nc" id="L120">						quitGame = true;</span>
-<span class="nc bnc" id="L121" title="All 2 branches missed.">					} else if (userChoiceMenu.equals(&quot;no&quot;)) {</span>
-<span class="nc" id="L122">						quitGame = false;</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">					if (userChoiceMenu.equals(&quot;si&quot;)) {</span>
+<span class="nc" id="L120">						System.out.println(&quot;...uscita dal gioco&quot;);</span>
+<span class="nc" id="L121">						quitGame = true;</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">					} else if (userChoiceMenu.equals(&quot;no&quot;)) {</span>
+<span class="nc" id="L123">						quitGame = false;</span>
 					} else {
-<span class="nc" id="L124">						System.out.println(&quot;COMANDO NON VALIDO\n&quot;);</span>
+<span class="nc" id="L125">						System.out.println(&quot;COMANDO NON VALIDO\n&quot;);</span>
 					}
-<span class="nc bnc" id="L126" title="All 4 branches missed.">				} while (!userChoiceMenu.equals(&quot;si&quot;) &amp;&amp; !userChoiceMenu.equals(&quot;no&quot;));</span>
-<span class="nc" id="L127">				break;</span>
+<span class="nc bnc" id="L127" title="All 4 branches missed.">				} while (!userChoiceMenu.equals(&quot;si&quot;) &amp;&amp; !userChoiceMenu.equals(&quot;no&quot;));</span>
+<span class="nc" id="L128">				break;</span>
 			default:
-<span class="nc bnc" id="L129" title="All 2 branches missed.">				if (!userChoiceMenu.matches(&quot;&quot;)) {</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">				if (!userChoiceMenu.matches(&quot;&quot;)) {</span>
 					// uso la stringa non convertita in minuscolo per
 					// proseguire con l'interpretazione della mossa
-<span class="nc bnc" id="L132" title="All 2 branches missed.">					if (!game.currentGame(userChoiceGame)) {</span>
-<span class="nc" id="L133">						System.out.println(&quot;\nCOMANDO O MOSSA NON VALIDA&quot;);</span>
+<span class="nc bnc" id="L133" title="All 2 branches missed.">					if (!game.currentGame(userChoiceGame)) {</span>
+<span class="nc" id="L134">						System.out.println(&quot;\nCOMANDO O MOSSA NON VALIDA&quot;);</span>
 					}
 				}
-<span class="nc" id="L136">				break;</span>
+<span class="nc" id="L137">				break;</span>
 			}
 		}
-<span class="nc" id="L139">		scanner().close();</span>
-<span class="nc" id="L140">	}</span>
+<span class="nc" id="L140">		scanner().close();</span>
+<span class="nc" id="L141">	}</span>
 
 	private static Scanner scanner() {
-<span class="nc" id="L143">		return new Scanner(System.in, &quot;UTF-8&quot;);</span>
+<span class="nc" id="L144">		return new Scanner(System.in, &quot;UTF-8&quot;);</span>
 	}
 
 	private static void confirmPrint() {
-<span class="nc" id="L147">		System.out.println(&quot;&gt;si        ::  conferma&quot;);</span>
-<span class="nc" id="L148">		System.out.println(&quot;&gt;no        ::  annulla&quot;);</span>
-<span class="nc" id="L149">		System.out.print(&quot;&gt; &quot;);</span>
-<span class="nc" id="L150">	}</span>
+<span class="nc" id="L148">		System.out.println(&quot;&gt;si        ::  conferma&quot;);</span>
+<span class="nc" id="L149">		System.out.println(&quot;&gt;no        ::  annulla&quot;);</span>
+<span class="nc" id="L150">		System.out.print(&quot;&gt; &quot;);</span>
+<span class="nc" id="L151">	}</span>
 
 	private static void helpPrint() {
-<span class="nc" id="L153">		System.out.println(&quot;\n COMANDI &quot;);</span>
-<span class="nc" id="L154">		System.out.println(&quot;&gt;play     ::  inizia/ripristina la partita&quot;);</span>
-<span class="nc" id="L155">		System.out.println(&quot;&gt;board    ::  mostra al scacchiera&quot;);</span>
-<span class="nc" id="L156">		System.out.println(&quot;&gt;moves    ::  mostra lo storico delle mosse giocate&quot;);</span>
-<span class="nc" id="L157">		System.out.println(&quot;&gt;captures ::  mostra i pezzi catturati&quot;);</span>
-<span class="nc" id="L158">		System.out.println(&quot;&gt;quit     ::  esci dalla partita&quot;);</span>
-<span class="nc" id="L159">	}</span>
+<span class="nc" id="L154">		System.out.println(&quot;\n COMANDI &quot;);</span>
+<span class="nc" id="L155">		System.out.println(&quot;&gt;play     ::  inizia/ripristina la partita&quot;);</span>
+<span class="nc" id="L156">		System.out.println(&quot;&gt;board    ::  mostra al scacchiera&quot;);</span>
+<span class="nc" id="L157">		System.out.println(&quot;&gt;moves    ::  mostra lo storico delle mosse giocate&quot;);</span>
+<span class="nc" id="L158">		System.out.println(&quot;&gt;captures ::  mostra i pezzi catturati&quot;);</span>
+<span class="nc" id="L159">		System.out.println(&quot;&gt;quit     ::  esci dalla partita&quot;);</span>
+<span class="nc" id="L160">	}</span>
 
 	private static void startPrint() {
-<span class="nc" id="L162">		System.out.println(&quot;\n**INIZIO PARTITA**\n&quot;);</span>
-<span class="nc" id="L163">		System.out.println(&quot;Le pedine si muovono usando la notazione algebrica abbreviata.&quot;);</span>
-<span class="nc" id="L164">	}</span>
+<span class="nc" id="L163">		System.out.println(&quot;\n**INIZIO PARTITA**\n&quot;);</span>
+<span class="nc" id="L164">		System.out.println(&quot;Le pedine si muovono usando la notazione algebrica abbreviata.&quot;);</span>
+<span class="nc" id="L165">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

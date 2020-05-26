@@ -8,7 +8,7 @@ package it.uniba.logic;
  *
  * <h2>RESPONSABILITA' DI CLASSE</h2>
  * si occupa di ricalcolare le mosse legali di ogni pezzo <br>
- * ed effettua controlli sulla posizione reciproca di due Spot <br>
+ * ed effettua controlli sulla posizione reciproca di due Spot; <br>
  * permette la stampa a video della scacchiera nella configurazione attuale <br>
  *
  * <h2>CLASSIFICAZIONE ECB</h2>
